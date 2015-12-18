@@ -1,0 +1,23 @@
+{
+  "name": "CTXApp",
+  "authors": [
+    "funiflying <funiflying@163.com>"
+  ],
+  "description": "chetongxiang",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue": "~1.0.11"
+  }
+}
