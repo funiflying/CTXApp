@@ -12,6 +12,27 @@
 		<!-- endinject -->
 		<script src="js/mui.min.js" type="text/javascript"></script>
 		<script src="js/chetongxiang.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			window.onload = function () {
+				//http://api.map.baidu.com/geocoder/v2/?ak=btsVVWf0TM1zUBEbzFz6QqWF&callback=renderReverse&location=24.53803,118.15707&output=json&pois=1
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function (position) {
+						var latitude = position.coords.latitude;
+						var longitude = position.coords.longitude
+						alert( "纬度是；" + latitude + "<br>经度是：" + longitude)
+						
+					}, function (error) {
+						alert(error.message)
+						//document.getElementById("output").innerHTML = error.message || "获取地理位置的时候发生了错误。";
+					}, function (error) {
+						console.log("Error code: " + error.code);
+						console.log("Error message: " + error.message);
+					});
+				} else {
+					alert("你的浏览器不支持 Geolocation API")
+				}
+			}
+		</script>
 	</head>
 
 	<body>
