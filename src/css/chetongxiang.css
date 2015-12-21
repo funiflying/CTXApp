@@ -3,7 +3,23 @@
  * @version:1.0.0
  * @date:2015-12-18
  */
+body{
+	background: #eeeeee;
+}
 
+/*********
+ * 头部导航
+ * *******/
+.mui-bar.mui-bar-nav.tui-bar-nav{
+	background:#ff6a00;
+	color: #fff;
+	-webkit-box-shadow:none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.mui-bar.mui-bar-nav.tui-bar-nav .tui-nav-location{
+	color: #fff;
+}
 /*********
  * 导航图标
  * *******/
@@ -24,9 +40,62 @@
 .tui-nav-icon-server {
     background-position: -92px -25px;
 }
+.mui-btn-nav.tui-nav-search-group{
+	background:#ff8126;
+	opacity: 0.6;
+	height: 30px;
+	line-height:30px;
+	width: 60%;
+	margin-top: 8px !important;
+	color: #fff;
+	font-size: 14px;
+}
+/*********
+ * 轮播图
+ * *******/
+.mui-slider img{
+	height: 100%;
+}
+.tui-about-promise{
+	background: #FFFFFF;
+	font-size: 11px;
+	height: 30px;
+	line-height: 30px;
+	color: #666666;
+	text-align: center;
+}
+.tui-about-promise .tui-promise-list{
+	height: 30px;
+	line-height: 30px;
+	display: inline-block;
+	font-size: 10px;
+	text-align: center;
+	margin: 0 5px;
+}
+.tui-about-promise .tui-promise-list i{
+	color: #ff6a00;
+	font-size: 12px;
+	line-height: 25px;
+}
 /*********
  * 快速买车
  * *******/
+.tui-car-filter-caption{
+	height: 30px;
+	line-height: 30px;
+	padding-left: 15px;
+	color: #999999;
+	font-size: 14px;
+	text-align: left;
+}
+.tui-car-filter-title{
+	background: #FFFFFF;
+	height: 34px;
+	line-height: 34px;
+	color: #333333;
+	padding-left: 15px;
+	margin-top: 8px;
+}
 .mui-table-view.tui-car-filter .mui-table-view-cell{
 	padding:0 4px ;
 	font-size: 13px ;
@@ -97,6 +166,7 @@
     font-size: 13px;
     line-height: 42px;
     text-align: center;
+
 }
 /*********
  * 大家在看

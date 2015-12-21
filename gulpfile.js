@@ -6,17 +6,17 @@ var minifycss=require('gulp-minify-css');
 var imagemin=require('gulp-imagemin');
 var browserSync = require('browser-sync');
 
-gulp.task('serve',['minify','inject'], function () {
+gulp.task('serve', function () {
    var files = [
-      '/**/*.html',
-      '/css/**/*.css',
-      '/images/**/*.png',
-      '/js/**/*.js'
+      './src/**/*.html',
+      './src/css/**/*.css',
+      './src/images/**/*.png',
+      './src/js/**/*.js'
    ];
 
    browserSync.init(files, {
       server: {
-         baseDir: './build'
+         baseDir: './src/'
       }
    });
 });
@@ -27,7 +27,7 @@ gulp.task('minify',function(){
 })
 gulp.task('inject',function(){
 	var injectStyle=gulp.src(['./build/css/**/*.css'],{read: false});
-	var indectJs=gulp.src(['./build/lib/**/*.js','./build/js/**/*.js'],{read: false});
+	var indectJs=gulp.src(['./build/js/**/*.js'],{read: false});
 	var target=gulp.src('./build/index.html');
 	target.pipe(plugins.inject(injectStyle)).pipe(plugins.inject(indectJs)).pipe(gulp.dest('./build'));
 })
