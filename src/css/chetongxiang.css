@@ -80,13 +80,13 @@ body{
 /*********
  * 快速买车
  * *******/
-.tui-car-filter-caption{
+.mui-table-view-cell.tui-car-filter-caption{
 	height: 30px;
 	line-height: 30px;
-	padding-left: 15px;
+	padding-left: 15px !important;
 	color: #999999;
 	font-size: 14px;
-	text-align: left;
+	text-align: left !important;
 }
 .tui-car-filter-title{
 	background: #FFFFFF;
@@ -168,16 +168,34 @@ body{
     text-align: center;
 
 }
+
 /*********
- * 大家在看
+ * 车辆列表
  * *******/
-.mui-table-view.tui-our-look{
-	background: #FFFFFF;
+.tui-product-title
+{
+	color: #333;
+	font-weight: 500;
+	line-height: 18px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-bottom: 2px;
+	overflow: hidden;
+	font-size: 14px;
 }
-.mui-table-view.tui-our-look .mui-table-view-cell{
-	padding: 4px;
-	border: none;
+.tui-product-meta{
+	color: #999;
+	font-size: 12px;
+	line-height: 18px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align: left;
 }
-.mui-table-view.tui-our-look .mui-table-view-cell img{
-	width: 100%;
+.tui-product-sale{
+	color: #fa8e0a;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 18px;
+	text-align: left;
 }

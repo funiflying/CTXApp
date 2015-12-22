@@ -154,33 +154,20 @@
     </li>
 </ul>
 
-<h5 class="mui-content-padded">大家都在看</h5>
+<h5 class="mui-content-padded">猜你喜欢</h5>
 <!--media list-->
-<ul class="mui-table-view mui-grid-view mui-grid-9 tui-our-look">
-    <li class="mui-table-view-cell mui-col-xs-6">
-        <img src="../images/car_index1.png" />
-    </li>
-    <li class="mui-table-view-cell  mui-col-xs-6">
-        <img src="../images/car_index2.png" />
-    </li>
-    <li class="mui-table-view-cell  mui-col-xs-3">
-        <img src="../images/car_index3.png" />
-    </li>
-    <li class="mui-table-view-cell  mui-col-xs-3">
-        <img src="../images/car_index4.png" />
-    </li>
-    <li class="mui-table-view-cell  mui-col-xs-3">
-        <img src="../images/car_index5.png" />
-    </li>
-    <li class="mui-table-view-cell  mui-col-xs-3">
-        <img src="../images/car_index6.png" />
+<ul class="mui-table-view mui-grid-view">
+    <li class="mui-table-view-cell mui-media mui-col-xs-6"  ng-repeat="obj in carlist">
+        <a href="#">
+            <img class="mui-media-object" ng-src="{{HOST+obj.HomePicID}}">
+            <div class="tui-product-title" ng-bind="obj.SpecName"></div>
+            <div class="tui-product-meta">
+                <i ng-bind="obj.InitialDate|date:'yyyy'"></i>上牌| <i ng-bind="obj.Mileage"></i>万公里
+            </div>
+            <div class="tui-product-sale">
+                <i ng-bind="obj.Price/1000|currency:'￥'"></i>万
+            </div>
+        </a>
     </li>
 </ul>
 <!--end media list-->
-<script>
-    window.onload=function(){
-
-    }
-
-
-</script>

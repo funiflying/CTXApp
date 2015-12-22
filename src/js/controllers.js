@@ -3,11 +3,15 @@
  * @date:2015-12-21
  * @version:1.0.0
  */
-angular.module("CTXAppControllers",[]).controller('HomeController',['$scope','CarService',function($scope,CarService){
+angular.module("CTXAppControllers",[]).controller('HomeController',['$scope','HomeService',function($scope,HomeService){
     mui('#pullrefresh').scroll();
     var gallery = mui(".mui-slider");
     gallery.slider({
         interval: 3000
     })
-    console.log(CarService.query({City:'2015 ',CarType:0}))
+    var cars=HomeService.getHomeCarList({City:'',CarType:0}).then(function(data){
+        $scope.carlist=data.data;
+        console.log($scope.carlist)
+    })
+
 }])
