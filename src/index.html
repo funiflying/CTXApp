@@ -36,39 +36,29 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav tui-bar-nav">
-			<button class="mui-btn mui-btn-link mui-btn-nav mui-pull-left tui-nav-location">
-				<i class="mui-icon mui-icon-location"></i>厦门
-			</button>
-			<button class="mui-btn mui-btn-link mui-btn-nav mui-pull-right tui-nav-search-group">
-				<i class="mui-icon mui-icon-search"></i>搜索好车
-			</button>
-			<h1 class="mui-title"></h1>
-		</header>
-		<nav class="mui-bar mui-bar-tab">
-				<a class="mui-tab-item mui-active">
-					<span class="mui-icon mui-icon-home"></span>
-					<span class="mui-tab-label">首页</span>
-				</a>
-				<a class="mui-tab-item">
-					<span class="mui-icon mui-icon-phone"></span>
-					<span class="mui-tab-label">买车</span>
-				</a>
-				<a class="mui-tab-item">
-					<span class="mui-icon mui-icon-email"></span>
-					<span class="mui-tab-label">买车</span>
-				</a>
-				<a class="mui-tab-item">
-					<span class="mui-icon mui-icon-person-filled"></span>
-					<span class="mui-tab-label">个人中心</span>
-				</a>
-			</nav>
-		  <div class="mui-content mui-scroll-wrapper" id="pullrefresh">
-			  <div class="mui-scroll" ui-view >
 
-			  </div>
-		  </div>
-		
+
+		<nav class="tui-bar tui-bar-tab">
+				<a class="tui-tab-item tui-active" ui-sref="home">
+					<span class="mui-icon mui-icon-home"></span>
+					<span class="tui-tab-label">首页</span>
+				</a>
+				<a class="tui-tab-item" ui-sref="carlist">
+					<span class="mui-icon mui-icon-chatbubble"></span>
+					<span class="tui-tab-label">买车</span>
+				</a>
+				<a class="tui-tab-item" ui-sref="sellcar">
+					<span class="mui-icon mui-icon-chat"></span>
+					<span class="tui-tab-label">卖车</span>
+				</a>
+				<a class="tui-tab-item" ui-sref="admin">
+					<span class="mui-icon mui-icon-contact"></span>
+					<span class="tui-tab-label">我的</span>
+				</a>
+		</nav>
+		 <div ui-view="">
+
+		 </div>
 
 		<!-- inject:js -->
 
@@ -80,7 +70,7 @@
 		<script src="js/app.js" type="text/javascript"></script>
 		<script src="js/controllers.js" type="text/javascript"></script>
 		<script src="js/services.js" type="text/javascript"></script>
-
+		<script src="js/filter.js" type="text/javascript"></script>
 	</body>
 
 </html>

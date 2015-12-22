@@ -4,9 +4,19 @@
  * @date:2015-12-18
  */
 body{
-	background: #eeeeee;
+	background-color: #e5e5e5;
+	color: #333;
+	font: 14px/1.5 helvetica neue,tahoma,arial,hiragino sans gb,microsoft yahei,sans-serif;
 }
 
+.mui-content{
+	margin-bottom: 60px;
+}
+.tui-blank{
+	width: auto;
+	height: 10px;
+	background: transparent;
+}
 /*********
  * 头部导航
  * *******/
@@ -19,6 +29,72 @@ body{
 }
 .mui-bar.mui-bar-nav.tui-bar-nav .tui-nav-location{
 	color: #fff;
+}
+/*************
+*底部导航
+*/
+.tui-bar-tab {
+	bottom: 0;
+	display: table;
+	width: 100%;
+	height: 50px;
+	padding: 0;
+	table-layout: fixed;
+	border-top: 0;
+	border-bottom: 0;
+	-webkit-touch-callout: none;
+}
+.tui-bar {
+	position: fixed;
+	z-index: 10;
+	right: 0;
+	left: 0;
+	height: 44px;
+	padding-right: 10px;
+	padding-left: 10px;
+	border-bottom: 0;
+	background-color: #f7f7f7;
+	-webkit-box-shadow: 0 0 1px rgba(0,0,0,.85);
+	box-shadow: 0 0 1px rgba(0,0,0,.85);
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+.tui-bar-tab .tui-tab-item
+{
+	display: table-cell;
+	overflow: hidden;
+	width: 1%;
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #999999;
+}
+.tui-bar-tab .tui-tab-item.tui-active .mui-icon,
+.tui-bar-tab .tui-tab-item.tui-active .tui-tab-label
+{
+	color: #ff6a00;
+}
+.tui-bar-tab .tui-tab-item .mui-icon
+{
+	top: 3px;
+	width: 24px;
+	height: 24px;
+	padding-top: 0;
+	padding-bottom: 0;
+	color: #999999;
+}
+.tui-bar-tab .tui-tab-item .mui-icon ~ .tui-tab-label
+{
+	font-size: 11px;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.tui-bar-tab .tui-tab-item .tui-icon:active
+{
+	background: none;
 }
 /*********
  * 导航图标
@@ -41,7 +117,7 @@ body{
     background-position: -92px -25px;
 }
 .mui-btn-nav.tui-nav-search-group{
-	background:#ff8126;
+	background:#faab73;
 	opacity: 0.6;
 	height: 30px;
 	line-height:30px;
@@ -49,6 +125,39 @@ body{
 	margin-top: 8px !important;
 	color: #fff;
 	font-size: 14px;
+	position: relative;
+}
+.mui-btn-nav.tui-nav-search-group a,
+.mui-btn-nav.tui-nav-search-cancel a{
+	color: #FFFFFF;
+}
+.mui-btn-nav.tui-nav-search-bar{
+	background:#faab73;
+	opacity: 0.6;
+	height: 30px;
+	line-height:30px;
+	margin-top: 7px !important;
+	color: #fff;
+	font-size: 14px;
+	position: relative;
+	width: 85%;
+}
+.mui-btn-nav.tui-nav-search-bar  .mui-icon-search{
+	position: absolute;
+	right: 10px;
+	color: #FFFFFF;
+	top:4px;
+}
+.mui-btn-nav.tui-nav-search-bar .tui-nav-search{
+	border:none;
+	background-color: transparent;
+	height: 30px;
+    line-height: 30px;
+	color: #ecf2d6;
+}
+.mui-btn-link.tui-nav-search-cancel{
+	width: 10%;
+	color: #FFFFFF;
 }
 /*********
  * 轮播图
@@ -160,15 +269,14 @@ body{
 	width: 18px;
 	background-position: -654px 0;
 }
-.mui-table-view.tui-car-filter .tui-mod-more {
+.tui-mod-more {
     display: block;
-    color: #ff6a00;
+    color: #ff6a00!important;
     font-size: 13px;
     line-height: 42px;
     text-align: center;
 
 }
-
 /*********
  * 车辆列表
  * *******/
@@ -176,7 +284,7 @@ body{
 {
 	color: #333;
 	font-weight: 500;
-	line-height: 18px;
+	line-height: 22px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	margin-bottom: 2px;
@@ -186,7 +294,7 @@ body{
 .tui-product-meta{
 	color: #999;
 	font-size: 12px;
-	line-height: 18px;
+	line-height: 20px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
@@ -196,6 +304,14 @@ body{
 	color: #fa8e0a;
 	font-size: 16px;
 	font-weight: bold;
-	line-height: 18px;
+	line-height: 20px;
 	text-align: left;
+}
+.mui-content-padded.mui-hotline-telephone{
+	color: #999999;
+	text-align: center;
+	padding:15px 0;
+}
+.mui-grid-9.tui-search-keyword{
+	background: #FFFFFF;
 }
