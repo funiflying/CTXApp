@@ -17,11 +17,11 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "angular": "angularjs#~1.4.8",
     "angular-ui-router": "~0.2.15",
-    "angular-touch": "~1.4.8"
+    "angular-touch": "~1.4.8",
+    "angular-resource": "~1.4.8"
   }
 }
