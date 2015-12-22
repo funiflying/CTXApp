@@ -18,7 +18,7 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','CTXAppServices','CT
         }).state('searchcar',{
             url:'/searchcar',
             templateUrl:'partials/searchcar.html',
-            controller:'HomeController'
+            controller:'SerachCarController'
         })
  }]).run(['$rootScope','$state','$stateParams',function($rootScope,$state,$stateParams) {
     $rootScope.HOST="http://192.168.0.218";

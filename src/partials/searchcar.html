@@ -1,6 +1,6 @@
 <header class="mui-bar mui-bar-nav tui-bar-nav">
     <button class="mui-btn mui-btn-link mui-btn-nav mui-pull-left tui-nav-search-bar">
-        <input type="text"  placeholder="" class="tui-nav-search"  /><i class="mui-icon mui-icon-search"></i>
+        <input type="text"  placeholder="" class="tui-nav-search" ng-model="brand" /><i class="mui-icon mui-icon-search"></i>
     </button>
     <button class="mui-btn mui-btn-link mui-btn-nav mui-pull-left tui-nav-search-cancel">
         <a href="" ui-sref="home">取消</a>
@@ -9,10 +9,10 @@
 <div class="mui-content mui-scroll-wrapper" id="pullrefresh">
     <div class="mui-scroll" >
             <ul class="mui-table-view">
-                <li class="mui-table-view-cell">
-                    <a href=""></a>
+                <li class="mui-table-view-cell" ng-repeat="obj in brandlist">
+                    <a href=""><i ng-bind="obj.brandName"></i></a>
                 </li>
-               
+
             </ul>
             <div class="tui-blank"></div>
             <ul class="mui-table-view mui-grid-view mui-grid-9 tui-search-keyword">
