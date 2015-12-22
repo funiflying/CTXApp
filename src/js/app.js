@@ -1,4 +1,4 @@
-angular.module('CTXApp',['ui.router','ngTouch','CTXAppServices','CTXAppControllers']).config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
+angular.module('CTXApp',['ui.router','ngTouch','ngResource','CTXAppServices','CTXAppControllers']).config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
        $urlRouterProvider.otherwise('/home');
         $stateProvider.state('home',{
             url:'/home',
