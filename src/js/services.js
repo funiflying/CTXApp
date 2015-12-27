@@ -3,10 +3,10 @@
  *@date:2015-12-21
  *@version:1.0.0
  */
-angular.module('CTXAppServices',[]).factory('ResourceService',['$http','$resource',function($http,$resource){
+angular.module('CTXAppServices',[]).factory('ResourceService',['$http','$rootScope','$resource',function($http,$rootScope,$resource){
     return{
       getHomeCarResource:function(){
-          return  $resource('http://192.168.0.218/Common/Car/RequestHomeData/', {}, {
+          return  $resource($rootScope.HOST+'/Common/Car/RequestHomeData/', {}, {
               query: { method: 'post', params:{City:'@city',CarType:'@cartype'},isArray:false}
           })
       },
@@ -14,7 +14,12 @@ angular.module('CTXAppServices',[]).factory('ResourceService',['$http','$resourc
           return  $resource('../data/brandlist.json', {}, {
               query: { method: 'get',params:{},isArray:false}
           })
-      }
+      },
+       getCarBrandListResource:function(){
+            return  $resource('../data/brandlist-new.json', {}, {
+                query: { method: 'get',params:{},isArray:false}
+            })
+        }
     }
 }]).factory('HomeService',['$q','ResourceService',function($q,ResourceService){
     return {
@@ -33,6 +38,58 @@ angular.module('CTXAppServices',[]).factory('ResourceService',['$http','$resourc
         getCarBrandList:function(){
             var defer=$q.defer();
             ResourceService.getCarBrandResource().query(function(data,headers){
+                defer.resolve(data);
+            },function(data,header){
+                defer.reject(data)
+            })
+            return defer.promise;
+        }
+    }
+}]).factory('LocalStorageService',function(){
+    return {
+        setStorage:function(name,val){
+            localStorage.setItem(name,JSON.stringify(val))
+        },
+        getStorage:function(name){
+          return JSON.parse(localStorage.getItem(name));
+        },
+        removeStorage:function(name){
+            localStorage.removeItem(name)
+        },
+        setSearchCarHistory:function(stateParams){
+            if(!stateParams.SearchValue){
+                return;
+            }
+            var SEARCH_CAR_HISTORY=this.getStorage('SEARCH_CAR_HISTORY')||{DATA:[]};
+            var count=0;
+            if(SEARCH_CAR_HISTORY.DATA.length==0){
+                SEARCH_CAR_HISTORY.DATA.push(stateParams);
+            }
+            else{
+                angular.forEach(SEARCH_CAR_HISTORY.DATA,function(obj,index){
+                    if((stateParams.SeriesID&&obj.BrandID==stateParams.BrandID&&obj.SeriesID==stateParams.SeriesID)||(!stateParams.SeriesID&&obj.BrandID==stateParams.BrandID)){
+                       count++;
+                    }
+                })
+                if(count==0){
+                    SEARCH_CAR_HISTORY.DATA.push(stateParams)
+                }
+            }
+            this.setStorage('SEARCH_CAR_HISTORY',SEARCH_CAR_HISTORY);
+        },
+        getSearchCarHistory:function(){
+             var SEARCH_CAR_HISTORY=this.getStorage('SEARCH_CAR_HISTORY')||{DATA:[]};
+             return SEARCH_CAR_HISTORY.DATA
+         },
+        clearSearchCarHistory:function(){
+            this.removeStorage('SEARCH_CAR_HISTORY')
+        }
+    }
+}).factory('CarListServcie',['$q','ResourceService',function($q,ResourceService){
+    return{
+        getCarBrandList:function(){
+            var defer=$q.defer();
+            ResourceService.getCarBrandListResource().query(function(data,headers){
                 defer.resolve(data);
             },function(data,header){
                 defer.reject(data)

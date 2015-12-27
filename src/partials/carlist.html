@@ -1,1 +1,185 @@
-sdfsd af
+<link rel="stylesheet" href="../css/mui.indexedlist.css"/>
+<header class="mui-bar mui-bar-nav tui-bar-nav">
+    <button class="mui-btn mui-btn-link mui-btn-nav mui-pull-left tui-nav-location">
+        <i class="mui-icon mui-icon-location"></i>厦门
+    </button>
+    <p class="mui-btn mui-btn-link mui-btn-nav mui-pull-right tui-nav-search-group" ui-sref="searchcar">
+        <i class="mui-icon mui-icon-search"></i>搜索好车
+    </p>
+    <h1 class="mui-title"></h1>
+</header>
+<div class="tui-filter" id="tui-filter">
+    <nav class="tui-filter-nav">
+        <a data-for="orderFilter" href="javascript:void(0);"  class="tui-nav-item">排  序</a>
+        <a data-for="brandFilter" href="javascript:void(0);"  class="tui-nav-item active">品  牌</a>
+        <a data-for="priceFilter" href="javascript:void(0);"  class="tui-nav-item">价  格</a>
+        <a data-for="moreFilter" href="javascript:void(0);"   class="tui-nav-item">更  多</a>
+    </nav>
+    <div class="tui-filter-type" data-role="orderFilter" data-url-key="order_index">
+        <ul class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list">
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-url-value=""><a href="javascript:void(0);" class="active">默 认</a></li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-url-value="1"><a href="javascript:void(0);" >价 格<i class="mui-icon mui-icon-pulldown"></i></a></li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-url-value="2"><a href="javascript:void(0);" >车 龄<i class="mui-icon mui-icon-pulldown"></i></a></li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-url-value="3"><a href="javascript:void(0);" >里 程<i class="mui-icon mui-icon-pulldown"></i></a></li>
+        </ul>
+    </div>
+    <div class="tui-filter-type" data-role="brandFilter" data-url-key="order_index">
+
+        <div id="list" class="mui-indexed-list" style="height:250px;">
+            <div class="mui-indexed-list-bar" style="height: 657px;">
+                <a style="height: 25px; line-height: 25px;">A</a>
+                <a style="height: 25px; line-height: 25px;">B</a>
+                <a style="height: 25px; line-height: 25px;">C</a>
+                <a style="height: 25px; line-height: 25px;">D</a>
+                <a style="height: 25px; line-height: 25px;">E</a>
+                <a style="height: 25px; line-height: 25px;">F</a>
+                <a style="height: 25px; line-height: 25px;">G</a>
+                <a style="height: 25px; line-height: 25px;">H</a>
+                <a style="height: 25px; line-height: 25px;">I</a>
+                <a style="height: 25px; line-height: 25px;">J</a>
+                <a style="height: 25px; line-height: 25px;">K</a>
+                <a style="height: 25px; line-height: 25px;">L</a>
+                <a style="height: 25px; line-height: 25px;">M</a>
+                <a style="height: 25px; line-height: 25px;">N</a>
+                <a style="height: 25px; line-height: 25px;">O</a>
+                <a style="height: 25px; line-height: 25px;">P</a>
+                <a style="height: 25px; line-height: 25px;">Q</a>
+                <a style="height: 25px; line-height: 25px;">R</a>
+                <a style="height: 25px; line-height: 25px;">S</a>
+                <a style="height: 25px; line-height: 25px;">T</a>
+                <a style="height: 25px; line-height: 25px;">U</a>
+                <a style="height: 25px; line-height: 25px;">V</a>
+                <a style="height: 25px; line-height: 25px;">W</a>
+                <a style="height: 25px; line-height: 25px;">X</a>
+                <a style="height: 25px; line-height: 25px;">Y</a>
+                <a style="height: 25px; line-height: 25px;">Z</a>
+            </div>
+            <div class="mui-indexed-list-alert"></div>
+            <div class="mui-indexed-list-inner" style="height: 657px;">
+                <div class="mui-indexed-list-empty-alert">没有数据</div>
+                <ul class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list">
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-12 tui-car-filter-caption">
+                        不限品牌
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-dazhong"></span>
+                            <div class="mui-media-body">大众</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-xiandai"></span>
+                            <div class="mui-media-body">现代</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-fengtian"></span>
+                            <div class="mui-media-body">丰田</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-baoma"></span>
+                            <div class="mui-media-body">宝马</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-bieke"></span>
+                            <div class="mui-media-body">别克</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-aodi"></span>
+                            <div class="mui-media-body">奥迪</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-benchi"></span>
+                            <div class="mui-media-body">奔驰</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-richan"></span>
+                            <div class="mui-media-body">日产</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-fute"></span>
+                            <div class="mui-media-body">福特</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-bentian"></span>
+                            <div class="mui-media-body">本田</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-xuefulan"></span>
+                            <div class="mui-media-body">雪弗兰</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-qiya"></span>
+                            <div class="mui-media-body">起亚</div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="mui-table-view">
+                    <li data-group="A" class="mui-table-view-divider mui-indexed-list-group">A</li>
+                    <li data-value="AKU" data-tags="AKeSu" class="mui-table-view-cell mui-indexed-list-item" ng-repeat="obj in brandlist"><span ng-bind="obj.brandName"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tui-mask"></div>
+<div class="mui-content mui-scroll-wrapper" id="pullrefresh">
+
+    <div class="mui-scroll">
+        <!--media list-->
+      <!--  <ul class="mui-table-view mui-grid-view">
+            <li class="mui-table-view-cell mui-media mui-col-xs-6"  ng-repeat="obj in carlist">
+                <a href="#">
+                    <img class="mui-media-object" ng-src="{{HOST+obj.HomePicID}}">
+                    <div class="tui-product-title" ng-bind="obj.SpecName"></div>
+                    <div class="tui-product-meta">
+                        <i ng-bind="obj.InitialDate|GetFullYear"></i>年上牌| 行驶<i ng-bind="obj.Mileage"></i>万公里
+                    </div>
+                    <div class="tui-product-sale">
+                        <i ng-bind="obj.Price/10000|currency:'￥'"></i>万
+                    </div>
+                </a>
+            </li>
+        </ul>-->
+        <ul class="mui-table-view">
+            <li data-value="AKU" data-tags="AKeSu" class="mui-table-view-cell mui-indexed-list-item" ng-repeat="obj in brandlist"><span ng-bind="obj.brandName"></span></li>
+        </ul>
+        <h5 class="mui-content-padded mui-hotline-telephone">
+            咨询电话 400-0732-777
+        </h5>
+        <!--end media list-->
+    </div>
+</div>
+<script  src="../js/mui.indexedlist.js" type="text/javascritp"></script>
+<script>
+
+    mui.init();
+    mui.ready(function() {
+        var list = document.getElementById('list');
+        list.style.height = (document.body.offsetHeight) + 'px';
+        window.indexedList = new mui.IndexedList(list);
+
+    });
+
+</script>
+                                     

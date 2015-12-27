@@ -21,14 +21,14 @@ body{
  * 头部导航
  * *******/
 .mui-bar.mui-bar-nav.tui-bar-nav{
-	background:#ff6a00;
-	color: #fff;
+	background:#ffffff;
+	color: #4c4c4c;
 	-webkit-box-shadow:none;
 	-moz-box-shadow: none;
 	box-shadow: none;
 }
 .mui-bar.mui-bar-nav.tui-bar-nav .tui-nav-location{
-	color: #fff;
+	color: #4c4c4c;
 }
 /*************
 *底部导航
@@ -37,7 +37,7 @@ body{
 	bottom: 0;
 	display: table;
 	width: 100%;
-	height: 50px;
+	height: 60px;
 	padding: 0;
 	table-layout: fixed;
 	border-top: 0;
@@ -49,7 +49,6 @@ body{
 	z-index: 10;
 	right: 0;
 	left: 0;
-	height: 44px;
 	padding-right: 10px;
 	padding-left: 10px;
 	border-bottom: 0;
@@ -117,27 +116,34 @@ body{
     background-position: -92px -25px;
 }
 .mui-btn-nav.tui-nav-search-group{
-	background:#faab73;
+	background:#ebebeb;
 	opacity: 0.6;
 	height: 30px;
 	line-height:30px;
 	width: 60%;
 	margin-top: 8px !important;
-	color: #fff;
+	color: #999999;
 	font-size: 14px;
 	position: relative;
 }
-.mui-btn-nav.tui-nav-search-group a,
-.mui-btn-nav.tui-nav-search-cancel a{
-	color: #FFFFFF;
+.mui-btn-nav.tui-nav-search-group,
+.mui-btn-nav.tui-nav-search-cancel{
+	color: #999999;
+}
+a.mui-btn-nav.tui-nav-search-group:link,
+a.mui-btn-nav.tui-nav-search-group:visited,
+a.mui-btn-nav.tui-nav-search-group:hover,
+a.mui-btn-nav.tui-nav-search-group:active,
+.mui-btn-nav.tui-nav-search-cancel:active{
+	color: #FFFFFF
 }
 .mui-btn-nav.tui-nav-search-bar{
-	background:#faab73;
+	background:#ebebeb;
 	opacity: 0.6;
 	height: 30px;
 	line-height:30px;
 	margin-top: 7px !important;
-	color: #fff;
+	color: #999999;
 	font-size: 14px;
 	position: relative;
 	width: 85%;
@@ -153,11 +159,10 @@ body{
 	background-color: transparent;
 	height: 30px;
     line-height: 30px;
-	color: #ecf2d6;
 }
 .mui-btn-link.tui-nav-search-cancel{
 	width: 10%;
-	color: #FFFFFF;
+	color: #999999;
 }
 /*********
  * 轮播图
@@ -190,8 +195,6 @@ body{
  * 快速买车
  * *******/
 .mui-table-view-cell.tui-car-filter-caption{
-	height: 30px;
-	line-height: 30px;
 	padding-left: 15px !important;
 	color: #999999;
 	font-size: 14px;
@@ -206,7 +209,6 @@ body{
 	margin-top: 8px;
 }
 .mui-table-view.tui-car-filter .mui-table-view-cell{
-	padding:0 4px ;
 	font-size: 13px ;
 	background: #fcfcfc;
 }
@@ -265,6 +267,10 @@ body{
 	width: 44px;
 	background-position: -551px 0;
 }
+.tui-car-filter-icon-qiya{
+	width: 44px;
+	background-position: -436px 0;
+}
 .tui-car-filter-icon-more{
 	width: 18px;
 	background-position: -654px 0;
@@ -314,4 +320,104 @@ body{
 }
 .mui-grid-9.tui-search-keyword{
 	background: #FFFFFF;
+}
+/*
+车辆筛选
+*/
+.tui-mask {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.4);
+	margin-top: 45px;
+}
+.tui-mask.active{
+	display: block;
+}
+.tui-filter {
+	position: relative;
+	z-index: 100;
+	background-color: #fcfcfc;
+	border-top: 1px solid #eee;
+}
+.tui-filter-nav {
+	display: -webkit-box;
+	display: -ms-box;
+	display:box;
+	background-color: #fff;
+	z-index: 100;
+}
+.tui-filter-nav .tui-nav-item {
+	display: block;
+	-webkit-box-flex: 1;
+	-ms-box-flex: 1;
+	box-flex: 1;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	overflow: hidden;
+	color: #333333;
+	position: relative;
+	z-index: 100;
+}
+
+.tui-filter-nav .tui-nav-item.active,
+.tui-filter-nav .tui-nav-item.active.touch,
+.tui-filter-nav .tui-nav-item.select,
+.tui-filter-nav .tui-nav-item.select.touch {
+	background-color: transparent;
+	border-bottom: 2px solid #ff6a00;
+	color: #ff6a00;
+}
+.tui-filter-nav .tui-nav-item::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 8px;
+	width: 0;
+	height: 0;
+	border: 4px solid transparent;
+	border-top-color: #999;
+	margin-top: -2px;
+}
+.tui-filter-nav .tui-nav-item.active::after {
+	border-top-color: transparent;
+	border-bottom-color: #ff6a00;
+	margin-top: -5px;
+}
+.tui-filter .tui-filter-type{
+	display: none;
+}
+.tui-filter .tui-filter-type.active{
+	display: block;
+}
+.tui-filter-type .tui-filter-list{
+	background: #FFFFFF;
+}
+.tui-filter-type .tui-filter-list a {
+	display: block;
+	position: relative;
+	color: #333;
+	font-size: 13px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}.tui-filter-type .tui-filter-list a.active {
+	background: #f4f4f4;
+	 color: #333;
+ }
+.tui-filter-type .tui-filter-list a  .mui-icon{
+	font-size: 12px;
+	color: #333;
+}
+.tui-filter-type .mui-table-view-cell.tui-filter-item{
+	padding: 0;
 }

@@ -1,4 +1,4 @@
-angular.module('CTXApp',['ui.router','ngTouch','ngResource','CTXAppServices','CTXAppControllers','CTXAppFilters']).config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
+angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppServices','CTXAppControllers','CTXAppFilters','CTXAppDirective']).config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
        $urlRouterProvider.otherwise('/home');
         $stateProvider.state('home',{
             url:'/home',
@@ -6,7 +6,16 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','CTXAppServices','CT
             controller:'HomeController'
         }).state('carlist',{
             url:'/carlist',
-            templateUrl:'partials/carlist.html'
+            templateUrl:'partials/carlist.html',
+            controller:'CarListController'
+        }).state('carlist.query',{
+            url:'/carlist?BrandID&SeriesID&SearchValue',
+            templateUrl:'partials/carlist.html',
+            controller:'CarListController'
+        }).state('car',{
+            url:'/car',
+            templateUrl:'',
+            controller:''
         }).state('sellcar',{
             url:'/sellcar',
             templateUrl:'',
@@ -24,4 +33,4 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','CTXAppServices','CT
     $rootScope.HOST="http://192.168.0.218";
     $rootScope.state = $state;
     $rootScope.stateParams = $stateParams;
-}])
+}]);
