@@ -18,7 +18,7 @@ angular.module("CTXAppControllers",[]).controller('HomeController',['$scope','$r
     SerachCarService.getCarBrandList().then(function(data){
         $scope.brandlist=data.data;
     });
-    //º‡ ”À—Àÿ
+    //ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
     $scope.$watch('brand',function(newValue,oldValue){
         $scope.searchlist=[];
         if(newValue){
@@ -41,19 +41,54 @@ angular.module("CTXAppControllers",[]).controller('HomeController',['$scope','$r
             },350)
         }
     });
-    //«Â≥˝¿˙ ∑ºÕ¬º
+    //Ê∏ÖÈô§ÊêúÁ¥†ËÆ∞ÂΩï
     $scope.clear=function(){
         LocalStorageService.clearSearchCarHistory();
         $scope.searchhistory=null;
     }
 }]).controller('CarListController',['$scope','$rootScope','LocalStorageService','CarListServcie',function($scope,$rootScope,LocalStorageService,CarListServcie){
    mui('#pullrefresh').scroll();
+    $scope.carlist=[];
+    $scope.filter={
+        Brand: $rootScope.stateParams.BrandID,
+        CarYear: null,
+        CityID: null,
+        Color: null,
+        Country: null,
+        DischargeStandard: null,
+        GearBox: null,
+        IsUrgent: null,
+        Mileage: null,
+        OutputVolume: null,
+        PageNo: 1,
+        PriceEnd: null,
+        PriceID: null,
+        PriceStart: null,
+        QuasiNewCar: null,
+        SearchWord: null,
+        Series: $rootScope.stateParams.SeriesID,
+        SevenSeat: null,
+        Sort: null,
+        Style: null,
+        WomenCar: null,
+        pageNum: 24
+    }
+
     CarListServcie.getCarBrandList().then(function(data){
         $scope.brandlist=data.data;
     });
     LocalStorageService.setSearchCarHistory($rootScope.stateParams);
-    $scope.go=function(){
-        $scope.count=$scope.count+1
+    $scope.getList=function(){
+        CarListServcie.getCarList($scope.filter).then(function(data){
+            if(data.data[0])
+            {
+                $scope.carlist=data.data[0].value;
+            }
+            else
+            {
+                $scope.carlist=[];
+            }
+        })
     }
-
+    $scope.getList()
 }])

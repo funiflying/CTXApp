@@ -19,6 +19,11 @@ angular.module('CTXAppServices',[]).factory('ResourceService',['$http','$rootSco
             return  $resource('../data/brandlist-new.json', {}, {
                 query: { method: 'get',params:{},isArray:false}
             })
+        },
+        getCarListResource:function(data){
+            return $resource($rootScope.HOST+'/common/car/SearchCar',{},{
+                query:{method:'post',params:data,isArray:false}
+            })
         }
     }
 }]).factory('HomeService',['$q','ResourceService',function($q,ResourceService){
@@ -90,6 +95,15 @@ angular.module('CTXAppServices',[]).factory('ResourceService',['$http','$rootSco
         getCarBrandList:function(){
             var defer=$q.defer();
             ResourceService.getCarBrandListResource().query(function(data,headers){
+                defer.resolve(data);
+            },function(data,header){
+                defer.reject(data)
+            })
+            return defer.promise;
+        },
+        getCarList:function(data){
+            var defer=$q.defer();
+            ResourceService.getCarListResource(data).query(function(data,headers){
                 defer.resolve(data);
             },function(data,header){
                 defer.reject(data)

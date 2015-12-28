@@ -9,13 +9,52 @@ body{
 	font: 14px/1.5 helvetica neue,tahoma,arial,hiragino sans gb,microsoft yahei,sans-serif;
 }
 
-.mui-content{
+.tui-content{
 	margin-bottom: 60px;
+	margin-top: 45px;
 }
 .tui-blank{
 	width: auto;
 	height: 10px;
 	background: transparent;
+}
+/*********
+ * 按钮
+ * *******/
+.tui-btn {
+	display: inline-block;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+	outline: 1px solid rgba(0,0,0,.02);
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+	width: 100%;
+	background-color: #ff6a00;
+	border: 1px solid#ff6a00;
+	color: #fff;
+	height: 42px;
+	font-size: 16px;
+	line-height: 42px;
+	border-radius: 0;
+}
+.tui-btn-default {
+	height: 34px;
+	background-color: #e6f5de;
+	color: #5b2;
+	font-size: 14px;
+	line-height: 34px;
+	padding: 0 12px;
+}
+.tui-btn-primary {
+	width: 100%;
+	background-color:#ff6a00;
+	color: #fff;
 }
 /*********
  * 头部导航
@@ -195,9 +234,9 @@ a.mui-btn-nav.tui-nav-search-group:active,
  * 快速买车
  * *******/
 .mui-table-view-cell.tui-car-filter-caption{
-	padding-left: 15px !important;
+	padding: 5px 15px !important;
 	color: #999999;
-	font-size: 14px;
+	font-size: 14px !important;
 	text-align: left !important;
 }
 .tui-car-filter-title{
@@ -342,7 +381,6 @@ a.mui-btn-nav.tui-nav-search-group:active,
 	position: relative;
 	z-index: 100;
 	background-color: #fcfcfc;
-	border-top: 1px solid #eee;
 }
 .tui-filter-nav {
 	display: -webkit-box;
@@ -402,6 +440,9 @@ a.mui-btn-nav.tui-nav-search-group:active,
 .tui-filter-type .tui-filter-list{
 	background: #FFFFFF;
 }
+.tui-filter-type .tui-filter-btnone{
+	border-top:none;
+}
 .tui-filter-type .tui-filter-list a {
 	display: block;
 	position: relative;
@@ -410,14 +451,69 @@ a.mui-btn-nav.tui-nav-search-group:active,
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-}.tui-filter-type .tui-filter-list a.active {
-	background: #f4f4f4;
-	 color: #333;
- }
+	padding: 0 !important;
+}
+
 .tui-filter-type .tui-filter-list a  .mui-icon{
 	font-size: 12px;
 	color: #333;
 }
 .tui-filter-type .mui-table-view-cell.tui-filter-item{
-	padding: 0;
+	padding: 8px 0 !important;
+}
+.tui-filter-type .mui-table-view-cell.tui-car-filter-caption{
+	padding-left: 15px;
+}
+.tui-filter-type .mui-table-view-cell.tui-filter-item.active{
+	 background: #f4f4f4;
+	 position: relative;
+ }
+.tui-filter-type .mui-table-view-cell.tui-filter-item.active .iconfont{
+	color: #ff6a00;
+}
+.tui-filter-more .tui-filter-type .mui-table-view-cell.tui-filter-item.active::after{
+	font-family: Muiicons;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	line-height: 1;
+	display: block;
+	text-decoration: none;
+	-webkit-font-smoothing: antialiased;
+	content: "\e442";
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	left: initial;
+	background:#ff6a00;
+	border-radius:50% ;
+	color: #ff6a00;
+}
+.tui-filter-opt
+{
+	display:-moz-box; /* Firefox */
+	display:-webkit-box; /* Safari and Chrome */
+	display:box;
+	width:100%;
+	padding: 10px 0;
+}
+.tui-filter-opt .tui-btn-default {
+	color: #fff;
+	background-color: #b5b5b5;
+	border: 0;
+	-webkit-box-flex: 3.0;
+	box-flex: 3.0;
+	display:-moz-box; /* Firefox */
+	display:-webkit-box; /* Safari and Chrome */
+	display:box;
+	height:42px;
+}
+.tui-filter-opt .tui-btn-primary {
+	color: #fff;
+	border: 0;
+	-webkit-box-flex:1.0;
+	box-flex: 1.0;
+	display:-moz-box; /* Firefox */
+	display:-webkit-box; /* Safari and Chrome */
+	display:box;
 }

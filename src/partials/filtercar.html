@@ -1,0 +1,288 @@
+<div class="tui-mask"></div>
+<div class="tui-filter" id="tui-filter">
+    <nav class="tui-filter-nav" style="border-bottom: 1px solid #eee">
+        <a data-for="orderFilter" href="javascript:void(0);"  class="tui-nav-item">排  序</a>
+        <a data-for="brandFilter" href="javascript:void(0);"  class="tui-nav-item">品  牌</a>
+        <a data-for="priceFilter" href="javascript:void(0);"  class="tui-nav-item">价  格</a>
+        <a data-for="moreFilter" href="javascript:void(0);"   class="tui-nav-item">更  多</a>
+    </nav>
+    <div class="tui-filter-type" data-role="orderFilter" data-url-key="order_index">
+        <ul class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item active" data-filter-value="0"  data-name="SortUpdate"><a href="" ui-sref="carlist">默 认</a></li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="1" data-name="SortPrice"><a href="javascript:void(0);">价 格<i ng-class="{'iconfont icon-down':filter.Sort!=1,'iconfont icon-up':filter.Sort==1}"></i></a></li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="2" data-name="SortAge"><a href="javascript:void(0);">车 龄<i ng-class="{'iconfont icon-down':filter.Sort!=2,'iconfont icon-up':filter.Sort==2}"></i></a></li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="3" data-name="SortMileage"><a href="javascript:void(0);">里 程<i ng-class="{'iconfont icon-down':filter.Sort!=3,'iconfont icon-up':filter.Sort==3}"></i></a></li>
+        </ul>
+    </div>
+    <div class="tui-filter-type" data-role="brandFilter" >
+        <div id="list" class="mui-indexed-list" style="border-top: none;">
+            <div class="mui-indexed-list-bar">
+                <a style="height: 25px; line-height: 25px;">A</a>
+                <a style="height: 25px; line-height: 25px;">B</a>
+                <a style="height: 25px; line-height: 25px;">C</a>
+                <a style="height: 25px; line-height: 25px;">D</a>
+                <a style="height: 25px; line-height: 25px;">E</a>
+                <a style="height: 25px; line-height: 25px;">F</a>
+                <a style="height: 25px; line-height: 25px;">G</a>
+                <a style="height: 25px; line-height: 25px;">H</a>
+                <a style="height: 25px; line-height: 25px;">I</a>
+                <a style="height: 25px; line-height: 25px;">J</a>
+                <a style="height: 25px; line-height: 25px;">K</a>
+                <a style="height: 25px; line-height: 25px;">L</a>
+                <a style="height: 25px; line-height: 25px;">M</a>
+                <a style="height: 25px; line-height: 25px;">N</a>
+                <a style="height: 25px; line-height: 25px;">O</a>
+                <a style="height: 25px; line-height: 25px;">P</a>
+                <a style="height: 25px; line-height: 25px;">Q</a>
+                <a style="height: 25px; line-height: 25px;">R</a>
+                <a style="height: 25px; line-height: 25px;">S</a>
+                <a style="height: 25px; line-height: 25px;">T</a>
+                <a style="height: 25px; line-height: 25px;">U</a>
+                <a style="height: 25px; line-height: 25px;">V</a>
+                <a style="height: 25px; line-height: 25px;">W</a>
+                <a style="height: 25px; line-height: 25px;">X</a>
+                <a style="height: 25px; line-height: 25px;">Y</a>
+                <a style="height: 25px; line-height: 25px;">Z</a>
+            </div>
+            <div class="mui-indexed-list-alert"></div>
+            <div class="mui-indexed-list-inner" style="height: 657px;">
+                <div class="mui-indexed-list-empty-alert">没有数据</div>
+                <ul class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-12 tui-car-filter-caption" data-filter-value="0">
+                        <a href="" >不限品牌</a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3" data-filter-value="">
+                        <a href="" >
+                            <span class="tui-car-filter-icon tui-car-filter-icon-dazhong"></span>
+                            <div class="mui-media-body">大众</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3" data-filter-value="">
+                        <a href="" >
+                            <span class="tui-car-filter-icon tui-car-filter-icon-xiandai"></span>
+                            <div class="mui-media-body">现代</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3" data-filter-value="">
+                        <a href="" >
+                            <span class="tui-car-filter-icon tui-car-filter-icon-fengtian"></span>
+                            <div class="mui-media-body">丰田</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3" data-filter-value="">
+                        <a href="" >
+                            <span class="tui-car-filter-icon tui-car-filter-icon-baoma"></span>
+                            <div class="mui-media-body">宝马</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3" data-filter-value="">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-bieke"></span>
+                            <div class="mui-media-body">别克</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3" data-filter-value="">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-aodi"></span>
+                            <div class="mui-media-body">奥迪</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3" data-filter-value="">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-benchi"></span>
+                            <div class="mui-media-body">奔驰</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3" data-filter-value="">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-richan"></span>
+                            <div class="mui-media-body">日产</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3" data-filter-value="">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-fute"></span>
+                            <div class="mui-media-body">福特</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3"  data-filter-value="">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-bentian"></span>
+                            <div class="mui-media-body">本田</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3"  data-filter-value="">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-xuefulan"></span>
+                            <div class="mui-media-body">雪弗兰</div>
+                        </a>
+                    </li>
+                    <li class="mui-table-view-cell tui-filter-item mui-col-xs-3"  data-filter-value="">
+                        <a href="">
+                            <span class="tui-car-filter-icon tui-car-filter-icon-qiya"></span>
+                            <div class="mui-media-body">起亚</div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="mui-table-view">
+                    <li data-group="A" class="mui-table-view-divider mui-indexed-list-group">A</li>
+                    <li  data-value="AKU" data-tags="AKeSu" class="mui-table-view-cell tui-filter-item mui-indexed-list-item " ng-repeat="obj in brandlist" data-filter-value="{{obj.brandID}}"><span ng-bind="obj.brandName"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="tui-filter-type" data-role="priceFilter" data-url-key="order_price">
+        <ul  class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">5万以下</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">5-10万</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">10-15万</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">15-20万</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">20-25万</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">25-40万</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">40-60万</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">60万以上</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tui-filter-type tui-filter-more" data-role="moreFilter" data-url-key="order_price">
+        <ul  class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
+            <li class="mui-table-view-cell mui-col-xs-12  tui-car-filter-caption">
+                车龄
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item active">
+                <a href="">1年内</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">3年内</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">5年内</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">5年上</a>
+            </li>
+        </ul>
+        <ul  class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
+            <li class="mui-table-view-cell mui-col-xs-12  tui-car-filter-caption">
+                车型
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">小轿车</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">SUV</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">MPV</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">跑车</a>
+            </li>
+        </ul>
+        <ul  class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
+            <li class="mui-table-view-cell mui-col-xs-12  tui-car-filter-caption">
+                行驶里程
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">1万公里内</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">3万公里内</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">5万公里内</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">5万公里上</a>
+            </li>
+        </ul>
+        <ul  class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
+            <li class="mui-table-view-cell mui-col-xs-12  tui-car-filter-caption">
+                变速箱
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">手动</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">自动</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">&nbsp;</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">&nbsp;</a>
+            </li>
+        </ul>
+        <ul  class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
+            <li class="mui-table-view-cell mui-col-xs-12  tui-car-filter-caption">
+                排放标准
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">国二及以上</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">国三及以上</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">国四及以上</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">国五</a>
+            </li>
+        </ul>
+        <ul  class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
+            <li class="mui-table-view-cell mui-col-xs-12  tui-car-filter-caption">
+                座位数
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">5座</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">5座以上</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">5座以下</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">&nbsp;</a>
+            </li>
+        </ul>
+        <ul  class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
+            <li class="mui-table-view-cell mui-col-xs-12 tui-car-filter-caption">
+                大家都在看
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">降价急售</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">准新车</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">女车主</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item">
+                <a href="">7座车</a>
+            </li>
+        </ul>
+        <div class="tui-filter-opt">
+            <button type="button" class="tui-btn tui-btn-default">重置</button>
+            <button type="button" class="tui-btn tui-btn-primary">确定</button>
+
+        </div>
+    </div>
+</div>
