@@ -9,7 +9,7 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             templateUrl:'partials/carlist.html',
             controller:'CarListController'
         }).state('carlist.query',{
-            url:'/carlist?BrandID&SeriesID&SearchValue',
+            url:'/carlist?BrandID&SeriesID&PriceID&Style&SearchValue&&Value',
             templateUrl:'partials/carlist.html',
             controller:'CarListController'
         }).state('car',{

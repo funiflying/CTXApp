@@ -8,7 +8,11 @@ body{
 	color: #333;
 	font: 14px/1.5 helvetica neue,tahoma,arial,hiragino sans gb,microsoft yahei,sans-serif;
 }
-
+html::-webkit-scrollbar,
+body::-webkit-scrollbar{
+	width:0;
+	height:0;
+}
 .tui-content{
 	margin-bottom: 60px;
 	margin-top: 45px;
@@ -247,11 +251,11 @@ a.mui-btn-nav.tui-nav-search-group:active,
 	padding-left: 15px;
 	margin-top: 8px;
 }
-.mui-table-view.tui-car-filter .mui-table-view-cell{
+.mui-table-view.tui-car-filter .mui-table-view-cell.tui-filter-item{
 	font-size: 13px ;
 	background: #fcfcfc;
+	padding: 0;
 }
-
 .tui-car-filter-icon{
 	display: block;
     width: 100%;
@@ -318,7 +322,6 @@ a.mui-btn-nav.tui-nav-search-group:active,
     display: block;
     color: #ff6a00!important;
     font-size: 13px;
-    line-height: 42px;
     text-align: center;
 
 }
@@ -458,20 +461,26 @@ a.mui-btn-nav.tui-nav-search-group:active,
 	font-size: 12px;
 	color: #333;
 }
-.tui-filter-type .mui-table-view-cell.tui-filter-item{
-	padding: 8px 0 !important;
+.tui-filter-list .mui-table-view-cell.tui-filter-item,
+.tui-filter-list .mui-table-view-cell.tui-filter-item-multiple{
+	padding: 10px 0 ;
+}
+.tui-filter-list .mui-table-view-cell.tui-filter-item-placeholder{
+	padding: 10px 0 ;
 }
 .tui-filter-type .mui-table-view-cell.tui-car-filter-caption{
 	padding-left: 15px;
 }
-.tui-filter-type .mui-table-view-cell.tui-filter-item.active{
+.tui-filter-type .mui-table-view-cell.tui-filter-item.active,
+.tui-filter-type .mui-table-view-cell.tui-filter-item-multiple.active{
 	 background: #f4f4f4;
 	 position: relative;
  }
 .tui-filter-type .mui-table-view-cell.tui-filter-item.active .iconfont{
 	color: #ff6a00;
 }
-.tui-filter-more .tui-filter-type .mui-table-view-cell.tui-filter-item.active::after{
+.tui-filter-more.tui-filter-type .mui-table-view-cell.tui-filter-item.active::after,
+.tui-filter-more.tui-filter-type .mui-table-view-cell.tui-filter-item-multiple.active::after{
 	font-family: Muiicons;
 	font-size: 14px;
 	font-weight: normal;
@@ -482,12 +491,25 @@ a.mui-btn-nav.tui-nav-search-group:active,
 	-webkit-font-smoothing: antialiased;
 	content: "\e442";
 	position: absolute;
-	top: 5px;
-	right: 5px;
+	top: 1px;
+	right:1px;
 	left: initial;
 	background:#ff6a00;
 	border-radius:50% ;
 	color: #ff6a00;
+	-webkit-transform: none;
+	transform: none;
+}
+.mui-table-view-cell:after {
+	/* position: absolute; */
+	/* right: 0; */
+	/* bottom: 0; */
+	/* left: 15px; */
+	/* height: 1px; */
+	/* content: ''; */
+	/* -webkit-transform: scaleY(.5); */
+	/* transform: scaleY(.5); */
+	/* background-color: #c8c7cc; */
 }
 .tui-filter-opt
 {
@@ -516,4 +538,40 @@ a.mui-btn-nav.tui-nav-search-group:active,
 	display:-moz-box; /* Firefox */
 	display:-webkit-box; /* Safari and Chrome */
 	display:box;
+}
+.tui-filter-type .mui-indexed-list-bar{
+	width: 15px;
+	opacity: 0.7;
+}
+.mui-indexed-list-bar a{
+	height:15px;
+	line-height:15px;
+}
+.tui-filter-result{
+	line-height: 32px;
+	padding-left: 15px;
+	border-bottom:1px solid #eeeeee;
+	display: none;
+}
+.tui-filter-result.active{
+	display: -webkit-box;
+}
+.tui-filter-result label{
+	 -webkit-box-flex: 1;
+ }
+.tui-filter-result p{
+	-webkit-box-flex: 3;
+	margin: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: keep-all;
+	white-space: nowrap;
+}
+.tui-filter-result-btn{
+	-webkit-box-flex:1;
+	border-left:1px solid #eeeeee;
+	text-align: center;
+	min-width: 60px;
+	width: 60px;
+	color: #ff6a00;
 }

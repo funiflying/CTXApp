@@ -47,7 +47,6 @@ angular.module("CTXAppControllers",[]).controller('HomeController',['$scope','$r
         $scope.searchhistory=null;
     }
 }]).controller('CarListController',['$scope','$rootScope','LocalStorageService','CarListServcie',function($scope,$rootScope,LocalStorageService,CarListServcie){
-   mui('#pullrefresh').scroll();
     $scope.carlist=[];
     $scope.filter={
         Brand: $rootScope.stateParams.BrandID,
@@ -62,14 +61,14 @@ angular.module("CTXAppControllers",[]).controller('HomeController',['$scope','$r
         OutputVolume: null,
         PageNo: 1,
         PriceEnd: null,
-        PriceID: null,
+        PriceID: $rootScope.stateParams.PriceID||0,
         PriceStart: null,
         QuasiNewCar: null,
         SearchWord: null,
         Series: $rootScope.stateParams.SeriesID,
         SevenSeat: null,
         Sort: null,
-        Style: null,
+        Style: $rootScope.stateParams.Style||0,
         WomenCar: null,
         pageNum: 24
     }
