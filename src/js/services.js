@@ -3,49 +3,46 @@
  *@date:2015-12-21
  *@version:1.0.0
  */
-angular.module('CTXAppServices',[]).factory('ResourceService',['$http','$rootScope','$resource',function($http,$rootScope,$resource){
-    return{
-      getHomeCarResource:function(){
-          return  $resource($rootScope.HOST+'/Common/Car/RequestHomeData/', {}, {
-              query: { method: 'post', params:{City:'@city',CarType:'@cartype'},isArray:false}
-          })
-      },
-      getCarBrandResource:function(){
-          return  $resource('../data/brandlist.json', {}, {
-              query: { method: 'get',params:{},isArray:false}
-          })
-      },
-       getCarBrandListResource:function(){
-            return  $resource('../data/brandlist-new.json', {}, {
-                query: { method: 'get',params:{},isArray:false}
-            })
-        },
-        getCarListResource:function(data){
-            return $resource($rootScope.HOST+'/common/car/SearchCar',{},{
-                query:{method:'post',params:data,isArray:false}
-            })
-        }
-    }
-}]).factory('HomeService',['$q','ResourceService',function($q,ResourceService){
+
+
+
+angular.module('CTXAppServices', []).factory('ResourceService', ['$resource', '$rootScope','$q', function($resource, $rootScope,$q) {
     return {
-        getHomeCarList:function(data){
-            var defer=$q.defer();
-            ResourceService.getHomeCarResource().query(data,function(data,headers){
+        getFunServer: function(sname,params,method) {
+            var surl = "",defer = $q.defer();;
+            switch (sname) {
+                case "RequestHomeData":
+                    surl = "/Common/Car/RequestHomeData/";
+                    break;
+                case "brandlist":
+                    surl = "/data/brandlist.json";
+                    break;
+                case "GetCardata":
+                    surl = "/common/car/GetCardata";
+                    break;
+                case "GetTestReportWithCode":
+                    surl = "/Alliance/TestReport/GetTestReportWithCode";
+                    break;
+                case "CarListServcie":
+                    surl='/common/car/SearchCar';
+                    break;
+                case 'brandlist-search':
+                    surl='/data/Brand.json';
+                    break;
+                default:
+                    break;
+            }
+            if (surl == "") return '';
+            $resource($rootScope.HOST + surl, {}, {
+                query: {
+                    method: method||'get',
+                    params: params||'{}',
+                    isArray: false
+                }
+            }).query(function(data, headers) {
                 defer.resolve(data);
-            },function(data,headers){
+            }, function(data, headers) {
                 defer.reject(data);
-            })
-            return defer.promise;
-        }
-    }
-}]).factory('SerachCarService',['$q','ResourceService',function($q,ResourceService){
-    return{
-        getCarBrandList:function(){
-            var defer=$q.defer();
-            ResourceService.getCarBrandResource().query(function(data,headers){
-                defer.resolve(data);
-            },function(data,header){
-                defer.reject(data)
             })
             return defer.promise;
         }
@@ -90,25 +87,10 @@ angular.module('CTXAppServices',[]).factory('ResourceService',['$http','$rootSco
             this.removeStorage('SEARCH_CAR_HISTORY')
         }
     }
-}).factory('CarListServcie',['$q','ResourceService',function($q,ResourceService){
-    return{
-        getCarBrandList:function(){
-            var defer=$q.defer();
-            ResourceService.getCarBrandListResource().query(function(data,headers){
-                defer.resolve(data);
-            },function(data,header){
-                defer.reject(data)
-            })
-            return defer.promise;
-        },
-        getCarList:function(data){
-            var defer=$q.defer();
-            ResourceService.getCarListResource(data).query(function(data,headers){
-                defer.resolve(data);
-            },function(data,header){
-                defer.reject(data)
-            })
-            return defer.promise;
-        }
-    }
+}).factory('PagerService',['$rootScope',function($rootScope){
+     return {
+         getPageCount:function(){
+             //console.log($rootScope.pageTotal)
+         }
+     }
 }])

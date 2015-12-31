@@ -33,4 +33,5 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
     $rootScope.HOST="http://192.168.0.218";
     $rootScope.state = $state;
     $rootScope.stateParams = $stateParams;
+
 }]);

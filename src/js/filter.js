@@ -12,5 +12,11 @@ angular.module("CTXAppFilters",[]).filter("GetFullYear",function(){
         }
         return "未知"
     }
+}).filter('FilterBrandByPy',function(){
+    return function (data,PY){
 
+
+
+
+    }
 })

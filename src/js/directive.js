@@ -87,15 +87,15 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                 scope.getList()
             })
             //价格
-            mui('.tui-filter-type[data-role=priceFilter]').on('tap','li.tui-filter-item',function(){
+            mui('.tui-filter-type[data-role=areaFilter]').on('tap','li.tui-filter-item',function(){
                 var val=$(this).attr('data-filter-value');
                 var text=$(this).attr('data-text');
-                scope.filter.PriceID=val;
+                scope.filter.IncludeFlag=val;
                 $(this).addClass('active').siblings('li.tui-filter-item').removeClass('active')
                 $('.tui-mask').removeClass('active')
-                $('.tui-filter-type[data-role=priceFilter]').toggleClass('active');
-                $('.tui-nav-item[data-for=priceFilter]').toggleClass('active');
-                $('.tui-filter-result').addClass('active').find('i.tui-filter-priceTxt').text(text)
+                $('.tui-filter-type[data-role=areaFilter]').toggleClass('active');
+                $('.tui-nav-item[data-for=areaFilter]').toggleClass('active');
+                $('.tui-filter-result').addClass('active').find('i.tui-filter-areaTxt').text(text)
                 scope.getList()
             })
             //更多
@@ -160,7 +160,7 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                     Sort: null,
                     Style: null,
                     WomenCar: null,
-                    pageNum: 24
+                    pageNum: scope.pagerConfig.pageSize
                 }
                 $rootScope.state.go('carlist');
                 scope.getList()
@@ -172,4 +172,69 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
 
     }
 
+}]).directive('pager',['$rootScope','PagerService',function($rootScope,PagerService){
+    return{
+        restrict:'EA',
+        transclude:true,
+        link:function(scope,element,attr){
+            scope.pager=function(pageNo){
+                var config= $.extend({},scope.pagerConfig);
+                pageNo=pageNo||1
+                var pageLength = (config.total % config.pageSize == 0 ? config.total / config.pageSize : Math.ceil(config.total /config.pageSize));
+
+                if(pageLength>1){
+                    $('.tui-page').show()
+                    var op="";
+                    for (var i= 0;i<pageLength;i++){
+                       op+='<option  value="'+i+1+'" >'+i+1+'</option>';
+                    }
+                    $('.tui-3g-page-btn').html(op)
+                    $('.page-num').text(pageNo+'/'+pageLength);
+                    if(pageLength==1){
+                        $('.page-up').addClass('disable').find('span').data('page',1);
+                        $('.page-down').addClass('disable').find('span').data('page',1);
+                    }
+                    else if (pageNo==pageLength) {
+                        $('.page-down').addClass('disable');
+                        $('.page-up').removeClass('disable').find('span').data('page',parseInt(pageNo)-1);
+                    }
+                    else if (pageNo==1) {
+                        $('.page-up').addClass('disable');
+                        $('.page-down').removeClass('disable').find('span').data('page',parseInt(pageNo)+1);
+                    }
+                    else {
+                        $('.page-up').removeClass('disable').find('span').data('page',parseInt(pageNo)-1);
+                        $('.page-down').removeClass('disable').find('span').data('page',parseInt(pageNo)+1);
+                    }
+                }
+                else {
+                    $('.tui-page').hide()
+                }
+           }
+           mui('.tui-page').on('change','.tui-3g-page-btn',function(){
+               scope.pagerConfig.callback($(this).val())
+           });
+           mui('.page-up').on('tap','span',function(){
+               var p=$(this).data('page')||1;
+               scope.pagerConfig.callback(p)
+           });
+           mui('.page-down').on('tap','span',function(){
+               var p=$(this).data('page')||1;
+               scope.pagerConfig.callback(p)
+           });
+        },
+        template:' <div class="tui-page">'+
+        '<a class="page-up">'+
+        '<span>上一页</span></a>'+
+        '<a  class="page-select-a">'+
+        '<span class="change-page">'+
+        '<span class="select-con">'+
+       '<span class="page-num"></span>'+
+        '<span class="triangle page-triangle"></span></span>'+
+       '<select name="" id="" class="tui-3g-page-btn">'+
+        '</select></select>'+
+        '</span></a><a class="page-down">'+
+        '<span>下一页</span></a></div>',
+        replace:false
+    }
 }])

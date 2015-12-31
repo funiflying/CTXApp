@@ -167,7 +167,9 @@
         <ul class="mui-table-view mui-grid-view">
             <li class="mui-table-view-cell mui-media mui-col-xs-6"  ng-repeat="obj in carlist">
                 <a href="#">
-                    <img class="mui-media-object" ng-src="{{HOST+obj.HomePicID}}">
+                    <div class="tui-car-cover" data-city="{{obj.CityName}}">
+                        <img class="mui-media-object" ng-src="{{HOST+obj.HomePicID}}">
+                    </div>
                     <div class="tui-product-title" ng-bind="obj.SpecName"></div>
                     <div class="tui-product-meta">
                         <i ng-bind="obj.InitialDate|GetFullYear"></i>年上牌| 行驶<i ng-bind="obj.Mileage"></i>万公里

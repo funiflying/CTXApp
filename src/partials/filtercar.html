@@ -1,16 +1,16 @@
 <div class="tui-mask"></div>
 <div class="tui-filter" id="tui-filter">
     <nav class="tui-filter-nav" style="border-bottom: 1px solid #eee">
+        <a data-for="areaFilter" href="javascript:void(0);"  class="tui-nav-item">区  域</a>
         <a data-for="orderFilter" href="javascript:void(0);"  class="tui-nav-item">排  序</a>
         <a data-for="brandFilter" href="javascript:void(0);"  class="tui-nav-item">品  牌</a>
-        <a data-for="priceFilter" href="javascript:void(0);"  class="tui-nav-item">价  格</a>
         <a data-for="moreFilter" href="javascript:void(0);"   class="tui-nav-item">更  多</a>
     </nav>
     <div class="tui-filter-result">
         <label>当前：</label>
         <p>
             <i class="tui-filter-brandTxt"></i>
-            <i class="tui-filter-priceTxt"></i>
+            <i class="tui-filter-areaTxt"></i>
             <i class="tui-filter-moreTxt"></i>
         </p>
         <div class="tui-filter-result-btn">
@@ -136,53 +136,58 @@
                     </li>
                 </ul>
                 <ul class="mui-table-view">
-                    <li data-group="H" class="mui-table-view-divider mui-indexed-list-group">A</li>
-                    <li  data-value="AKU" data-tags="AKeSu" class="mui-table-view-cell tui-filter-item mui-indexed-list-item"  data-text="{{obj.brandName}}" ng-repeat="obj in brandlist" data-filter-value="{{obj.brandID}}"><span ng-bind="obj.brandName"></span></li>
+                    <li data-group="A"  class="mui-table-view-divider mui-indexed-list-group">A</li>
+                    <li ng-repeat="obj in brandlist"   data-value="{{obj.BrandNamePY}}" data-tags="{{obj.BrandNamePY}}" class="mui-table-view-cell tui-filter-item mui-indexed-list-item"  data-text="{{obj.BrandName}}"  data-filter-value="{{obj.BrandID}}"><span ng-bind="obj.BrandName"></span></li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="tui-filter-type" data-role="priceFilter" data-url-key="order_price">
+    <div class="tui-filter-type" data-role="areaFilter" >
         <ul  class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="0">
-                <a href="">不限</a>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item active" data-filter-value="0" data-text="" data-filter-name="IncludeFlag">
+                <a href="">默认</a>
             </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="1"  data-text="5万以下">
-                <a href="">5万以下</a>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="2"  data-text="同省" data-filter-name="IncludeFlag">
+                <a href="">同省</a>
             </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="2" data-text="5-10万">
-                <a href="">5-10万</a>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="1" data-text="同市" data-filter-name="IncludeFlag">
+                <a href="">同市</a>
             </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="3" data-text="10-15万">
-                <a href="">10-15万</a>
-            </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="4" data-text="15-20万">
-                <a href="">15-20万</a>
-            </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="5" data-text="20-30万">
-                <a href="">20-30万</a>
-            </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="6" data-text="20-40万">
-                <a href="">20-40万</a>
-            </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="7" data-text="40-50万">
-                <a href="">40-50万</a>
-            </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="8" data-text="50万以上">
-                <a href="">50万以上</a>
-            </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item-placeholder" >
-                <a href="">&nbsp;</a>
-            </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item-placeholder" >
-                <a href="">&nbsp;</a>
-            </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item-placeholder" >
-                <a href="">&nbsp;</a>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="0" data-text="同城" data-filter-name="IncludeFlag">
+                <a href="">同城</a>
             </li>
         </ul>
     </div>
     <div class="tui-filter-type tui-filter-more" data-role="moreFilter" >
+        <ul  class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
+            <li class="mui-table-view-cell mui-col-xs-12  tui-car-filter-caption">
+                价格
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="1"  data-text="5万以下" data-filter-name="PriceID">
+                <a href="">5万以下</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="2" data-text="5-10万" data-filter-name="PriceID">
+                <a href="">5-10万</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="3" data-text="10-15万" data-filter-name="PriceID">
+                <a href="">10-15万</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="4" data-text="15-20万" data-filter-name="PriceID">
+                <a href="">15-20万</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="5" data-text="20-30万" data-filter-name="PriceID">
+                <a href="">20-30万</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="6" data-text="20-40万" data-filter-name="PriceID">
+                <a href="">20-40万</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="7" data-text="40-50万" data-filter-name="PriceID">
+                <a href="">40-50万</a>
+            </li>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="8" data-text="50万以上" data-filter-name="PriceID">
+                <a href="">50万以上</a>
+            </li>
+        </ul>
         <ul  class="mui-table-view mui-grid-view mui-grid-9 tui-filter-list tui-filter-btnone">
             <li class="mui-table-view-cell mui-col-xs-12  tui-car-filter-caption">
                 车龄
