@@ -186,7 +186,7 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                     $('.tui-page').show()
                     var op="";
                     for (var i= 0;i<pageLength;i++){
-                       op+='<option  value="'+i+1+'" >'+i+1+'</option>';
+                       op+='<option  value="'+parseInt(i+1)+'" >'+parseInt(i+1)+'</option>';
                     }
                     $('.tui-3g-page-btn').html(op)
                     $('.page-num').text(pageNo+'/'+pageLength);

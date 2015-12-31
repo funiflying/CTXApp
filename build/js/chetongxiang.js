@@ -1,1 +1,0 @@
-var URL_HOST="http://"+window.location.host;mui.ready(function(){mui("#pullrefresh").scroll();var e=mui(".mui-slider");e.slider({interval:3e3});{var n=mui("#offCanvasWrapper");n[0].querySelector(".mui-inner-wrap"),document.getElementById("offCanvasSide")}document.getElementById("offCanvasShow").addEventListener("tap",function(){n.offCanvas("show")})});
