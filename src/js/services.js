@@ -29,6 +29,9 @@ angular.module('CTXAppServices', []).factory('ResourceService', ['$resource', '$
                 case 'brandlist-search':
                     surl='/data/Brand.json';
                     break;
+                case 'SendPhoneValCode':
+                    surl='/common/message/SendValiadeCode';
+                    break;
                 default:
                     break;
             }

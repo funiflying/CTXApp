@@ -4430,7 +4430,6 @@ select:focus
     font-family: Muiicons;
     font-weight: normal;
     font-style: normal;
-
     src: url('../fonts/mui.ttf') format('truetype');
 }
 .mui-icon
@@ -4440,7 +4439,6 @@ select:focus
     font-weight: normal;
     font-style: normal;
     line-height: 1;
-
     display: inline-block;
 
     text-decoration: none;

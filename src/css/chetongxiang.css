@@ -5,7 +5,7 @@
  */
 body{
 	background-color: #e5e5e5;
-	color: #333;
+	color: #666;
 	font: 14px/1.5 helvetica neue,tahoma,arial,hiragino sans gb,microsoft yahei,sans-serif;
 }
 html::-webkit-scrollbar,
@@ -58,6 +58,28 @@ body::-webkit-scrollbar{
 .tui-btn-primary {
 	width: 100%;
 	background-color:#ff6a00;
+	color: #fff;
+}
+.tui-btn-orange{
+	color: #fff;
+	border: 1px solid #ff6a00;
+	background-color: #ff6a00;
+}
+/*********
+ * 字体颜色
+ * *******/
+.tui-font-orange {
+	color: #fd5736;
+}
+
+.tui-font-green {
+	color: #41a934;
+}
+
+.tui-font-red {
+	color: #cc2b53;
+}
+.tui-font-white{
 	color: #fff;
 }
 /*********
@@ -616,7 +638,6 @@ option {
 	display:-webkit-box; /* Safari and Chrome */
 	display:box;
 	width:100%;
-	padding: 10px 0;
 }
 .tui-filter-opt .tui-btn-default {
 	color: #fff;
@@ -673,4 +694,218 @@ option {
 	min-width: 60px;
 	width: 60px;
 	color: #ff6a00;
+}
+/*
+个人中心
+*/
+.tui-admin-banner{
+	background: url("../images/adminbanner.png") no-repeat;
+	height: 125px;
+	background-size: cover;
+    text-align: center;
+	padding-top: 10%;
+}
+.tui-admin-banner i{
+	color: #c4c4c4;
+	font-size: 32px;
+	border-radius: 50%;
+	background: #FFFFFF;
+}
+.tui-wodedingdan1
+ {
+	 background: #ff6a00;
+	 border-radius: 50%;
+	 font-size: 16px;
+	 color: #FFFFFF;
+	 padding: 4px;
+ }
+.tui-chechan
+{
+	background: #fb6464;
+	border-radius: 50%;
+	font-size: 16px;
+	color: #FFFFFF;
+	padding: 4px;
+}
+.tui-youhuiquan
+ {
+	 background: #fb9c0a;
+	 border-radius: 50%;
+	 font-size: 16px;
+	 color: #FFFFFF;
+	 padding: 4px;
+ }
+.tui-xiaoxi
+{
+	background: #0ec1e9;
+	border-radius: 50%;
+	font-size: 16px;
+	color: #FFFFFF;
+	padding: 4px;
+}
+.tui-zhanghaoanquan0101
+{
+	background: #93d557;
+	border-radius: 50%;
+	font-size: 16px;
+	color: #FFFFFF;
+	padding: 4px;
+}
+.tui-login{
+	position: absolute;
+	padding: 0 10px;
+    z-index: 100;
+	display: block;
+	width: 100%;
+	top:50%;
+	transform: translateY(-50%) ;
+	-webkit-transform:translateY(-50%) ;
+
+}
+.tui-login .mui-input-row .tui-btn-getcode{
+	width: 80px;
+	height: 30px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	left: inherit;
+	line-height: 30px;
+	font-size: 12px;
+}
+.tui-login .mui-input-row label{
+	width: 30%;
+}
+.tui-login .mui-input-row input{
+	width: 70%;
+}
+.tui-slider-indicator
+{
+	bottom: 8px;
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px solid #dedede;
+	color: #4c4c4c;
+	background: #FFFFFF;
+
+}
+.tui-slider-indicator.tui-segmented-control
+{
+	position: relative;
+	bottom: auto;
+}
+.tui-slider-indicator .tui-indicator
+{
+	display: inline-block;
+
+	width: 6px;
+	height: 6px;
+	margin: 1px 6px;
+
+	cursor: pointer;
+
+	border-radius: 50%;
+	background: #fff;
+	-webkit-box-shadow: 0 0 1px 1px rgba(130, 130, 130, .7);
+	box-shadow: 0 0 1px 1px rgba(130, 130, 130, .7);
+}
+
+.tui-segmented-control .tui-control-item
+{
+	line-height: 38px;
+
+	display: table-cell;
+	overflow: hidden;
+
+	width: 1%;
+	-webkit-transition: background-color .1s linear;
+	transition: background-color .1s linear;
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #4c4c4c;
+	border-color: #dedede;
+	border-left: 1px solid #dedede;
+}
+.tui-segmented-control .tui-control-item:first-child
+{
+	border-left-width: 0;
+}
+.tui-segmented-control .tui-control-item.active
+{
+	color: #ff6a00;
+	background-color: #fff;
+	border-bottom: 2px solid #ff6a00;
+}
+/*
+ *订单
+ */
+.tui-order{
+	padding:0;
+	padding-bottom: 10px;
+    list-style: none;
+	margin:  0;
+	color: #4c4c4c;
+}
+.tui-order-item{
+	margin-top: 10px;
+	background: #FFFFFF;
+}
+.tui-order-item::after,
+.tui-order-header::after{
+	content: "";
+	display: block;
+	clear: both;
+	height:0;
+}
+.tui-order-header{
+  line-height: 38px;
+  border-bottom: 1px solid #dedede;
+  padding: 0 10px;
+}
+.tui-order-info{
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row;
+	padding: 10px;
+	align-items: center;
+	border-bottom: 1px solid #dedede;
+}
+.tui-order-info .tui-order-icon{
+	-webkit-flex: 0 0 35%;
+}
+.tui-order-info .tui-order-descr{
+	-webkit-flex: 0 0 65%;
+}
+.tui-order-info .tui-order-icon img{
+	width: 100%;
+	height:100%;
+}
+.tui-order-descr{
+	padding: 0 10px;
+}
+.tui-order-descr .tui-car-name{
+	font-size: 16px;
+	color: #4c4c4c;
+}
+.tui-order-descr  .tui-car-deploy{
+	font-size: 14px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	padding: 0;
+	margin: 0;
+}
+.tui-order-descr  .tui-car-sellprice{
+
+}
+.tui-order-descr  .tui-car-price{
+	font-size: 18px;
+}
+.tui-order-descr  .tui-car-newprice{
+	font-size: 12px;
+	margin-top: 5px;
+}
+.tui-order-operate{
+	padding: 10px;
+    text-align: right;
 }

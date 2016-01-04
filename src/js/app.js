@@ -16,13 +16,13 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             url:'/car',
             templateUrl:'',
             controller:''
-        }).state('sellcar',{
-            url:'/sellcar',
-            templateUrl:'',
+        }).state('sell',{
+            url:'/sell',
+            templateUrl:'partials/sell.html',
             controller:''
         }).state('admin',{
             url:'/admin',
-            templateUrl:'',
+            templateUrl:'partials/admin.html',
             controller:''
         }).state('searchcar',{
             url:'/searchcar',
@@ -36,6 +36,10 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             url:'/viewreport',
             templateUrl:'partials/viewreport.html',
             controller:'ViewReportCtrl'
+        }).state('buyorder',{
+            url:'/buyorder',
+            templateUrl:'partials/buyorder.html',
+            controller:''
         })
  }]).run(['$rootScope','$state','$stateParams',function($rootScope,$state,$stateParams) {
     $rootScope.HOST="http://192.168.0.218";

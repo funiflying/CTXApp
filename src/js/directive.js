@@ -237,4 +237,27 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
         '<span>下一页</span></a></div>',
         replace:false
     }
+}]).directive('login',['$rootScope',function(){
+    return{
+        restrict:'EA',
+        transclude:true,
+        templateUrl:'../partials/login.html',
+        replace:false,
+        link:function(scope,element,attr){
+            mui('.tui-filter-opt').on('tap','.tui-btn-default',function(){
+              $('login').hide();
+            })
+        }
+    }
+}]).directive('tuiLogin',['$rootScope',function(){
+    return{
+        restrict:'EA',
+        replace:false,
+        link:function(scope,element,attr){
+            angular.element(element).on('tap',function(){
+                $('login').show()
+
+            })
+        }
+    }
 }])
