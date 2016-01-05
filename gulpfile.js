@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var plugins=require('gulp-load-plugins')();
+//var concat=require('gulp-concat')
 var minifycss=require('gulp-minify-css');
 var imagemin=require('gulp-imagemin');
 var browserSync = require('browser-sync');
@@ -21,8 +22,8 @@ gulp.task('serve', function () {
    });
 });
 gulp.task('minify',function(){
-	gulp.src(['./src/css/**/*/*.css']).pipe(minifycss()).pipe(gulp.dest('./build/css/'));
-	gulp.src(['./src/js/**/*/*.js']).pipe(plugins.uglify()).pipe(gulp.dest('./build/js/'));
+	gulp.src(['./src/css/*.css']).pipe(minifycss()).pipe(gulp.dest('./build/css/'));
+	gulp.src(['./src/js/*.js']).pipe(plugins.uglify()).pipe(gulp.dest('./build/js/'));
 	gulp.src(['./src/images/**/*.*']).pipe(imagemin()).pipe(gulp.dest('./build/images/'));
 })
 gulp.task('inject',function(){

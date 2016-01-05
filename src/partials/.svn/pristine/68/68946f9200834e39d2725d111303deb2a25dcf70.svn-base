@@ -1,0 +1,22 @@
+<div class="tui-mask" style="display: block"></div>
+<div class="tui-login">
+	<form  class="mui-input-group" name="loginForm" novalidate>
+		<div class="mui-input-row">
+				<label>手机号</label>
+				<input type="text" class="mui-input-clear" ng-model="login.Account" required/>
+				<button class="tui-btn tui-btn-getcode" type="button">获取验证</button>
+
+		</div>
+		<div class="mui-input-row">
+			<div class="mui-pull-left">
+				<label>验证码</label>
+				<input type="text" class="mui-input-clear" ng-model="login.Pwd" required/>
+			</div >
+
+		</div>
+		<div class="tui-filter-opt">
+			<button type="button" class="tui-btn tui-btn-default">取消</button>
+			<button type="button" class="tui-btn tui-btn-primary" ng-click="login()">确定</button>
+		</div>
+</form>
+</div>
