@@ -41,12 +41,11 @@
                 <input type="date" class="mui-input-clear" ng-model="full.AllMoneyTime" placeholder="请输入汇款时间" required/>
             </div>
         </form>
-        <div class="tui-btngroup-fix">
-            <button type="button" class="tui-btn tui-btn-default">查看详情</button>
-            <button type="button" class="tui-btn tui-btn-primary" ng-click="fullpay()">确定</button>
-        </div>
     </div>
 </div>
-
+<div class="tui-btngroup-fix">
+    <button type="button" class="tui-btn tui-btn-default" ui-sref="orderdetails({OrderCode:order.OrderCode})">查看详情</button>
+    <button type="button" class="tui-btn tui-btn-primary" ng-click="fullpay()">确定</button>
+</div>
 
 

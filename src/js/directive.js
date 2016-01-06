@@ -259,4 +259,52 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
             })
         }
     }
+}]).directive('evaluate',['$rootScope',function(){
+    return{
+        restrict:'EA',
+        replace:false,
+        template:'<div class="pj-container"><span class="pj-star-icon active" val="1" >星星</span>'+
+        '<span class="pj-star-icon"     val="2">星星</span>'+
+        '<span class="pj-star-icon"     val="3">星星</span>'+
+        '<span class="pj-star-icon"     val="4">星星</span>'+
+        '<span class="pj-star-icon"     val="5">星星</span></div>',
+        link:function(scope,element,attr){
+            mui('.pj-container').on('tap','.pj-star-icon',function(){
+                var val=$(this).attr('val')
+                var arr= $(this).parent('.pj-container').find('.pj-star-icon');
+                var name=$(this).parents('evaluate').attr('data-name');
+                scope[name]=val;
+                console.log(scope[name])
+                arr.each(function(index,obj){
+                    var i=$(obj).attr('val');
+                    if(i<val||i==val){
+                        $(this).addClass('active')
+                    }
+                    else {
+                        $(this).removeClass('active')
+                    }
+                })
+            })
+        }
+    }
 }])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

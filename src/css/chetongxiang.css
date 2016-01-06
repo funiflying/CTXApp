@@ -987,3 +987,23 @@ option {
 	color: #fff;
 	border: 0;
 }
+/*
+*评价
+*/
+.pj-container{
+	line-height: 1.1;
+	padding: 5px 15px;
+}
+.pj-star-icon.active {
+	background-position: 0 0;
+	background-size: 52px 17px;
+}
+.pj-star-icon {
+	display: inline-block;
+	width: 22px;
+	height: 17px;
+	background: url(../images/icon_star3.png) -33px 0 no-repeat;
+	background-size: 52px 17px;
+	text-indent: -9999px;
+	vertical-align: -2px;
+}

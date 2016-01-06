@@ -209,8 +209,42 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
             })
         }
     }
-
-
+    //买家评价
+    $scope.buyevaluate=function(){
+        var params = {
+            OrderCode: orderCode,
+            UserGiveScore:$scope.UserGiveScore,
+            UserGiveShipping:$scope.UserGiveShipping,
+            UserGiveTest:$scope.UserGiveTest,
+            UserFeedback: $scope.UserFeedback
+        }
+        ResourceService.getFunServer('buyfeedback',params,'post').then(function(data){
+            if(data.status==1){
+                mui.toast('评价成功',function(){
+                    $rootScope.state.go('buyorder');
+                })
+            }else {
+                mui.toast(data.message);
+            }
+        })
+    }
+    //车主评价
+    $scope.sellevaluate=function(){
+        var params = {
+            OrderCode: orderCode,
+            CarOwnerGiveScore:$scope.CarOwnerGiveScore,
+            CarOwnerMemo: $scope.CarOwnerMemo
+        }
+        ResourceService.getFunServer('sellfeedback',params,'post').then(function(data){
+            if(data.status==1){
+                mui.toast('评价成功',function(){
+                    $rootScope.state.go('sellorder');
+                })
+            }else {
+                mui.toast(data.message);
+            }
+        })
+    }
 
 }]).controller('LoginController',['$rootScope','$scope','ResourceService','LocalStorageService',function($rootScope,$scope,ResourceService,LocalStorageService){
     $scope.login=function(){

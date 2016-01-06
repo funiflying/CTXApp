@@ -52,6 +52,18 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             url:'/orderbackout?OrderCode&BID',
             templateUrl:'partials/orderbackout.html',
             controller:'OrderController'
+        }).state('buyevaluate',{
+            url:'/buyevaluate?OrderCode',
+            templateUrl:'partials/buyevaluate.html',
+            controller:'OrderController'
+        }).state('sellevaluate',{
+            url:'/sellevaluate?OrderCode',
+            templateUrl:'partials/sellevaluate.html',
+            controller:'OrderController'
+        }).state('orderdetails',{
+            url:'/orderdetails?OrderCode',
+            templateUrl:'partials/orderdetails.html',
+            controller:'OrderController'
         })
  }]).run(['$rootScope','$state','$stateParams','LocalStorageService',function($rootScope,$state,$stateParams,LocalStorageService) {
     $rootScope.HOST="http://192.168.0.218";

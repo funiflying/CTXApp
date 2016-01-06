@@ -30,7 +30,7 @@
             <section class="tui-order-operate">
                 <button type="button" class="mui-btn">查看详情</button>
                 <button type="button" class="mui-btn mui-btn-grey"  ng-if="obj.RevokeFlag==0&&obj.OrderFlag<10" ui-sref="orderbackout({OrderCode:obj.OrderCode,BID:0})">申请撤单</button>
-                <button type="button" class="mui-btn mui-btn-success" ng-if="(obj.OrderFlag==10||obj.OrderFlag==257)&&(obj.RevokeFlag!=2&&obj.RevokeFlag!=12)">评价</button>
+                <button type="button" class="mui-btn mui-btn-success" ui-sref="buyevaluate({OrderCode:obj.OrderCode})" ng-if="(obj.OrderFlag==10||obj.OrderFlag==257)&&(obj.RevokeFlag!=2&&obj.RevokeFlag!=12)">买家评价</button>
                 <button type="button" class="mui-btn tui-btn-orange" ng-if="obj.OrderFlag==0&&(obj.RevokeFlag!=2&&obj.RevokeFlag!=12)" ui-sref="prepay({OrderCode:obj.OrderCode})">支付预付款</button>
                 <button type="button" class="mui-btn tui-btn-orange" ng-if="obj.OrderFlag==4&&(obj.RevokeFlag!=2&&obj.RevokeFlag!=12)" ui-sref="fullpay({OrderCode:obj.OrderCode})">支付购车款</button>
             </section>

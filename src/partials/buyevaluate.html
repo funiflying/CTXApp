@@ -1,6 +1,6 @@
 <div class="tui-content">
     <header class="mui-bar mui-bar-nav tui-bar-nav">
-        <h1 class="mui-title">撤单申请</h1>
+        <h1 class="mui-title">买方评价</h1>
         <button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</button>
     </header>
     <ul class="tui-order" ng-init="getOrder()">
@@ -20,23 +20,36 @@
                 </section>
             </section>
             <section class="tui-order-operate">
-
+                请写下您对这次购车的感受吧，对其他人
+                有很大帮助哦！
             </section>
         </li>
     </ul>
     <div class="tui-order-form">
-        <h5 class="tui-order-header">撤单申请</h5>
+        <h5 class="tui-order-header">买方评价</h5>
         <form name="orderForm" class="mui-input-group">
-            <div class="mui-input-row" style="min-height: 120px;padding-left: 10px">
-                <textarea id="textarea" rows="5" placeholder="输入撤单原因" ng-model="RevokeMemo"></textarea>
+            <div class="mui-input-row">
+                <label>对车主评价</label>
+                <evaluate data-name="UserGiveScore"></evaluate>
+            </div>
+            <div class="mui-input-row">
+                <label>对物流服务</label>
+                <evaluate data-name="UserGiveShipping"></evaluate>
+            </div>
+            <div class="mui-input-row">
+                <label>对检测报告</label>
+                <evaluate data-name="UserGiveTest"></evaluate>
+            </div>
+            <div class="mui-input-row" style="min-height: 80px;padding-left: 15px">
+                <textarea id="textarea" rows="5" placeholder="反馈建议或意见" ng-model="UserFeedback"></textarea>
             </div>
         </form>
-
+        <span id="star-five"></span>
+        <div class="tui-btngroup-fix">
+            <button type="button" class="tui-btn tui-btn-default" ui-sref="orderdetails({OrderCode:order.OrderCode})">查看详情</button>
+            <button type="button" class="tui-btn tui-btn-primary" ng-click="buyevaluate()">确定</button>
+        </div>
     </div>
-</div>
-<div class="tui-btngroup-fix">
-    <button type="button" class="tui-btn tui-btn-default" ui-sref="orderdetails({OrderCode:order.OrderCode})">查看详情</button>
-    <button type="button" class="tui-btn tui-btn-primary" ng-click="backout()">确定</button>
 </div>
 
 
