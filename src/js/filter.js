@@ -3,12 +3,11 @@
  * @date:2015-12-22
  * @version:1.0.0
  */
-angular.module("CTXAppFilters",[]).filter("GetFullYear",function(){
-    return function (date){
+angular.module("CTXAppFilters",[]).filter("DateTimeFormat",function(){
+    return function (date,format){
         if(date){
             var d=new Date(date);
-            var _year= d.getFullYear();
-            return _year
+		   return d.Format(format);
         }
         return "未知"
     }
@@ -234,14 +233,61 @@ angular.module("CTXAppFilters",[]).filter("GetFullYear",function(){
 		}
 		return descr;
 	}
-}).filter("GetMonth",function(){
-	return function (date){
-		if(date){
-			var d=new Date(date);
-			var _year= d.getFullYear();
-			var _month= d.getMonth()+1;
-			return _year+'年'+_month+'月'
+}).filter('CarStatus', function() {
+	//
+	return function(status) {
+		status = status + ""
+		var descr = "";
+		switch (status) {
+			case "0":
+				descr = "显示中";
+				break;
+			case "1":
+				descr = "交易中";
+				break;
+			case "254":
+				descr = "已下架";
+				break;
+			case "255":
+				descr = "交易完成";
+				break;
+			default:
+				descr = "未知：" + status;
+				break;
+
 		}
-		return "未知"
+		return descr;
 	}
+}).filter("CarCheck", function() {
+	//车源审核状态
+	return function(status) {
+		status = status + ""
+		var descr = "";
+		switch (status) {
+			case "0":
+				descr = "认证中";
+				break;
+			case "1":
+				descr = "初审不通过";
+				break;
+			case "2":
+				descr = "已初审";
+				break;
+			case "3":
+				descr = "终审不通过";
+				break;
+			case "4":
+				descr = "已认证";
+				break;
+			case "5":
+				descr = "已检测";
+				break;
+			default:
+				descr = ""
+				break;
+
+		}
+		return descr;
+	}
+
 })

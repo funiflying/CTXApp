@@ -65,9 +65,32 @@ angular.module('CTXAppServices', []).factory('ResourceService', ['$resource', '$
                 case 'sendpaycode':
                     surl='/order/SendBankInfoToBuyer';
                     break;
+                case 'amount':
+                    surl='/order/CarOwnerUpdateOrder';
+                    break;
                 case 'login':
                     surl='/account/OutAndAllanceLogin';
                     break;
+                case 'loginout':
+                    surl='/account/LoginOff';
+                    break;
+                case 'GetCar':
+                	surl='/common/car/GetCar';   //获取车源基本信息
+                	break;
+                case 'SearchAppraiserWithSkill':
+                	surl='/Alliance/Appraiser/SearchAppraiserWithSkill'; //获取评估师列表
+                	break;
+                case 'cargather':
+                    surl='/common/car/GetCarsByUserID'; //个人车源
+                    break;
+                case 'alliancecargather':
+                    surl='/common/car/GetAllianceCarList'; //联盟商车源
+                    break;
+                case 'carsoldout':
+                    surl='/common/car/PostCarRevoke'; //车源下架
+                    break;
+                case 'GetCarCreditInfoByCarNo':  //获取诚信数据
+                	surl='/common/car/GetCarCreditInfoByCarNo';
                 default:
                     break;
             }
@@ -126,4 +149,11 @@ angular.module('CTXAppServices', []).factory('ResourceService', ['$resource', '$
             this.removeStorage('SEARCH_CAR_HISTORY')
         }
     }
-})
+}).factory('UploaderService',['$http',function($http){
+    return {
+        uploader:function(data){
+            return $http.post('/common/file/UpLoadImgByBase64',data)
+        }
+    }
+
+}])

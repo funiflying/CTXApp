@@ -10,12 +10,12 @@
                 <span class="mui-pull-right tui-font-green"><span ng-if="order.RevokeFlag==0"  ng-bind="order.OrderFlag|OrderStatus"></span><span ng-if="order.RevokeFlag>0"  ng-bind="order.RevokeFlag|RevokeStatus"></span></span>
             </section>
             <section class="tui-order-info">
-                <div class="tui-order-icon">
+                <div class="tui-order-icon" data-car="{{order.CarNo}}">
                     <img ng-src="{{order.HomePicID}}" alt="">
                 </div>
                 <section class="tui-order-descr">
                     <h5 class="tui-car-name" ><i ng-bind="order.BrandName+order.SpecName"></i></h5>
-                    <p class="tui-car-deploy"><i ng-bind="order.InitialDate|GetMonth" ></i>上牌 <i ng-bind="order.Mileage"></i>万公里</p>
+                    <p class="tui-car-deploy"><i ng-bind="order.InitialDate|DateTimeFormat:'yyyy年MM月'" ></i>上牌 <i ng-bind="order.Mileage"></i>万公里</p>
                     <p class="tui-car-sellprice"><span class="mui-pull-left  tui-font-orange"><strong class="tui-car-price" ng-bind="order.DealPrice/10000|currency:'￥'"></strong>万 </span><span class="mui-pull-right tui-car-newprice" ng-if="order.NewCarPrice>0">新车价 <strike ><i ng-bind="order.NewCarPrice/10000|currency:'￥'"></i>万</strike></span></p>
                 </section>
             </section>
@@ -37,8 +37,12 @@
                 <evaluate data-name="UserGiveShipping"></evaluate>
             </div>
             <div class="mui-input-row">
-                <label>对检测报告</label>
+                <label>卖方检测报告</label>
                 <evaluate data-name="UserGiveTest"></evaluate>
+            </div>
+            <div class="mui-input-row">
+                <label>本地检测报告</label>
+                <evaluate data-name="UserGiveTestTarget"></evaluate>
             </div>
             <div class="mui-input-row" style="min-height: 80px;padding-left: 15px">
                 <textarea id="textarea" rows="5" placeholder="反馈建议或意见" ng-model="UserFeedback"></textarea>

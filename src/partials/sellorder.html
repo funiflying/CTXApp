@@ -1,0 +1,40 @@
+<div class="tui-content" >
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title">卖车订单</h1>
+        <button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</button>
+    </header>
+    <div class="tui-slider-indicator tui-segmented-control tui-segmented-control-inverted" ng-init="getSellList(1)">
+        <a class="tui-control-item active" >
+            进行中
+        </a>
+        <a class="tui-control-item" >
+            历史记录
+        </a>
+    </div>
+    <ul class="tui-order" >
+        <li class="tui-order-item" ng-repeat="obj in list" >
+            <section class="tui-order-header">
+                <span class="mui-pull-left"><i ng-bind="obj.UserName"></i>  <i ng-bind="obj.Contact"></i> <i class="mui-icon mui-icon-arrowright" style="font-size: 14px"></i></span>
+                <span class="mui-pull-right"><span class="tui-font-green" ng-if="obj.RevokeFlag==0"  ng-bind="obj.OrderFlag|OrderStatus"></span><span class="tui-font-red" ng-if="obj.RevokeFlag>0"  ng-bind="obj.RevokeFlag|RevokeStatus"></span></span>
+            </section>
+            <section class="tui-order-info" ui-sref="carinfo({CarNo:obj.CarNo})">
+                <div class="tui-order-icon" data-car="{{obj.CarNo}}">
+                    <img ng-src="{{obj.HomePicID}}" alt="">
+                </div>
+                <section class="tui-order-descr">
+                    <h5 class="tui-car-name" ><i ng-bind="obj.BrandName+obj.SpecName"></i></h5>
+                    <p class="tui-car-deploy"><i ng-bind="obj.InitialDate|DateTimeFormat:'yyyy年MM月'" ></i>上牌 <i ng-bind="obj.Mileage"></i>万公里</p>
+                    <p class="tui-car-sellprice"><span class="mui-pull-left  tui-font-orange"><strong class="tui-car-price" ng-bind="obj.DealPrice/10000|currency:'￥'"></strong>万 </span><span class="mui-pull-right tui-car-newprice" ng-if="obj.NewCarPrice>0">新车价 <strike ><i ng-bind="obj.NewCarPrice/10000|currency:'￥'"></i>万</strike></span></p>
+                </section>
+            </section>
+            <section class="tui-order-operate">
+
+                <button type="button" class="mui-btn"  ng-if="obj.RevokeFlag==0&&obj.OrderFlag<10" ui-sref="orderbackout({OrderCode:obj.OrderCode,BID:1})">申请撤单</button>
+                <button type="button" class="mui-btn tui-btn-orange" ui-sref="orderdetails({OrderCode:obj.OrderCode})">查看详情</button>
+                <button type="button" class="mui-btn mui-btn-success" ui-sref="sellevaluate({OrderCode:obj.OrderCode})"  ng-if="(obj.OrderFlag==10||obj.OrderFlag==256)&&obj.CarOwnerGiveScore==0&&(obj.RevokeFlag!=2&&obj.RevokeFlag!=12)">车主评价</button>
+                <button type="button" class="mui-btn tui-btn-orange" ng-if="obj.OrderFlag==0&&(obj.RevokeFlag!=2&&obj.RevokeFlag!=12)" ui-sref="amount({OrderCode:obj.OrderCode})">修改成交价</button>
+            </section>
+        </li>
+    </ul>
+    <pager></pager>
+</div>

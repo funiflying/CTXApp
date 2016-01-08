@@ -36,9 +36,25 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             url:'/viewreport?CarNo',
             templateUrl:'partials/viewreport.html',
             controller:'CarInfoCtrl'
+        }).state('evaluationlist',{
+            url:'/evaluationlist?CarNo&BrandID',
+            templateUrl:'partials/evaluationlist.html',
+            controller:'evaluationlistCtrl'
+        }).state('eval_order',{
+            url:'/eval_order',
+            templateUrl:'partials/evalorder.html',
+            controller:'evalorderCtrl'
+        }).state('creditfile',{
+            url:'/creditfile?CarNo',
+            templateUrl:'partials/creditfile.html',
+            controller:'creditfileCtrl'
         }).state('buyorder',{
             url:'/buyorder',
             templateUrl:'partials/buyorder.html',
+            controller:'OrderController'
+        }).state('sellorder',{
+            url:'/sellorder',
+            templateUrl:'partials/sellorder.html',
             controller:'OrderController'
         }).state('prepay',{
             url:'/prepay?OrderCode',
@@ -64,6 +80,26 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             url:'/orderdetails?OrderCode',
             templateUrl:'partials/orderdetails.html',
             controller:'OrderController'
+        }).state('amount',{
+            url:'/amount?OrderCode',
+            templateUrl:'partials/amount.html',
+            controller:'OrderController'
+        }).state('cargather',{
+            url:'/cargather',
+            templateUrl:'partials/cargather.html',
+            controller:'CarController'
+        }).state('carout',{
+            url:'/carout?CarNo',
+            templateUrl:'partials/carout.html',
+            controller:'CarController'
+        }).state('carissue.edit',{
+            url:'/carissue?CarNo',
+            templateUrl:'partials/carissue.html',
+            controller:'CarController'
+        }).state('carissue',{
+            url:'/carissue',
+            templateUrl:'partials/carissue.html',
+            controller:'CarController'
         })
  }]).run(['$rootScope','$state','$stateParams','LocalStorageService',function($rootScope,$state,$stateParams,LocalStorageService) {
     $rootScope.HOST="http://192.168.0.218";

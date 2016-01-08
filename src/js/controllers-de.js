@@ -9,7 +9,7 @@ angular.module("CTXAppCtrl", []).controller('CarInfoCtrl', ['$scope', '$rootScop
 	};
 	$scope.CarNo = $rootScope.stateParams.CarNo;
 
-	var cars = ResourceService.getFunServer('GetCardata', obj, 'get').then(function(d) {
+	ResourceService.getFunServer('GetCardata', obj, 'get').then(function(d) {
 		var ReportDetail;
 		for (var i = 0, ln = d.data.length; i < ln; i++) {
 			var tabname = d.data[i].name;
@@ -42,6 +42,20 @@ angular.module("CTXAppCtrl", []).controller('CarInfoCtrl', ['$scope', '$rootScop
 			$scope.carinfodata.role = "个人";
 		} else {
 			$scope.carinfodata.role = "商家";
+		}
+
+		if ($scope.carinfoimg == undefined) {
+			$scope.carinfoimg = [{
+				CarNo: $scope.carinfodata.CarNo,
+				CarPicID: "",
+				IsDeleted: "False",
+				PicAddr: $scope.carinfodata.HomePicID,
+			}, {
+				CarNo: $scope.carinfodata.CarNo,
+				CarPicID: "",
+				IsDeleted: "False",
+				PicAddr: $scope.carinfodata.HomePicID,
+			}];
 		}
 
 		if (ReportDetail != undefined) {
@@ -192,16 +206,173 @@ angular.module("CTXAppCtrl", []).controller('CarInfoCtrl', ['$scope', '$rootScop
 
 		}
 
+		angular.element(document).ready(function() {
+			mui('#pullrefresh').scroll();
+			var slider = mui("#carslider");
+			slider.slider();
+		});
+	});
+
+}]).controller('ViewReportCtrl', ['$scope', '$rootScope', 'ResourceService', function($scope, $rootScope, ResourceService) {
+
+	angular.element(document).ready(function() {
 		mui('#pullrefresh').scroll();
 		var slider = mui("#slider");
 		slider.slider();
 	});
 
-}]).controller('ViewReportCtrl', ['$scope', '$rootScope', 'ResourceService', function($scope, $rootScope, ResourceService) {
-	//mui('#pullrefresh').scroll();
-	//mui.init();
-	$(".mui-slider-item").css("display", '');
-	var slider = mui("#slider");
-	slider.slider();
+}]).controller('evaluationlistCtrl', ['$scope', '$rootScope', 'ResourceService', 'LocalStorageService', function($scope, $rootScope, ResourceService, LocalStorageService) {
 
+	//分页条数
+	$scope.pagerConfig = {
+		pageSize: 5,
+		total: 0,
+		callback: null
+	}
+	$scope.list = [];
+	//评估师列表
+	$scope.getList = function(pageNo) {
+		pageNo = pageNo || 1;
+		var obj = {
+			CarNo: $rootScope.stateParams.CarNo,
+			BrandID: $rootScope.stateParams.BrandID,
+			SeriesID: '0',
+			PageNo: pageNo
+		};
+
+		ResourceService.getFunServer('SearchAppraiserWithSkill', obj, 'POST').then(function(data, header) {
+			var d = data.data;
+			if (d.total) {
+				$scope.list = d.rows.Appraiser;
+				$scope.AppraiserSkill = d.rows.AppraiserSkill;
+				$scope.getTeChang = function(AppraiserCode) {
+					if ($scope.AppraiserSkill == undefined || $scope.AppraiserSkill == null) {
+						return '';
+					}
+					
+					var retdata = "";
+					var k = 0;
+					for (var j = 0, jln = $scope.AppraiserSkill.length; j < jln; j++) {
+						if ($scope.AppraiserSkill[j].AppraiserCode == AppraiserCode) {
+							if ($scope.AppraiserSkill[j].BrandName != null) {
+								retdata += "" + $scope.AppraiserSkill[j].BrandName + "、";
+							}
+							k++;
+							if (k > 10) {
+								break;
+							}
+						}
+					}
+					return retdata;
+				}
+			}
+			$scope.pagerConfig.total = d.total;
+			$scope.pagerConfig.callback = $scope.getList;
+			$scope.pager(pageNo);
+		}, function(data, header) {
+
+		})
+	};
+
+	//获取车源基本信息
+	var g_obj = {
+		CarNo: $rootScope.stateParams.CarNo
+	};
+
+	ResourceService.getFunServer('GetCar', g_obj, 'get').then(function(d) {
+		if (d.status) {
+			for (var i = 0, ln = d.data.length; i < ln; i++) {
+				var tabname = d.data[i].name;
+				switch (tabname) {
+					case "Car":
+						$scope.carinfodata = d.data[i].value[0];
+						break;
+					case "CarPic":
+						$scope.CarPic = d.data[i].value;
+						break;
+					default:
+						break;
+				}
+			}
+		}
+	});
+
+	$scope.viewevaluation = function(obj) {
+		$("#evalist").hide();
+		$("#evainfo").show();
+		//console.log(obj);
+		$scope.evaluationdata = obj;
+	}
+
+	$scope.closeview = function() {
+		$("#evalist").show();
+		$("#evainfo").hide();
+	}
+
+	$scope.gotobuy = function(obj) {
+		//console.log(obj);
+		var eprice = $("#eva_price").val();
+		if (eprice > 0) {
+			obj.eprice = eprice;
+			obj.CarNo = $rootScope.stateParams.CarNo;
+			LocalStorageService.setStorage("eval_order", obj);
+			$rootScope.state.go('eval_order');
+		} else {
+			mui.toast('请填写评估费用金额');
+		}
+	}
+
+	angular.element(document).ready(function() {
+		mui('#pullrefresh').scroll();
+		var slider = mui("#slider");
+		slider.slider();
+	});
+
+}]).controller('evalorderCtrl', ['$scope', '$rootScope', 'ResourceService', 'LocalStorageService', function($scope, $rootScope, ResourceService, LocalStorageService) {
+
+	$scope.edata = LocalStorageService.getStorage("eval_order");
+
+	if ($scope.edata.CarNo == "") {
+		mui.toast('数据错误，请刷新页面，若无法继续请重新下单！');
+		return false;
+	}
+
+	//获取车源基本信息
+	var g_obj = {
+		CarNo: $scope.edata.CarNo
+	};
+
+	ResourceService.getFunServer('GetCar', g_obj, 'get').then(function(d) {
+		if (d.status) {
+			for (var i = 0, ln = d.data.length; i < ln; i++) {
+				var tabname = d.data[i].name;
+				switch (tabname) {
+					case "Car":
+						$scope.carinfodata = d.data[i].value[0];
+						break;
+					default:
+						break;
+				}
+			}
+
+			//console.log($scope.carinfodata);
+		}
+	});
+
+	//console.log($scope.edata);
+}]).controller('creditfileCtrl', ['$scope', '$rootScope', 'ResourceService', 'LocalStorageService', function($scope, $rootScope, ResourceService, LocalStorageService) {
+	//获取车主的诚信数据
+	var g_obj = {
+		CarNo: $rootScope.stateParams.CarNo||null
+	};
+	if (g_obj.CarNo == undefined || g_obj.CarNo == null) {
+		mui.toast('参数错误');
+		$rootScope.state.go('home');
+	}
+	ResourceService.getFunServer('GetCarCreditInfoByCarNo', g_obj, 'get').then(function(d) {
+		if (d.status && d.data[0] != null) {
+			$scope.datainfo = d.data[0];
+			//console.log($scope.datainfo);
+		}
+	});
 }])

@@ -172,7 +172,7 @@
                     </div>
                     <div class="tui-product-title" ng-bind="obj.SpecName"></div>
                     <div class="tui-product-meta">
-                        <i ng-bind="obj.InitialDate|GetFullYear"></i>年上牌| 行驶<i ng-bind="obj.Mileage"></i>万公里
+                        <i ng-bind="obj.InitialDate|DateTimeFormat:'yyyy年MM月'"></i>上牌| 行驶<i ng-bind="obj.Mileage"></i>万公里
                     </div>
                     <div class="tui-product-sale">
                         <i ng-bind="obj.Price/10000|currency:'￥'"></i>万

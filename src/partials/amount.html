@@ -1,6 +1,6 @@
 <div class="tui-content">
     <header class="mui-bar mui-bar-nav tui-bar-nav">
-        <h1 class="mui-title">车主评价</h1>
+        <h1 class="mui-title">修改成交价</h1>
         <button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</button>
     </header>
     <ul class="tui-order" ng-init="getOrder()">
@@ -20,20 +20,20 @@
                 </section>
             </section>
             <section class="tui-order-operate">
-                请写下您对这次卖车的感受吧，对其他人
-                有很大帮助哦！
+
             </section>
         </li>
     </ul>
     <div class="tui-order-form">
-        <h5 class="tui-order-header">车主评价</h5>
+        <h5 class="tui-order-header">修改成交价</h5>
         <form name="orderForm" class="mui-input-group">
             <div class="mui-input-row">
-                <label>对买家评价</label>
-                <evaluate data-name="CarOwnerGiveScore"></evaluate>
+                <label>原成交价</label>
+                <input type="text" class="mui-input-clear" value="{{order.DealPrice|currency:'￥'}}" readonly/>
             </div>
-            <div class="mui-input-row" style="min-height: 80px;padding-left: 15px">
-                <textarea id="textarea" rows="5" placeholder="反馈建议或意见" ng-model="CarOwnerMemo"></textarea>
+            <div class="mui-input-row">
+                <label>新成交价</label>
+                <input type="text" class="mui-input-clear" ng-model="DealPrice" placeholder="请输入新成交价" required/>
             </div>
         </form>
 
@@ -41,6 +41,7 @@
 </div>
 <div class="tui-btngroup-fix">
     <button type="button" class="tui-btn tui-btn-default" ui-sref="orderdetails({OrderCode:order.OrderCode})">查看详情</button>
-    <button type="button" class="tui-btn tui-btn-primary" ng-click="sellevaluate()">确定</button>
+    <button type="button" class="tui-btn tui-btn-primary" ng-click="amount()">确定</button>
 </div>
+
 

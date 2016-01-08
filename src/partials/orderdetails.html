@@ -1,0 +1,284 @@
+<div class="tui-content">
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title">订单详情</h1>
+        <button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</button>
+    </header>
+    <ul class="tui-order" ng-init="getOrder()">
+        <li class="tui-order-item">
+            <section class="tui-order-header">
+                <span class="mui-pull-left"><i ng-bind="order.UserName"></i>  <i ng-bind="order.Contact"></i> <i class="mui-icon mui-icon-arrowright" style="font-size: 14px"></i></span>
+                <span class="mui-pull-right tui-font-green"><span ng-if="order.RevokeFlag==0"  ng-bind="order.OrderFlag|OrderStatus"></span><span ng-if="order.RevokeFlag>0"  ng-bind="order.RevokeFlag|RevokeStatus"></span></span>
+            </section>
+            <section class="tui-order-info">
+                <div class="tui-order-icon" data-car="{{order.CarNo}}">
+                    <img ng-src="{{order.HomePicID}}" alt="">
+                </div>
+                <section class="tui-order-descr">
+                    <h5 class="tui-car-name" ><i ng-bind="order.BrandName+order.SpecName"></i></h5>
+                    <p class="tui-car-deploy"><i ng-bind="order.InitialDate|DateTimeFormat:'yyyy年MM月'" ></i>上牌 <i ng-bind="order.Mileage"></i>万公里</p>
+                    <p class="tui-car-sellprice"><span class="mui-pull-left  tui-font-orange"><strong class="tui-car-price" ng-bind="order.DealPrice/10000|currency:'￥'"></strong>万 </span><span class="mui-pull-right tui-car-newprice" ng-if="order.NewCarPrice>0">新车价 <strike ><i ng-bind="order.NewCarPrice/10000|currency:'￥'"></i>万</strike></span></p>
+                </section>
+            </section>
+            <section class="tui-order-operate">
+
+            </section>
+        </li>
+    </ul>
+    <div class="tui-order-form">
+        <h5 class="tui-order-header">订单详情</h5>
+        <ul class="tui-order-details">
+            <li ng-class="{'tui-order-details-item active':order.OrderFlag==255,'tui-order-details-item underway ':order.OrderFlag==10||order.OrderFlag==257||order.OrderFlag==256,'tui-order-details-item':order.OrderFlag<10}">
+                <h4 class="tui-order-details-caption">
+                    双方互评
+                </h4>
+                <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag==255">
+                    <tr>
+                        <th>买方评价：</th>
+                        <td><span ng-bind="order.UserGiveScore"></span>分</td>
+                    </tr>
+                    <tr>
+                        <th>物流评价：</th>
+                        <td><span ng-bind="order.UserGiveShipping"></span>分</td>
+                    </tr>
+                    <tr>
+                        <th>卖方检测：</th>
+                        <td><span ng-bind="order.UserGiveTestFrom"></span>分</td>
+                    </tr>
+                    <tr>
+                        <th>本地检测：</th>
+                        <td><span ng-bind="order.UserGiveTestTarget"></span>分</td>
+                    </tr>
+                    <tr>
+                        <th>车主评价：</th>
+                        <td><span ng-bind="order.CarOwnerGiveScore"></span>分</td>
+                    </tr>
+                    <tr>
+                        <th>车主反馈：</th>
+                        <td><span ng-bind="order.CarOwnerFeedback" ></span></td>
+                    </tr>
+                </table>
+            </li>
+            <li ng-class="{'tui-order-details-item active':order.OrderFlag>9,'tui-order-details-item underway ':order.OrderFlag==9,'tui-order-details-item':order.OrderFlag<9}">
+                <h4 class="tui-order-details-caption">
+                    客户提车
+                </h4>
+                <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag>9">
+
+                    <tr>
+                        <th>提车时间：</th>
+                        <td><span ng-bind="order.TakeCarTime"></span></td>
+                    </tr>
+                    <tr>
+                        <th>提车说明：</th>
+                        <td><span ng-bind="order.TakeMemo"></span></td>
+                    </tr>
+                    <tr>
+                        <th>客户反馈：</th>
+                        <td><span ng-bind="order.UserFeedback"></span></td>
+                    </tr>
+                    <tr>
+                        <th>提车确认单：</th>
+                        <td>[<a  href="" ng-click="openPicDialog(order.TakeCarPicture)">点击查看</a>]</td>
+                    </tr>
+                </table>
+            </li>
+            <li ng-class="{'tui-order-details-item active':order.OrderFlag>8,'tui-order-details-item underway ':order.OrderFlag==8,'tui-order-details-item':order.OrderFlag<8}">
+                <h4 class="tui-order-details-caption">
+                    买家直营公司检测
+                </h4>
+                <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag>8">
+                    <tr>
+                        <th>检测时间：</th>
+                        <td><span ng-bind="order.BuyerTestTime"></span></td>
+
+                    </tr>
+                    <tr>
+                        <th>检测单号：</th>
+                        <td><a class="font-orange" ng-bind="order.CompanyTestCode" href=""  ng-click="viewReport(order.CompanyTestCode,order.SpecName)"></a>(点击查看)</td>
+                    </tr>
+                </table>
+            </li>
+            <li ng-class="{'tui-order-details-item active':order.OrderFlag>7,'tui-order-details-item underway ':order.OrderFlag==7,'tui-order-details-item':order.OrderFlag<7}">
+                <h4 class="tui-order-details-caption">
+                    物流到货
+                </h4>
+                <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag>7">
+
+                    <tr>
+                        <th>到货时间：</th>
+                        <td><span ng-bind="order.ShippingTime"></span></td>
+                    </tr>
+                    <tr>
+                        <th>到点说明：</th>
+                        <td><span ng-bind="order.ShippingGetMemo"></span></td>
+                    </tr>
+                </table>
+            </li>
+            <li ng-class="{'tui-order-details-item active':order.OrderFlag>6,'tui-order-details-item underway ':order.OrderFlag==6,'tui-order-details-item':order.OrderFlag<6}">
+                <h4 class="tui-order-details-caption">
+                    物流发车
+                </h4>
+                <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag>6">
+
+                    <tr>
+                        <th>物流单号：</th>
+                        <td><span ng-bind="order.ShippingCode"></span></td>
+                    </tr>
+                    <tr>
+                        <th>物流说明：</th>
+                        <td><span ng-bind="order.ShippingMemo"></span></td>
+                    </tr>
+                </table>
+            </li>
+            <li ng-class="{'tui-order-details-item active':order.OrderFlag>5,'tui-order-details-item underway ':order.OrderFlag==5,'tui-order-details-item':order.OrderFlag<5}">
+                <h4 class="tui-order-details-caption">
+                    购车全款审核
+                </h4>
+                <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag>5">
+
+                    <tr>
+                        <th>审核时间：</th>
+                        <td><span ng-bind="order.AllMoneyCheckTime"></span></td>
+                    </tr>
+                    <tr>
+                        <th>审核备注：</th>
+                        <td><span ng-bind="order.AllMoneyCheckMemo"></span></td>
+                    </tr>
+                </table>
+            </li>
+            <li ng-class="{'tui-order-details-item active':order.OrderFlag>4,'tui-order-details-item underway ':order.OrderFlag==4,'tui-order-details-item':order.OrderFlag<4}">
+                <h4 class="tui-order-details-caption">
+                    支付购车全款
+                </h4>
+                <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag>4">
+
+                    <tr>
+                        <th>付款时间：</th>
+                        <td><span ng-bind="order.AllMoneyTime"></span></td>
+                    </tr>
+                    <tr>
+                        <th>付款金额：</th>
+                        <td><span ng-bind="order.PayTotal"></span></td>
+                    </tr>
+                    <tr>
+                        <th>付款银行：</th>
+                        <td><span ng-bind="order.AllMoneyBank"></span></td>
+                    </tr>
+                </table>
+            </li>
+            <li ng-class="{'tui-order-details-item active':order.OrderFlag>3,'tui-order-details-item underway ':order.OrderFlag==3,'tui-order-details-item':order.OrderFlag<3}">
+                <h4 class="tui-order-details-caption">
+                    购车全款
+                </h4>
+                <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag>3">
+
+                    <tr>
+                        <th>服务费：</th>
+                        <td><span ng-bind="order.ServiceFee|currency:'￥'"></span></td>
+                    </tr>
+                    <tr>
+                        <th>保修费：</th>
+                        <td><span ng-bind="order.WarrantyCost|currency:'￥'"></span></td>
+                    </tr>
+                    <tr>
+                        <th>物流费：</th>
+                        <td><span ng-bind="order.ShippingFee|currency:'￥'"></span></td>
+                    </tr>
+                    <tr>
+                        <th>物流备注：</th>
+                        <td><span ng-bind="order.SellerFeedback"></span></td>
+                    </tr>
+                </table></li>
+            <li ng-class="{'tui-order-details-item active':order.OrderFlag>2,'tui-order-details-item underway ':order.OrderFlag==2,'tui-order-details-item':order.OrderFlag<2}">
+                <h4 class="tui-order-details-caption">
+                    卖家当地直营公司检测
+                </h4>
+                <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag>2">
+                    <tr>
+                        <th>检测时间：</th>
+                        <td><span ng-bind="order.SellerTestTime"></span></td>
+                    </tr>
+                    <tr>
+                        <th>检测单号：</th>
+                        <td><a  class="font-orange" ng-bind="order.SellerTestCode" href=""  ></a>(点击查看)</td>
+                    </tr>
+                </table>
+            </li>
+            <li ng-class="{'tui-order-details-item active':order.OrderFlag>1,'tui-order-details-item underway ':order.OrderFlag==1,'tui-order-details-item':order.OrderFlag<1}">
+                <h4 class="tui-order-details-caption">
+                    预付款审核
+                </h4>
+                <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag>1">
+                    <tr>
+                        <th>审核时间：</th>
+                        <td><span ng-bind="order.PrePayCheckTime"></span></td>
+                    </tr>
+                    <tr>
+                        <th>付款备注：</th>
+                        <td><span ng-bind="order.PrePayCheckMemo"></span></td>
+                    </tr>
+                </table>
+            </li>
+            <li ng-class="{'tui-order-details-item active':order.OrderFlag>0,'tui-order-details-item underway ':order.OrderFlag==0}">
+                <h4 class="tui-order-details-caption">
+                    支付预付款
+                </h4>
+                <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag>0">
+                    <tr>
+                        <th>付款时间：</th>
+                        <td><span ng-bind="order.PrePayTime"></span></td>
+                    </tr>
+                    <tr>
+                        <th>付款金额：</th>
+                        <td><span ng-bind="order.PrePayMoney|currency:'￥'"></span></td>
+                    </tr>
+                    <tr>
+                        <th>付款银行：</th>
+                        <td><span ng-bind="order.PrePayBank"></span></td>
+                    </tr>
+                </table>
+            </li>
+            <li class="tui-order-details-item active">
+                <h4 class="tui-order-details-caption">
+                    客户下单
+                </h4>
+                <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag>0||order.OrderFlag==0">
+                    <tr>
+                        <th>下单时间：</th>
+                        <td><span ng-bind="order.OrderTime"></span></td>
+                    </tr>
+                    <tr>
+                        <th>订单号：</th>
+                        <td><span ng-bind="order.OrderCode"></span></td>
+                    </tr>
+                    <tr>
+                        <th>成交金额：</th>
+                        <td><span ng-bind="order.DealPrice|currency:'￥'"></span></td>
+                    </tr>
+                    <tr>
+                        <th>车源编号：</th>
+                        <td><span ng-bind="order.OrderCode"></span></td>
+                    </tr>
+                </table>
+
+
+            </li>
+
+
+
+
+
+
+
+
+
+
+
+
+        </ul>
+
+    </div>
+</div>
+
+
+

@@ -1,0 +1,147 @@
+<style>
+	.dui-order-title {
+		padding: 10px;
+		line-height: 35px;
+		font-size: 18px;
+	}
+	
+	.dui-appr-photo {
+		width: 30px;
+		height: 30px;
+		overflow: hidden;
+		text-align: center;
+		border-radius: 50%;
+		background-color: #FFF;
+		border: 1px solid #dedede;
+	}
+	
+	.dui-appr-photo img {
+		width: 75px;
+		height: auto;
+	}
+	
+	.dui-appr-td {
+		float: left;
+	}
+	
+	.dui-carinfo-img {
+		overflow: hidden;
+		text-align: center;
+	}
+	
+	.dui-carinfo-img img {
+		width: 90px;
+		margin-top: 8px;
+	}
+	
+	.dui-evalist-table .mui-table-view-cell:after {
+		left: 0px;
+	}
+	
+	.dui-evalist-table .mui-table-view-cell {
+		padding: 5px 10px 5px 10px !important;
+	}
+	
+	.fl {
+		float: left;
+	}
+	
+	.dui-appr-td {
+		float: left;
+	}
+	
+	.dui-appr-td p {
+		text-align: left;
+		font-size: 12px;
+		padding: 0px 0px 3px 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	
+	.dui-eva-order .span20 {
+		font-size: 20px;
+	}
+	
+	.dui-eva-order .span14 {
+		font-size: 14px;
+	}
+	
+	.dui-eva-order .span16 {
+		font-size: 16px;
+	}
+	
+	.dui-eva-order .color-price {
+		color: #ff6a00;
+	}
+	.dui-eva-order .dui-eva-button{position: relative; text-align: center; padding: 20px;}
+	
+	.mui-table-view-radio .mui-table-view-cell .mui-navigate-right:after{
+		color: #ff6a00;
+	}
+</style>
+
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</a>
+	<h1 class="mui-title">委托评估支付</h1>
+</header>
+<div class="mui-content">
+	<div class="dui-order-title">
+		填写并核对订单信息
+	</div>
+
+	<div class="mui-table-view dui-evalist-table">
+		<div class="mui-table-view-cell mui-col-xs-12">
+			<div class="dui-appr-photo"></div>
+		</div>
+		<div class="mui-table-view-cell mui-col-xs-12">
+			<div class="dui-evalist-table dui-eva-order">
+				<div class="mui-col-xs-4 dui-carinfo-img dui-appr-td">
+					<img ng-src="{{HOST + (carinfodata.HomePicID||'/images/default_img.png')}}">
+				</div>
+				<div class="mui-col-xs-8 dui-appr-td">
+					<p><span class="span16" ng-bind="carinfodata.SpecName"></span></p>
+					<p>{{carinfodata.Buyyear | CDateFormat}}上牌 {{carinfodata.Mileage}}万公里 {{carinfodata.CityName}}</p>
+					<p>
+						<span class="color-price span20">{{carinfodata.Price/10000 | number:2}} </span>
+						<span class="span14 color-price">万</span>
+						<span class="span14"> 新车价：<strike>{{carinfodata.NewCarPrice/10000 | number:2}}万</strike></span>
+						<p/>
+				</div>
+			</div>
+		</div>
+
+		<div class="mui-table-view-cell mui-col-xs-12 dui-eva-order">
+			<div style="text-align: right;">评估费用：<span class="span16 color-price" ng-bind="edata.eprice"></span>元</div>
+		</div>
+	</div>
+
+	<div class="dui-eva-order">
+		<div class="mui-table-view">
+			<div class="mui-table-view-cell span16">收款人信息</div>
+		</div>
+		<div class="mui-table-view">
+			<div class="mui-table-view-cell"><span ng-bind="edata.UserName"></span> <span ng-bind="edata.Contact"></span> <span ng-bind="edata.Address"></span></div>
+		</div>
+		<div class="mui-table-view">
+			<div class="mui-table-view-cell span16">支付方式 &nbsp;<span class="span14">(请选择下面的支付方式)</span></div>
+		</div>
+		<ul class="mui-table-view mui-table-view-radio">
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right">微信支付</a>
+			</li>
+			<li class="mui-table-view-cell mui-selected">
+				<a class="mui-navigate-right">支付宝</a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right">网上银行</a>
+			</li>
+		</ul>
+		<div class="mui-table-view">
+			<div class="mui-table-view-cell span16">评估截止时间</div>
+		</div>
+		<div class="dui-eva-button">
+			<button type="button" class="mui-btn mui-btn-danger mui-btn-block">提交订单</button>
+		</div>
+	</div>
+</div>

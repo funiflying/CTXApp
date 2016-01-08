@@ -169,9 +169,19 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
         templateUrl:'/ctxWap/partials/filtercar.html',
         replace: false
 
+    }
+}]).directive('brandlist',['$rootScope',function($rootScope){
+    return {
+        restrict: 'EA',
+        transclude: true,
+        link: function(scope, elem, attrs) {
+            var list = document.getElementById('list');
+            window.indexedList = new mui.IndexedList(list);
+        },
+        templateUrl:'/ctxWap/partials/brandlist.html',
+        replace: false
 
     }
-
 }]).directive('pager',['$rootScope',function($rootScope){
     return{
         restrict:'EA',
@@ -264,17 +274,16 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
         restrict:'EA',
         replace:false,
         template:'<div class="pj-container"><span class="pj-star-icon active" val="1" >星星</span>'+
-        '<span class="pj-star-icon"     val="2">星星</span>'+
-        '<span class="pj-star-icon"     val="3">星星</span>'+
-        '<span class="pj-star-icon"     val="4">星星</span>'+
-        '<span class="pj-star-icon"     val="5">星星</span></div>',
+        '<span class="pj-star-icon" val="2">星星</span>'+
+        '<span class="pj-star-icon" val="3">星星</span>'+
+        '<span class="pj-star-icon" val="4">星星</span>'+
+        '<span class="pj-star-icon" val="5">星星</span></div>',
         link:function(scope,element,attr){
             mui('.pj-container').on('tap','.pj-star-icon',function(){
                 var val=$(this).attr('val')
                 var arr= $(this).parent('.pj-container').find('.pj-star-icon');
                 var name=$(this).parents('evaluate').attr('data-name');
                 scope[name]=val;
-                console.log(scope[name])
                 arr.each(function(index,obj){
                     var i=$(obj).attr('val');
                     if(i<val||i==val){
@@ -287,7 +296,95 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
             })
         }
     }
-}])
+}]).directive('uploader',function(){
+    return {
+        restrict:'EA',
+        template:'',
+        replace:false,
+        link:function(scope,element,attr){
+            var ui = {
+                imageList:angular.element(element)
+            };
+            ui.clearForm = function() {
+                ui.imageList.innerHTML = '';
+                ui.newPlaceholder();
+            };
+            ui.getFileInputArray = function() {
+                return [].slice.call(ui.imageList.find('input[type="file"]'));
+            };
+            ui.getFileInputIdArray = function() {
+                var fileInputArray = ui.getFileInputArray();
+                var idArray = [];
+                fileInputArray.forEach(function(fileInput) {
+                    if (fileInput.value != '') {
+                        idArray.push(fileInput.getAttribute('id'));
+                    }
+                });
+                return idArray;
+            };
+            var imageIndexIdNum = 0;
+            ui.newPlaceholder = function() {
+                var fileInputArray = ui.getFileInputArray();
+                if (fileInputArray &&
+                    fileInputArray.length > 0 &&
+                    fileInputArray[fileInputArray.length - 1].parentNode.classList.contains('space')) {
+                   return;
+                }
+                imageIndexIdNum++;
+                var placeholder = document.createElement('div');
+                placeholder.setAttribute('class', 'image-item space');
+                var fileInput = document.createElement('input');
+                fileInput.setAttribute('type', 'file');
+                fileInput.setAttribute('accept', 'image/*');
+                if( ui.imageList.attr('multiple')) {
+                    fileInput.setAttribute('multiple', 'true');
+                }
+                fileInput.setAttribute('id', 'image-' + imageIndexIdNum);
+                fileInput.addEventListener('change', function(event) {
+                    var i=0
+                    var getDataUrl=function(files){
+                        var file = files[i];
+                        if (file) {
+                            var reader = new FileReader();
+                            reader.onload = function(e) {
+                                //处理 android 4.1 兼容问题
+                                var base64 = reader.result.split(',')[1];
+                                var dataUrl = 'data:image/png;base64,' + base64;
+                                ui.preView(dataUrl);
+                                i++
+                                getDataUrl(files)
+                            }
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                    getDataUrl(this.files)
+                }, false);
+                placeholder.appendChild(fileInput);
+                ui.imageList.append(placeholder);
+            };
+            ui.newPlaceholder();
+            ui.preView = function(dataUrl) {
+                var placeholder = document.createElement('div');
+                placeholder.setAttribute('class', 'image-item');
+                var closeButton = document.createElement('div');
+                closeButton.setAttribute('class', 'image-close');
+                closeButton.innerHTML = 'X';
+                placeholder.style.backgroundImage = 'url(' + dataUrl + ')';
+                closeButton.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    event.cancelBubble = true;
+                    setTimeout(function() {
+                        // ui.imageList.removeChild(placeholder);
+                        placeholder.remove()
+                    }, 0);
+                    return false;
+                }, false);
+                placeholder.appendChild(closeButton);
+                ui.imageList.append(placeholder);
+            };
+        }
+    }
+})
 
 
 

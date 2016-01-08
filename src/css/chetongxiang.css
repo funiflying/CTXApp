@@ -25,7 +25,7 @@ table { border-collapse:collapse; border-spacing:0}
 .fl{float:left;}.fr{float:right;}.hide{display:none;}.show{display: block;}
 .ellipsis { white-space:nowrap; text-overflow:ellipsis; overflow:hidden}
 .break { word-break:break-all; word-wrap:break-word}
-header, footer, article, section, nav, menu, hgroup {display: block;clear:all;}
+header, footer, article, section, nav, menu {display: block;clear:all;}
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar{
@@ -103,6 +103,27 @@ body::-webkit-scrollbar{
 }
 .tui-font-blue{
 	color: #0091ff;
+}
+/*********
+ * 表单
+ * *******/
+.mui-input-row select {
+	font-size: 100%;
+	height: 37px;
+	padding: 0;
+}
+.tui-form-required{
+	position: relative;
+}
+.tui-form-required::before{
+	content:  '* ';
+	display: inline-block;
+	color:red;
+	line-height: 1.1;
+	font-size: 100%;
+	position: absolute;
+	left: 5px;
+	top:35%;
 }
 /*********
  * 头部导航
@@ -682,13 +703,16 @@ option {
 	display:box;
 }
 .tui-filter-type .mui-indexed-list-bar{
-	width: 15px;
-	opacity: 0.7;
+	width: 23px;
+	background-color: transparent;
+	position: absolute;
+	height: 100%;
+	z-index: 10;
+	right: 0px;
+	-webkit-transition: .2s;
+	color: #4c4c4c;
 }
-.mui-indexed-list-bar a{
-	height:15px;
-	line-height:15px;
-}
+
 .tui-filter-result{
 	line-height: 32px;
 	padding-left: 15px;
@@ -902,6 +926,25 @@ option {
 }
 .tui-order-info .tui-order-icon{
 	-webkit-flex: 0 0 35%;
+	position: relative;
+}
+.tui-order-code{
+   margin: 0;
+   padding: 0 10px;
+	line-height:24px;
+	font-size: 12px;
+	border-bottom:1px solid #dedede;
+}
+.tui-order-info .tui-order-icon::before{
+	content: attr(data-car);
+	display: block;
+	position: absolute;
+	width: 100%;
+	color: #FFFFFF;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+	font-size: 10px;
 }
 .tui-order-info .tui-order-descr{
 	-webkit-flex: 0 0 65%;
@@ -912,6 +955,9 @@ option {
 }
 .tui-order-descr{
 	padding: 0 10px;
+}
+.tui-order-descr p{
+	margin:0;
 }
 .tui-order-descr .tui-car-name{
 	font-size: 14px;
@@ -983,7 +1029,7 @@ option {
 	height:42px;
 }
 .tui-btngroup-fix .tui-btn-primary{
-	-webkit-flex: 0 0 70%;
+	-webkit-flex: 1 1 70%;
 	color: #fff;
 	border: 0;
 }
@@ -1006,4 +1052,195 @@ option {
 	background-size: 52px 17px;
 	text-indent: -9999px;
 	vertical-align: -2px;
+}
+/*
+*订单详情
+*/
+.tui-order-details{
+	padding: 10px 0 10px 20px;
+	position: relative;
+}
+.tui-order-details-item{
+	border-left: 1px solid #dedede;
+	min-height:30px;
+	position: relative;
+}
+.tui-order-details-item::before{
+	font-family:"iconfont" !important;
+	font-size:16px;
+	font-style:normal;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.2px;
+	content: "\e618";
+	position: absolute;
+	top: 2px;
+	left: -9px;
+}
+.tui-order-details-item.active::before{
+	font-family:"iconfont" !important;
+	font-size:16px;
+	font-style:normal;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.2px;
+	content: "\e618";
+	position: absolute;
+	top: 2px;
+	left: -9px;
+	color: #ff6a00;
+}
+.tui-order-details-item.underway::before{
+	font-family:"iconfont" !important;
+	font-size:16px;
+	font-style:normal;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.2px;
+	content: "\e63e";
+	position: absolute;
+	top: 2px;
+	left: -9px;
+	color: #12a000;
+	z-index: 2;
+	-webkit-animation:onway 5s linear 0s infinite alternate;
+}
+.tui-order-details-item:first-child::before{
+
+}
+.tui-order-details::after{
+	width: 12px;
+	height: 12px;
+	border:1px solid #dedede;
+	border-radius: 50%;
+	position: absolute;
+	bottom: -3px;
+	left: 14px;
+	content: "";
+}
+.tui-order-details::before{
+	width: 12px;
+	height: 12px;
+	border:1px solid #dedede;
+	border-radius: 50%;
+	position: absolute;
+	top: -3px;
+	left: 14px;
+	content: "";
+}
+.tui-orderdetails-table{
+	width: 90%;
+	margin: 0 auto;
+	font-size: 14px;
+	line-height: 24px;
+	color: #666666;
+	border-bottom: 1px solid #dedede;
+}
+.tui-order-details-caption{
+	font-size: 14px;
+	color: #333333;
+	text-align: left;
+	width: 90%;
+	margin: 0 auto;
+    line-height: 30px;
+	font-weight: normal;
+}
+.tui-orderdetails-table th{
+	font-weight: normal;
+	width: 80px;
+}
+.tui-orderdetails-table td{
+	text-align: left;
+}
+@-webkit-keyframes onway /* Safari 和 Chrome */
+{
+	0%   {top: 2px;}
+	25%  {top: 25%;}
+	50%  {top: 50%;}
+	100% {top: 70%;}
+}
+/*
+*我的车源
+*/
+.tui-carissue .mui-input-row{
+	background: #FFFFFF;
+	display: -webkit-flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.tui-carissue .mui-input-row label{
+	-webkit-flex: 1 1 auto;
+}
+.tui-carissue .mui-input-row input{
+	-webkit-flex: 1 1 50%;
+}
+.tui-carissue .mui-input-row .tui-aide{
+	-webkit-flex: 1 1 15%;
+	color: #999;
+	font-size: 12px;
+}
+.tui-carissue .mui-checkbox label,
+.mui-radio label{
+	width: auto;
+}
+.mui-input-row.tui-image-container{
+	background: #FFFFFF;
+	display: block;
+	min-height: 125px;
+	height: auto;
+}
+.tui-image-container label{
+	display: block !important;
+	width: 100%;
+	float: none;
+}
+.mui-input-row.tui-image-container .image-list {
+	min-height: 85px;
+	height: auto;
+	 background-size: cover;
+	 padding: 10px 10px;
+	overflow: hidden;
+	display: block;
+}
+ .image-item.space {
+	border: none;
+}
+ .image-item {
+	width: 65px;
+	height: 65px;
+	background-image: url(../images/iconfont-tianjia.png);
+	background-size: 100% 100%;
+	position: relative;
+	border-radius: 5px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	border: solid 1px #e8e8e8;
+	 display: inline-block;
+}
+ .image-item .image-close {
+	position: absolute;
+	display: inline-block;
+	right: -6px;
+	top: -6px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	border-radius: 12px;
+	background-color: #FF5053;
+	color: #f3f3f3;
+	border: solid 1px #FF5053;
+	font-size: 9px;
+	font-weight: 200;
+	z-index: 1;
+}
+.image-item.space .image-close {
+	display: none;
+}
+ .image-item input[type="file"] {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+	z-index: 0;
 }

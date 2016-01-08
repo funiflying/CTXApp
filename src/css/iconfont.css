@@ -5,7 +5,7 @@
 
 .iconfont {
   font-family:"iconfont" !important;
-  font-size:20px;
+  font-size:16px;
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
@@ -24,6 +24,8 @@
 .icon-gouxuan:before { content: "\e61b"; }
 .icon-dingwei:before { content: "\e639"; }
 .icon-fabu:before { content: "\e611"; }
+.icon-car:before { content: "\e63c"; }
+.icon-qiche:before { content: "\e63e"; }
 .icon-sousuo1:before { content: "\e637"; }
 .icon-dingdan:before { content: "\e626"; }
 .icon-10faqichuangyipinggu:before { content: "\e600"; }
@@ -59,6 +61,7 @@
 .icon-write-success:before { content: "\e612"; }
 .icon-shibai2:before { content: "\e62e"; }
 .icon-shibai3:before { content: "\e62f"; }
+.icon-gongzuoshenqing:before { content: "\e63b"; }
 .icon-yundangenzong:before { content: "\e601"; }
 .icon-shibai4:before { content: "\e630"; }
 .icon-jiudianjingquwanlexiangqingyeicon13:before { content: "\e631"; }
