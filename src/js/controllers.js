@@ -3,19 +3,28 @@
  * @date:2015-12-21
  * @version:1.0.0
  */
-angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$rootScope','$swipe','ResourceService',function($scope,$rootScope,$swipe,ResourceService){
-
+angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$rootScope','$swipe','ResourceService','LocalStorageService',function($scope,$rootScope,$swipe,ResourceService,LocalStorageService){
+    $rootScope.CityID=(LocalStorageService.getStorage('LOCALTION')&&LocalStorageService.getStorage('LOCALTION').CityID)||''
+    $rootScope.CityName=(LocalStorageService.getStorage('LOCALTION')&&LocalStorageService.getStorage('LOCALTION').CityName)||'全国';
+    //同行价
+    $rootScope.WholesalePrice=(LocalStorageService.getStorage('WholesalePrice')&&LocalStorageService.getStorage('WholesalePrice').WholesalePrice)||false;
 }]).controller('HomeController',['$scope','$rootScope','$swipe','ResourceService',function($scope,$rootScope,$swipe,ResourceService){
-    mui('#pullrefresh').scroll();
+
     var gallery = mui(".mui-slider");
     gallery.slider({
         interval: 3000
     })
-    var cars=ResourceService.getFunServer('RequestHomeData',{City:'',CarType:0}).then(function(data){
-        $scope.carlist=data.data;
-    });
+    var city=ResourceService.getFunServer('servicecity',{}).then(function(data){
+        if(data.status==1){
+            $scope.city=data.data.rows;
+        }
+    })
+    $scope.getList=function() {
+        ResourceService.getFunServer('RequestHomeData', {City: $rootScope.CityID||null, CarType: 0}).then(function (data) {
+            $scope.carlist = data.data;
+        });
+    }
 }]).controller('SerachCarController',['$scope','$rootScope','$timeout','ResourceService','LocalStorageService',function($scope,$rootScope,$timeout,ResourceService,LocalStorageService){
-    mui('#pullrefresh').scroll();
     $scope.searchhistory=LocalStorageService.getSearchCarHistory();
     ResourceService.getFunServer('brandlist-search').then(function(data){
         $scope.brandlist=data.data;
@@ -52,7 +61,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
     $scope.filter={
         Brand: $rootScope.stateParams.BrandID,
         CarYear: null,
-        CityID: null,
+        CityID: $rootScope.CityID||-1,
         Color: null,
         Country: null,
         DischargeStandard: null,
@@ -62,25 +71,30 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
         OutputVolume: null,
         PageNo:1,
         PriceEnd: null,
-        PriceID: $rootScope.stateParams.PriceID||0,
+        PriceID: $rootScope.stateParams.PriceID||null,
         PriceStart: null,
         QuasiNewCar: null,
         SearchWord: null,
         Series: $rootScope.stateParams.SeriesID,
         SevenSeat: null,
         Sort: null,
-        Style: $rootScope.stateParams.Style||0,
+        Style: $rootScope.stateParams.Style||null,
         WomenCar: null,
         PageNum:$scope.pagerConfig.pageSize,
         IncludeFlag:0
     }
-
+    var city=ResourceService.getFunServer('servicecity',{}).then(function(data){
+        if(data.status==1){
+            $scope.city=data.data.rows;
+        }
+    })
     ResourceService.getFunServer('brandlist-search').then(function(data){
         $scope.brandlist=data.data;
     });
     LocalStorageService.setSearchCarHistory($rootScope.stateParams);
     $scope.getList=function(pageNo){
-        $scope.filter.PageNo=pageNo||1
+        $scope.filter.PageNo=pageNo||1;
+        $scope.filter.IncludeFlag>0?$scope.filter.CityID==-1:$scope.filter.CityID=$rootScope.CityID;
         ResourceService.getFunServer('CarListServcie',$scope.filter,'post').then(function(data){
             if(data.data[0])
             {
@@ -106,7 +120,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
     }
     $scope.list=[];
     $scope.order={};
-    var orderCode=$rootScope.stateParams.OrderCode;
+
     //买车订单
     $scope.getList=function(pageNo){
         ResourceService.getFunServer('buyorderlist',{pageNo:pageNo,pageNum:$scope.pagerConfig.pageSize},'post').then(function(data,header){
@@ -140,8 +154,6 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
                    $http.post('/order/GetServiceFee',{OrderCode:orderCode}).then(function(d){
                        $scope.servicefees=d.data;
                        $scope.order=data.data.rows[0];
-                       $scope.payall = parseFloat($scope.order.DealPrice) + parseFloat($scope.servicefees) + parseFloat($scope.order.WarrantyCost) + parseFloat($scope.order.ShippingFee);
-                       $scope.pay = $scope.payall - parseFloat($scope.order.PrePayMoney);
                    })
                }
            })
@@ -151,6 +163,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
         if($scope.orderForm.$valid){
           $scope.pre.OrderCode=orderCode;
             $scope.pre.PrepayOrder="";
+            $scope.pre.PrePayBank=$scope.bank;
           ResourceService.getFunServer('prepay',$scope.pre,'post').then(function(data){
               if(data.status==1){
                   mui.toast('提交成功',function(){
@@ -174,6 +187,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
         if($scope.orderForm.$valid){
             $scope.full.OrderCode=orderCode;
             $scope.full.AllMoneyOrder="";
+            $scope.full.AllMoneyBank=$scope.bank;
             ResourceService.getFunServer('fullpay',$scope.full,'post').then(function(data){
                 if(data.status==1){
                     mui.toast('提交成功',function(){
@@ -216,6 +230,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
             UserGiveScore:$scope.UserGiveScore||1,
             UserGiveShipping:$scope.UserGiveShipping||1,
             UserGiveTest:$scope.UserGiveTest||1,
+            UserGiveTestTarget:$scope.UserGiveTestTarget||1,
             UserFeedback: $scope.UserFeedback
         }
         ResourceService.getFunServer('buyfeedback',params,'post').then(function(data){
@@ -262,39 +277,54 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
         })
     }
 }]).controller('LoginController',['$rootScope','$scope','ResourceService','LocalStorageService',function($rootScope,$scope,ResourceService,LocalStorageService){
+     $rootScope.user.HeadImage? $scope.HeadStyle={backgroundImage:'url('+$rootScope.user.HeadImage+')'}:$scope.HeadStyle={backgroundImage:'url(../images/detection-photo-default.gif)'};
+    $scope.login={
+        Contact:'',
+        Code:''
+    }
+    var settime=function(){
+
+        var el=$('.tui-btn-getcode');
+        if ($rootScope.countdown == 0) {
+            el.removeAttr("disabled");
+            el.text("获取验证码");
+            $rootScope.countdown = 60
+        } else {
+            el.attr("disabled", true);
+            el.text($rootScope.countdown + "s");
+            $rootScope.countdown--;
+            setTimeout(settime, 1000)
+        }
+    }
+    //短信验证码
+    $scope.getMCode=function(){
+        if($scope.login.Contact){
+            var params={
+                phoneNum:$scope.login.Contact
+            }
+            ResourceService.getFunServer('SendPhoneValCode',params).then(function(data){
+                if(data.status==1){
+                    settime()
+                }
+            })
+        }
+    }
     //登录
-    $scope.login=function(){
+    $scope.bind=function(){
        if($scope.loginForm.$valid){
-           ResourceService.getFunServer('login',$scope.login,'post').then(function(data){
+           ResourceService.getFunServer('bindwechat',$scope.login,'post').then(function(data){
                if(data.status==1){
                    LocalStorageService.setStorage('AUTH',data.data);
                    $rootScope.user=data.data;
                }
                else{
-                   mui.toast('登录失败');
+                   mui.toast(data.message);
                }
            })
        }
     }
-    //退出
-    $scope.loginout=function(){
-            ResourceService.getFunServer('loginout').then(function(data){
-                if(data.status==1){
-                    LocalStorageService.removeStorage('AUTH');
-                    $rootScope.user=null;
-                }
-                else{
-                    mui.toast(data.message);
-                }
-            })
-        LocalStorageService.removeStorage('AUTH');
-    }
-}]).controller('CarController',['$rootScope','$http','$scope','$filter','ResourceService',function($rootScope,$scope,$http,$filter,ResourceService){
-
-    //var data={BaseCodes:[]};
-
-    //Uploader.uploader(data)
-
+}]).controller('CarController',['$rootScope','$http','$scope','$filter','ResourceService','UploaderService','CarService',function($rootScope,$http,$scope,$filter,ResourceService,UploaderService,CarService){
+    $scope.car={};
 
     //分页条数
     $scope.pagerConfig={
@@ -303,6 +333,8 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
         callback:null
     }
     $scope.list=[];
+
+    var orderCode=$rootScope.stateParams.OrderCode;
     $scope.CarNo=$rootScope.stateParams.CarNo;
     //车源列表
     $scope.getList=function(pageNo){
@@ -327,7 +359,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
            //个人车源
            var d = {
                CarFlag: -1,
-               PageNo: pagegNo,
+               PageNo: pageNo,
                PageNum:$scope.pagerConfig.pageSize
            }
            ResourceService.getFunServer('cargather',d,'post').then(function(data){
@@ -335,42 +367,90 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
                    $scope.list=data.data.rows;
                    $scope.pagerConfig.total=data.data.total;
                }
-
                $scope.pagerConfig.callback=$scope.getList;
                $scope.pager(pageNo);
-
            })
-
        }
     }
-    $scope.getList(1)
     //车辆基本信息
     $scope.getCar=function(){
-        ResourceService.getFunServer('GetCar',{CarNo:$scope.CarNo}).then(function(data){
-            if(data.status==1&&data.data[0]){
-                var obj=data.data[0].value[0];
-                obj.Mileage=parseInt(obj.Mileage);
-                obj.TransferNo=parseInt(obj.TransferNo);
-                obj.Price=parseInt(obj.Price);
-                obj.WholesalePrice=parseInt(obj.WholesalePrice);
-                obj.Buyyear =new Date($filter('DateTimeFormat')(obj.Buyyear,'yyyy/MM/dd'));
-                obj.InitialDate =new Date($filter('DateTimeFormat')(obj.Buyyear,'yyyy/MM/dd'));
-                obj.Annual_Inspect_Time =new Date($filter('DateTimeFormat')(obj.Buyyear,'yyyy/MM/dd'));
-                obj.Compulsory_insurance_Time =new Date($filter('DateTimeFormat')(obj.Buyyear,'yyyy/MM/dd'));
-                obj.Commercial_Insurance_Time =new Date($filter('DateTimeFormat')(obj.Buyyear,'yyyy/MM/dd'));
-                obj.IsUrgent=obj.IsUrgent=='True'?true:false;
-                obj.QuasiNewCar=obj.QuasiNewCar=='True'?true:false;
-                obj.LearnerCa=obj.LearnerCa=='True'?true:false;
-                obj.WomenCar=obj.WomenCar=='True'?true:false;
-                obj.SevenSeat=obj.SevenSeat=='True'?true:false;
-                obj.DrivingLicense=obj.DrivingLicense=='True'?true:false;
-                obj.Registration=obj.Registration=='True'?true:false;
-                obj.PurchaseInvoices=obj.PurchaseInvoices=='True'?true:false;
-                obj.ViolationRecord=obj.ViolationRecord=='True'?true:false;
-                $scope.car=obj;
-
+        if(!$scope.CarNo){
+            return;
+        }
+        ResourceService.getFunServer('GetCardata',{CarNo:$scope.CarNo}).then(function(data){
+            if(data.status==1){
+                var val=data.data;
+                var o=new Object();
+                for(var i=0;i<val.length;i++){
+                    var name=val[i].name;
+                    switch (name){
+                        case 'Car':
+                            var  o= val[i].value[0]
+                            o.CarNo=o.CarNo;
+                            o.Mileage=parseInt(o.Mileage);
+                            o.TransferNo=parseInt(o.TransferNo);
+                            o.Price=parseFloat(o.Price/10000);
+                            o.WholesalePrice=parseFloat(o.WholesalePrice/10000);
+                            o.Buyyear =new Date($filter('DateTimeFormat')(o.Buyyear,'yyyy/MM/dd'));
+                            o.InitialDate =new Date($filter('DateTimeFormat')(o.Buyyear,'yyyy/MM/dd'));
+                            o.Annual_Inspect_Time =new Date($filter('DateTimeFormat')(o.Buyyear,'yyyy/MM/dd'));
+                            o.Compulsory_insurance_Time =new Date($filter('DateTimeFormat')(o.Buyyear,'yyyy/MM/dd'));
+                            o.Commercial_Insurance_Time =new Date($filter('DateTimeFormat')(o.Buyyear,'yyyy/MM/dd'));
+                            o.IsUrgent=o.IsUrgent=='True'?true:false;
+                            o.QuasiNewCar=o.QuasiNewCar=='True'?true:false;
+                            o.LearnerCa=o.LearnerCa=='True'?true:false;
+                            o.WomenCar=o.WomenCar=='True'?true:false;
+                            o.SevenSeat=o.SevenSeat=='True'?true:false;
+                            o.DrivingLicense=o.DrivingLicense=='True'?true:false;
+                            o.Registration=o.Registration=='True'?true:false;
+                            o.PurchaseInvoices=o.PurchaseInvoices=='True'?true:false;
+                            o.IncludeTransferFee=o.IncludeTransferFee?true:false;
+                            o.CarPic_Car_CarNo=[];
+                            $scope.car=o;
+                            $scope.EditPic([{PicAddr:$scope.car.HomePicID}],'car-homepic')
+                            break;
+                        case 'CarPic':
+                            $scope.CarPic=val[i].value;
+                            $scope.EditPic($scope.CarPic,'car-cover')
+                            break;
+                        default:
+                            obj=val[i].value[0];
+                            break;
+                    }
+                }
             }
         })
+    }
+    $scope.EditPic=function(images,id){
+        angular.forEach(images,function(obj,index){
+            var imageList=document.getElementById(id);
+            var placeholder = document.createElement('div');
+            placeholder.setAttribute('class', 'image-item');
+            var closeButton = document.createElement('div');
+            closeButton.setAttribute('class', 'image-close');
+            closeButton.innerHTML = 'X';
+            placeholder.style.backgroundImage = 'url(' + obj.PicAddr + ')';
+            placeholder.setAttribute('data-path',obj.PicAddr);
+            closeButton.addEventListener('click', function(event) {
+                event.stopPropagation();
+                event.cancelBubble = true;
+                placeholder.remove();
+                return false;
+            }, false);
+            placeholder.appendChild(closeButton);
+            imageList.appendChild(placeholder);
+        })
+    }
+    $scope.GetPicPath=function(){
+                 var cover=$('#car-cover').find('.image-item:not(.space)');
+                 var home=$('#car-homepic').find('.image-item:not(.space)');
+                 $scope.car.CarPic_Car_CarNo=[];
+                 $.each(cover,function(index,obj){
+                     var o=new Object();
+                     o.PicAddr=$(this).attr('data-path')
+                     $scope.car.CarPic_Car_CarNo.push(o);
+                 })
+                 $scope.car.HomePicID=home.attr('data-path');
     }
     //下架
     $scope.soldout=function(){
@@ -387,6 +467,249 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
             })
         }
     }
+    //车系
+    $scope.getSeries=function(){
+        var params={
+            BrandID:$scope.car.Brand
+        }
+        ResourceService.getFunServer('Series',params,'post').then(function(data){
+            if(data.status==1){
+                $scope.series=data.data
+            }
+            else {
+                $scope.series=[];
+            }
+        })
+    }
+    //车型
+    $scope.getSpecName=function(){
+        var params={
+            brandid:$scope.car.Brand,
+            seriesid:$scope.car.SeriesID
+        }
+        ResourceService.getFunServer('SpecName',params,'post').then(function(data){
+            if(data.status==1){
+                $scope.speclist=data.data
+            }
+            else {
+                $scope.speclist=[];
+            }
+        })
+    }
+    //发布
+    $scope.release=function() {
+        if ($scope.carForm.$valid) {
+            $scope.GetPicPath()
+            $scope.car.Price = parseFloat($scope.car.Price) * 10000;
+            $scope.car.WholesalePrice = parseFloat($scope.car.WholesalePrice) * 10000;
+            $scope.car.IncludeTransferFee = $scope.IncludeTransferFee;
+            if ($scope.CarNo) {
+                CarService.edit($scope.car).then(function (data) {
+                    if (data.data.status ==1) {
+                        mui.toast('编辑成功', function () {
+                            $rootScope.state.go('cargather');
+                        })
+                    } else {
+                        mui.toast(data.data.message);
+                    }
+                })
+            }
+            else {
+                CarService.release( $scope.car).then(function (data) {
+                    if (data.data.status ==1) {
+                        mui.toast('发布成功', function () {
+                            $rootScope.state.go('cargather');
+                        })
+                    } else {
+                        mui.toast(data.data.message);
+                    }
+                })
+            }
+        }
+    }
+}]).controller('AccountController',['$rootScope','$scope','ResourceService','LocalStorageService',function($rootScope,$scope,ResourceService,LocalStorageService){
 
+    $scope.USER=$rootScope.user;
+    $scope.bankinfo={};
 
+    //用户信息
+    $scope.getUser=function(){
+        ResourceService.getFunServer('user',{}).then(function(data){
+            if(data.status==1){
+                $scope.USER=data.data;
+                $scope.bankinfo.RegisterBankCode= parseInt($scope.USER.RegisterBankCode);
+                $scope.bankinfo.UserName=$scope.USER.UserName;
+                $scope.bankinfo.RegisterBank=$scope.USER.RegisterBank
+                if($scope.USER.IdentityTag==3){
+                    $scope.getAlliance();
+                }
+            }
+        })
+    }
+    //联盟商信息
+    $scope.getAlliance=function(){
+        ResourceService.getFunServer('alliance',{}).then(function(data){
+            if(data.status==1){
+               $scope.alliance=data.data[0]
+            }
+        })
+    }
+    $scope.getUser();
+    //检测交易密码
+    $scope.checkTradePwd=function(){
+        ResourceService.getFunServer('checkTradePwd',{}).then(function(data){
+            $scope.Trade=data.status;
+        })
+    }
+    $scope.checkTradePwd();
+    $scope.goTrade=function(){
+        if($scope.Trade==0){
+            $rootScope.state.go('traders')
+        }
+        else {
+            $rootScope.state.go('retraders')
+        }
+    }
+    $scope.goBank=function(){
+        if($scope.USER.RegisterBankCode){
+            $rootScope.state.go('bank')
+        }
+        else {
+            $rootScope.state.go('addbank')
+        }
+    }
+    //重置交易密码
+    $scope.reTrade=function(){
+        if($scope.settingsForm.$valid){
+            if($scope.newTradePwd!=$scope.ConfigPwd) {
+                $scope.errmsg='两次密码不一致';
+                return ;
+            }
+            else {
+                var params={
+                    oldTradePwd:$scope.oldTradePwd,
+                    newTradePwd:$scope.newTradePwd
+                }
+                ResourceService.getFunServer('resetTradePwd',params,'post').then(function(data){
+                    if(data.status==1){
+                        mui.toast('交易密码重置成功',function(){
+                            $rootScope.state.go('account')
+                        })
+                    }else {
+                        mui.toast(data.message)
+                    }
+                })
+
+            }
+        }
+    }
+    //设置交易密码
+    $scope.modifyTrade=function(){
+        if($scope.settingsForm.$valid){
+            if($scope.PayPassword!=$scope.ConfigPwd) {
+                $scope.errmsg='两次密码不一致';
+                return ;
+            }
+            else {
+                ResourceService.getFunServer('updateUser',{PayPassword:$scope.PayPassword}).then(function(data){
+                    if(data.status==1){
+                        mui.toast('设置成功',function(){
+                            $rootScope.state.go('account')
+                        })
+                    }else {
+                        mui.toast(data.message)
+                    }
+                })
+
+            }
+        }
+    }
+    //评估师认证
+    $scope.appraiserAppy=function(){
+        if($scope.settingsForm.$valid){
+            $scope.appraiser.AppraiserPic=$('#AppraiserPic').attr('data-path');
+            ResourceService.getFunServer('apprasiorApply',$scope.appraiser,'post').then(function(data){
+                if(data.status==1){
+                    mui.toast('已提交申请，请等待审核',function(){
+                        $rootScope.state.go('account')
+                    })
+                }else {
+                    mui.toast(data.message)
+                }
+            })
+        }
+    }
+    //绑卡
+    $scope.addBank=function(){
+        if($scope.settingsForm.$valid){
+            $scope.bankinfo.RegisterBank=$scope.bank;
+            ResourceService.getFunServer('updateUser',$scope.bankinfo,'post').then(function(data){
+                if(data.status==1){
+                    mui.toast('银行卡绑定成功',function(){
+                        $rootScope.state.go('account')
+                    })
+                }else {
+                    mui.toast(data.message)
+                }
+            })
+        }
+    }
+    //删除银行卡
+    $scope.deleteBank=function(){
+        $scope.bankinfo.RegisterBankCode='';
+        $scope.bankinfo.RegisterBank=''
+        ResourceService.getFunServer('updateUser',$scope.bankinfo,'post').then(function(data){
+            if(data.status==1){
+                mui.toast('删除成功',function(){
+                    $rootScope.state.go('account')
+                })
+            }else {
+                mui.toast(data.message)
+            }
+        })
+    }
+    //提现
+    $scope.withdraw=function(){
+        if($scope.settingsForm.$valid){
+            $scope.alliance?$scope.account.BusinessFlag=1:$scope.account.BusinessFlag0;
+            if(!parseInt($scope.account.PayMoney)>0){
+                return;
+            }
+            ResourceService.getFunServer('withdraw',$scope.account,'post').then(function(data){
+                if(data.status==1){
+                    mui.toast('您的提现请求已经成功提交，将在2个工作日内到账，如有疑问请致电400-0732-777',function(){
+                        $rootScope.state.go('account');
+                    })
+                } else{
+                    $scope.errmsg=data.message;
+                }
+            })
+        }
+    }
+}]).controller('SellController',['$rootScope','$scope','ResourceService','CarService',function($rootScope,$scope,ResourceService,CarService){
+    $scope.getCarCount=function(){
+        CarService.carsellcount().success(function(data){
+            $scope.carcount=data;
+        })
+    }
+    $scope.sell=function(){
+        var param={
+            ContactPhone:$scope.phone,
+            EventFlag:0,
+            Contact:'',
+            CityID:'',
+            CityName:''
+        }
+        if($scope.phone){
+            ResourceService.getFunServer('sellcar',param,'post').then(function(data){
+                if(data.status==1){
+                    mui.toast('您的卖车邀请已提交，客服人员将与您联系',function(){
+                        $scope.phone='';
+                    })
+                }else {
+                    mui.toast(data.message)
+                }
+            })
+       }
+    }
 }])

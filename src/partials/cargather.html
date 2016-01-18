@@ -1,7 +1,6 @@
 <div class="tui-content" >
     <header class="mui-bar mui-bar-nav tui-bar-nav" ng-init="getList(1)">
         <h1 class="mui-title">我的车源</h1>
-        <button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</button>
         <a class="mui-pull-right mui-btn mui-btn-blue mui-btn-link" ui-sref="carissue">发布车源</a>
     </header>
     <ul class="tui-order" >
@@ -18,15 +17,14 @@
                     <img ng-src="{{obj.HomePicID}}" alt="">
                 </div>
                 <section class="tui-order-descr">
-                    <h5 class="tui-car-name" ><i ng-bind="obj.SpecName"></i></h5>
+                    <h5 class="tui-car-name mui-ellipsis-2" ><i ng-bind="obj.SpecName"></i></h5>
                     <p class="tui-car-deploy"><i ng-bind="obj.InitialDate|DateTimeFormat:'yyyy年MM月'" ></i>上牌 <i ng-bind="obj.Mileage"></i>万公里</p>
                     <p class="tui-car-sellprice"><span class="mui-pull-left  tui-font-orange"><strong class="tui-car-price" ng-bind="obj.Price/10000|currency:'￥'"></strong>万 </span><span class="mui-pull-right tui-car-newprice" ng-if="obj.WholesalePrice>0">同行价 <i ng-bind="obj.WholesalePrice/10000|currency:'￥'"></i>万</span></p>
                 </section>
             </section>
             <section class="tui-order-operate">
                 <button type="button" class="mui-btn"  ng-if="obj.CarFlag!=254" ui-sref="carout({CarNo:obj.CarNo})">下架</button>
-                <button type="button" class="mui-btn" ui-sref="carinfo({CarNo:obj.CarNo})">查看详情</button>
-                <button type="button" class="mui-btn mui-btn-orange" ui-sref="carissue.edit({CarNo:obj.CarNo})"  'ng-if="obj.CarFlag==0"'>编辑</button>
+                <button type="button" class="mui-btn mui-btn-orange" ui-sref="carissue.edit({CarNo:obj.CarNo})"  ng-if="obj.CarFlag==0">编辑</button>
                 <button type="button" class="mui-btn tui-btn-orange" ng-if="obj.ReportCount==0&&(user.IdentityTag==202 || user.IdentityTag==2 || user.IdentityTag==3)" >填写检测报告</button>
             </section>
         </li>

@@ -1,11 +1,11 @@
 /**
  * 自动消失提示框
  */
-(function($, document) {
-	$.toast = function(_message, callback) {
-		if ($.os.plus) {
+(function(mui, document) {
+	mui.toast = function(_message,callback) {
+		if (mui.os.plus) {
 			//默认显示在底部；
-			$.plusReady(function() {
+			mui.plusReady(function() {
 				plus.nativeUI.toast(_message, {
 					verticalAlign: 'middle'
 				});
@@ -13,15 +13,36 @@
 		} else {
 			var toast = document.createElement('div');
 			toast.classList.add('mui-toast-container');
-			toast.innerHTML = '<div class="' + 'mui-toast-message' + '">' + _message + '</div>';
+			toast.innerHTML = '<div class="' + 'mui-toast-message animated bounceInDown ' + '"><h6>提示</h6>' + _message + '</div>';
 			document.body.appendChild(toast);
 			setTimeout(function() {
+				toast.querySelector('.mui-toast-message').classList.add('fadeOutDown')
 				document.body.removeChild(toast);
 				if (mui.isFunction(callback)) {
 					callback()
 				}
 			}, 2000);
 		}
+	}
+	mui.loading=function(end){
+		var loading=document.getElementsByClassName('mui-loading-container')
+		if(loading.length>0){
+			return
+		}
+		else {
+			loading = document.createElement('div');
+			loading.classList.add('mui-loading-container');
+			loading.innerHTML = '<i class="mui-icon mui-spinner"></i>';
+			document.body.appendChild(loading);
+		}
+			//loading.classList.add('fadeOutDown')
+	}
+	mui.onload=function(){
+		var loading=$('.mui-loading-container');
+		setTimeout(function(){
+			loading.remove();
+		},500)
+
 	}
 })(mui, document)
 
@@ -56,4 +77,15 @@ function extend(des, src, override) {
 		}
 	}
 	return des;
+}
+Array.prototype.remove = function(index) {
+	if (isNaN(index) || index > this.length) {
+		return false;
+	}
+	for (var i = 0, n = 0; i < this.length; i++) {
+		if (this[i] != this[index]) {
+			this[n++] = this[i]
+		}
+	}
+	this.length -= 1
 }

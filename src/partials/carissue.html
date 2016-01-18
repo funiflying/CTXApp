@@ -1,31 +1,30 @@
-
+<div class="tui-mask"></div>
 <div class="tui-content"  ng-init="getCar()">
     <header class="mui-bar mui-bar-nav tui-bar-nav">
         <h1 class="mui-title">发布车源</h1>
-        <button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</button>
     </header>
     <div class="tui-carissue">
         <form class="mui-input-group" name="carForm" novalidate>
-             <div class="mui-input-row">
+             <div class="mui-input-row" select-series style="height: auto;min-height: 40px">
                 <label class="tui-form-required">品牌</label>
-                <input type="text" ng-model="car.Brand" readonly>
+                <p class="tui-car-text" ng-bind="car.SeriesName+car.SpecName"></p>
                 <span class="mui-navigate-right"></span>
             </div>
 
-            <div class="mui-input-row">
+            <div class="mui-input-row" select-color>
                 <label class="tui-form-required">颜色</label>
-                <input type="text" ng-model="car.Color" readonly>
+                <p class="tui-color-text"  ng-bind="car.Color|ColorFilter" ></p>
                 <span class="mui-navigate-right"></span>
 
             </div>
             <div class="mui-input-row">
                 <label class="tui-form-required">售价</label>
-                <input type="number" ng-model="car.Price" >
+                <input type="number" ng-model="car.Price" required>
                 <span class="tui-aide">万元</span>
             </div>
             <div class="mui-input-row">
                 <label>含过户费</label>
-                <div class="mui-switch mui-switch-mini mui-active" ng-model="car.IncludeTransferFee">
+                <div ng-class="{true:'mui-switch mui-switch-mini mui-active',false:'mui-switch mui-switch-mini'}[car.IncludeTransferFee==true]" ng-model="IncludeTransferFe" mui-switch >
                     <div class="mui-switch-handle"></div>
                 </div>
             </div>
@@ -37,20 +36,20 @@
             <div class="tui-blank"></div>
            <div class="mui-input-row">
                 <label class="tui-form-required">行驶里程</label>
-                <input type="number" ng-model="car.Mileage" >
+                <input type="number" ng-model="car.Mileage" required>
                <span class="tui-aide">万公里</span>
             </div>
             <div class="mui-input-row">
                 <label class="tui-form-required">过户次数</label>
-                <input type="number" ng-model="car.TransferNo" >
+                <input type="number" ng-model="car.TransferNo" required>
             </div>
             <div class="mui-input-row">
                 <label class="tui-form-required">购买年限</label>
-                <input type="date" ng-model="car.Buyyear"  >
+                <input type="date" ng-model="car.Buyyear"  required>
             </div>
             <div class="mui-input-row">
                 <label class="tui-form-required">注册城市</label>
-                <input type="text" ng-model="car.RegisterPlace" >
+                <input type="text" ng-model="car.RegisterPlace" value="{{user.CityName}}" required>
             </div>
             <div class="mui-input-row">
                 <label>初登日期</label>
@@ -59,29 +58,29 @@
             <div class="tui-blank"></div>
             <div class="mui-input-row">
                 <label class="tui-form-required">发动机号</label>
-                <input type="text" ng-model="car.EngineNo" >
+                <input type="text" ng-model="car.EngineNo" required>
             </div>
             <div class="mui-input-row">
                  <label>车架号</label>
-                 <input type="number" ng-model="car.FrameNumber" >
+                 <input type="text" ng-model="car.FrameNumber" >
              </div>
             <div class="tui-blank"></div>
             <div class="mui-input-row tui-image-container" >
                 <label class="tui-form-required">封面图片</label>
-                <uploader class="image-list"></uploader>
+                <uploader class="image-list"  data-name="HomePicID"  data-flag="1" id="car-homepic"></uploader>
             </div>
              <div class="mui-input-row tui-image-container" >
                  <label class="tui-form-required">车辆图片</label>
-                 <uploader class="image-list" multiple></uploader>
+                 <uploader class="image-list" multiple data-name="CarPic_Car_CarNo" data-flag="1" id="car-cover"></uploader>
              </div>
              <div class="tui-blank"></div>
            <div class="mui-input-row">
                 <label class="tui-form-required">车船使用税</label>
-                <input type="text" ng-model="car.UseFee" >
+                <input type="text" ng-model="car.UseFee" required>
             </div>
             <div class="mui-input-row">
                 <label class="tui-form-required">购置附加税</label>
-                <input type="text" ng-model="car.BuyFeeNO" >
+                <input type="text" ng-model="car.BuyFeeNO" required maxlength="20">
             </div>
             <div class="tui-blank"></div>
 
@@ -99,13 +98,13 @@
             </div>
             <div class="tui-blank"></div>
            <div class="mui-input-row mui-checkbox mui-left">
-                <label>行驶证</label>
+                <label style=" -webkit-flex:1 1 40%">行驶证</label>
                 <input name="checkbox"  type="checkbox" ng-model="car.DrivingLicense">
-                <input type="text" ng-model="car.DrivingLicenseModel" >
+                <input type="text" ng-model="car.DrivingLicenseModel" placeholder="输入行驶证" ng-if="car.DrivingLicense">
             </div>
             <div class="mui-input-row mui-checkbox mui-left">
                 <label>登记证</label>
-                <input name="checkbox"  type="checkbox" ng-model="car.Registration">
+                <input name="checkbox"  type="checkbox" ng-model="car.Registration" >
             </div>
             <div class="mui-input-row mui-checkbox mui-left">
                 <label>购车发票</label>
@@ -137,10 +136,15 @@
         <div class="mui-input-row" >
             <textarea  rows="5" style="margin: 10px ; padding: 10px" placeholder="车主自述 例：我一直很爱惜自己的车，每次保养都是在4S店保养，小刮擦在所难免但绝对没有大事故。加装了自动大灯，门灯，点火线圈，胎压监测。保险还有9个月到期，可随时看车！"  ng-model="car.Readme" ></textarea>
         </div>
+        <brandindex tui-series class="tui-swipe-container"></brandindex>
+        <serieslist tui-spec class="tui-swipe-container"></serieslist>
+        <speclist class="tui-swipe-container"></speclist>
+        <colorlist class="tui-swipe-container"></colorlist>
     </div>
+
 </div>
 <div class="tui-btngroup-fix">
-    <button type="button" class="tui-btn tui-btn-primary"  ng-click="soldout()">确定</button>
+    <button type="button" class="tui-btn tui-btn-primary"  ng-click="release()">确定</button>
 </div>
 
 

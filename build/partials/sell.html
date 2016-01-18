@@ -1,0 +1,66 @@
+<div ng-include="'partials/nav.html'"></div>
+<div class="tui-content">
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title">我要卖车</h1>
+    </header>
+    <div id="slider" class="tui-sell-banner" ng-init="getCarCount()">
+        <img ng-src="../images/sell-bg.jpg">
+    </div>
+    <h5 class="tui-sell-count">已有<i class="tui-font-orange" ng-bind="carcount"></i>部车源在售</h5>
+    <div class="mui-input-row">
+        <input type="tel" style="border: 0;margin-bottom: 10px" name="phone" placeholder="请输入您的联系电话" ng-model="phone">
+    </div>
+    <div class="tui-sell-bar">
+        <button type="button" class="tui-btn tui-btn-orange" ng-click="sell()">提交</button>
+        <p>免费咨询电话:<span class="tui-font-green">400-0732-777</span> </p>
+    </div>
+    <div class="tui-sell-pro">
+        <img src="../images/sell-pro.jpg" alt="">
+    </div>
+    <ul class="mui-table-view mui-grid-view tui-sell-descr">
+        <li class="mui-table-view-cell mui-media">
+                <div class="mui-media-body">
+                    <h3>省心卖车</h3>
+                    <p>流程简单，全程跟踪服务，卖车四步搞定</p>
+                </div>
+                <img class="mui-media-object" src="../images/sell-1.jpg">
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <div class="mui-media-body">
+                <h3>快速卖车</h3>
+                <p>全国车商联盟，海量买家，快速卖车</p>
+            </div>
+            <img class="mui-media-object" src="../images/sell-2.jpg">
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <div class="mui-media-body">
+                <h3>诚信卖车</h3>
+                <p>专业评估团队，权威检测，交易公平公正</p>
+            </div>
+            <img class="mui-media-object" src="../images/sell-3.jpg">
+        </li>
+        <li class="mui-table-view-cell mui-media">
+            <div class="mui-media-body">
+                <h3>优价卖车</h3>
+                <p>买卖双方自主议价，保证成交价格优于市价</p>
+            </div>
+            <img class="mui-media-object" src="../images/sell-4.jpg">
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

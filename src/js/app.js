@@ -1,110 +1,286 @@
-angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppServices','CTXAppControllers','CTXAppCtrl','CTXAppFilters','CTXAppDirective']).config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
+angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppServices','CTXAppControllers','CTXAppCtrl','CTXAppFilters','CTXAppDirective']).config(['$stateProvider','$urlRouterProvider','$httpProvider',function($stateProvider,$urlRouterProvider,$httpProvider){
        $urlRouterProvider.otherwise('/home');
+        //access访问权限,0未不限制，1为需登录
         $stateProvider.state('home',{
             url:'/home',
             templateUrl:'partials/home.html',
-            controller:'HomeController'
+            controller:'HomeController',
+            access:0,
+            action:'home'
         }).state('carlist',{
             url:'/carlist',
             templateUrl:'partials/carlist.html',
-            controller:'CarListController'
+            controller:'CarListController',
+            access:0,
+            action:'buy'
         }).state('carlist.query',{
             url:'/carlist?BrandID&SeriesID&PriceID&Style&SearchValue&&Value',
             templateUrl:'partials/carlist.html',
-            controller:'CarListController'
+            controller:'CarListController',
+            access:0,
+            action:'buy'
         }).state('car',{
             url:'/car',
             templateUrl:'',
-            controller:''
+            controller:'',
+            action:'home'
         }).state('sell',{
             url:'/sell',
             templateUrl:'partials/sell.html',
-            controller:''
+            controller:'SellController',
+            access:0,
+            action:'sell'
         }).state('admin',{
             url:'/admin',
             templateUrl:'partials/admin.html',
-            controller:'LoginController'
+            controller:'LoginController',
+            access:0,
+            action:'admin'
         }).state('searchcar',{
             url:'/searchcar',
             templateUrl:'partials/searchcar.html',
-            controller:'SerachCarController'
+            controller:'SerachCarController',
+            access:0,
+            action:'home'
         }).state('carinfo',{
             url:'/carinfo?CarNo',
             templateUrl:'partials/carinfo.html',
-            controller:'CarInfoCtrl'
+            controller:'CarInfoCtrl',
+            access:0,
+            action:'buy'
         }).state('viewreport',{
             url:'/viewreport?CarNo',
             templateUrl:'partials/viewreport.html',
-            controller:'CarInfoCtrl'
+            controller:'CarInfoCtrl',
+            access:0,
+            action:'home'
         }).state('evaluationlist',{
             url:'/evaluationlist?CarNo&BrandID',
             templateUrl:'partials/evaluationlist.html',
-            controller:'evaluationlistCtrl'
+            controller:'evaluationlistCtrl',
+            access:0,
+            action:'home'
         }).state('eval_order',{
             url:'/eval_order',
             templateUrl:'partials/evalorder.html',
-            controller:'evalorderCtrl'
+            controller:'evalorderCtrl',
+            access:0,
+            action:'home'
         }).state('creditfile',{
             url:'/creditfile?CarNo',
             templateUrl:'partials/creditfile.html',
-            controller:'creditfileCtrl'
+            controller:'creditfileCtrl',
+            access:0,
+            action:'home'
+        }).state('u_eval_list',{
+            url:'/u_eval_list',
+            templateUrl:'partials/u_eval_list.html',
+            controller:'u_eval_listCtrl',
+            access:1,
+            action:'admin'
+        }).state('appr_eval_list',{
+            url:'/appr_eval_list',
+            templateUrl:'partials/appr_eval_list.html',
+            controller:'appr_eval_listCtrl',
+            access:1,
+            action:'admin'
         }).state('buyorder',{
             url:'/buyorder',
             templateUrl:'partials/buyorder.html',
-            controller:'OrderController'
+            controller:'OrderController',
+            access:1,
+            action:'admin'
         }).state('sellorder',{
             url:'/sellorder',
             templateUrl:'partials/sellorder.html',
-            controller:'OrderController'
+            controller:'OrderController',
+            access:1,
+            action:'admin'
         }).state('prepay',{
             url:'/prepay?OrderCode',
             templateUrl:'partials/prepay.html',
-            controller:'OrderController'
+            controller:'OrderController',
+            access:1,
+            action:'admin'
         }).state('fullpay',{
             url:'/fullpay?OrderCode',
             templateUrl:'partials/fullpay.html',
-            controller:'OrderController'
+            controller:'OrderController',
+            access:1,
+            action:'admin'
         }).state('orderbackout',{
             url:'/orderbackout?OrderCode&BID',
             templateUrl:'partials/orderbackout.html',
-            controller:'OrderController'
+            controller:'OrderController',
+            access:1,
+            action:'admin'
         }).state('buyevaluate',{
             url:'/buyevaluate?OrderCode',
             templateUrl:'partials/buyevaluate.html',
-            controller:'OrderController'
+            controller:'OrderController',
+            access:1,
+            action:'admin'
         }).state('sellevaluate',{
             url:'/sellevaluate?OrderCode',
             templateUrl:'partials/sellevaluate.html',
-            controller:'OrderController'
+            controller:'OrderController',
+            access:1,
+            action:'admin'
         }).state('orderdetails',{
             url:'/orderdetails?OrderCode',
             templateUrl:'partials/orderdetails.html',
-            controller:'OrderController'
+            controller:'OrderController',
+            access:1,
+            action:'admin'
         }).state('amount',{
             url:'/amount?OrderCode',
             templateUrl:'partials/amount.html',
-            controller:'OrderController'
+            controller:'OrderController',
+            access:1,
+            action:'admin'
         }).state('cargather',{
             url:'/cargather',
             templateUrl:'partials/cargather.html',
-            controller:'CarController'
+            controller:'CarController',
+            access:1,
+            action:'admin'
         }).state('carout',{
             url:'/carout?CarNo',
             templateUrl:'partials/carout.html',
-            controller:'CarController'
+            controller:'CarController',
+            access:1,
+            action:'admin'
         }).state('carissue.edit',{
             url:'/carissue?CarNo',
             templateUrl:'partials/carissue.html',
-            controller:'CarController'
+            controller:'CarController',
+            access:1,
+            action:'admin'
         }).state('carissue',{
             url:'/carissue',
             templateUrl:'partials/carissue.html',
-            controller:'CarController'
-        })
- }]).run(['$rootScope','$state','$stateParams','LocalStorageService',function($rootScope,$state,$stateParams,LocalStorageService) {
-    $rootScope.HOST="http://192.168.0.218";
+            controller:'CarController',
+            access:1,
+            action:'admin'
+        }).state('account',{
+            url:'/account',
+            templateUrl:'partials/account.html',
+            controller:'AccountController',
+            access:1,
+            action:'admin'
+        }).state('traders',{
+            url:'/account/traders',
+            templateUrl:'partials/traderspwd.html',
+            controller:'AccountController',
+            access:1,
+            action:'admin'
+        }).state('retraders',{
+            url:'/account/retraders',
+            templateUrl:'partials/retraderspwd.html',
+            controller:'AccountController',
+            access:1,
+            action:'admin'
+        }).state('appraiser',{
+            url:'/account/appraiser',
+            templateUrl:'partials/appraiser.html',
+            controller:'AccountController',
+            access:1,
+            action:'admin'
+        }).state('bank',{
+            url:'/account/bank',
+            templateUrl:'partials/bank.html',
+            controller:'AccountController',
+            access:1,
+            action:'admin'
+        }).state('addbank',{
+            url:'/account/bank/add',
+            templateUrl:'partials/addbank.html',
+            controller:'AccountController',
+            access:1,
+            action:'admin'
+        }).state('withdraw',{
+            url:'/account/withdraw',
+            templateUrl:'partials/withdraw.html',
+            controller:'AccountController',
+            access:1,
+            action:'admin'
+        }).state('404',{
+            url:'/404',
+            templateUrl:'partials/404.html',
+            controller:'',
+            access:0,
+            action:'home'
+        });
+    $httpProvider.interceptors.push('myInterceptor');
+ }]).run(['$rootScope','$state','$stateParams','ResourceService','LocalStorageService',function($rootScope,$state,$stateParams,ResourceService,LocalStorageService) {
+    $rootScope.HOST=window.location.protocol+'//'+window.location.host;
+    $rootScope.PATH=''
     $rootScope.state = $state;
     $rootScope.stateParams = $stateParams;
+    $rootScope.ACTION='home'
+    //短信验证码时间
+    $rootScope.countdown=60;
     //用户
     $rootScope.user=LocalStorageService.getStorage('AUTH')||null;
-}]);
+    ResourceService.getFunServer('validwechat',{}).then(function(data){
+        if(data.status==1){
+            $rootScope.user=data.data;
+            LocalStorageService.setStorage('AUTH',data.data);
+        }
+        else{
+            $rootScope.user=null;
+            LocalStorageService.removeStorage('AUTH');
+        }
+    });
+    $rootScope.LOGIN=function(){
+        $('.tui-login').addClass('active')
+        $('.tui-mask').addClass('active');
+        document.getElementsByTagName('body')[0].scrollTop=0;
+    }
+    //路由控制
+    $rootScope.$on("$stateChangeStart", function(event) {
+        document.getElementsByTagName('body')[0].scrollTop=0;
+        document.querySelector('.tui-login').classList.remove('active');
+        document.querySelector('.tui-mask').classList.remove('active');
+    });
+    $rootScope.$on('$stateChangeSuccess', function() {
+
+        if($state.current.access==1&&!$rootScope.user){
+           $rootScope.state.go('admin');
+           $rootScope.LOGIN();
+        }
+        if ($state.current.action) {
+            $rootScope.ACTION=$state.current.action
+        }else{
+            $rootScope.ACTION = "home"
+        }
+    });
+    $rootScope.$on('$stateNotFound', function(event){
+        $rootScope.state.go('404')
+    });
+}]).factory("myInterceptor",['$q', '$rootScope', function($q,$rootScope) {
+    //http 拦截
+    var requestInterceptor = {
+        request: function(config) {
+            if(config.url.match('/common/file/')==null){
+                mui.loading()
+            }
+            return config
+        },
+        requestError:function(config){
+            return config
+        },
+        response:function(response){
+            if(response.data.status==-1){
+                $rootScope.state.go('admin');
+                $rootScope.LOGIN();
+            }
+            mui.onload()
+            return response
+        },
+        responseError:function(response){
+            return response
+        }
+    };
+    return requestInterceptor;
+}])

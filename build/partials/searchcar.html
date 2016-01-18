@@ -1,0 +1,65 @@
+<header class="mui-bar mui-bar-nav tui-bar-nav">
+    <p class="mui-btn mui-btn-link mui-btn-nav mui-pull-left tui-nav-search-bar">
+        <input type="text" placeholder="" class="tui-nav-search" ng-model="brand" autofocus="autofocus"><i class="mui-icon mui-icon-search"></i>
+    </p>
+    <button class="mui-btn mui-btn-link mui-action-back mui-btn-nav mui-pull-left tui-nav-search-cancel">
+        取消
+    </button>
+</header>
+<div class="mui-content mui-scroll-wrapper" id="pullrefresh">
+    <div class="mui-scroll">
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell" ng-repeat="obj in searchlist" ng-if="!obj.SeriesName">
+                    <a ui-sref="carlist.query({SearchValue:obj.BrandName,BrandID:obj.BrandID})"><i ng-bind="obj.BrandName"></i></a>
+                </li>
+                <li class="mui-table-view-cell" ng-repeat="obj in searchlist" ng-if="obj.SeriesName">
+                    <a ui-sref="carlist.query({SearchValue:obj.SeriesName,BrandID:obj.BrandID,SeriesID:obj.SeriesID})"><i ng-bind="obj.SeriesName"></i></a>
+                </li>
+            </ul>
+            <ul class="mui-table-view" ng-if="!searchlist[0]">
+                <li class="mui-table-view-cell" ng-repeat="obj in searchhistory">
+                    <a ui-sref="carlist.query({SearchValue:obj.SearchValue,BrandID:obj.BrandID,SeriesID:obj.SeriesID})"><i ng-bind="obj.SearchValue"></i></a>
+                </li>
+                <li class="mui-table-view-cell mui-col-xs-12 mui-text-center" ng-if="searchhistory[0]">
+                    <a ng-click="clear()">清除搜索记录</a>
+                </li>
+            </ul>
+            <div class="tui-blank"></div>
+            <ul class="mui-table-view mui-grid-view mui-grid-9 tui-search-keyword">
+                <li class="mui-table-view-cell mui-col-xs-12 tui-car-filter-caption">
+                    热销品牌
+                </li>
+                <li class="mui-table-view-cell mui-col-xs-4">
+                    <a href="" data-filter-value="34" ui-sref="carlist.query({BrandID:34,Value:'大众'})">
+                        大众
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-col-xs-4">
+                    <a href="" data-filter-value="34" ui-sref="carlist.query({BrandID:155,Value:'现代'})">
+                        现代
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-col-xs-4">
+                    <a href="" data-filter-value="34" ui-sref="carlist.query({BrandID:45,Value:'丰田'})">
+                        丰田
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-col-xs-4">
+                    <a href="" data-filter-value="34" ui-sref="carlist.query({BrandID:8,Value:'宝马'})">
+                        宝马
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-col-xs-4">
+                    <a href="" data-filter-value="34" ui-sref="carlist.query({BrandID:35,Value:'奥迪'})">
+                        奥迪
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-col-xs-4">
+                    <a href="" data-filter-value="34" ui-sref="carlist.query({BrandID:48,Value:'福特'})">
+                        福特
+                    </a>
+                </li>
+
+            </ul>
+    </div>
+</div>

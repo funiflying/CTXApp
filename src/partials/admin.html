@@ -2,46 +2,56 @@
 <div class="tui-content">
     <header class="mui-bar mui-bar-nav tui-bar-nav">
         <h1 class="mui-title">个人中心</h1>
-        <a class="mui-icon mui-icon-gear-filled mui-pull-right" ng-click="loginout()"></a>
+        <!--<a class="mui-icon mui-icon-gear-filled mui-pull-right" ></a>-->
     </header>
     <section class="tui-admin-banner">
-         <p><i class="mui-icon mui-icon-person-filled"></i></p>
-         <button ng-if="!user" type="button" class="mui-btn tui-btn-orange" tui-login>点击登录</button>
+        <p><span  class="tui-admin-icon" ng-style="HeadStyle"></span></p>
+        <button ng-if="!user" type="button" class="mui-btn tui-btn-orange" tui-login>点击登录</button>
         <span ng-if="user" class="tui-user-name" ng-bind="user.Contact"></span>
     </section>
     <ul class="mui-table-view">
         <li class="mui-table-view-cell"  ui-sref="buyorder">
             <a class="mui-navigate-right">
-                <i class="iconfont icon-wodedingdan1 tui-wodedingdan1"></i> 买车订单
+                <i class="iconfont icon-orderform tui-wodedingdan1"></i> 买车订单
             </a>
         </li>
         <li class="mui-table-view-cell" ui-sref="sellorder">
             <a class="mui-navigate-right">
-                <i class="iconfont icon-wodedingdan1 tui-wodedingdan1" ></i> 卖车订单
+                <i class="iconfont icon-dingdanguanli tui-wodedingdan1" ></i> 卖车订单
             </a>
         </li>
         <li class="mui-table-view-cell" ui-sref="cargather">
             <a class="mui-navigate-right">
-                <i class="iconfont icon-chechan tui-chechan"></i> 我的车源
+                <i class="iconfont icon-wodecheyuan tui-chechan"></i> 我的车源
+            </a>
+        </li>
+        <li class="mui-table-view-cell" ui-sref="u_eval_list">
+            <a class="mui-navigate-right">
+                <i class="iconfont icon-jiaoyijilu tui-wodedingdan1" ></i> 委托评估
+            </a>
+        </li>
+        <li class="mui-table-view-cell" ui-sref="appr_eval_list">
+            <a class="mui-navigate-right">
+                <i class="iconfont icon-jiaoyijilu tui-wodedingdan1" ></i> 委托评估订单
             </a>
         </li>
         <li class="mui-table-view-cell">
             <a class="mui-navigate-right">
-                <i class="iconfont icon-youhuiquan tui-youhuiquan"></i> 优惠券
+                <i class="iconfont icon-youhuiquan1 tui-youhuiquan"></i> 优惠券
             </a>
         </li>
         <li class="mui-table-view-cell">
             <a class="mui-navigate-right">
-                <i class="iconfont icon-xiaoxi tui-xiaoxi"></i> 系统消息
+                <i class="iconfont icon-wodexiaoxi tui-xiaoxi"></i> 系统消息
             </a>
         </li>
-        <li class="mui-table-view-cell">
+        <li class="mui-table-view-cell" ui-sref="account">
             <a class="mui-navigate-right">
-                <i class="iconfont icon-zhanghaoanquan0101 tui-zhanghaoanquan0101"></i> 账号中心
+                <i class="iconfont icon-zhanghaozhongxin tui-zhanghaoanquan"></i> 账号中心
             </a>
         </li>
     </ul>
-    <login style="display: none;"></login>
+
 </div>
 
 

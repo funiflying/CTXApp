@@ -1,0 +1,25 @@
+<div class="tui-content">
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title">评估师认证</h1>
+    </header>
+    <div class="tui-settings mui-fullscreen">
+        <div class="tui-settings-text">
+            提交您的资料，申请城市评估师，享受更多会员权益
+        </div>
+        <div class="tui-blank"></div>
+        <form class="mui-input-group" name="settingsForm" novalidate>
+            <div class="mui-input-row" >
+                <label>姓名</label>
+                <input type="text" class="mui-input-clear"  name="realName" required   ng-model="appraiser.realName" />
+            </div>
+            <div class="mui-input-row tui-image-container" >
+                <label>资格证书</label>
+               <uploader class="image-list"  data-flag="4"  data-name="AppraiserPic" id="AppraiserPic"  ></uploader>
+            </div>
+        </form>
+        <div class="tui-settings-tip" ng-bind="errmsg"></div>
+    </div>
+</div>
+<div class="tui-btngroup-fix">
+    <button type="button" class="tui-btn tui-btn-primary"   ng-click="appraiserAppy()">确定</button>
+</div>

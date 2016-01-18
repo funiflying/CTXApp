@@ -1,18 +1,18 @@
-<nav class="tui-bar tui-bar-tab">
-    <a class="tui-tab-item tui-active" ui-sref="home">
-        <span class="mui-icon mui-icon-home"></span>
-        <span class="tui-tab-label">首页</span>
+<nav class="tui-bar tui-bar-tab" >
+    <a ng-class="{true:'tui-tab-item tui-active',false:'tui-tab-item'}[ACTION=='home']" ui-sref="home">
+        <span class="iconfont icon-shouyeshouye"></span>
+        <p class="tui-tab-label">首页</p>
     </a>
-    <a class="tui-tab-item" ui-sref="carlist">
-        <span class="mui-icon mui-icon-chatbubble"></span>
-        <span class="tui-tab-label">买车</span>
+    <a ng-class="{true:'tui-tab-item tui-active',false:'tui-tab-item'}[ACTION=='buy']" ui-sref="carlist">
+        <span class="iconfont icon-ershoucheqiugou"></span>
+        <p class="tui-tab-label">买车</p>
     </a>
-    <a class="tui-tab-item" ui-sref="sell">
-        <span class="mui-icon mui-icon-chat"></span>
-        <span class="tui-tab-label">卖车</span>
+    <a ng-class="{true:'tui-tab-item tui-active',false:'tui-tab-item'}[ACTION=='sell']" ui-sref="sell">
+        <span class="iconfont icon-maiche"></span>
+        <p class="tui-tab-label">卖车</p>
     </a>
-    <a class="tui-tab-item" ui-sref="admin">
-        <span class="mui-icon mui-icon-contact"></span>
-        <span class="tui-tab-label">我的</span>
+    <a ng-class="{true:'tui-tab-item tui-active',false:'tui-tab-item'}[ACTION=='admin']" ui-sref="admin">
+        <span class="iconfont icon-gerenzhongxin"></span>
+        <p class="tui-tab-label">我的</p>
     </a>
 </nav>

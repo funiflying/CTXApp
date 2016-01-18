@@ -1,0 +1,8 @@
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+	color: #ff6a00;
+	border-bottom:2px solid #ff6a00;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted~.mui-slider-progress-bar{
+	background-color:#ff6a00;
+}

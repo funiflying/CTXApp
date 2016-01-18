@@ -24,7 +24,13 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
             mui('.tui-filter-nav').on('tap','a.tui-nav-item',function(){
                 var role=$(this).attr('data-for');
                 $(this).toggleClass('active');
-                $('.tui-mask').toggleClass('active')
+                var active=this.classList.contains('active');
+                if(active){
+                    $('.tui-mask').addClass('active')
+                }
+                else {
+                    $('.tui-mask').removeClass('active')
+                }
                 $('.tui-filter-type[data-role='+role+']').toggleClass('active');
                 $('.tui-filter-type:not([data-role='+role+'])').removeClass('active');
                 $('.tui-nav-item:not([data-for='+role+'])').removeClass('active');
@@ -91,6 +97,7 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                 var val=$(this).attr('data-filter-value');
                 var text=$(this).attr('data-text');
                 scope.filter.IncludeFlag=val;
+                scope.filter.CityID=-1;
                 $(this).addClass('active').siblings('li.tui-filter-item').removeClass('active')
                 $('.tui-mask').removeClass('active')
                 $('.tui-filter-type[data-role=areaFilter]').toggleClass('active');
@@ -138,10 +145,10 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
             //全部重置
             mui('.tui-filter-result').on('tap','.tui-filter-result-btn',function(){
                 $('.tui-filter-result').removeClass('active').find('i').text('');
+                $('.tui-filter .tui-filter-item').removeClass('active')
                 scope.filter={
                     Brand: null,
                     CarYear: null,
-                    CityID: null,
                     Color: null,
                     Country: null,
                     DischargeStandard: null,
@@ -166,7 +173,7 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                 scope.getList()
             })
         },
-        templateUrl:'/ctxWap/partials/filtercar.html',
+        templateUrl:$rootScope.PATH+'/partials/filtercar.html',
         replace: false
 
     }
@@ -178,8 +185,36 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
             var list = document.getElementById('list');
             window.indexedList = new mui.IndexedList(list);
         },
-        templateUrl:'/ctxWap/partials/brandlist.html',
+        templateUrl:$rootScope.PATH+'/partials/brandlist.html',
         replace: false
+
+    }
+}]).directive('brandindex',['$rootScope',function($rootScope){
+    return {
+        restrict: 'EA',
+        transclude: true,
+        link: function(scope, element, attrs) {
+            var elem=element[0].querySelector('.mui-bar-nav');
+            mui(elem).on('tap','.mui-btn-nav',function(){
+                $('.tui-mask').removeClass('active')
+                $(this).parents('brandindex').removeClass('active');
+            })
+            var list = document.getElementById('list');
+            window.indexedList = new mui.IndexedList(list);
+        },
+        templateUrl:$rootScope.PATH+'/partials/brandindex.html',
+        replace: false
+
+    }
+}]).directive('hotbrand',['$rootScope',function($rootScope){
+    return {
+        restrict: 'EA',
+        transclude: true,
+        link: function(scope, elem, attrs) {
+
+        },
+        templateUrl:$rootScope.PATH+'/partials/hotbrand.html',
+        replace: true
 
     }
 }]).directive('pager',['$rootScope',function($rootScope){
@@ -189,6 +224,9 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
         link:function(scope,element,attr){
             scope.pager=function(pageNo){
                 var config= $.extend({},scope.pagerConfig);
+                if(config.total==0){
+                    $(element[0]).before('<div class="tui-nolist"></div>')
+                }
                 pageNo=pageNo||1
                 var pageLength = (config.total % config.pageSize == 0 ? config.total / config.pageSize : Math.ceil(config.total /config.pageSize));
 
@@ -196,7 +234,13 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                     $('.tui-page').show()
                     var op="";
                     for (var i= 0;i<pageLength;i++){
-                       op+='<option  value="'+parseInt(i+1)+'" >'+parseInt(i+1)+'</option>';
+                        if((i+1)==pageNo){
+                            op+='<option  selected value="'+parseInt(i+1)+'" >'+parseInt(i+1)+'</option>';
+                        }
+                        else {
+                            op+='<option  value="'+parseInt(i+1)+'" >'+parseInt(i+1)+'</option>';
+                        }
+
                     }
                     $('.tui-3g-page-btn').html(op)
                     $('.page-num').text(pageNo+'/'+pageLength);
@@ -226,6 +270,7 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
            });
            mui('.page-up').on('tap','span',function(){
                var p=$(this).data('page')||1;
+               $('#pager').select()
                scope.pagerConfig.callback(p)
            });
            mui('.page-down').on('tap','span',function(){
@@ -241,31 +286,34 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
         '<span class="select-con">'+
        '<span class="page-num"></span>'+
         '<span class="triangle page-triangle"></span></span>'+
-       '<select name="" id="" class="tui-3g-page-btn">'+
+       '<select name="" id="pager" class="tui-3g-page-btn">'+
         '</select></select>'+
         '</span></a><a class="page-down">'+
         '<span>下一页</span></a></div>',
         replace:false
     }
-}]).directive('login',['$rootScope',function(){
+}]).directive('login',['$rootScope',function($rootScope){
     return{
         restrict:'EA',
         transclude:true,
-        templateUrl:'/ctxWap/partials/login.html',
+        templateUrl:$rootScope.PATH+'/partials/login.html',
         replace:false,
         link:function(scope,element,attr){
-            mui('.tui-filter-opt').on('tap','button',function(){
-              $('login').hide();
+            var elem=element[0].querySelector('.tui-filter-opt');
+            mui(elem).on('tap','button.tui-btn-default',function(){
+              $('.tui-login').removeClass('active');
+              $('.tui-mask').removeClass('active');
             })
         }
     }
 }]).directive('tuiLogin',['$rootScope',function(){
     return{
-        restrict:'EA',
+        restrict:'A',
         replace:false,
         link:function(scope,element,attr){
             angular.element(element).on('tap',function(){
-                $('login').show()
+                $('.tui-login').addClass('active')
+                $('.tui-mask').addClass('active');
             })
         }
     }
@@ -279,7 +327,8 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
         '<span class="pj-star-icon" val="4">星星</span>'+
         '<span class="pj-star-icon" val="5">星星</span></div>',
         link:function(scope,element,attr){
-            mui('.pj-container').on('tap','.pj-star-icon',function(){
+            var elem=element[0].querySelector('.pj-container')
+            mui(elem).on('tap','.pj-star-icon',function(){
                 var val=$(this).attr('val')
                 var arr= $(this).parent('.pj-container').find('.pj-star-icon');
                 var name=$(this).parents('evaluate').attr('data-name');
@@ -296,7 +345,7 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
             })
         }
     }
-}]).directive('uploader',function(){
+}]).directive('uploader',['UploaderService',function(UploaderService){
     return {
         restrict:'EA',
         template:'',
@@ -312,17 +361,6 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
             ui.getFileInputArray = function() {
                 return [].slice.call(ui.imageList.find('input[type="file"]'));
             };
-            ui.getFileInputIdArray = function() {
-                var fileInputArray = ui.getFileInputArray();
-                var idArray = [];
-                fileInputArray.forEach(function(fileInput) {
-                    if (fileInput.value != '') {
-                        idArray.push(fileInput.getAttribute('id'));
-                    }
-                });
-                return idArray;
-            };
-            var imageIndexIdNum = 0;
             ui.newPlaceholder = function() {
                 var fileInputArray = ui.getFileInputArray();
                 if (fileInputArray &&
@@ -330,27 +368,34 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                     fileInputArray[fileInputArray.length - 1].parentNode.classList.contains('space')) {
                    return;
                 }
-                imageIndexIdNum++;
                 var placeholder = document.createElement('div');
-                placeholder.setAttribute('class', 'image-item space');
+                placeholder.setAttribute('class', 'image-item-bar space');
                 var fileInput = document.createElement('input');
                 fileInput.setAttribute('type', 'file');
                 fileInput.setAttribute('accept', 'image/*');
                 if( ui.imageList.attr('multiple')) {
                     fileInput.setAttribute('multiple', 'true');
                 }
-                fileInput.setAttribute('id', 'image-' + imageIndexIdNum);
                 fileInput.addEventListener('change', function(event) {
                     var i=0
                     var getDataUrl=function(files){
                         var file = files[i];
                         if (file) {
                             var reader = new FileReader();
+                            var elem=ui.preView();
+                            var flag=$(element[0]).attr('data-flag')
                             reader.onload = function(e) {
                                 //处理 android 4.1 兼容问题
                                 var base64 = reader.result.split(',')[1];
-                                var dataUrl = 'data:image/png;base64,' + base64;
-                                ui.preView(dataUrl);
+                                var dataUrl = 'data:image/jpg;base64,' + base64;
+                                var params={BaseCodes:base64};
+                                elem.style.backgroundImage='url(' + dataUrl + ')';
+                                UploaderService.uploader(params,flag).success(function(data){
+                                    if(data.status==1) {
+                                        $(elem).find('span.mui-icon').remove()
+                                        elem.setAttribute('data-path',data.data)
+                                    }
+                                });
                                 i++
                                 getDataUrl(files)
                             }
@@ -363,29 +408,270 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                 ui.imageList.append(placeholder);
             };
             ui.newPlaceholder();
-            ui.preView = function(dataUrl) {
+            ui.preView = function() {
                 var placeholder = document.createElement('div');
                 placeholder.setAttribute('class', 'image-item');
                 var closeButton = document.createElement('div');
                 closeButton.setAttribute('class', 'image-close');
                 closeButton.innerHTML = 'X';
-                placeholder.style.backgroundImage = 'url(' + dataUrl + ')';
+                var spinner=document.createElement('span');
+                spinner.setAttribute('class','mui-icon mui-spinner');
                 closeButton.addEventListener('click', function(event) {
                     event.stopPropagation();
                     event.cancelBubble = true;
                     setTimeout(function() {
-                        // ui.imageList.removeChild(placeholder);
-                        placeholder.remove()
+                        placeholder.remove();
                     }, 0);
                     return false;
                 }, false);
                 placeholder.appendChild(closeButton);
+                placeholder.appendChild(spinner)
                 ui.imageList.append(placeholder);
+                return placeholder;
             };
         }
     }
-})
+}]).directive('tuiSeries',function(){
+    return {
+        restrict:'A',
+        replace:false,
+        link:function(scope,element,attr){
+            var elem=element[0].querySelector('ul.mui-table-view')
+            mui(elem).on('tap','.tui-filter-item',function(){
+                $('.tui-mask').addClass('active');
+                scope.car.Brand=$(this).attr('data-filter-value');
+                scope.BrandName=$(this).attr('data-text');
+                scope.getSeries();
+                $(element[0]).removeClass('active');
+                $('serieslist.tui-swipe-container').addClass('active  ').siblings('.tui-swipe-container').removeClass('active   fadeOutRightBig');
+            })
+        }
+    }
+}).directive('serieslist',function(){
+    return {
+        restrict:'EA',
+        replace:false,
+        template:'<header class="mui-bar mui-bar-nav tui-bar-nav">'+
+        '<h1 class="mui-title">车系</h1>'+
+        '<button class=" mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</button>'+
+        '</header><div  class="mui-indexed-list tui-filter-btnone"><div  class="mui-indexed-list-inner">'+
+        '<ul class="mui-table-view">'+
+        '<li class="mui-table-view-cell tui-filter-item mui-indexed-list-item" data-filter-value="{{obj.SeriesID}}"  data-text="{{obj.SeriesName}}" ng-repeat="obj in series" ><i ng-bind="obj.SeriesName"></i>'+
+        '<span class="mui-navigate-right"></span></li></ul></div></div>',
+        link:function(scope,element,attr){
+            var elem=element[0].querySelector('.mui-bar-nav');
+            mui(elem).on('tap','.mui-btn-nav',function(){
+                $('.tui-mask').removeClass('active')
+                $('.tui-swipe-container').removeClass('active');
 
+            })
+        }
+    }
+}).directive('tuiSpec',function(){
+    return {
+        restrict:'A',
+        replace:false,
+        link:function(scope,element,attr){
+            var elem=element[0].querySelector('ul.mui-table-view')
+            mui(elem).on('tap','li.tui-filter-item',function(){
+                scope.car.SeriesID=$(this).attr('data-filter-value');
+                scope.SeriesName=$(this).attr('data-text');
+                scope.getSpecName();
+                $(element[0]).removeClass('active');
+                $('speclist.tui-swipe-container').addClass('active').siblings('.tui-swipe-container').removeClass('active');
+            })
+        }
+    }
+}).directive('speclist',function(){
+    return {
+        restrict:'EA',
+        replace:false,
+        template:'<header class="mui-bar mui-bar-nav tui-bar-nav">'+
+        '<h1 class="mui-title">车型</h1>'+
+        '<button class=" mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</button>'+
+        '</header><div  class="mui-indexed-list tui-filter-btnone"><div  class="mui-indexed-list-inner">'+
+        '<ul class="mui-table-view">'+
+        '<li class="mui-table-view-cell tui-filter-item mui-indexed-list-item" data-filter-value="{{obj.CatalogID}}"  data-text="{{obj.SpecName}}" ng-repeat="obj in speclist" ng-bind="obj.SpecName">'+
+        '</li></ul></div></div>',
+        link:function(scope,element,attr){
+            var elem=element[0].querySelector('ul.mui-table-view')
+            var target=element[0].querySelector('.mui-bar-nav');
+            mui(target).on('tap','.mui-btn-nav',function(){
+                $('.tui-mask').removeClass('active');
+                $('.tui-swipe-container').removeClass('active');
+
+            })
+            mui(elem).on('tap','li.tui-filter-item',function(){
+                scope.car.CatalogID=$(this).attr('data-filter-value');
+                scope.car.SpecName=$(this).attr('data-text');
+                $('.tui-mask').removeClass('active');
+                $('.tui-swipe-container').removeClass('active');
+            })
+        }
+    }
+}).directive('selectSeries',function(){
+    return {
+        restrict:'A',
+        replace:false,
+        link:function(scope,element,attr){
+            var elem=element[0];
+            mui(elem).on('tap','.tui-car-text',function(){
+                document.getElementsByTagName('body')[0].scrollTop=0;
+                $('.tui-swipe-container').removeClass('fadeOutRightBig')
+                $('brandindex.tui-swipe-container').addClass('active');
+                $('.tui-mask').addClass('active');
+
+            });
+        }
+    }
+}).directive('colorlist',['$rootScope',function($rootScope){
+    return {
+        restrict:'EA',
+        replace:false,
+        templateUrl:$rootScope.PATH+'/partials/colorlist.html',
+        link:function(scope,element,attr){
+            var elem=element[0].querySelector('ul.mui-table-view');
+            var target=element[0].querySelector('.mui-bar-nav');
+            mui(target).on('tap','.mui-btn-nav',function(){
+                $('.tui-mask').removeClass('active');
+                $('.tui-swipe-container').removeClass('active');
+            })
+            mui(elem).on('tap','li.tui-filter-item',function(){
+                scope.car.Color=$(this).attr('data-value');
+                scope.ColorName=$(this).attr('data-text');
+                $('.tui-color-text').text($(this).attr('data-text'))
+                $('.tui-mask').removeClass('active');
+                $('.tui-swipe-container').removeClass('active');
+            })
+        }
+    }
+}]).directive('selectColor',function(){
+    return {
+        restrict:'A',
+        replace:false,
+        link:function(scope,element,attr){
+            document.getElementsByTagName('body')[0].scrollTop=0;
+            var elem=element[0];
+            mui(elem).on('tap','.tui-color-text',function(){
+                $('colorlist.tui-swipe-container').addClass('active');
+                $('.tui-mask').addClass('active');
+            })
+        }
+    }
+}).directive('wholesaleSwitch',['$rootScope','LocalStorageService',function($rootScope,LocalStorageService){
+    return {
+        restrict:'A',
+        replace:false,
+        link:function(scope,element,attr){
+            var elem=element[0];
+            var name=$(elem).attr('ng-model')
+            mui(elem).on('tap','.mui-switch-handle',function(){
+                $(elem).toggleClass('mui-active');
+                scope[name]=!scope[name];
+                LocalStorageService.setStorage('WholesalePrice',{WholesalePrice:scope[name]});
+                $rootScope.WholesalePrice=scope[name];
+            })
+        }
+    }
+}]).directive('muiSwitch',function(LocalStorageService){
+    return {
+        restrict:'A',
+        replace:false,
+        link:function(scope,element,attr){
+            var elem=element[0];
+            var name=$(elem).attr('ng-model')
+            mui(elem).on('tap','.mui-switch-handle',function(){
+                $(elem).toggleClass('mui-active');
+                scope[name]=!scope[name];
+            })
+        }
+    }
+}).directive('city',['$rootScope','LocalStorageService',function($rootScope,LocalStorageService){
+    return{
+        restrict:'E',
+        replace:false,
+        templateUrl:$rootScope.PATH+'/partials/city.html',
+        link:function(scope,element,attr){
+            var elem=element[0].querySelector('ul.mui-table-view');
+            var target=element[0].querySelector('.mui-bar-nav');
+            mui(target).on('tap','.mui-btn-nav',function(){
+                $('.tui-mask').removeClass('active');
+                $('.tui-swipe-container').removeClass('active');
+            })
+            mui(elem).on('tap','li.tui-filter-item',function(){
+                $rootScope.CityID=$(this).attr('data-value');
+                $rootScope.CityName=$(this).attr('data-text');
+                LocalStorageService.setStorage('LOCALTION',{CityID:$rootScope.CityID,CityName:$rootScope.CityName});
+                scope.getList();
+                $('.tui-mask').removeClass('active');
+                $('.tui-swipe-container').removeClass('active');
+            })
+        }
+    }
+}]).directive('selectCity',function(){
+    return {
+        restrict:'A',
+        replace:false,
+        link:function(scope,element,attr){
+            document.getElementsByTagName('body')[0].scrollTop=0;
+            var elem=element[0];
+            mui(elem).on('tap','i',function(){
+                $('city.tui-swipe-container').addClass('active');
+                $('.tui-mask').addClass('active');
+            })
+        }
+    }
+}).directive('banklist',['$rootScope',function($rootScope){
+    return {
+        restrict:'EA',
+        replace:false,
+        templateUrl:$rootScope.PATH+'/partials/banklist.html',
+        link:function(scope,element,attr){
+            var elem=element[0].querySelector('ul.mui-table-view');
+            var target=element[0].querySelector('.mui-bar-nav');
+            mui(target).on('tap','.mui-btn-nav',function(){
+                $('.tui-mask').removeClass('active');
+                $('.tui-swipe-container').removeClass('active');
+            })
+            mui(elem).on('tap','li.tui-filter-item',function(){
+                var bank=$(this).attr('data-text');
+                scope.bank=bank
+                $('.tui-bank-text').text(bank)
+                $('.tui-mask').removeClass('active');
+                $('.tui-swipe-container').removeClass('active');
+            })
+        }
+    }
+}]).directive('selectBank',function(){
+    return {
+        restrict:'A',
+        replace:false,
+        link:function(scope,element,attr){
+            document.getElementsByTagName('body')[0].scrollTop=0;
+            var elem=element[0];
+            mui(elem).on('tap','.tui-bank-text',function(){
+                $('banklist.tui-swipe-container').addClass('active');
+                $('.tui-mask').addClass('active');
+
+            });
+        }
+    }
+}).directive('tuiMask',function(){
+    return {
+        restrict:'A',
+        replace:false,
+        link:function(scope,element,attr){
+            document.getElementsByTagName('body')[0].scrollTop=0;
+            var elem=element[0];
+            elem.addEventListener('tap',function(e){
+               $('.active').removeClass('active');
+                e.stopPropagation()
+            })
+        }
+    }
+
+
+})
 
 
 

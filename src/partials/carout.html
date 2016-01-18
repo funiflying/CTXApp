@@ -1,7 +1,6 @@
 <div class="tui-content">
     <header class="mui-bar mui-bar-nav tui-bar-nav">
         <h1 class="mui-title">车源下架</h1>
-        <button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</button>
     </header>
     <ul class="tui-order" ng-init="getCar()">
         <li class="tui-order-item" >
@@ -17,7 +16,7 @@
                     <img ng-src="{{car.HomePicID}}" alt="">
                 </div>
                 <section class="tui-order-descr">
-                    <h5 class="tui-car-name" ><i ng-bind="car.BrandName+car.SpecName"></i></h5>
+                    <h5 class="tui-car-name mui-ellipsis-2" ><i ng-bind="car.BrandName+car.SpecName"></i></h5>
                     <p class="tui-car-deploy"><i ng-bind="car.InitialDate|DateTimeFormat:'yyyy年MM月'" ></i>上牌 <i ng-bind="car.Mileage"></i>万公里</p>
                     <p class="tui-car-sellprice"><span class="mui-pull-left  tui-font-orange"><strong class="tui-car-price" ng-bind="car.Price/10000|currency:'￥'"></strong>万 </span><span class="mui-pull-right tui-car-newprice" ng-if="car.WholesalePrice>0">同行价 <i ng-bind="car.WholesalePrice/10000|currency:'￥'"></i>万</span></p>
                 </section>

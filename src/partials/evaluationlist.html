@@ -196,7 +196,7 @@
 						<div class="mui-table-view-cell" ng-repeat="obj in list">
 							<a ng-click="viewevaluation(obj)" class="dui-nav-right">
 								<div class="mui-col-xs-3 dui-appr-td">
-									<div class="dui-appr-photo"><img ng-src="{{obj.HeadImage}}" src="./images/detection-photo-default.gif"></div>
+									<div class="dui-appr-photo"><img ng-src="{{HOST + obj.HeadImage}}" src="./images/detection-photo-default.gif"></div>
 								</div>
 								<div class="mui-col-xs-8 dui-appr-td">
 									<p class="p1">【<span ng-bind='obj.CityName'></span>】 <span ng-bind='obj.UserName'></span> <span ng-bind='obj.Contact'></span></p>
@@ -253,7 +253,7 @@
 		<div class="mui-table-view dui-evalist-table">
 			<div class="mui-table-view-cell">
 				<div class="mui-col-xs-3 dui-appr-td">
-					<div class="dui-appr-photo"><img ng-src="{{evaluationdata.HeadImage}}" src="./images/detection-photo-default.gif"></div>
+					<div class="dui-appr-photo"><img ng-src="{{HOST + evaluationdata.HeadImage}}" src="./images/detection-photo-default.gif"></div>
 				</div>
 				<div class="mui-col-xs-9 dui-appr-td">
 					<p class="p1">【<span ng-bind='evaluationdata.CityName'></span>】 <span ng-bind='evaluationdata.UserName'></span> <span ng-bind='evaluationdata.Contact'></span></p>
@@ -272,7 +272,7 @@
 				</div>
 
 				<div class="mui-table-view-cell">
-					<div class="class=" mui-input-group "">
+					<div class="mui-input-group">
 						<div class="mui-input-row">
 							<label>评估费用</label>
 							<input type="text" name="eva_price" id="eva_price" required="required" placeholder="请输入评估费用金额">

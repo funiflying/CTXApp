@@ -1,0 +1,56 @@
+<div class="tui-content">
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title">买方评价</h1>
+    </header>
+    <ul class="tui-order" ng-init="getOrder()">
+        <li class="tui-order-item">
+            <section class="tui-order-header">
+                <span class="mui-pull-left"><i ng-bind="order.UserName"></i>  <i ng-bind="order.Contact"></i> <i class="mui-icon mui-icon-arrowright" style="font-size: 14px"></i></span>
+                <span class="mui-pull-right tui-font-green"><span ng-if="order.RevokeFlag==0" ng-bind="order.OrderFlag|OrderStatus"></span><span ng-if="order.RevokeFlag>0" ng-bind="order.RevokeFlag|RevokeStatus"></span></span>
+            </section>
+            <section class="tui-order-info">
+                <div class="tui-order-icon" data-car="{{order.CarNo}}">
+                    <img ng-src="{{order.HomePicID}}" alt="">
+                </div>
+                <section class="tui-order-descr">
+                    <h5 class="tui-car-name mui-ellipsis-2"><i ng-bind="order.BrandName+order.SpecName"></i></h5>
+                    <p class="tui-car-deploy"><i ng-bind="order.InitialDate|DateTimeFormat:'yyyy年MM月'"></i>上牌 <i ng-bind="order.Mileage"></i>万公里</p>
+                    <p class="tui-car-sellprice"><span class="mui-pull-left tui-font-orange"><strong class="tui-car-price" ng-bind="order.DealPrice/10000|currency:'￥'"></strong>万 </span><span class="mui-pull-right tui-car-newprice" ng-if="order.NewCarPrice>0">新车价 <strike><i ng-bind="order.NewCarPrice/10000|currency:'￥'"></i>万</strike></span></p>
+                </section>
+            </section>
+            <section class="tui-order-operate">
+                请写下您对这次购车的感受吧，对其他人
+                有很大帮助哦！
+            </section>
+        </li>
+    </ul>
+    <div class="tui-order-form">
+        <h5 class="tui-order-header">买方评价</h5>
+        <form name="orderForm" class="mui-input-group">
+            <div class="mui-input-row">
+                <label>对车主评价</label>
+                <evaluate data-name="UserGiveScore"></evaluate>
+            </div>
+            <div class="mui-input-row">
+                <label>对物流服务</label>
+                <evaluate data-name="UserGiveShipping"></evaluate>
+            </div>
+            <div class="mui-input-row">
+                <label>卖方检测报告</label>
+                <evaluate data-name="UserGiveTest"></evaluate>
+            </div>
+            <div class="mui-input-row">
+                <label>本地检测报告</label>
+                <evaluate data-name="UserGiveTestTarget"></evaluate>
+            </div>
+            <div class="mui-input-row" style="min-height: 80px;padding-left: 15px">
+                <textarea id="textarea" rows="5" placeholder="反馈建议或意见" ng-model="UserFeedback"></textarea>
+            </div>
+        </form>
+        <span id="star-five"></span>
+        <div class="tui-btngroup-fix">
+            <button type="button" class="tui-btn tui-btn-default" ui-sref="orderdetails({OrderCode:order.OrderCode})">查看详情</button>
+            <button type="button" class="tui-btn tui-btn-primary" ng-click="buyevaluate()">确定</button>
+        </div>
+    </div>
+</div>

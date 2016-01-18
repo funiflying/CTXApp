@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="css/carinfo.css">
 <style>
 	.dui-slider .mui-slider-item {}
 	
@@ -10,15 +9,14 @@
 		vertical-align: top;
 		white-space: normal;
 	}
-	
-	.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
-		border-bottom: none;
+	.mui-segmented-control-negative.mui-segmented-control-inverted .mui-control-item.mui-active{
+		border-bottom:2px solid #ff6a00;
 	}
 </style>
-<header class="mui-bar mui-bar-nav">
+<!--<header class="mui-bar mui-bar-nav">
 	<a class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</a>
-	<h1 class="mui-title">车辆信息</h1>
-</header>
+	<h1 class="mui-title">检测报告详细</h1>
+</header>-->
 <div class="mui-content dui-content">
 	<!--事故排查Begin-->
 	<div class="dui-title-w">
@@ -27,225 +25,248 @@
 		</a>
 	</div>
 	<div class="dui-title-desc">
-		车体骨架结构无变形、无扭曲、无更换、无烧焊、无褶皱；无火烧痕迹，无水泡痕迹。
+		<span ng-bind="treportdata.AccidentCheckMemo||'车体骨架结构无变形、无扭曲、无更换、无烧焊、无褶皱；无火烧痕迹，无水泡痕迹。'"></span>
 	</div>
-	<div class="mui-row">
-		<div class="dui-img-w mui-col-xs-12">
-			<img src="{{HOST}}/images/carbody-bg.png" width="350">
+	<div class="w">
+		<div class="mui-row">
+			<div class="dui-img-w mui-col-xs-12" style="text-align: center; padding-top: 20px; padding-bottom: 20px;">
+				<div class="carbody-bg">
+					<div style="position: absolute; top: 0px; left: 0px;"><img src="./images/carbody-bg.jpg" width="300"></div>
+					<div id="accident-16" class="gcc_16"></div>
+					<div id="accident-5" class="gcc_5"></div>
+					<div id="accident-9" class="gcc_9"></div>
+					<div id="accident-13" class="gcc_13"></div>
+					<div id="accident-14" class="gcc_14"></div>
+					<div id="accident-3" class="gcc_3"></div>
+					<div id="accident-1" class="gcc_1"></div>
+					<div id="accident-11" class="gcc_11"></div>
+					<div id="accident-7" class="gcc_7"></div>
+
+					<div id="accident-6" class="gcc_6"></div>
+					<div id="accident-10" class="gcc_10"></div>
+					<div id="accident-4" class="gcc_4"></div>
+					<div id="accident-15" class="gcc_15"></div>
+					<div id="accident-2" class="gcc_2"></div>
+					<div id="accident-12" class="gcc_12"></div>
+					<div id="accident-8" class="gcc_8"></div>
+					<div id="accident-17" class="gcc_17"></div>
+					<div id="accident-18" class="gcc_18"></div>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="dui-report-title">
-		<h5>1.排除重大碰撞</h5>
-	</div>
-	<div class="dui-report-box">
-		<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
-			<li class="mui-table-view-cell mui-col-xs-3">编号</li>
-			<li class="mui-table-view-cell mui-col-xs-6">检查项</li>
-			<li class="mui-table-view-cell mui-col-xs-3">结果</li>
+		<div class="dui-report-title">
+			<h5>1.排除重大碰撞</h5>
+		</div>
+		<div class="dui-report-box">
+			<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+				<li class="mui-table-view-cell mui-col-xs-3">编号</li>
+				<li class="mui-table-view-cell mui-col-xs-6">检查项</li>
+				<li class="mui-table-view-cell mui-col-xs-3">结果</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">1</li>
-			<li class="mui-table-view-cell mui-col-xs-6">左A柱</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-1" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">1</li>
+				<li class="mui-table-view-cell mui-col-xs-6">左A柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-1" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">2</li>
-			<li class="mui-table-view-cell mui-col-xs-6">右A柱</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-2" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">2</li>
+				<li class="mui-table-view-cell mui-col-xs-6">右A柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-2" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">3</li>
-			<li class="mui-table-view-cell mui-col-xs-6">左B柱</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-3" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">3</li>
+				<li class="mui-table-view-cell mui-col-xs-6">左B柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-3" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">4</li>
-			<li class="mui-table-view-cell mui-col-xs-6">右B柱</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-4" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">4</li>
+				<li class="mui-table-view-cell mui-col-xs-6">右B柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-4" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">5</li>
-			<li class="mui-table-view-cell mui-col-xs-6">左C柱</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-5" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">5</li>
+				<li class="mui-table-view-cell mui-col-xs-6">左C柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-5" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">6</li>
-			<li class="mui-table-view-cell mui-col-xs-6">右C柱</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-6" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">6</li>
+				<li class="mui-table-view-cell mui-col-xs-6">右C柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-6" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">7</li>
-			<li class="mui-table-view-cell mui-col-xs-6">左前纵梁</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-7" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">7</li>
+				<li class="mui-table-view-cell mui-col-xs-6">左前纵梁</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-7" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">8</li>
-			<li class="mui-table-view-cell mui-col-xs-6">右前纵梁</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-8" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">8</li>
+				<li class="mui-table-view-cell mui-col-xs-6">右前纵梁</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-8" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">9</li>
-			<li class="mui-table-view-cell mui-col-xs-6">左后纵梁</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-9" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">9</li>
+				<li class="mui-table-view-cell mui-col-xs-6">左后纵梁</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-9" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">10</li>
-			<li class="mui-table-view-cell mui-col-xs-6">右后纵梁</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-10" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">10</li>
+				<li class="mui-table-view-cell mui-col-xs-6">右后纵梁</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-10" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3 dui-cell">11</li>
-			<li class="mui-table-view-cell mui-col-xs-6 dui-cell">左前减震器
-				<br/>悬挂部位</li>
-			<li class="mui-table-view-cell mui-col-xs-3 dui-cell">
-				<i id="report-11" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">11</li>
+				<li class="mui-table-view-cell mui-col-xs-6 dui-cell">左前减震器
+					<br/>悬挂部位</li>
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">
+					<i id="report-11" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3 dui-cell">12</li>
-			<li class="mui-table-view-cell mui-col-xs-6 dui-cell">右前减震器
-				<br/>悬挂部位</li>
-			<li class="mui-table-view-cell mui-col-xs-3 dui-cell">
-				<i id="report-12" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">12</li>
+				<li class="mui-table-view-cell mui-col-xs-6 dui-cell">右前减震器
+					<br/>悬挂部位</li>
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">
+					<i id="report-12" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3 dui-cell">13</li>
-			<li class="mui-table-view-cell mui-col-xs-6 dui-cell">左后减震器
-				<br/>悬挂部位</li>
-			<li class="mui-table-view-cell mui-col-xs-3 dui-cell">
-				<i id="report-13" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">13</li>
+				<li class="mui-table-view-cell mui-col-xs-6 dui-cell">左后减震器
+					<br/>悬挂部位</li>
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">
+					<i id="report-13" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3 dui-cell">14</li>
-			<li class="mui-table-view-cell mui-col-xs-6 dui-cell">右后减震器
-				<br/>悬挂部位</li>
-			<li class="mui-table-view-cell mui-col-xs-3 dui-cell">
-				<i id="report-14" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">14</li>
+				<li class="mui-table-view-cell mui-col-xs-6 dui-cell">右后减震器
+					<br/>悬挂部位</li>
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">
+					<i id="report-14" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">15</li>
-			<li class="mui-table-view-cell mui-col-xs-6">车身底板</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-15" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">15</li>
+				<li class="mui-table-view-cell mui-col-xs-6">车身底板</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-15" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">16</li>
-			<li class="mui-table-view-cell mui-col-xs-6">后备箱底板</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-16" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">16</li>
+				<li class="mui-table-view-cell mui-col-xs-6">后备箱底板</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-16" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">17</li>
-			<li class="mui-table-view-cell mui-col-xs-6">防火墙</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-17" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-3">17</li>
+				<li class="mui-table-view-cell mui-col-xs-6">防火墙</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-17" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-3">18</li>
-			<li class="mui-table-view-cell mui-col-xs-6">水箱支柱</li>
-			<li class="mui-table-view-cell mui-col-xs-3">
-				<i id="report-18" class="report-check-yes"></i>
-			</li>
-		</ul>
-	</div>
+				<li class="mui-table-view-cell mui-col-xs-3">18</li>
+				<li class="mui-table-view-cell mui-col-xs-6">水箱支柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-18" class="report-check-yes"></i>
+				</li>
+			</ul>
+		</div>
 
-	<div class="dui-report-title">
-		<h5>2.排除火烧</h5>
-	</div>
-	<div class="dui-report-box">
-		<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
-			<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
-			<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+		<div class="dui-report-title">
+			<h5>2.排除火烧</h5>
+		</div>
+		<div class="dui-report-box">
+			<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+				<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+				<li class="mui-table-view-cell mui-col-xs-5">结果</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7 dui-cell">发动机线束及
-				<br/>车身线束</li>
-			<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
-				<i id="report-29" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">发动机线束及
+					<br/>车身线束</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-29" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7 dui-cell">发动机舱、车厢
-				<br/>内或尾箱内</li>
-			<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
-				<i id="report-30" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">发动机舱、车厢
+					<br/>内或尾箱内</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-30" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7 dui-cell">车身各夹层内</li>
-			<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
-				<i id="report-31" class="report-check-yes"></i>
-			</li>
-		</ul>
-	</div>
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">车身各夹层内</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-31" class="report-check-yes"></i>
+				</li>
+			</ul>
+		</div>
 
-	<div class="dui-report-title">
-		<h5>2.排除泡水</h5>
-	</div>
-	<div class="dui-report-box">
-		<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
-			<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
-			<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+		<div class="dui-report-title">
+			<h5>2.排除泡水</h5>
+		</div>
+		<div class="dui-report-box">
+			<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+				<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+				<li class="mui-table-view-cell mui-col-xs-5">结果</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7 dui-cell">发动机线束
-				<br>及橡胶制品</li>
-			<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
-				<i id="report-19" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">发动机线束
+					<br>及橡胶制品</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-19" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7 dui-cell">后备箱边角
-				<br>及备胎槽</li>
-			<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
-				<i id="report-20" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">后备箱边角
+					<br>及备胎槽</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-20" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7">座椅滑轨内</li>
-			<li class="mui-table-view-cell mui-col-xs-5">
-				<i id="report-21" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-7">座椅滑轨内</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-21" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7">后排座椅坐垫底部</li>
-			<li class="mui-table-view-cell mui-col-xs-5">
-				<i id="report-22" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-7">后排座椅坐垫底部</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-22" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7">安全带底部</li>
-			<li class="mui-table-view-cell mui-col-xs-5">
-				<i id="report-23" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-7">安全带底部</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-23" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7">全车地胶地毯</li>
-			<li class="mui-table-view-cell mui-col-xs-5">
-				<i id="report-24" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-7">全车地胶地毯</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-24" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7">音响喇叭底部</li>
-			<li class="mui-table-view-cell mui-col-xs-5">
-				<i id="report-25" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-7">音响喇叭底部</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-25" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7">烟灰缸底座</li>
-			<li class="mui-table-view-cell mui-col-xs-5">
-				<i id="report-26" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-7">烟灰缸底座</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-26" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7 dui-cell">悬挂组件的固定
-				<br>螺丝及刹车挡板</li>
-			<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
-				<i id="report-27" class="report-check-yes"></i>
-			</li>
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">悬挂组件的固定
+					<br>螺丝及刹车挡板</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-27" class="report-check-yes"></i>
+				</li>
 
-			<li class="mui-table-view-cell mui-col-xs-7 dui-cell">车底板有一层隔
-				<br>热和隔音的棉毡</li>
-			<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
-				<i id="report-28" class="report-check-yes"></i>
-			</li>
-		</ul>
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">车底板有一层隔
+					<br>热和隔音的棉毡</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-28" class="report-check-yes"></i>
+				</li>
+			</ul>
+		</div>
 	</div>
 
 	<!--事故排查End-->
@@ -255,9 +276,9 @@
 			<div class="dui-title-text">车辆安全</div>
 		</a>
 	</div>
-	<div class="w">
+	<div class="w" id="safe_content">
 		<div class="dui-title-desc">
-			车体骨架结构无变形、无扭曲、无更换、无烧焊、无褶皱；无火烧痕迹，无水泡痕迹。
+			<span ng-bind="treportdata.SecurityCheckMemo||'经检测，胎纹深度、刹车片厚度、液位均正常。'"></span>
 		</div>
 		<div class="w dui-safety">
 			<div class="vehicle-safety-wrap">
@@ -294,10 +315,10 @@
 					</div>
 				</div>
 				<div class="vehicle-safety-tyre">
-					<span style="position: absolute; left: 70px;">左前轮</span>
-					<span style="position: absolute; left: 125px;">左后轮</span>
-					<span style="position: absolute; left: 182px;">右前轮</span>
-					<span style="position: absolute; left: 238px;">右后轮</span>
+					<span style="position: absolute; left: 12px;">左前轮</span>
+					<span style="position: absolute; left: 67px;">左后轮</span>
+					<span style="position: absolute; left: 124px;">右前轮</span>
+					<span style="position: absolute; left: 180px;">右后轮</span>
 				</div>
 			</div>
 		</div>
@@ -335,10 +356,10 @@
 					</div>
 				</div>
 				<div class="vehicle-safety-tyre">
-					<span style="position: absolute; left: 70px;">左前轮</span>
-					<span style="position: absolute; left: 125px;">左后轮</span>
-					<span style="position: absolute; left: 182px;">右前轮</span>
-					<span style="position: absolute; left: 238px;">右后轮</span>
+					<span style="position: absolute; left: 12px;">左前轮</span>
+					<span style="position: absolute; left: 67px;">左后轮</span>
+					<span style="position: absolute; left: 124px;">右前轮</span>
+					<span style="position: absolute; left: 180px;">右后轮</span>
 				</div>
 			</div>
 		</div>
@@ -386,17 +407,16 @@
 					</div>
 				</div>
 				<div class="vehicle-safety-tyre">
-					<span style="position: absolute; left: 70px;">制动油</span>
-					<span style="position: absolute; left: 121px;">机油</span>
-					<span style="position: absolute; left: 160px;">助力油</span>
-					<span style="position: absolute; left: 205px;">变速箱</span>
-					<span style="position: absolute; left: 250px;">防冻液</span>
+					<span style="position: absolute; left: 12px;">制动油</span>
+					<span style="position: absolute; left: 63px;">机油</span>
+					<span style="position: absolute; left: 102px;">助力油</span>
+					<span style="position: absolute; left: 147px;">变速箱</span>
+					<span style="position: absolute; left: 192px;">防冻液</span>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!--车辆安全End-->
-	<div class="clear"></div>
 
 	<!--外观内饰Begin-->
 	<div class="dui-title-w">
@@ -405,10 +425,59 @@
 		</a>
 	</div>
 	<div class="dui-title-desc">
-		车体骨架结构无变形、无扭曲、无更换、无烧焊、无褶皱；无火烧痕迹，无水泡痕迹。
+		<span ng-bind="treportdata.AICheckMemo||'经检测，无钣金修复、无刮擦，外观一切正常；灯光设备正常；内饰整洁干净，无异味。其它无更换！'"></span>
+	</div>
+
+	<div style="display: inline-block; background: #fff; width: 100%; height: auto;">
+		<div style="position: relative; width: 100%; padding-left: 10px; height: 50px; overflow: hidden;">
+			<p>
+				<span class="car-interior-flag"><i style="background: #dddddd;"></i>原厂漆或轻微划痕修复</span>
+				<span class="car-interior-flag"><i style="background: #b2cce5;"></i>钣金修复</span>
+				<span class="car-interior-flag"><i style="background: #ffb2b2;"></i>覆盖件更换</span>
+				<span class="car-interior-flag"><i style="background: url(./images/guacha_line.png) no-repeat center; widht:12px; height:15px; overflow: hidden;"></i>刮擦</span>
+				<span class="car-interior-flag"><i style="background: url(./images/pengzhuang_line.png) no-repeat center; widht:12px; height:15px; overflow: hidden;"></i>碰撞</span>
+			</p>
+		</div>
+		<div class="car-interior-wrap">
+			<div id="AIcheck_64" class="carAIbg carAI_W_64"></div>
+			<div id="AIcheck_65" class="carAIbg carAI_W_65"></div>
+			<div id="AIcheck_66" class="carAIbg carAI_W_66"></div>
+			<div id="AIcheck_67" class="carAIbg carAI_W_67"></div>
+			<div id="AIcheck_68" class="carAIbg carAI_W_68"></div>
+			<div id="AIcheck_69" class="carAIbg carAI_W_69"></div>
+			<div id="AIcheck_70" class="carAIbg carAI_W_70"></div>
+			<div id="AIcheck_71" class="carAIbg carAI_W_71"></div>
+			<div id="AIcheck_72" class="carAIbg carAI_W_72"></div>
+			<div id="AIcheck_73" class="carAIbg carAI_W_73"></div>
+			<div id="AIcheck_74" class="carAIbg carAI_W_74"></div>
+			<div id="AIcheck_75" class="carAIbg carAI_W_75"></div>
+			<div id="AIcheck_76" class="carAIbg carAI_W_76"></div>
+
+			<div class="e_main" id="guacha"></div>
+		</div>
+	</div>
+
+	<div style="display: inline-block; background: #fff; width: 100%; height: auto;">
+		<div style="position: relative; width: 100%; padding-left: 10px; padding-top: 10px; height: 30px; overflow: hidden;">
+			<p>
+				<span class="car-interior-flag" style="float:left;"><i style="background: #b2cce5;"></i>脏污</span>
+				<span class="car-interior-flag" style="float:left;"><i style="background: #ffb2b2;"></i>破损</span>
+			</p>
+		</div>
+		<div class="car-neishi-wrap">
+			<div id="AIcheck_79" class="carNSbg carNS_W_79"></div>
+			<div id="AIcheck_80" class="carNSbg carNS_W_80"></div>
+			<div id="AIcheck_81" class="carNSbg carNS_W_81"></div>
+			<div id="AIcheck_82" class="carNSbg carNS_W_82"></div>
+			<div id="AIcheck_83" class="carNSbg carNS_W_83"></div>
+			<div id="AIcheck_84" class="carNSbg carNS_W_84"></div>
+			<div id="AIcheck_85" class="carNSbg carNS_W_85"></div>
+			<div id="AIcheck_86" class="carNSbg carNS_W_86"></div>
+			<div id="AIcheck_87" class="carNSbg carNS_W_87"></div>
+		</div>
 	</div>
 	<!--外观内饰End-->
-	<div class="clearfix w"></div>
+
 	<!--驾驶检测Begin-->
 	<div class="dui-title-w">
 		<a class="dui-title-right" href="#/viewreport">
@@ -416,146 +485,144 @@
 		</a>
 	</div>
 	<div class="dui-title-desc">
-		车体骨架结构无变形、无扭曲、无更换、无烧焊、无褶皱；无火烧痕迹，无水泡痕迹。
+		<span ng-bind="treportdata.ControlCheckMemo||'经试驾员专业测试，发动机、变速箱正常，无怠速抖动，变速时无闯档顿挫，转向无乏力感。'"></span>
 	</div>
-	<div class="w">
-		<div id="slider" class="mui-slider">
-			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-				<a class="mui-control-item" href="#item_qidong">启动</a>
-				<a class="mui-control-item" href="#item_qibu">起步</a>
-				<a class="mui-control-item" href="#item_jiasu">加速</a>
-				<a class="mui-control-item" href="#item_yunsu">匀速</a>
-				<a class="mui-control-item" href="#item_jiansu">减速</a>
+	<div class="w mui-content">
+		<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-negative">
+			<a class="mui-control-item mui-active" href="#item_qidong">启动</a>
+			<a class="mui-control-item" href="#item_qibu">起步</a>
+			<a class="mui-control-item" href="#item_jiasu">加速</a>
+			<a class="mui-control-item" href="#item_yunsu">匀速</a>
+			<a class="mui-control-item" href="#item_jiansu">减速</a>
+		</div>
+		<div class="dui-slider">
+			<div id="item_qidong" class="dui-slider-item mui-control-content mui-active">
+				<div class="dui-report-box">
+					<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+						<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+						<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-47" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">制动系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-48" class="report-check-yes"></i>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div id="sliderProgressBar" class="mui-slider-progress-bar" style="width: 20%; position: relative; min-height: 1px;"></div>
-			<div class="mui-slider-group dui-slider">
-				<div id="item_qidong" class="mui-slider-item dui-slider-item mui-control-content mui-active">
-					<div class="dui-report-box">
-						<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
-							<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
-							<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+			<div id="item_qibu" class="dui-slider-item mui-control-content">
+				<div class="dui-report-box">
+					<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+						<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+						<li class="mui-table-view-cell mui-col-xs-5">结果</li>
 
-							<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-47" class="report-check-yes"></i>
-							</li>
+						<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-49" class="report-check-yes"></i>
+						</li>
 
-							<li class="mui-table-view-cell mui-col-xs-7">制动系统</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-48" class="report-check-yes"></i>
-							</li>
-						</ul>
-					</div>
+						<li class="mui-table-view-cell mui-col-xs-7">变速箱</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-50" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">悬挂系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-51" class="report-check-yes"></i>
+						</li>
+					</ul>
 				</div>
-				<div id="item_qibu" class="mui-slider-item dui-slider-item mui-control-content">
-					<div class="dui-report-box">
-						<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
-							<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
-							<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+			</div>
+			<div id="item_jiasu" class="dui-slider-item mui-control-content">
+				<div class="dui-report-box">
+					<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+						<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+						<li class="mui-table-view-cell mui-col-xs-5">结果</li>
 
-							<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-49" class="report-check-yes"></i>
-							</li>
+						<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-52" class="report-check-yes"></i>
+						</li>
 
-							<li class="mui-table-view-cell mui-col-xs-7">变速箱</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-50" class="report-check-yes"></i>
-							</li>
+						<li class="mui-table-view-cell mui-col-xs-7">变速箱</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-53" class="report-check-yes"></i>
+						</li>
 
-							<li class="mui-table-view-cell mui-col-xs-7">悬挂系统</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-51" class="report-check-yes"></i>
-							</li>
-						</ul>
-					</div>
+						<li class="mui-table-view-cell mui-col-xs-7">传动系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-54" class="report-check-yes"></i>
+						</li>
+					</ul>
 				</div>
-				<div id="item_jiasu" class="mui-slider-item dui-slider-item mui-control-content">
-					<div class="dui-report-box">
-						<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
-							<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
-							<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+			</div>
+			<div id="item_yunsu" class="dui-slider-item mui-control-content">
+				<div class="dui-report-box">
+					<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+						<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+						<li class="mui-table-view-cell mui-col-xs-5">结果</li>
 
-							<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-52" class="report-check-yes"></i>
-							</li>
+						<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-55" class="report-check-yes"></i>
+						</li>
 
-							<li class="mui-table-view-cell mui-col-xs-7">变速箱</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-53" class="report-check-yes"></i>
-							</li>
+						<li class="mui-table-view-cell mui-col-xs-7">变速箱</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-56" class="report-check-yes"></i>
+						</li>
 
-							<li class="mui-table-view-cell mui-col-xs-7">传动系统</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-54" class="report-check-yes"></i>
-							</li>
-						</ul>
-					</div>
+						<li class="mui-table-view-cell mui-col-xs-7">悬挂系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-57" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">转向系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-58" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">制动系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-59" class="report-check-yes"></i>
+						</li>
+					</ul>
 				</div>
-				<div id="item_yunsu" class="mui-slider-item dui-slider-item mui-control-content">
-					<div class="dui-report-box">
-						<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
-							<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
-							<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+			</div>
+			<div id="item_jiansu" class="dui-slider-item mui-control-content">
+				<div class="dui-report-box">
+					<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+						<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+						<li class="mui-table-view-cell mui-col-xs-5">结果</li>
 
-							<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-55" class="report-check-yes"></i>
-							</li>
+						<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-60" class="report-check-yes"></i>
+						</li>
 
-							<li class="mui-table-view-cell mui-col-xs-7">变速箱</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-56" class="report-check-yes"></i>
-							</li>
+						<li class="mui-table-view-cell mui-col-xs-7">变速箱</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-61" class="report-check-yes"></i>
+						</li>
 
-							<li class="mui-table-view-cell mui-col-xs-7">悬挂系统</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-57" class="report-check-yes"></i>
-							</li>
+						<li class="mui-table-view-cell mui-col-xs-7">传动系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-62" class="report-check-yes"></i>
+						</li>
 
-							<li class="mui-table-view-cell mui-col-xs-7">转向系统</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-58" class="report-check-yes"></i>
-							</li>
-
-							<li class="mui-table-view-cell mui-col-xs-7">制动系统</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-59" class="report-check-yes"></i>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div id="item_jiansu" class="mui-slider-item dui-slider-item mui-control-content">
-					<div class="dui-report-box">
-						<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
-							<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
-							<li class="mui-table-view-cell mui-col-xs-5">结果</li>
-
-							<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-60" class="report-check-yes"></i>
-							</li>
-
-							<li class="mui-table-view-cell mui-col-xs-7">变速箱</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-61" class="report-check-yes"></i>
-							</li>
-
-							<li class="mui-table-view-cell mui-col-xs-7">传动系统</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-62" class="report-check-yes"></i>
-							</li>
-
-							<li class="mui-table-view-cell mui-col-xs-7">悬挂系统</li>
-							<li class="mui-table-view-cell mui-col-xs-5">
-								<i id="report-63" class="report-check-yes"></i>
-							</li>
-						</ul>
-					</div>
+						<li class="mui-table-view-cell mui-col-xs-7">悬挂系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-63" class="report-check-yes"></i>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
+
 	</div>
 	<!--驾驶检测End-->
 
@@ -566,7 +633,7 @@
 		</a>
 	</div>
 	<div class="dui-title-desc">
-		车体骨架结构无变形、无扭曲、无更换、无烧焊、无褶皱；无火烧痕迹，无水泡痕迹。
+		<span ng-bind="treportdata.DeviceCheckMemo||'经检测，安全系统正常、电子设备正常、发动机舱正常！'"></span>
 	</div>
 	<div class="w">
 		<div class="dui-report-box">
@@ -575,7 +642,8 @@
 					<h6>7</h6><em>项</em></li>
 				<li class="dui-device-li mui-col-xs-7">
 					<p class="p1">安全系统检测</p>
-					<p class="p2">全部合格</p>
+					<p class="p2" ng-if="report_tj.aqzc == report_tj.aqt">全部合格</p>
+					<p class="p2" style="color: #FF5053;" ng-if="report_tj.aqzc != report_tj.aqt">{{report_tj.aqwt}}项异常</p>
 				</li>
 
 				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">安全带系统</li>
@@ -621,7 +689,8 @@
 					<h6>17</h6><em>项</em></li>
 				<li class="dui-device-li mui-col-xs-7">
 					<p class="p1">电子设备检测</p>
-					<p class="p2">全部合格</p>
+					<p class="p2" ng-if="report_tj.dzzc == report_tj.dzt">全部合格</p>
+					<p class="p2" style="color: #FF5053;" ng-if="report_tj.dzzc != report_tj.dzt">{{report_tj.dzwt}}项异常</p>
 				</li>
 
 				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">车灯系统</li>
@@ -717,7 +786,8 @@
 					<h6>8</h6><em>项</em></li>
 				<li class="dui-device-li mui-col-xs-7">
 					<p class="p1">发动机舱</p>
-					<p class="p2">全部合格</p>
+					<p class="p2" ng-if="report_tj.fdzc == report_tj.fdt">全部合格</p>
+					<p class="p2" style="color: #FF5053;" ng-if="report_tj.fdzc != report_tj.fdt">{{report_tj.fdwt}}项异常</p>
 				</li>
 
 				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">缸盖外有无机油渗入</li>

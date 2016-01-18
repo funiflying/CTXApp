@@ -1,8 +1,8 @@
 <div ng-include="'partials/nav.html'"></div>
 <div class="tui-content" >
     <header class="mui-bar mui-bar-nav tui-bar-nav">
-        <button class="mui-btn mui-btn-link mui-btn-nav mui-pull-left tui-nav-location">
-            <i class="mui-icon mui-icon-location"></i>厦门
+        <button class="mui-btn mui-btn-link mui-btn-nav mui-pull-left tui-nav-location"  select-city>
+           <i class="mui-icon mui-icon-location"></i><i ng-bind="CityName"></i>
         </button>
         <p class="mui-btn mui-btn-link mui-btn-nav mui-pull-right tui-nav-search-group" ui-sref="searchcar">
             <i class="mui-icon mui-icon-search"></i>搜索好车
@@ -11,7 +11,7 @@
     </header>
     <!--slider-->
         <div id="slider" class="mui-slider">
-            <div class="mui-slider-group">
+            <div class="mui-slider-group" ui-sref="searchcar">
                 <div class="mui-slider-item">
                     <a href="">
                         <img src="../images/index-1.png">
@@ -164,29 +164,34 @@
 
         <h5 class="mui-content-padded tui-carlist-title">猜你喜欢</h5>
         <!--media list-->
-        <ul class="mui-table-view mui-grid-view">
+        <ul class="mui-table-view mui-grid-view" ng-init="getList()">
             <li class="mui-table-view-cell mui-media mui-col-xs-6"  ng-repeat="obj in carlist">
                 <a  ui-sref="carinfo({CarNo:obj.CarNo})">
-                    <div class="tui-car-cover" data-city="{{obj.CityName}}">
-                        <img class="mui-media-object" ng-src="{{HOST+obj.HomePicID}}">
+                    <div  ng-class="{true:'tui-car-cover tui-order-trade',false:'tui-car-cover'}[obj.CarFlag==1]" data-city="{{obj.CityName}}">
+                        <img class="mui-media-object" ng-src="{{obj.HomePicID}}">
+                        <span class="tui-report-count" ng-if="obj.BuyIntentionCount>0"><i ng-bind="obj.BuyIntentionCount"></i>人评估</span>
+                        <span class="tui-ctxrenzhen" ng-if="obj.CheckFlag == 4"></span>
                     </div>
                     <div class="tui-product-title" ng-bind="obj.SpecName"></div>
                     <div class="tui-product-meta">
                         <i ng-bind="obj.InitialDate|DateTimeFormat:'yyyy年MM月'"></i>上牌| 行驶<i ng-bind="obj.Mileage"></i>万公里
                     </div>
-                    <div class="tui-product-sale">
-                        <i ng-bind="obj.Price/10000|currency:'￥'"></i>万
+                    <div class="tui-product-price">
+                        <div class="tui-product-sale">
+                            <i ng-bind="obj.Price/10000|currency:''"></i>万
+                        </div>
+                        <div class="tui-product-detection" ng-if="obj.ReportCount >0">检</div>
+                        <div class="tui-tag-reduce" ng-if="WholesalePrice"><b ng-bind="obj.WholesalePrice/10000|currency:'￥'"></b>万<br>同行价</div>
                     </div>
+                   
                 </a>
             </li>
             <li class="mui-table-view-cell mui-col-xs-12 tui-filter-item" style="border-top:1px solid #eee ">
                 <a  ui-sref="carlist" class="tui-mod-more">查看全部车辆 &gt;&gt; </a>
             </li>
         </ul>
-        <h5 class="mui-content-padded mui-hotline-telephone">
-            咨询电话 400-0732-777
-        </h5>
+
         <!--end media list-->
     </div>
-
+<city class="tui-swipe-container"></city>
 

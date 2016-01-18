@@ -290,4 +290,99 @@ angular.module("CTXAppFilters",[]).filter("DateTimeFormat",function(){
 		return descr;
 	}
 
-})
+}).filter('ColorFilter', function() {
+	//车辆颜色
+	return function(status) {
+		var flag = "";
+		status=parseInt(status)
+		switch (status) {
+			case 0:
+				flag = "未知";
+				break;
+			case 1:
+				flag = "黑色";
+				break;
+			case 2:
+				flag = "白色";
+				break;
+			case 3:
+				flag = "银灰色";
+				break;
+			case 4:
+				flag = "深灰色";
+				break;
+			case "5":
+				flag = "红色"
+				break;
+			case 6:
+				flag = "橙色"
+				break;
+			case 7:
+				flag = "绿色"
+				break;
+			case 8:
+				flag = "蓝色"
+				break;
+			case 9:
+				flag = "咖啡色"
+				break;
+			case 10:
+				flag = "紫色"
+				break;
+			case 11:
+				flag = "香槟色"
+				break;
+			case 12:
+				flag = "多彩色"
+				break;
+			case 3:
+				flag = "黄色"
+				break;
+			case 14:
+				flag = "其它"
+				break;
+			default:
+				break;
+				flag = "未知";
+		}
+		//console.log(flag);
+		return flag;
+	}
+}).filter('ApprOrderStatus', function() {
+		//评估检测状态
+		return function(status) {
+			status = status + ""
+			var descr = "";
+			switch (status) {
+				case "0":
+					descr = "未付款";
+					break;
+				case "1":
+					descr = "已付款待接单";
+					break;
+				case "2":
+					descr = "待评估";
+					break;
+				case "3":
+					descr = "已评估待评估师评价";
+					break;
+				case "4":
+					descr = "评估师已评价待用户评价";
+					break;
+				case "5":
+					descr = "客户已评价";
+					break;
+				case "6":
+					descr = "双方评价完成";
+					break;
+				case "255":
+					descr = "订单完成";
+					break;
+				default:
+					descr = "未知：" + status;
+					break;
+
+			}
+			return descr;
+		}
+	})

@@ -1,0 +1,135 @@
+<style>
+	.dui-evalist-table .mui-table-view-cell:after {
+		left: 0px;
+	}
+	
+	.dui-evalist-table .mui-table-view-cell {
+		padding: 10px !important;
+	}
+	
+	.dui-evalist-table-cell {
+		padding: 0px;
+		font-size: 12px;
+		background: #fcfcfc;
+		float: left;
+		text-align: center;
+		list-style: none;
+	}
+	
+	.dui-appr-td {
+		float: left;
+	}
+	
+	.dui-appr-td p {
+		text-align: left;
+		font-size: 12px;
+		padding: 0px 0px 3px 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	
+	.dui-appr-td .p1 {
+		margin-left: -5px;
+		font-size: 14px;
+	}
+	
+	.dui-appr-td .span1 {
+		float: left;
+	}
+	
+	.dui-appr-td .span2 {
+		float: right;
+	}
+	
+	.dui-appr-photo {
+		width: 75px;
+		height: 80px;
+		overflow: hidden;
+		text-align: center;
+		border-radius: 50%;
+	}
+	
+	.dui-appr-photo img {
+		width: 75px;
+		height: auto;
+	}
+	.dui-vip-table{
+		padding: 0px 10px 20px 10px;
+		background-color: #fff;
+	}
+	.dui-vip-table .dui-vip-title-w{
+		line-height: 34px;
+		border-bottom: 1px solid #dedede;
+		padding-top: 20px;
+	}
+	.dui-vip-table .dui-vip-title-w .dui-vip-title{
+		background-color: #f4f6f9;
+		height:auto;
+		display: inline-block;
+		margin: 0px;
+		padding: 10px;
+	}
+	.mui-bar .mui-btn-link{
+		color: #333;
+	}
+</style>
+
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</a>
+	<h1 class="mui-title">诚信信息</h1>
+</header>
+
+<div class="mui-content">
+	<div class="mui-table-view dui-evalist-table">
+		<div class="mui-table-view-cell">
+			<div class="mui-col-xs-3 dui-appr-td">
+				<div class="dui-appr-photo"><img ng-src="{{datainfo.HeadImage}}" src="./images/detection-photo-default.gif"></div>
+			</div>
+			<div class="mui-col-xs-1 dui-appr-td"></div>
+			<div class="mui-col-xs-8 dui-appr-td">
+				<p class="p1">
+					【<span ng-bind="datainfo.UserName||datainfo.CompanyName"></span>】<span class="mui-badge mui-badge-success" ng-if="datainfo.CompanyName">联盟商</span><span class="mui-badge mui-badge-success" ng-if="datainfo.UserName">个人</span>
+				</p>
+				<p>联系人：<span ng-bind="datainfo.Charger"></span></p>
+				<p>电　话：<span ng-bind="datainfo.Phone||datainfo.Contact"></span></p>
+				<p>城　市：<span ng-bind="datainfo.CityName||'未知'"></span></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="dui-vip-table">
+		<div class="mui-table-view dui-evalist-table">
+			<div class="dui-vip-title-w">
+				<div class="mui-col-xs-12"><h6 class="dui-vip-title">诚信档案详情</h6><span style="font-size: 12px; float: right; color: #D5D5D5" ng-bind="'更新时间：'+(datainfo.UpdateTime|DateTimeFormat:'yyyy年M月d日')"></span></div>
+			</div>
+			<div class="mui-table-view-cell">
+				<div class="mui-col-xs-12 dui-appr-td">注册时间：<span ng-bind="datainfo.RegisterTime|DateTimeFormat:'yyyy年M月d日'"></span></div>
+			</div>
+			<div class="mui-table-view-cell">
+				<div class="mui-col-xs-6 dui-appr-td">卖车成交次数：<span ng-bind="datainfo.SellCarCount||0"></span>次</div>
+				<div class="mui-col-xs-6 dui-appr-td">购车成交次数：<span ng-bind="datainfo.BuyCarCount||0"></span>次</div>
+			</div>
+
+			<div class="mui-table-view-cell">
+				<div class="mui-col-xs-6 dui-appr-td">卖车好评率：<span ng-bind="datainfo.SellCarGoodPerson||100"></span>%</div>
+				<div class="mui-col-xs-6 dui-appr-td">购车好评率：<span ng-bind="datainfo.BuyCarGoodPerson||100"></span>%</div>
+			</div>
+
+			<div class="mui-table-view-cell">
+				<div class="mui-col-xs-6 dui-appr-td">卖车悔单次数：<span ng-bind="datainfo.SellCarRegretCount||0"></span>次</div>
+				<div class="mui-col-xs-6 dui-appr-td">购车悔单次数：<span ng-bind="datainfo.BuyCarRegretCount||0"></span>次</div>
+			</div>
+
+			<div class="mui-table-view-cell">
+				<div class="mui-col-xs-6 dui-appr-td">卖车跳单次数：<span ng-bind="datainfo.SellCarSkipCount||0"></span>次</div>
+				<div class="mui-col-xs-6 dui-appr-td">委托评估次数：<span ng-bind="datainfo.EntrustTestCount||0"></span>次</div>
+			</div>
+
+			<div class="mui-table-view-cell">
+				<div class="mui-col-xs-6 dui-appr-td">委托悔单次数：<span ng-bind="datainfo.EntrustRegretCount||0"></span>次</div>
+				<div class="mui-col-xs-6 dui-appr-td">委托好评率：<span ng-bind="datainfo.EntrustGoodPerson||100"></span>%</div>
+			</div>
+		</div>
+	</div>
+</div>

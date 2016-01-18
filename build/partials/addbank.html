@@ -1,0 +1,31 @@
+<div class="tui-content">
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title">编辑银行卡</h1>
+    </header>
+    <div class="tui-settings mui-fullscreen">
+        <div class="tui-settings-text">
+            银行卡用于您提现等资金操作
+        </div>
+        <div class="tui-blank"></div>
+        <form class="mui-input-group" name="settingsForm" novalidate>
+            <div class="mui-input-row">
+                <label>持卡人</label>
+                <input type="text" class="mui-input-clear" name="UserName" required ng-model="bankinfo.UserName">
+            </div>
+            <div class="mui-input-row" select-bank>
+                <label>银行名称</label>
+                <p class="tui-bank-text" ng-bind="bankinfo.RegisterBank"></p>
+                <span class="mui-navigate-right"></span>
+            </div>
+            <div class="mui-input-row">
+                <label>银行卡号</label>
+                <input type="number" class="mui-input-clear" name="RegisterBankCode" required ng-model="bankinfo.RegisterBankCode">
+            </div>
+        </form>
+        <div class="tui-settings-tip" ng-bind="errmsg"></div>
+    </div>
+    <banklist class="tui-swipe-container"></banklist>
+</div>
+<div class="tui-btngroup-fix">
+    <button type="button" class="tui-btn tui-btn-primary" ng-click="addBank()">确定</button>
+</div>

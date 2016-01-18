@@ -1,0 +1,30 @@
+<div class="tui-content">
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title">提现申请</h1>
+    </header>
+    <div class="tui-settings mui-fullscreen">
+        <div class="tui-blank"></div>
+        <form class="mui-input-group" name="settingsForm" novalidate>
+            <div class="mui-input-row" style="height:auto">
+                <label>收款银行</label>
+                <p class="tui-bank-text" ng-bind="alliance.RegisterBank+alliance.RegisterBankCode||USER.RegisterBank+USER.RegisterBankCode"></p>
+            </div>
+            <div class="mui-input-row">
+                <label>当前余额</label>
+                <input type="text" name="" required value="{{alliance.Balance||USER.Balance|currency:'￥'}}" readonly="readonly">
+            </div>
+            <div class="mui-input-row">
+                <label>提现金额</label>
+                <input type="number" class="mui-input-clear" required ng-model="account.PayMoney">
+            </div>
+            <div class="mui-input-row">
+                <label>支付密码</label>
+                <input type="password" class="mui-input-clear" required ng-model="account.PayPwd">
+            </div>
+        </form>
+        <div class="tui-settings-tip" ng-bind="errmsg"></div>
+    </div>
+</div>
+<div class="tui-btngroup-fix">
+    <button type="button" class="tui-btn tui-btn-primary" ng-click="withdraw()">确定</button>
+</div>

@@ -1,0 +1,59 @@
+<div class="tui-content">
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title">车源下架</h1>
+    </header>
+    <ul class="tui-order" ng-init="getCar()">
+        <li class="tui-order-item">
+            <section class="tui-order-header">
+                <span class="mui-pull-left">发布时间:<i ng-bind="car.PublishTime|DateTimeFormat:'yyyy年MM月dd日'"></i></span>
+                <span class="mui-pull-right">
+                    <span class="tui-font-green" ng-if="car.CarFlag!=0" ng-bind="car.CarFlag|CarStatus"></span>
+                    <span class="tui-font-green" ng-if="car.CarFlag==0" ng-bind="car.CheckFlag|CarCheck"></span>
+                </span>
+            </section>
+            <section class="tui-order-info" ui-sref="carinfo({CarNo:car.CarNo})">
+                <div class="tui-order-icon" data-car="{{car.CarNo}}">
+                    <img ng-src="{{car.HomePicID}}" alt="">
+                </div>
+                <section class="tui-order-descr">
+                    <h5 class="tui-car-name mui-ellipsis-2"><i ng-bind="car.BrandName+car.SpecName"></i></h5>
+                    <p class="tui-car-deploy"><i ng-bind="car.InitialDate|DateTimeFormat:'yyyy年MM月'"></i>上牌 <i ng-bind="car.Mileage"></i>万公里</p>
+                    <p class="tui-car-sellprice"><span class="mui-pull-left tui-font-orange"><strong class="tui-car-price" ng-bind="car.Price/10000|currency:'￥'"></strong>万 </span><span class="mui-pull-right tui-car-newprice" ng-if="car.WholesalePrice>0">同行价 <i ng-bind="car.WholesalePrice/10000|currency:'￥'"></i>万</span></p>
+                </section>
+            </section>
+            <section class="tui-order-operate">
+
+            </section>
+        </li>
+    </ul>
+    <div class="tui-order-form">
+        <h5 class="tui-order-header">车源下架</h5>
+        <form name="carForm" class="mui-input-group">
+            <div class="mui-input-row">
+                <label class="tui-form-required">下架原因</label>
+                <select name="" ng-model="soldout.RevokeMemo" required>
+                    <option value="">请选择</option>
+                    <option value="线下售出">线下售出</option>
+                    <option value="暂缓出售">暂缓出售</option>
+                    <option value="其它原因">其它原因</option>
+                </select>
+            </div>
+            <div class="mui-input-row">
+                <label class="tui-form-required">新车主姓名</label>
+                <input type="text" class="mui-input-clear" ng-model="soldout.OwnerName" required>
+            </div>
+            <div class="mui-input-row">
+                <label class="tui-form-required">新车主电话</label>
+                <input type="tel" class="mui-input-clear" ng-model="soldout.OwnerPhone" required maxlength="10">
+            </div>
+            <div class="mui-input-row">
+                <label>新车主地址</label>
+                <input type="text" class="mui-input-clear" ng-model="soldout.OwnerAddress">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="tui-btngroup-fix">
+    <button type="button" class="tui-btn tui-btn-default" ui-sref="carinfo({CarNo:car.CarNo})">查看详情</button>
+    <button type="button" class="tui-btn tui-btn-primary" ng-click="soldout()">确定</button>
+</div>

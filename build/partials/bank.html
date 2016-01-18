@@ -1,0 +1,58 @@
+<div class="tui-content">
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title">我的银行卡</h1>
+        <button class="mui-btn mui-btn-link mui-btn-nav mui-pull-right" ui-sref="addbank">
+            <i class="mui-icon mui-icon-plus"></i>
+        </button>
+    </header>
+    <div class="tui-bank">
+        <div class="tui-bank-title">
+            <div class="tui-bank-name" ng-switch="USER.RegisterBank">
+                <span class="bank-logo bank-icbc" ng-switch-when="中国工商银行"></span>
+                <span class="bank-logo bank-abc" ng-switch-when="中国农业银行"></span>
+                <span class="bank-logo bank-boc" ng-switch-when="中国银行"></span>
+                <span class="bank-logo bank-ccb" ng-switch-when="建设银行"></span>
+                <span class="bank-logo bank-cmbc" ng-switch-when="民生银行"></span>
+                <span class="bank-logo bank-cmb" ng-switch-when="招商银行"></span>
+                <span class="bank-logo bank-bcom" ng-switch-when="交通银行"></span>
+                <span class="bank-logo bank-cib" ng-switch-when="兴业银行"></span>
+                <span class="bank-logo bank-ceb" ng-switch-when="光大银行"></span>
+                <span class="bank-logo bank-hxb" ng-switch-when="华夏银行"></span>
+                <span class="bank-logo bank-pab" ng-switch-when="平安银行"></span>
+                <span class="bank-logo bank-spdb" ng-switch-when="浦发银行"></span>
+                <span class="bank-logo bank-bob" ng-switch-when="北京银行"></span>
+                <span class="bank-logo bank-post" ng-switch-when="中国邮政储蓄银行"></span>
+                <span class="bank-logo bank-shb" ng-switch-when="上海银行"></span>
+                <span class="bank-logo bank-boxm" ng-switch-when="厦门银行"></span>
+                <span class="bank-logo bank-egb" ng-switch-when="恒丰银行"></span>
+                <span class="bank-logo bank-icbc" ng-switch-when="中信银行"></span>
+
+            </div>
+            <div class="tui-bank-bar">
+                <a ui-sref="addbank">修改</a>
+                <!--<a ng-click="deleteBank()" >删除</a>-->
+            </div>
+
+        </div>
+        <div class="tui-bank-body">
+            <table border="0" cellspacing="" cellpadding="">
+                <tr>
+                    <th class="text-right" style="width: 30%">户名：</th>
+                    <td ng-bind="USER.UserName"></td>
+                </tr>
+                <tr>
+                    <th class="text-right">卡号：</th>
+                    <td ng-bind="USER.RegisterBankCode"></td>
+                </tr>
+                <tr>
+                    <th class="text-right">开户行：</th>
+                    <td ng-bind="USER.RegisterBank"></td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="tui-bank-footer">
+            <i class="iconfont icon-zhanghaoanquan0101"></i> 安全银行卡，可用于提现
+        </div>
+    </div>
+</div>

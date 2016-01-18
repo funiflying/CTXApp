@@ -1,7 +1,6 @@
 <div class="tui-content">
     <header class="mui-bar mui-bar-nav tui-bar-nav">
         <h1 class="mui-title">撤单申请</h1>
-        <button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</button>
     </header>
     <ul class="tui-order" ng-init="getOrder()">
         <li class="tui-order-item">
@@ -14,7 +13,7 @@
                     <img ng-src="{{order.HomePicID}}" alt="">
                 </div>
                 <section class="tui-order-descr">
-                    <h5 class="tui-car-name" ><i ng-bind="order.BrandName+order.SpecName"></i></h5>
+                    <h5 class="tui-car-name mui-ellipsis-2" ><i ng-bind="order.BrandName+order.SpecName"></i></h5>
                     <p class="tui-car-deploy"><i ng-bind="order.InitialDate|DateTimeFormat:'yyyy年MM月'" ></i>上牌 <i ng-bind="order.Mileage"></i>万公里</p>
                     <p class="tui-car-sellprice"><span class="mui-pull-left  tui-font-orange"><strong class="tui-car-price" ng-bind="order.DealPrice/10000|currency:'￥'"></strong>万 </span><span class="mui-pull-right tui-car-newprice" ng-if="order.NewCarPrice>0">新车价 <strike ><i ng-bind="order.NewCarPrice/10000|currency:'￥'"></i>万</strike></span></p>
                 </section>

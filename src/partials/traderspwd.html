@@ -1,0 +1,25 @@
+<div class="tui-content">
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title">交易密码</h1>
+    </header>
+    <div class="tui-settings mui-fullscreen">
+        <div class="tui-settings-text">
+            交易密码，资金操作时输入，保护账户资金安全
+        </div>
+        <div class="tui-blank"></div>
+        <form class="mui-input-group" name="settingsForm" novalidate>
+            <div class="mui-input-row" >
+                <label>交易密码</label>
+                <input type="password" class="mui-input-clear"  name="PayPassword" required   ng-model="PayPassword" />
+            </div>
+            <div class="mui-input-row" >
+                <label>确认密码</label>
+                <input type="password" class="mui-input-clear" name="ConfigPwd"   required   ng-model="ConfigPwd"  />
+            </div>
+        </form>
+        <div class="tui-settings-tip" ng-bind="errmsg"></div>
+    </div>
+</div>
+<div class="tui-btngroup-fix">
+    <button type="button" class="tui-btn tui-btn-primary"   ng-click="modifyTrade()">确定</button>
+</div>
