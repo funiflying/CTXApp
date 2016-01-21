@@ -34,5 +34,5 @@ gulp.task('inject',function(){
 	var injectStyle=gulp.src(['./build/css/**/*.css'],{read: false});
 	var indectJs=gulp.src(['./build/js/**/*.js'],{read: false});
 	var target=gulp.src('./build/index.html');
-	target.pipe(plugins.inject(injectStyle)).pipe(plugins.inject(indectJs)).pipe(gulp.dest('./build'));
+	target.pipe(plugins.inject(injectStyle)).pipe(plugins.inject(indectJs)).pipe(gulp.dest('./build/'));
 })
