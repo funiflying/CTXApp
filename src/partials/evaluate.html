@@ -1,0 +1,46 @@
+<!--通用评价页面-->
+
+<div class="tui-content">
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title" ng-bind="evaluatetitle"></h1>
+    </header>
+    <ul class="tui-order" ng-if="evaluatedata">
+        <li class="tui-order-item">
+            <section class="tui-order-header">
+                <span class="mui-pull-left"><i ng-bind="evaluatedata.UserName"></i>  <i ng-bind="evaluatedata.Contact"></i></span>
+                <span class="mui-pull-right"><i ng-bind="evaluatedata.OrderTime|DateTimeFormat:'yyyy年MM月dd日'" ></i></span>
+            </section>
+            <section class="tui-order-info">
+                <div class="tui-order-icon" data-car="{{evaluatedata.CarNo||evaluatedata.cardata.CarNo}}">
+                    <img ng-src="{{evaluatedata.HomePicID||evaluatedata.cardata.HomePicID}}" alt="">
+                </div>
+                <section class="tui-order-descr">
+                    <h5 class="tui-car-name mui-ellipsis-2" ><i ng-bind="(evaluatedata.BrandName||evaluatedata.cardata.BrandName)+(evaluatedata.SpecName||evaluatedata.cardata.SpecName)"></i></h5>
+                    <p class="tui-car-deploy">订单编号：<i ng-bind="evaluatedata.AppraiseOrderCode" ></i></p>
+                    <p class="tui-car-sellprice">评估费用：<span class="tui-font-orange"><strong class="tui-car-price" ng-bind="evaluatedata.AppraiserFee|currency:'￥'"></strong>元 </span></p>
+                </section>
+            </section>
+            <section class="tui-order-operate">
+                	请填写下您的宝贵评价信息！
+            </section>
+        </li>
+    </ul>
+    <div class="tui-order-form">
+        <h5 class="tui-order-header" ng-bind="evaluatetitle||'评价'">评价</h5>
+        <form name="orderForm" class="mui-input-group">
+            <div class="mui-input-row">
+                <label>评价</label>
+                <evaluate data-name="UserGiveScore"></evaluate>
+            </div>
+            <div class="mui-input-row" style="min-height: 80px;padding-left: 15px">
+                <textarea id="textarea" rows="5" placeholder="反馈建议或意见" ng-model="UserFeedback"></textarea>
+            </div>
+        </form>
+        <span id="star-five"></span>
+        <div class="tui-btngroup-fix">
+            <button type="button" class="tui-btn tui-btn-primary" ng-click="evaluatesubmit()">确定</button>
+        </div>
+    </div>
+</div>
+
+

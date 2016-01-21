@@ -1,91 +1,220 @@
 <style>
-	.dui-list-p{ white-space: nowrap; text-overflow:ellipsis; overflow: hidden;}
-	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item{
+	.mui-bar~.mui-content .mui-fullscreen {
+		top: 44px;
+		height: auto;
+	}
+	
+	.mui-pull-top-tips {
+		position: absolute;
+		top: 20px;
+		left: 50%;
+		margin-left: -25px;
+		width: 40px;
+		height: 40px;
+		border-radius: 100%;
+	}
+	
+	.mui-bar~.mui-pull-top-tips {
+		top: 24px;
+	}
+	
+	.mui-pull-top-wrapper {
+		width: 42px;
+		height: 42px;
+		display: block;
+		text-align: center;
+		background-color: #efeff4;
+		border: 1px solid #ddd;
+		border-radius: 25px;
+		background-clip: padding-box;
+		box-shadow: 0 4px 10px #bbb;
+		overflow: hidden;
+	}
+	
+	.mui-pull-top-tips.mui-transitioning {
+		-webkit-transition-duration: 200ms;
+		transition-duration: 200ms;
+	}
+	
+	.mui-pull-top-tips .mui-pull-loading {
+		/*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+		margin: 0;
+	}
+	
+	.mui-pull-top-wrapper .mui-icon,
+	.mui-pull-top-wrapper .mui-spinner {
+		margin-top: 7px;
+	}
+	
+	.mui-pull-top-wrapper .mui-icon.mui-reverse {
+		/*-webkit-transform: rotate(180deg) translateZ(0);*/
+	}
+	
+	.mui-pull-bottom-tips {
+		text-align: center;
+		background-color: #efeff4;
+		font-size: 15px;
+		line-height: 40px;
+		color: #777;
+	}
+	
+	.mui-pull-top-canvas {
+		overflow: hidden;
+		background-color: #fafafa;
+		border-radius: 40px;
+		box-shadow: 0 4px 10px #bbb;
+		width: 40px;
+		height: 40px;
+		margin: 0 auto;
+	}
+	
+	.mui-pull-top-canvas canvas {
+		width: 40px;
+	}
+	
+	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
 		background-color: #fff;
 	}
-	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item:first-child{
+	
+	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item:first-child {
 		border-right: 1px solid #dedede;
 	}
-	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+	
+	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
 		background-color: #fff;
 	}
-	.dui-right-border{border-right: 1px solid #dedede;}
-	.dui-nodata{ text-align: center; line-height: 200px; background-color: #fff;}
-	.eval_price{ font-size: 18px; color: #FE5621;}
+	
+	.mui-slider .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+		color: #ff6a00;
+		border-bottom: 2px solid #ff6a00;
+	}
+	
+	.mui-scroll,
+	div#scroll1 {
+		z-index: 0;
+	}
+	
+	.dui-list-p {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+	
+	.dui-right-border {
+		border-right: 1px solid #dedede;
+	}
+	
+	.dui-nodata {
+		text-align: center;
+		line-height: 200px;
+		background-color: #fff;
+	}
+	
+	.eval_price {
+		font-size: 18px;
+		color: #FE5621;
+	}
+	
+	.dui-item-list {
+		height: 100%;
+		font-size: 14px;
+		z-index: 0;
+	}
 </style>
 
-<div class="tui-content">
-    <header class="mui-bar mui-bar-nav mui-bar-nav" ng-init="getList(1)">
-        <h1 class="mui-title">委托评估订单</h1>
-        <button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</button>
-    </header>
-  	<div id="segmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-        <a class="mui-control-item dui-right-border mui-active" href="#item_ing" ng-click="ishistory(false)">进行中</a>
-        <a class="mui-control-item" href="#item_history" ng-click="ishistory(true)">历史记录</a>
-    </div>
-    <ul id="item_ing" class="tui-order mui-control-content mui-active">
-        <li class="tui-order-item" ng-if="!list[0] && history ==''"><div class="dui-nodata"><p>暂无评估数据</p></div></li>
-        <li class="tui-order-item" ng-repeat="obj in list">
-            <section class="tui-order-header">
-                <span class="mui-pull-left">订单号:<i ng-bind="obj.AppraiseOrderCode"></i></span>
-                <span class="mui-pull-right">
-                	<span class="tui-font-green" ng-bind="obj.OrderFlag|ApprOrderStatus"></span>
-                </span>
-            </section>
-            <section class="tui-order-info">
-                <div class="tui-order-icon" data-car="{{obj.CarNo}}">
-                    <img ng-src="{{obj.cardata.HomePicID}}" alt="">
-                </div>
-                <section class="tui-order-descr">
-                    <h5 class="tui-car-name dui-list-p"><i ng-bind="obj.cardata.SpecName"></i></h5>
-                    <p class="tui-car-deploy">评估费用:<i class="eval_price" ng-bind="obj.AppraiserFee|currency:'￥'"></i>元</p>
-                    <p class="tui-car-sellprice">下单时间:<i ng-bind="obj.OrderTime|DateTimeFormat:'yyyy年MM月dd日'"></i></p>
-                </section>
-            </section>
-           <section class="tui-order-info">
-            	<div class="mui-row">
-            		<div class="mui-col-xs-12">委托人：<span ng-bind="obj.UserName + '&nbsp;&nbsp;' + obj.Contact"></span></div>
-            	</div>
-            </section>
-            <section class="tui-order-operate">
-                <a href="javascript:;" class="mui-btn" ng-if="obj.OrderFlag==0">等待付款中</a>
-                <a href="javascript:;" class="mui-btn" ng-if="obj.OrderFlag==1" ng-click="jiedansubmit(obj)">接取评估</a>
-                <a href="javascript:;" class="mui-btn tui-btn-orange" ng-if="obj.OrderFlag==2">请用PC端或APP填写报告</a>
-                <a href="javascript:;" class="mui-btn tui-btn-orange" ng-href="#/uviewreport?ReportCode={{obj.TestReportCode}}" ng-if="obj.OrderFlag>=3">查看检测</a>
-				<a href="javascript:;" class="mui-btn" ng-click="AFeedbacksubmit(obj)" ng-if="obj.OrderFlag==4">交易评价</a>
-            </section>
-        </li>
-    </ul>
-    
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	<h1 class="mui-title">检测订单</h1>
+</header>
+<div class="mui-content">
+	<div id="sliderno" class="mui-slider">
+		<!--sliderSegmentedControl-->
+		<div id="segmentedControl" style="z-index: 5" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+			<a class="mui-control-item dui-right-border mui-active" href="#item_ing" ng-click="ishistory(false)">进行中</a>
+			<a class="mui-control-item" href="#item_history" ng-click="ishistory(true)">历史记录</a>
+		</div>
+		<div class="mui-slider-group" ng-init="getList(1)">
+			<div id="item_ing" class="dui-update-list dui-item-list mui-control-content mui-active">
+				<ul class="tui-order">
+					<li class="tui-order-item" ng-if="!list[0] && history =='0'">
+						<div class="dui-nodata">
+							<p>暂无待办检测订单历史</p>
+						</div>
+					</li>
+					<li class="tui-order-item" ng-repeat="obj in list">
+						<section class="tui-order-header">
+							<span class="mui-pull-left">订单号:<i ng-bind="obj.AppraiseOrderCode"></i></span>
+							<span class="mui-pull-right">
+					                	<span class="tui-font-green" ng-bind="obj.OrderFlag|ApprOrderStatus"></span>
+							</span>
+						</section>
+						<section class="tui-order-info">
+							<div class="tui-order-icon" data-car="{{obj.cardata.CarNo}}">
+								<img ng-src="{{obj.cardata.HomePicID}}" alt="">
+							</div>
+							<section class="tui-order-descr">
+								<h5 class="tui-car-name dui-list-p"><i ng-bind="obj.cardata.SpecName"></i></h5>
+								<p class="tui-car-deploy">评估费用:<i class="eval_price" ng-bind="obj.AppraiserFee|currency:'￥'"></i>元</p>
+								<p class="tui-car-sellprice">下单时间:<i ng-bind="obj.OrderTime|DateTimeFormat:'yyyy年MM月dd日'"></i></p>
+							</section>
+						</section>
+						<section class="tui-order-info">
+							<div class="mui-row">
+								<div class="mui-col-xs-12">委托人：<span ng-bind="obj.UserName + '&nbsp;&nbsp;' + obj.Contact"></span></div>
+							</div>
+						</section>
+						<section class="tui-order-operate">
+							<button type="button" class="mui-btn" ng-click="delcomfirm(obj)" ng-if="obj.OrderFlag<3 && obj.RevokeFlag==0">申请撤单</button>
+							<a class="mui-btn tui-btn-orange" ui-sref="uviewreport({ReportCode:obj.TestReportCode})" ng-if="obj.OrderFlag>=3">查看检测</a>
+							<a class="mui-btn tui-btn-orange" ng-click="Paysubmit(obj)" ng-if="obj.OrderFlag==0">支付费用</a>
+							<a class="mui-btn" ng-click="goto_evaluate(obj)" ng-if="obj.OrderFlag==4">交易评价</a>
+						</section>
+					</li>
+				</ul>
 
-    <ul id="item_history" class="tui-order mui-control-content">
-        <li class="tui-order-item" ng-if="!historylist[0] && history =='1'"><div class="dui-nodata"><p>暂无评估历史数据</p></div></li>
-        <li class="tui-order-item" ng-repeat="hobj in historylist">
-            <section class="tui-order-header">
-                <span class="mui-pull-left">订单号:<i ng-bind="hobj.AppraiseOrderCode"></i></span>
-                <span class="mui-pull-right">
-                	<span class="tui-font-green" ng-bind="hobj.OrderFlag|ApprOrderStatus"></span>
-                </span>
-            </section>
-            <section class="tui-order-info">
-                <div class="tui-order-icon" data-car="{{hobj.CarNo}}">
-                    <img ng-src="{{hobj.cardata.HomePicID}}" alt="">
-                </div>
-                <section class="tui-order-descr">
-                    <h5 class="tui-car-name dui-list-p"><i ng-bind="hobj.cardata.SpecName"></i></h5>
-                    <p class="tui-car-deploy">评估费用:<i class="eval_price" ng-bind="hobj.AppraiserFee|currency:'￥'"></i>元</p>
-                    <p class="tui-car-sellprice">下单时间:<i ng-bind="hobj.OrderTime|DateTimeFormat:'yyyy年MM月dd日'"></i></p>
-                </section>
-            </section>
-            <section class="tui-order-info">
-            	<div class="mui-row">
-            		<div class="mui-col-xs-12">委托人：<span ng-bind="hobj.UserName + '&nbsp;&nbsp;' + hobj.Contact"></span></div>
-            	</div>
-            </section>
-            <section class="tui-order-operate">
-                <a class="mui-btn tui-btn-orange" ng-if="hobj.OrderFlag>=3" ng-href="#/uviewreport?ReportCode={{hobj.TestReportCode}}">查看检测</a>
-            </section>
-        </li>
-    </ul>
-    <pager></pager>
+			</div>
+			<div id="item_history" class="dui-update-list dui-item-list mui-control-content">
+
+				<ul class="tui-order">
+					<li class="tui-order-item" ng-if="!historylist[0] && history =='1'">
+						<div class="dui-nodata">
+							<p>暂无检测订单历史</p>
+						</div>
+					</li>
+					<li class="tui-order-item" ng-repeat="hobj in historylist">
+						<section class="tui-order-header">
+							<span class="mui-pull-left">订单号:<i ng-bind="hobj.AppraiseOrderCode"></i></span>
+							<span class="mui-pull-right">
+					            <span class="tui-font-green" ng-bind="hobj.OrderFlag|ApprOrderStatus"></span>
+							</span>
+						</section>
+						<section class="tui-order-info">
+							<div class="tui-order-icon" data-car="{{hobj.cardata.CarNo}}">
+								<img ng-src="{{hobj.cardata.HomePicID}}" alt="">
+							</div>
+							<section class="tui-order-descr">
+								<h5 class="tui-car-name dui-list-p"><i ng-bind="hobj.cardata.SpecName"></i></h5>
+								<p class="tui-car-deploy">评估费用:<i class="eval_price" ng-bind="hobj.AppraiserFee|currency:'￥'"></i>元</p>
+								<p class="tui-car-sellprice">下单时间:<i ng-bind="hobj.OrderTime|DateTimeFormat:'yyyy年MM月dd日'"></i></p>
+							</section>
+						</section>
+						<section class="tui-order-info">
+							<div class="mui-row">
+								<div class="mui-col-xs-12">委托人：<span ng-bind="hobj.UserName + '&nbsp;&nbsp;' + hobj.Contact"></span></div>
+							</div>
+						</section>
+						<section class="tui-order-operate">
+							<a class="mui-btn tui-btn-orange" ng-href="#/uviewreport?ReportCode={{hobj.TestReportCode}}">查看检测</a>
+						</section>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
 </div>
+<pager></pager>
+
+<div ng-include="'partials/nav.html'"></div>

@@ -20,7 +20,14 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
         }
     })
     $scope.getList=function() {
-        ResourceService.getFunServer('RequestHomeData', {City: $rootScope.CityID||null, CarType: 0}).then(function (data) {
+        var params={
+            City: $rootScope.CityID,
+            CarType: 0
+        }
+        if($rootScope.CityID==''){
+            params.City=null;
+        }
+        ResourceService.getFunServer('RequestHomeData', params).then(function (data) {
             $scope.carlist = data.data;
         });
     }
@@ -111,7 +118,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
         })
     }
     $scope.getList(1)
-}]).controller('OrderController',['$rootScope','$scope','$http','ResourceService',function($rootScope,$scope, $http,ResourceService){
+}]).controller('OrderController',['$rootScope','$scope','$http','$filter','ResourceService',function($rootScope,$scope, $http,$filter,ResourceService){
     //分页条数
     $scope.pagerConfig={
         pageSize:5,
@@ -120,10 +127,16 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
     }
     $scope.list=[];
     $scope.order={};
-
+    var orderCode=$rootScope.stateParams.OrderCode;
+    $scope.PayTotal=0;
     //买车订单
     $scope.getList=function(pageNo){
-        ResourceService.getFunServer('buyorderlist',{pageNo:pageNo,pageNum:$scope.pagerConfig.pageSize},'post').then(function(data,header){
+        var params={
+            pageNo:pageNo,
+            pageNum:$scope.pagerConfig.pageSize,
+            history:0
+        }
+        ResourceService.getFunServer('buyorderlist',params,'post').then(function(data,header){
             if(data.total){
                 $scope.list=data.rows
             }
@@ -134,9 +147,27 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
 
         })
     }
+    //历史记录
+    $scope.getRecordList=function(pageNo){
+        var params={
+            pageNo:pageNo,
+            pageNum:$scope.pagerConfig.pageSize,
+            history:1
+        }
+        ResourceService.getFunServer('buyorderlist',params,'post').then(function(data,header){
+            if(data.total){
+                $scope.list=data.rows
+            }
+            $scope.pagerConfig.total=data.total;
+            $scope.pagerConfig.callback=$scope.getRecordList;
+            $scope.pager(pageNo)
+        },function(data,header){
+
+        })
+    }
     //卖车订单
     $scope.getSellList=function(pageNo){
-        ResourceService.getFunServer('sellorderlist',{pageNo:pageNo,pageNum:$scope.pagerConfig.pageSize},'post').then(function(data,header){
+        ResourceService.getFunServer('sellorderlist',{pageNo:pageNo,pageNum:$scope.pagerConfig.pageSize,history:0},'post').then(function(data,header){
             if(data.total){
                 $scope.list=data.rows;
             }
@@ -145,6 +176,19 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
             $scope.pager(pageNo)
         },function(data,header){
 
+        })
+    }
+    //历史记录
+    $scope.getSellRecordList=function(pageNo){
+        var params={ pageNo:pageNo, pageNum:$scope.pagerConfig.pageSize,history:1}
+        ResourceService.getFunServer('sellorderlist',params,'post').then(function(data,header){
+            if(data.total){
+                $scope.list=data.rows;
+            }
+            $scope.pagerConfig.total=data.total;
+            $scope.pagerConfig.callback=$scope.getSellRecordList;
+            $scope.pager(pageNo)
+        },function(data,header){
         })
     }
     //订单详情
@@ -162,7 +206,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
     $scope.prepay=function(){
         if($scope.orderForm.$valid){
           $scope.pre.OrderCode=orderCode;
-            $scope.pre.PrepayOrder="";
+            $scope.pre.PrepayOrder=" ";
             $scope.pre.PrePayBank=$scope.bank;
           ResourceService.getFunServer('prepay',$scope.pre,'post').then(function(data){
               if(data.status==1){
@@ -182,24 +226,95 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
             $scope.servicefees=data;
         })
     }
-    //提交全款
-    $scope.fullpay=function(){
-        if($scope.orderForm.$valid){
-            $scope.full.OrderCode=orderCode;
-            $scope.full.AllMoneyOrder="";
-            $scope.full.AllMoneyBank=$scope.bank;
-            ResourceService.getFunServer('fullpay',$scope.full,'post').then(function(data){
+    
+    //使用优惠券
+	$scope.discount={
+		PolicyCodes:[],
+		Count:0,
+		usage:false
+	}
+	$scope.$watch('discount',function(newValue){
+		if(!$scope.discount.usage){
+			$scope.discount={
+				PolicyCodes:[],
+				Count:0
+			}
+			$('#Count').text('');
+			$('#needpay').text($filter('currency')($scope.order.PayTotal,'￥'));
+			$('#needpayservice').text($filter('currency')($scope.servicefees,'￥'));
+			$('.tui-discount-item').removeClass('active');
+		}
+	},true);
+    $scope.payAll=function(){
+    	$scope.full.OrderCode=orderCode;
+        $scope.full.AllMoneyOrder="";
+        $scope.full.AllMoneyBank=$scope.bank;
+    	ResourceService.getFunServer('fullpay',$scope.full,'post').then(function(data){
                 if(data.status==1){
                     mui.toast('提交成功',function(){
                         $rootScope.state.go('buyorder');
                     })
                 }
-            })
-        }
-        else{
-            mui.toast('请填写相应内容')
-        }
+			})
     }
+    //提交全款
+    $scope.fullpay=function(){
+        if($scope.orderForm.$valid){
+            if($scope.discount.usage){
+				var params={
+					OrderCode:orderCode,
+					PolicyCodes:$scope.discount.PolicyCodes
+				  }
+				ResourceService.getFunServer('discountusage',params,'post').then(function(data){
+					if(data.status==1){
+						$scope.payAll();
+					} else{
+		            	mui.toast(data.message)
+		        	}
+			})
+			}
+			else{
+				$scope.payAll();
+			}
+    }
+ }
+    //买家使用抵用券
+    //优惠券列表
+    $scope.getDiscountList=function(pageNo){
+        ResourceService.getFunServer('discount',{}).then(function(data){
+            if(data.status==1){
+                $scope.discountlist=data.data;
+            }
+            else {
+                $scope.discountlist=[];
+            }
+        })
+    }
+    //提交全款
+    $scope.paytips=function(){
+
+            if($scope.discount.usage){
+				var params={
+					OrderCode:orderCode,
+					PolicyCodes:$scope.discount.PolicyCodes
+				  }
+				ResourceService.getFunServer('discountusage',params,'post').then(function(data){
+					if(data.status==1){
+						mui.toast('支付成功',function(){
+							$rootScope.state.go('sellorder')
+						})
+					} else{
+		            	mui.toast(data.message)
+		        	}
+			})
+			}
+			else{
+				mui.toast('请选择抵用券')
+			}
+    
+ }
+    
+    
     //撤单
     $scope.backout=function(){
         //0 为买家撤单，1为车主撤单
@@ -276,8 +391,11 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
             }
         })
     }
+	
+
+
 }]).controller('LoginController',['$rootScope','$scope','ResourceService','LocalStorageService',function($rootScope,$scope,ResourceService,LocalStorageService){
-     $rootScope.user.HeadImage? $scope.HeadStyle={backgroundImage:'url('+$rootScope.user.HeadImage+')'}:$scope.HeadStyle={backgroundImage:'url(../images/detection-photo-default.gif)'};
+     $rootScope.user&&$rootScope.user.HeadImage? $scope.HeadStyle={backgroundImage:'url('+$rootScope.user.HeadImage+')'}:$scope.HeadStyle={backgroundImage:'url(../images/detection-photo-default.gif)'};
     $scope.login={
         Contact:'',
         Code:''
@@ -290,7 +408,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
             el.text("获取验证码");
             $rootScope.countdown = 60
         } else {
-            el.attr("disabled", true);
+            el.attr("disabled",'disabled');
             el.text($rootScope.countdown + "s");
             $rootScope.countdown--;
             setTimeout(settime, 1000)
@@ -350,6 +468,10 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
                    $scope.list=data.data.rows;
                    $scope.pagerConfig.total=data.data.total;
                }
+               else {
+                   $scope.list=[];
+                   $scope.pagerConfig.total=0;
+               }
                $scope.pagerConfig.callback=$scope.getList;
                $scope.pager(pageNo);
 
@@ -366,6 +488,10 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
                if(data.status==1){
                    $scope.list=data.data.rows;
                    $scope.pagerConfig.total=data.data.total;
+               }
+               else {
+                   $scope.list=[];
+                   $scope.pagerConfig.total=0;
                }
                $scope.pagerConfig.callback=$scope.getList;
                $scope.pager(pageNo);
@@ -392,19 +518,19 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
                             o.Price=parseFloat(o.Price/10000);
                             o.WholesalePrice=parseFloat(o.WholesalePrice/10000);
                             o.Buyyear =new Date($filter('DateTimeFormat')(o.Buyyear,'yyyy/MM/dd'));
-                            o.InitialDate =new Date($filter('DateTimeFormat')(o.Buyyear,'yyyy/MM/dd'));
-                            o.Annual_Inspect_Time =new Date($filter('DateTimeFormat')(o.Buyyear,'yyyy/MM/dd'));
-                            o.Compulsory_insurance_Time =new Date($filter('DateTimeFormat')(o.Buyyear,'yyyy/MM/dd'));
-                            o.Commercial_Insurance_Time =new Date($filter('DateTimeFormat')(o.Buyyear,'yyyy/MM/dd'));
-                            o.IsUrgent=o.IsUrgent=='True'?true:false;
-                            o.QuasiNewCar=o.QuasiNewCar=='True'?true:false;
-                            o.LearnerCa=o.LearnerCa=='True'?true:false;
-                            o.WomenCar=o.WomenCar=='True'?true:false;
-                            o.SevenSeat=o.SevenSeat=='True'?true:false;
-                            o.DrivingLicense=o.DrivingLicense=='True'?true:false;
-                            o.Registration=o.Registration=='True'?true:false;
-                            o.PurchaseInvoices=o.PurchaseInvoices=='True'?true:false;
-                            o.IncludeTransferFee=o.IncludeTransferFee?true:false;
+                            o.InitialDate =new Date($filter('DateTimeFormat')(o.InitialDate,'yyyy/MM/dd'));
+                            o.Annual_Inspect_Time =new Date($filter('DateTimeFormat')(o.Annual_Inspect_Time,'yyyy/MM/dd'));
+                            o.Compulsory_insurance_Time =new Date($filter('DateTimeFormat')(o.Compulsory_insurance_Time,'yyyy/MM/dd'));
+                            o.Commercial_Insurance_Time =new Date($filter('DateTimeFormat')(o.Commercial_Insurance_Time,'yyyy/MM/dd'));
+                            o.IsUrgent=o.IsUrgent=='True'||true?true:false;
+                            o.QuasiNewCar=o.QuasiNewCar=='True'||true?true:false;
+                            o.LearnerCa=o.LearnerCa=='True'||true?true:false;
+                            o.WomenCar=o.WomenCar=='True'||true?true:false;
+                            o.SevenSeat=o.SevenSeat=='True'||true?true:false;
+                            o.DrivingLicense=o.DrivingLicense=='True'||true?true:false;
+                            o.Registration=o.Registration=='True'||true?true:false;
+                            o.PurchaseInvoices=o.PurchaseInvoices=='True'||true?true:false;
+                            o.IncludeTransferFee=o.IncludeTransferFee=='True'||true?true:false;
                             o.CarPic_Car_CarNo=[];
                             $scope.car=o;
                             $scope.EditPic([{PicAddr:$scope.car.HomePicID}],'car-homepic')
@@ -423,14 +549,15 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
     }
     $scope.EditPic=function(images,id){
         angular.forEach(images,function(obj,index){
+        	var img=obj.PicAddr//.replace('_Big','');
             var imageList=document.getElementById(id);
             var placeholder = document.createElement('div');
             placeholder.setAttribute('class', 'image-item');
             var closeButton = document.createElement('div');
             closeButton.setAttribute('class', 'image-close');
             closeButton.innerHTML = 'X';
-            placeholder.style.backgroundImage = 'url(' + obj.PicAddr + ')';
-            placeholder.setAttribute('data-path',obj.PicAddr);
+            placeholder.style.backgroundImage = 'url(' + img + ')';
+            placeholder.setAttribute('data-path',img);
             closeButton.addEventListener('click', function(event) {
                 event.stopPropagation();
                 event.cancelBubble = true;
@@ -712,4 +839,34 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
             })
        }
     }
+}]).controller('DiscountController',['$rootScope','$scope','ResourceService',function($rootScope,$scope,ResourceService){
+  
+    //优惠券列表
+    $scope.getList=function(pageNo){
+        ResourceService.getFunServer('discount',{}).then(function(data){
+            if(data.status==1){
+                $scope.list=data.data;
+            }
+            else {
+                $scope.list=[];
+            }
+        })
+    }
+   //优惠券详情
+   $scope.getInfo=function(){
+   		var params={
+   			PolicyCode:$rootScope.stateParams.PolicyCode
+   		}
+   	    ResourceService.getFunServer('discountinfo',params).then(function(data){
+   	    	if(data.status==1){
+   	    		$scope.promotion=data.data;
+   	    	}
+   	    	
+   	    })
+  
+   }
+
+
+
+
 }])

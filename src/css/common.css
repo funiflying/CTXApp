@@ -6,3 +6,5 @@
 .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-progress-bar{
 	background-color:#ff6a00;
 }
+
+.dui-no-active{ background: #FCFCFC !important; cursor: none !important;}

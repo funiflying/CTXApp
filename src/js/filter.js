@@ -6,6 +6,7 @@
 angular.module("CTXAppFilters",[]).filter("DateTimeFormat",function(){
     return function (date,format){
         if(date){
+            date = date.replace(/\-/g, "/");
             var d=new Date(date);
 		   return d.Format(format);
         }
@@ -25,8 +26,13 @@ angular.module("CTXAppFilters",[]).filter("DateTimeFormat",function(){
 		if (str == undefined || str == null) {
 			return '';
 		} else {
-			strdata = str.split(".");
-			ret = strdata[0] + "_Big." + strdata[1];
+			//strdata = str.split(".");
+			var pos = str.lastIndexOf(".");
+			var iurl = str.substring(0, pos);
+			var lastname = str.substring(pos, str.length);
+			//console.log(iurl +  "----"+lastname);
+			//ret = strdata[0]+"_Big."+strdata[1];
+			ret = iurl + "_Big" + lastname;
 			return ret;
 		}
 	}
@@ -364,10 +370,10 @@ angular.module("CTXAppFilters",[]).filter("DateTimeFormat",function(){
 					descr = "待评估";
 					break;
 				case "3":
-					descr = "已评估待评估师评价";
+					descr = "待评估师评价";
 					break;
 				case "4":
-					descr = "评估师已评价待用户评价";
+					descr = "待委托人评价";
 					break;
 				case "5":
 					descr = "客户已评价";
@@ -384,5 +390,44 @@ angular.module("CTXAppFilters",[]).filter("DateTimeFormat",function(){
 
 			}
 			return descr;
+		}
+	}).filter('PolicyRange', function() {
+		//评估检测状态
+		return function(status) {
+			status = status + ""
+			var descr = "";
+			switch (status) {
+				case "0":
+					descr = "平台服务费";
+					break;
+			
+				default:
+					descr = "未知平台服务费"
+					break;
+
+			}
+			return descr;
+		}
+	}).filter('PolicyMutile', function() {
+
+		return function(status) {
+			status = status + ""
+			var descr = "";
+			switch (status) {
+				case true||'True':
+					descr = "是";
+					break;
+			    case false:
+					descr = "否";
+					break;
+				default:
+					descr = "是"
+					break;
+			}
+			return descr;
+		}
+	}).filter('Litimg', function() {
+		return function(descr) {
+			return descr.replace('_Big','');
 		}
 	})

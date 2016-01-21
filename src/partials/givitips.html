@@ -1,0 +1,36 @@
+<div class="tui-content">
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title">支付服务费</h1>
+    </header>
+    <ul class="tui-order" ng-init="getOrder()">
+        <li class="tui-order-item">
+            <section class="tui-order-header">
+                 <span class="mui-pull-left">订单号:<i ng-bind="order.OrderCode"></i>  <!--<i ng-bind="obj.Contact"></i> <i class="mui-icon mui-icon-arrowright" style="font-size: 14px"></i>--></span>
+                <span class="mui-pull-right tui-font-green"><span ng-if="order.RevokeFlag==0"  ng-bind="order.OrderFlag|OrderStatus"></span><span ng-if="order.RevokeFlag>0"  ng-bind="order.RevokeFlag|RevokeStatus"></span></span>
+            </section>
+            <section class="tui-order-info">
+                <div class="tui-order-icon" data-car="{{order.CarNo}}">
+                    <img ng-src="{{order.HomePicID}}" alt="">
+                </div>
+                <section class="tui-order-descr">
+                    <h5 class="tui-car-name mui-ellipsis-2" ><i ng-bind="order.BrandName+order.SpecName"></i></h5>
+                    <p class="tui-car-deploy"><i ng-bind="order.InitialDate|DateTimeFormat:'yyyy年MM月'" ></i>上牌 <i ng-bind="order.Mileage"></i>万公里</p>
+                    <p class="tui-car-sellprice"><span class="mui-pull-left  tui-font-orange"><strong class="tui-car-price" ng-bind="order.DealPrice/10000|currency:'￥'"></strong>万 </span><span ng-if="order.NewCarPrice>0" class="mui-pull-right tui-car-newprice">新车价 <strike ><i ng-bind="order.NewCarPrice/10000|currency:'￥'"></i>万</strike></span></p>
+                </section>
+            </section>
+            <section class="tui-order-operate">
+                <p><span class="tui-fullpay-title">服务费：</span><span class="tui-fullpay-num tui-font-orange"><i ng-bind="servicefees|currency:'￥'"></i></span></p>
+            	<p><span class="mui-checkbox mui-left tui-fullpay-check"><label for="">使用抵用券</label><input type="checkbox" name="usediscount" ng-model="discount.usage"/></span><span class="tui-fullpay-title">抵用券：</span><span class="tui-fullpay-num tui-font-green"><i  id="Count" ></i></span></p>
+            	<p class="tui-fullpay-allpay" style="margin-top: 10px;"><span class="tui-fullpay-title">应付金额：</span><span class="tui-fullpay-num"><i class="tui-font-orange" ng-bind="servicefees|currency:'￥'" id="needpayservice"></i></span></p>
+            </section>
+        </li>
+    </ul>
+    <discount ng-class="{true:'tui-swipe-container active',false:'tui-swipe-container'}[discount.usage==true]"></discount>
+    <div ng-class="{true:'tui-mask active',false:'tui-mask'}[discount.usage==true]"></div>
+</div> 
+<div class="tui-btngroup-fix">
+    <button type="button" class="tui-btn tui-btn-default" ui-sref="orderdetails({OrderCode:order.OrderCode})">查看详情</button>
+    <button type="button" class="tui-btn tui-btn-primary" ng-click="paytips()">确定</button>
+</div>
+
+

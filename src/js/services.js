@@ -131,36 +131,60 @@ angular.module('CTXAppServices', []).factory('ResourceService', ['$resource', '$
                 case 'AppraiserGetOrderList':  //评估师获取客户委托订单
                 	surl='/Alliance/AppraiserOrder/AppraiserGetOrderList'; //AppraiserCode
                 	break;
-                case  'servicecity':
+                case 'servicecity':
                     surl='/oa/direct/HomeGetAlldirectCity';//开通城市
                     break;
-                case  'updateUser':
+                case 'updateUser':
                     surl='/account/UpdatingUser';//更新用户信息
                     break;
-                case  'resetTradePwd':
+                case 'resetTradePwd':
                     surl='/account/ChangeTradePwd';//重置Trade
                     break;
-                case  'checkTradePwd':
+                case 'checkTradePwd':
                     surl='/account/CheckCurrentUserIfHasTradePwd';//检测Trade
                     break;
-                case  'apprasiorApply':
+                case 'apprasiorApply':
                     surl='/account/UserUpgradeApprasior';//评估师认证
                     break;
-                case  'user':
+                case 'user':
                     surl='/account/GetCurrentUserinfo';//用户信息
                     break;
-                case  'sellcar':
+                case 'sellcar':
                     surl='/JoinMessage/JoinMessage/AddJoinMessage';//买车请求
                     break;
-                case  'sellcarcount':
+                case 'sellcarcount':
                     surl='/Common/car/GetSellingCount';//在售车源
                     break;
-                case  'alliance':
+                case 'alliance':
                     surl='/account/GetCurrentAllianceinfo';//联盟商
                     break;
-                case  'withdraw':
+                case 'withdraw':
                     surl='/Financial/FinanceNeedPay/PostExtraction';//提现
                     break;
+                case 'AppraiserFeedBack':    
+                	surl='/Alliance/AppraiserOrder/AppraiserFeedBack'; //给评估师评价
+                	break;
+                case 'UserFeedBack':    
+                	surl='/AppraiserOrder/UserFeedBack'; //给委托人评价
+                	break;
+                case 'CarEvalutionRequest':
+                	surl='/JoinMessage/JoinMessage/CarEvalutionRequest';  //请求金牌评估师评估
+                	break;
+                case  'discount':
+                    surl='/DiscountPolicy/DiscountPolicy/UserGetDiscountPolicy'//'/DiscountPolicy/DiscountPolicy/GetDiscountPolicyByUser';//优惠券列表int PageNo, int PageSize = 20
+                    break;
+                case  'discountlog':
+                    surl='/DiscountPolicy/DiscountPolicy/GetDiscountPolicysLogByUser';//优惠券明细记录int PageNo, int PageSize = 20
+                    break;
+                case  'discountinfo':
+                    surl='/DiscountPolicy/DiscountPolicy/GetInfo';//优惠详情string PolicyCode
+                    break;
+                case  'discountusage':
+                    surl='/Order/OrderUseDiscountPolicy';//优惠券抵扣购车服务费string OrderCode, string[] PolicyCodes
+                    break;
+                case 'TestEntrust':
+                	surl='/Alliance/AppraiserOrder/TestEntrust';  //委托订单提交
+                	break;
                 default:
                     break;
             }

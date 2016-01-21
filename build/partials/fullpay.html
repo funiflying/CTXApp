@@ -5,7 +5,7 @@
     <ul class="tui-order" ng-init="getOrder()">
         <li class="tui-order-item">
             <section class="tui-order-header">
-                 <span class="mui-pull-left">订单号:<i ng-bind="obj.OrderCode"></i>  </span>
+                 <span class="mui-pull-left">订单号:<i ng-bind="order.OrderCode"></i>  <!--<i ng-bind="obj.Contact"></i> <i class="mui-icon mui-icon-arrowright" style="font-size: 14px"></i>--></span>
                 <span class="mui-pull-right tui-font-green"><span ng-if="order.RevokeFlag==0" ng-bind="order.OrderFlag|OrderStatus"></span><span ng-if="order.RevokeFlag>0" ng-bind="order.RevokeFlag|RevokeStatus"></span></span>
             </section>
             <section class="tui-order-info">
@@ -25,6 +25,8 @@
                 <p><span class="tui-fullpay-title">物流费：</span><span class="tui-fullpay-num tui-font-orange"><i ng-bind="order.ShippingFee|currency:'￥'"></i></span></p>
                 <p><span class="tui-fullpay-title">保修费：</span><span class="tui-fullpay-num tui-font-orange"><i ng-bind="order.WarrantyCost|currency:'￥'"></i></span></p>
                 <p class="tui-fullpay-allpay"><span class="tui-fullpay-title">总金额：</span><span class="tui-fullpay-num"><i class="tui-font-orange" ng-bind="order.PayTotal|currency:'￥'"></i></span></p>
+            	<p ng-if="discountlist[0]"><span class="mui-checkbox mui-left tui-fullpay-check"><label for="">使用抵用券</label><input type="checkbox" name="usediscount" ng-model="discount.usage"></span><span class="tui-fullpay-title">抵用券：</span><span class="tui-fullpay-num tui-font-green"><i id="Count"></i></span></p>
+            	<p class="tui-fullpay-allpay" style="margin-top: 10px"><span class="tui-fullpay-title">应付金额：</span><span class="tui-fullpay-num"><i class="tui-font-orange" ng-bind="order.PayTotal|currency:'￥'" id="needpay"></i></span></p>
             </section>
         </li>
     </ul>
@@ -43,7 +45,9 @@
         </form>
     </div>
     <banklist class="tui-swipe-container"></banklist>
-</div>
+    <discount ng-class="{true:'tui-swipe-container active',false:'tui-swipe-container'}[discount.usage==true]"></discount>
+    <div ng-class="{true:'tui-mask active',false:'tui-mask'}[discount.usage==true]"></div>
+</div> 
 <div class="tui-btngroup-fix">
     <button type="button" class="tui-btn tui-btn-default" ui-sref="orderdetails({OrderCode:order.OrderCode})">查看详情</button>
     <button type="button" class="tui-btn tui-btn-primary" ng-click="fullpay()">确定</button>

@@ -8,8 +8,32 @@
 	.mui-slider-indicator .mui-number span {
 		color: #fff;
 	}
-	.tui-content{
+	
+	.tui-content {
 		margin-top: 0px;
+	}
+	
+	.dui-flow-wrap{
+		height: 25px; overflow: hidden;
+		padding: 0px 0px 0px 0px;
+	}
+	
+	.dui-num-icon {
+		border: 1px solid #ff8f3f;
+		color: #ff8f3f;
+		height: 25px;
+		width: 26px;
+		border-radius: 13px;
+		text-align: center;
+		display: inline-block;
+		margin-right: 10px;
+		margin-left: 10px;
+	}
+	.dui-num-jiantou{
+		/*background: url(./images/flow-jiantou-icon.png) no-repeat left; margin-left: 3px; height: 20px; */
+		width: 100%;
+		color: #ff8f3f;
+		padding-left: 11px;
 	}
 </style>
 <!--<header class="mui-bar mui-bar-nav">
@@ -22,14 +46,14 @@
 		<div class="mui-slider-group mui-slider-loop" style="width:100%; max-height:230px" id="data-info-thumb">
 			<div class="mui-slider-item mui-slider-item-duplicate">
 				<a href="javascript:void(0);">
-					<img style="min-height:230px" data-img="{{carinfodata.HomePicID}}" src="{{carinfodata.HomePicID}}">
+					<img style="min-height:230px" data-img="{{carinfodata.HomePicID}}" src="{{carinfodata.HomePicID|bigimg}}">
 				</a>
 			</div>
 			<div class="mui-slider-item" ng-repeat="cimg in carinfoimg">
-				<a href="javascript:;"><img style="min-height:230px" data-img="{{cimg.PicAddr|bigimg}}" ng-src="{{cimg.PicAddr}}"></a>
+				<a href="javascript:;"><img style="min-height:230px" data-img="{{cimg.PicAddr|bigimg}}" ng-src="{{cimg.PicAddr|bigimg}}"></a>
 			</div>
 			<div class="mui-slider-item mui-slider-item-duplicate">
-				<a href="javascript:;"><img style="min-height:230px" data-img="{{carinfodata.HomePicID}}" src="{{carinfodata.HomePicID}}"></a>
+				<a href="javascript:;"><img style="min-height:230px" data-img="{{carinfodata.HomePicID}}" src="{{carinfodata.HomePicID|bigimg}}"></a>
 			</div>
 
 		</div>
@@ -42,12 +66,12 @@
 	<!--车辆相册图end-->
 	<!--车辆标题及价格begin-->
 	<ul class="mui-table-view dui-brand-w">
-		<li class="mui-col-xs-12 mui-table-view-cell">
+		<li class="mui-col-xs-12 mui-table-view-cell dui-no-active">
 			<h2><span ng-bind="carinfodata.BrandName"></span></h2>
 			<!--<span ng-bind="carinfodata.SeriesName"></span>-->
 			<p ng-bind="carinfodata.SpecName"></p>
 		</li>
-		<li class="mui-col-xs-12 mui-table-view-cell">
+		<li class="mui-col-xs-12 mui-table-view-cell dui-no-active">
 			<span class="dui-price dui-c1 fl">￥<span ng-bind="carinfodata.Price | FormatPrice"></span>万</span>
 			<span class="dui-newprice fr">新车价：<span ng-bind="carinfodata.NewCarPrice | FormatPrice"></span>万 指导价：<span ng-bind="carinfodata.ReferencePrice | FormatPrice"></span>万</span>
 		</li>
@@ -60,20 +84,20 @@
 	</ul>
 	<!--基本配置begin-->
 	<ul class="mui-table-view mui-grid-view mui-grid-9 dui-carinfo-table">
-		<li class="mui-col-xs-3 mui-table-view-cell"><span>上牌时间</span></li>
-		<li class="mui-col-xs-3 mui-table-view-cell"><span ng-bind="(carinfodata.InitialDate|CDateFormat)||'未知'">未知</span></li>
-		<li class="mui-col-xs-3 mui-table-view-cell"><span>里程数</span></li>
-		<li class="mui-col-xs-3 mui-table-view-cell"><span ng-bind="carinfodata.Mileage||'未知'"></span>万公里</li>
+		<li class="mui-col-xs-3 mui-table-view-cell dui-no-active"><span>上牌时间</span></li>
+		<li class="mui-col-xs-3 mui-table-view-cell dui-no-active"><span ng-bind="(carinfodata.InitialDate|CDateFormat)||'未知'">未知</span></li>
+		<li class="mui-col-xs-3 mui-table-view-cell dui-no-active"><span>里程数</span></li>
+		<li class="mui-col-xs-3 mui-table-view-cell dui-no-active"><span ng-bind="carinfodata.Mileage||'未知'"></span>万公里</li>
 
-		<li class="mui-col-xs-3 mui-table-view-cell"><span>排放量</span></li>
-		<li class="mui-col-xs-3 mui-table-view-cell"><span ng-bind="(carinfodata.OutputVolume|FilterCarOutputVolume)||'未知'">未知</span></li>
-		<li class="mui-col-xs-3 mui-table-view-cell"><span>变速箱</span></li>
-		<li class="mui-col-xs-3 mui-table-view-cell"><span ng-bind="(carinfodata.GearBox | FilterCarGearBox)||'未知'">未知</span></li>
+		<li class="mui-col-xs-3 mui-table-view-cell dui-no-active"><span>排放量</span></li>
+		<li class="mui-col-xs-3 mui-table-view-cell dui-no-active"><span ng-bind="(carinfodata.OutputVolume|FilterCarOutputVolume)||'未知'">未知</span></li>
+		<li class="mui-col-xs-3 mui-table-view-cell dui-no-active"><span>变速箱</span></li>
+		<li class="mui-col-xs-3 mui-table-view-cell dui-no-active"><span ng-bind="(carinfodata.GearBox | FilterCarGearBox)||'未知'">未知</span></li>
 
-		<li class="mui-col-xs-3 mui-table-view-cell"><span>排放标准</span></li>
-		<li class="mui-col-xs-3 mui-table-view-cell"><span ng-bind="(carinfodata.DischargeStandard|FilterCarDischargeStandard)||'未知'"></span></li>
-		<li class="mui-col-xs-3 mui-table-view-cell"><span>归属地</span></li>
-		<li class="mui-col-xs-3 mui-table-view-cell"><span ng-bind="carinfodata.RegisterPlace||'未知'"></span></li>
+		<li class="mui-col-xs-3 mui-table-view-cell dui-no-active"><span>排放标准</span></li>
+		<li class="mui-col-xs-3 mui-table-view-cell dui-no-active"><span ng-bind="(carinfodata.DischargeStandard|FilterCarDischargeStandard)||'未知'"></span></li>
+		<li class="mui-col-xs-3 mui-table-view-cell dui-no-active"><span>归属地</span></li>
+		<li class="mui-col-xs-3 mui-table-view-cell dui-no-active"><span ng-bind="carinfodata.RegisterPlace||'未知'"></span></li>
 
 		<!--<li class="mui-col-xs-12 mui-table-view-cell"><span class="dui-c1 dui-strong">更多配置参数&gt;</span></li>-->
 	</ul>
@@ -85,18 +109,18 @@
 		</li>
 	</ul>
 	<ul class="mui-table-view mui-grid-view mui-grid-9 dui-carinfo-table">
-		<li class="mui-col-xs-6 mui-table-view-cell">
-			<span class="dui-lh"><i class="iconfont icon-icon"></i>１００％好车认证</span>
+		<li class="mui-col-xs-6 mui-table-view-cell dui-no-active">
+			<span class="dui-lh"><i class="mui-icon mui-icon-checkbox-filled"></i>１００％好车认证</span>
 		</li>
-		<li class="mui-col-xs-6 mui-table-view-cell">
-			<span class="dui-lh"><i class="iconfont icon-icon"></i>１年两万公里质保</span>
+		<li class="mui-col-xs-6 mui-table-view-cell dui-no-active">
+			<span class="dui-lh"><i class="mui-icon mui-icon-checkbox-filled"></i>１年两万公里质保</span>
 		</li>
 
-		<li class="mui-col-xs-6 mui-table-view-cell">
-			<span class="dui-lh"><i class="iconfont icon-icon"></i>双方交易评价　　  </span>
+		<li class="mui-col-xs-6 mui-table-view-cell dui-no-active">
+			<span class="dui-lh"><i class="mui-icon mui-icon-checkbox-filled"></i>双方交易评价　　  </span>
 		</li>
-		<li class="mui-col-xs-6 mui-table-view-cell">
-			<span class="dui-lh"><i class="iconfont icon-icon"></i>专业可靠检测　　</span>
+		<li class="mui-col-xs-6 mui-table-view-cell dui-no-active">
+			<span class="dui-lh"><i class="mui-icon mui-icon-checkbox-filled"></i>专业可靠检测　　</span>
 		</li>
 	</ul>
 	<!--服务资质end-->
@@ -115,14 +139,14 @@
 		</li>
 	</ul>
 	<ul class="mui-table-view mui-grid-view mui-grid-9 dui-carinfo-table">
-		<li class="mui-col-xs-12 mui-table-view-cell mui-text-left">
+		<li class="mui-col-xs-12 mui-table-view-cell mui-text-left dui-no-active">
 			<p class="dui-plr10" ng-bind="carinfodata.ReadMe||'暂时无车主自述信息'"></p>
 		</li>
 
-		<li class="mui-col-xs-6 mui-table-view-cell"><span ng-bind="(carinfodata.Annual_Inspect_Time | CDateFormat)||'未知'"></span>年检到期</li>
-		<li class="mui-col-xs-6 mui-table-view-cell"><span ng-bind="(carinfodata.Compulsory_insurance_Time | CDateFormat)||'未知'"></span>交强险到期</li>
-		<li class="mui-col-xs-6 mui-table-view-cell"><span ng-bind="(carinfodata.Commercial_Insurance_Time | CDateFormat)||'未知'"></span>商业险到期</li>
-		<li class="mui-col-xs-6 mui-table-view-cell"><span ng-bind="carinfodata.TransferNo||'0'"></span>过户次数</li>
+		<li class="mui-col-xs-6 mui-table-view-cell dui-no-active"><span ng-bind="(carinfodata.Annual_Inspect_Time | CDateFormat)||'未知'"></span>年检到期</li>
+		<li class="mui-col-xs-6 mui-table-view-cell dui-no-active"><span ng-bind="(carinfodata.Compulsory_insurance_Time | CDateFormat)||'未知'"></span>交强险到期</li>
+		<li class="mui-col-xs-6 mui-table-view-cell dui-no-active"><span ng-bind="(carinfodata.Commercial_Insurance_Time | CDateFormat)||'未知'"></span>商业险到期</li>
+		<li class="mui-col-xs-6 mui-table-view-cell dui-no-active"><span ng-bind="carinfodata.TransferNo||'0'"></span>过户次数</li>
 
 		<li class="mui-col-xs-12 mui-table-view-cell">
 			<a href="#/creditfile?CarNo={{CarNo}}" style="display: inline">
@@ -207,7 +231,7 @@
 		<li class="mui-col-xs-12 mui-table-view-cell"><a href="#viewreport?CarNo={{CarNo}}" style="display: inline"><span class="dui-c1 dui-strong">查看详情检测报告&gt;</span></a></li>
 	</ul>
 	<!--评估师检测end-->
-	
+
 	<!--车辆图片begin-->
 	<ul id="list" class="mui-table-view mui-table-view-chevron dui-mt10">
 		<li class="mui-table-view-cell">
@@ -220,13 +244,12 @@
 				<img src='{{carinfodata.HomePicID}}'>
 			</div>-->
 			<div class="mui-col-xs-12 dui-img-inherit" ng-repeat="cil in carimglist">
-				<img ng-src="{{cil.PicAddr}}">
-
+				<img ng-src="{{cil.PicAddr|bigimg}}">
 			</div>
 		</li>
 	</ul>
 	<!--车辆图片end-->
-	
+
 	<!--交易流程begin-->
 	<ul id="list" class="mui-table-view mui-table-view-chevron dui-mt10">
 		<li class="mui-table-view-cell">
@@ -235,8 +258,30 @@
 	</ul>
 	<ul class="mui-table-view mui-grid-view mui-grid-9 dui-carinfo-table">
 		<li class="mui-col-xs-12 dui-car-imglist">
-			<div class="mui-col-xs-12 dui-img-inherit">
-				<img src="{{carinfodata.HomePicID}}">
+			<div class="mui-col-xs-12" style="padding: 10px 0px 10px 0px">
+				<div class="dui-flow-wrap">
+					<p><i class="dui-num-icon">1</i><strong>买家下单并支付预付款</strong></p>
+				</div>
+				<div class="dui-num-jiantou"><i class="mui-icon mui-icon-arrowthindown"></i></div>
+				<div class="dui-flow-wrap">
+					<p><i class="dui-num-icon">2</i><strong>车同享验车、物流确认</strong></p>
+				</div>
+				<div class="dui-num-jiantou"><i class="mui-icon mui-icon-arrowthindown"></i></div>
+				<div class="dui-flow-wrap">
+					<p><i class="dui-num-icon">3</i><strong>买家支付购车余款</strong></p>
+				</div>
+				<div class="dui-num-jiantou"><i class="mui-icon mui-icon-arrowthindown"></i></div>
+				<div class="dui-flow-wrap">
+					<p><i class="dui-num-icon">4</i><strong>发车及物流跟踪</strong></p>
+				</div>
+				<div class="dui-num-jiantou"><i class="mui-icon mui-icon-arrowthindown"></i></div>
+				<div class="dui-flow-wrap">
+					<p><i class="dui-num-icon">5</i><strong>车同享提车、验车</strong></p>
+				</div>
+				<div class="dui-num-jiantou"><i class="mui-icon mui-icon-arrowthindown"></i></div>
+				<div class="dui-flow-wrap">
+					<p><i class="dui-num-icon">6</i><strong>买家提车，交易完成</strong></p>
+				</div>
 			</div>
 		</li>
 	</ul>
@@ -248,7 +293,9 @@
 	<a href="javascript:;" ng-disabled="carinfodata.CarFlag==1" ui-sref="evaluationlist({CarNo:CarNo,BrandID:carinfodata.Brand})">
 		<div class="mui-col-xs-4 dui-b-nav-h" style="border-right: 1px solid #dedede">委托评估</div>
 	</a>
-	<a href="javascript:;" ui-sref="creditfile({CarNo:CarNo})"><div class="mui-col-xs-4 dui-b-nav-h">车主信息</div></a>
+	<a href="javascript:;" ui-sref="creditfile({CarNo:CarNo})">
+		<div class="mui-col-xs-4 dui-b-nav-h">车主信息</div>
+	</a>
 </div>
 <!--<div class="tui-btngroup-fix">
 	<button type="button" class="tui-btn tui-btn-primary" ng-disabled="carinfodata.CarFlag==1" ng-click="buy()">确认购买</button>

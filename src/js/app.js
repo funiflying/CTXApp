@@ -54,6 +54,12 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             controller:'CarInfoCtrl',
             access:0,
             action:'home'
+        }).state('uviewreport',{
+            url:'/uviewreport?ReportCode',
+            templateUrl:'partials/viewreport.html',
+            controller:'ViewReportCtrl',
+            access:0,
+            action:'home'
         }).state('evaluationlist',{
             url:'/evaluationlist?CarNo&BrandID',
             templateUrl:'partials/evaluationlist.html',
@@ -90,9 +96,21 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             controller:'OrderController',
             access:1,
             action:'admin'
+        }).state('buyrecord',{
+            url:'/buyorder',
+            templateUrl:'partials/buyrecord.html',
+            controller:'OrderController',
+            access:1,
+            action:'admin'
         }).state('sellorder',{
             url:'/sellorder',
             templateUrl:'partials/sellorder.html',
+            controller:'OrderController',
+            access:1,
+            action:'admin'
+        }).state('sellrecord',{
+            url:'/sellorder',
+            templateUrl:'partials/sellrecord.html',
             controller:'OrderController',
             access:1,
             action:'admin'
@@ -105,6 +123,12 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
         }).state('fullpay',{
             url:'/fullpay?OrderCode',
             templateUrl:'partials/fullpay.html',
+            controller:'OrderController',
+            access:1,
+            action:'admin'
+        }).state('givitips',{
+            url:'/givitips?OrderCode',
+            templateUrl:'partials/givitips.html',
             controller:'OrderController',
             access:1,
             action:'admin'
@@ -204,6 +228,24 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             controller:'AccountController',
             access:1,
             action:'admin'
+        }).state('discount',{
+            url:'/discount',
+            templateUrl:'partials/discount.html',
+            controller:'DiscountController',
+            access:0,
+            action:'admin'
+        }).state('promotion',{
+            url:'/promotion?PolicyCode',
+            templateUrl:'partials/promotion.html',
+            controller:'DiscountController',
+            access:0,
+            action:'admin'
+        }).state('evaluate',{
+            url:'/account/evaluate',
+            templateUrl:'partials/evaluate.html',
+            controller:'EvaluateCtrl',
+            access:1,
+            action:'admin'
         }).state('404',{
             url:'/404',
             templateUrl:'partials/404.html',
@@ -279,6 +321,7 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             return response
         },
         responseError:function(response){
+            mui.onload();
             return response
         }
     };

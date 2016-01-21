@@ -3,40 +3,40 @@
         <h1 class="mui-title">帐号中心</h1>
     </header>
     <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-                <i class="iconfont icon-kehufuwuzhiliangpinggu tui-wodedingdan1"></i>同行价
+        <li class="mui-table-view-cell" ng-if="user.AllianceCode">
+                <i class="tui-admin-icon tui-admin-tonghangzhaoche"></i>同行价
                 <div ng-class="{true:'mui-switch mui-switch-mini mui-active',false:'mui-switch mui-switch-mini'}[WholesalePrice==true]" ng-model="WholesalePrice" wholesale-switch>
                     <div class="mui-switch-handle"></div>
                 </div>
         </li>
         <li class="mui-table-view-cell" ng-click="goTrade()">
             <a class="mui-navigate-right">
-                <i class="iconfont icon-jiaoyimima tui-wodedingdan1"></i> 设置密码
+                <i class="tui-admin-icon tui-admin-jiaoyimima"></i> 交易密码
             </a>
         </li>
         <li class="mui-table-view-cell" ui-sref="withdraw">
             <a class="mui-navigate-right">
-                <i class="iconfont icon-chongzhitixian tui-chechan"></i> 提现
+                <i class="tui-admin-icon tui-admin-tixian"></i> 提现
             </a>
         </li>
         <li class="mui-table-view-cell" ng-click="goBank()">
             <a class="mui-navigate-right">
-                <i class="iconfont icon-yinxingqia tui-wodedingdan1"></i> 银行卡
+                <i class="tui-admin-icon tui-admin-yinhangka"></i> 银行卡
+            </a>
+        </li>
+       <!--<li class="mui-table-view-cell">
+            <a class="mui-navigate-right">
+                <i class="tui-admin-icon tui-admin-gerenziliao"></i> 个人资料
             </a>
         </li>
         <li class="mui-table-view-cell">
             <a class="mui-navigate-right">
-                <i class="iconfont icon-gerenziliao1 tui-youhuiquan"></i> 个人资料
+                <i class="tui-admin-icon tui-admin-danweixinxi" ></i> 企业信息
             </a>
-        </li>
-        <li class="mui-table-view-cell">
-            <a class="mui-navigate-right">
-                <i class="iconfont icon-danwei tui-xiaoxi"></i> 企业信息
-            </a>
-        </li>
+        </li>-->
         <li class="mui-table-view-cell" ui-sref="appraiser">
             <a class="mui-navigate-right">
-                <i class="iconfont icon-pinggushishenqing tui-zhanghaoanquan"></i> 评估师认证
+                <i class="tui-admin-icon tui-admin-pinggushi"></i> 评估师认证
             </a>
         </li>
     </ul>

@@ -55,6 +55,7 @@ body::-webkit-scrollbar{
 }
 .tui-footer p{
 	margin: 0;
+	font-size: 10px;
 }
 .tui-notfound{
 	background: url("../images/404.png") no-repeat center bottom ;
@@ -72,6 +73,9 @@ body::-webkit-scrollbar{
 	position: absolute;
 	top: 180px;
 	width: 100%;
+}
+pager{
+	display: none;
 }
 /********
 *提示框
@@ -113,8 +117,7 @@ body::-webkit-scrollbar{
 	text-align: center;
 	color: #FFFFFF;
 	border-radius: 7px;
-	background: #bbbbbb;
-	opacity: .9;
+	background: rgba(0,0,0,0.7);
 	height: 80px;
 	vertical-align: middle;
 	top:50%;
@@ -123,9 +126,83 @@ body::-webkit-scrollbar{
 	margin-top: -40px;
 	z-index: 3;
 }
-.mui-loading-container i.mui-icon{
+.mui-loading-container i::before{
 	color: #FFFFFF;
+	font-size: 30px;
+	-webkit-animation: spinner-spin 1s step-end infinite;
+	animation: spinner-spin 1s step-end infinite;
 }
+.tui-loading {
+	height : 10px;
+	width : 10px;
+	position : absolute;
+	background-color : #fff;
+	border-radius : 50%;
+	top : 0;
+	left : 8px;
+}
+
+.tui-rond {
+	height  : 60px;
+	width : 60px;
+	border : 1px solid #fff;
+	border-radius : 50%;
+	position :absolute;
+	top : 10px;
+	left : 30px;
+	animation : rond 1.5s infinite;
+	-webkit-animation : rond 1.5s infinite;
+}
+.mui-uploader-loading-container{
+	position: absolute;
+	top:8px;
+	left: 8px;
+}
+.mui-uploader-loading-container i::before{
+	color: #FFFFFF;
+	font-size: 10px;
+	-webkit-animation: spinner-spin 1s step-end infinite;
+	animation: spinner-spin 1s step-end infinite;
+}
+.tui-uploader-loading {
+	height : 5px;
+	width : 5px;
+	position : absolute;
+	background-color : #fff;
+	border-radius : 50%;
+	top : 0;
+	left : 3px;
+}
+
+.tui-uploader-rond {
+	height  : 24px;
+	width :24px;
+	border : 1px solid #fff;
+	border-radius : 50%;
+	position :absolute;
+	top : 13px;
+	left :13px;
+	animation : rond 1.5s infinite;
+	-webkit-animation : rond 1.5s infinite;
+}
+.tui-uploader-load{
+	text-align: center;
+	font-size: 10px;
+	width: 80px;
+	position: absolute;
+	top: 12px;
+	left: -15px;
+}
+@keyframes rond {
+	0% {transform : rotate(0deg);}
+	100% {transform : rotate(360deg);}
+}
+
+@-webkit-keyframes rond {
+	0% {-webkit-transform : rotate(0deg);}
+	100% {-webkit-transform : rotate(360deg);}
+}
+
 /*********
  * 按钮
  * *******/
@@ -899,57 +976,45 @@ option {
 .tui-admin-banner p{
 	margin: 0;
 }
-.tui-admin-icon{
+.tui-admin-header{
 	display: inline-block;
 	background-size: cover;
 	border-radius: 50%;
 }
 @media screen and (max-device-width:640px){
-	.tui-admin-icon{
+	.tui-admin-header{
 		width: 61px;
 		height: 61px;
 		border:1px solid #DEDEDE;
 	}
 }
 @media screen and (min-device-width:640px){
-	.tui-admin-icon{
+	.tui-admin-header{
 		width: 121px;
 		height: 121px;
 	}
 }
-.tui-user-name{
-	width: auto;
-	background: #c4c4c4;
-	text-align: center;
-	padding:0 15px;
-	border-radius: 4px;
-}
-.tui-wodedingdan1
- {
-	 color: #ff6a00;
-	 font-size: 30px;
- }
-.tui-chechan
-{
-	color: #fb6464;
-	font-size: 30px;
+.tui-admin-icon {background-image: url("../images/admin-icon.png"); display: inline-block; float: left;margin-right: 10px;}
+.tui-admin-pinggushi {background-position: -0px -90px; width: 25px; height: 25px; }
+.tui-admin-danweixinxi {background-position: -360px -45px; width: 25px; height: 25px; }
+.tui-admin-gerenziliao{background-position: -315px -45px; width: 25px; height: 25px; }
+.tui-admin-jiaoyijilu{background-position: -270px -45px; width: 25px; height: 25px; }
+.tui-admin-yinhangka{background-position: -225px -45px; width: 25px; height: 25px; }
+.tui-admin-chongzhi {background-position: -180px -45px; width: 25px; height: 25px; }
+.tui-admin-tixian{background-position: -120px -45px; width: 25px; height: 25px; }
+.tui-admin-tonghangzhaoche {background-position: -0px -45px; width: 25px; height: 25px; }
+.tui-admin-jiaoyimima {background-position: -60px -45px; width: 25px; height: 25px; }
+.tui-admin-mimashezhi{background-position: -360px -0px; width: 25px; height: 25px; }
+.tui-admin-zhanghaozhongxin {background-position: -315px -0px; width: 25px; height: 25px; }
+.tui-admin-wodexiaoxi {background-position: -270px -0px; width: 25px; height: 25px; }
+.tui-admin-youhuiquan{background-position: -225px -0px; width: 25px; height: 25px; }
+.tui-admin-wodecheyuan {background-position: -180px -0px; width: 25px; height: 25px; }
+.tui-admin-pinggudingdan{background-position: -120px -0px; width: 25px; height: 25px; }
+.tui-admin-sell{background-position: -60px -0px; width: 25px; height: 25px; }
+.tui-admin-buy{background-position: -0px -0px; width: 25px; height: 25px; }
 
-}
-.tui-youhuiquan
- {
-	color: #fb9c0a;
-	font-size: 30px;
- }
-.tui-xiaoxi
-{
-	color: #0ec1e9;
-	font-size: 30px;
-}
-.tui-zhanghaoanquan
-{
-	color: #93d557;
-	font-size: 30px;
-}
+
+
 .tui-login{
 	 position: absolute;
 	 z-index: 100;
@@ -1156,7 +1221,15 @@ option {
 	justify-content: flex-end;
 	align-items: center;
 }
-
+.tui-fullpay-check{
+	-webkit-flex: 0 0 50%;
+	 position:releative;
+}
+.tui-fullpay-check input[type=checkbox]{
+	position:absolute;
+	top: -7px;
+	left: 40px !important;
+}
  .tui-fullpay-title{
 
 	-webkit-flex: 0 0 30%;
@@ -1169,6 +1242,7 @@ option {
 	border-top:1px solid #dedede;
 	font-size: 14px;
 	line-height: 38px;
+	margin-top: 10px;
 }
 .tui-order-form{
 	background: #FFFFFF;
@@ -1382,7 +1456,7 @@ option {
 
 .mui-input-row.tui-image-container{
 	background: #FFFFFF;
-	display: block;
+	display: block !important;
 	min-height: 125px;
 	height: auto;
 }
@@ -1917,3 +1991,132 @@ option {
 	margin: 10px 0;
 	line-height: 24px;
 }
+/*
+*优惠券
+*/
+.tui-discount{
+padding: 10px;
+	background: transparent;
+}
+.tui-discount-item.mui-table-view-cell:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 15px;
+    height: 0px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    /* background-color: #c8c7cc; */
+}
+.tui-discount-item{
+	display: -webkit-flex;
+	-webkit-justify-content: center;
+	-webkit-align-items: center;
+	background: #FFFFFF url("../images/watermark.png") no-repeat 90% 80%;
+	background-size: 60% 60%;
+	padding: 0;
+	margin: 5px 0;
+	position: relative;
+	border: 1px solid #dedede;
+}
+.tui-discount-item.active{
+	border: 1px solid #FF6A00;
+	-webkit-transition:all  0.5s;
+}
+.tui-discount-item.active::before{
+	content: '\e678';
+	display: block;
+	font-family:"iconfont" !important;
+  font-size:30px;
+  line-height: 1;
+  color: #FF6A00;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  position: absolute;
+  right: -2px;
+  top: -4px;
+}
+.tui-discount-main{
+	-webkit-flex: 1 1 40%;
+	padding: 0 2px;
+	text-align: center;
+	border-right: dashed 1px #FFFFFF;
+}
+.tui-discount-aside{
+	-webkit-flex: 1 1 auto;
+	padding: 0 10px;
+	color: #4c4c4c;
+}
+.tui-discount-aside p{
+	color: #4c4c4c;
+}
+.tui-discount-reduction{
+	background: #8cc754;
+}
+.tui-discount-deduction{
+	background: #a60a03;
+}
+.tui-discount-bootless{
+	background: #b3b3b3;
+}
+.tui-discount-value{
+	font-size: 16px;
+	color: #FFFFFF;
+	font-family:arial;
+	font-weight: 700;
+}
+.tui-discount-for{
+	font-size: 14px;
+	color: #FFFFFF;
+}
+.tui-discount-reduction .tui-discount-date{
+	font-size: 10px;
+	color: #209305;
+}
+.tui-discount-deduction .tui-discount-date{
+	font-size: 10px;
+	color: #7c0302
+}
+.tui-discount-bootless .tui-discount-date{
+	font-size: 10px;
+}
+.tui-promotion-banner img{
+	width: 100%;
+	height:auto;
+}
+.tui-promotion-title{
+	padding: 10px;
+	font-size: 16px;
+	background: #FFFFFF;
+	border-bottom: 1px solid #DEDEDE;
+	color: #4c4c4c;
+}
+.tui-promotion-title i{
+	font-size: 16px;
+	color: #ab5015;
+}
+.tui-promotion-description{
+ 	padding: 10px;
+	display: -webkit-flex;
+	-webkit-justify-content: flex-start;
+	align-items: flex-start;
+}
+.tui-promotion-description span{
+	-webkit-flex:  0 0 25%;
+}
+.tui-promotion-description label{
+	-webkit-flex:  0 0 75%;
+}
+.tui-promotion-usagerule{
+	padding: 10px;
+}
+.tui-promotion-usagerule p{
+	text-indent: 2em;
+}
+.tui-promotion-statement{
+	text-align: center;
+	color: #005ae1;
+}
+

@@ -224,8 +224,11 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
         link:function(scope,element,attr){
             scope.pager=function(pageNo){
                 var config= $.extend({},scope.pagerConfig);
-                if(config.total==0){
+                if(config.total==0&&document.querySelector('.tui-nolist')==null){
                     $(element[0]).before('<div class="tui-nolist"></div>')
+                }
+                else{
+                   $('.tui-nolist').remove()
                 }
                 pageNo=pageNo||1
                 var pageLength = (config.total % config.pageSize == 0 ? config.total / config.pageSize : Math.ceil(config.total /config.pageSize));
@@ -381,25 +384,55 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                     var getDataUrl=function(files){
                         var file = files[i];
                         if (file) {
-                            var reader = new FileReader();
                             var elem=ui.preView();
-                            var flag=$(element[0]).attr('data-flag')
-                            reader.onload = function(e) {
-                                //处理 android 4.1 兼容问题
+                            var flag=$(element[0]).attr('data-flag');
+                            var url = webkitURL.createObjectURL(file);
+                            var $img = new Image();
+                            $img.onload = function() {
+
+                            //生成比例
+                            var width = $img.width,
+                                    height = $img.height,
+                                    scale = width / height;
+                            width = parseInt(1280);
+                            height = parseInt(width / scale);
+
+                            //生成canvas
+                            var $canvas = document.createElement('canvas');
+                            var ctx = $canvas.getContext('2d');
+                            $canvas.width=width;
+                            $canvas.height=height;
+                            ctx.drawImage($img, 0, 0, width, height);
+                            var base64 = $canvas.toDataURL('image/jpeg',0.5);
+                            elem.style.backgroundImage='url(' + base64 + ')';
+                            var params={BaseCode:base64.substr(23)};     
+                            UploaderService.uploader(params,flag).success(function(data){
+                                    if(data.status==1) {
+                                        $(elem).find('.mui-uploader-loading-container').remove()
+                                        elem.setAttribute('data-path',data.data.replace('_Big',''))
+                                    }
+                            });
+                            i++
+                            getDataUrl(files)
+
+                        }
+                        $img.src = url;
+                
+                        /* reader.onload = function(e) {
                                 var base64 = reader.result.split(',')[1];
                                 var dataUrl = 'data:image/jpg;base64,' + base64;
-                                var params={BaseCodes:base64};
+                                var params={BaseCode:base64};
                                 elem.style.backgroundImage='url(' + dataUrl + ')';
                                 UploaderService.uploader(params,flag).success(function(data){
                                     if(data.status==1) {
-                                        $(elem).find('span.mui-icon').remove()
+                                        $(elem).find('.mui-uploader-loading-container').remove()
                                         elem.setAttribute('data-path',data.data)
                                     }
                                 });
                                 i++
                                 getDataUrl(files)
-                            }
-                            reader.readAsDataURL(file);
+                        }
+                        reader.readAsDataURL(file);*/
                         }
                     }
                     getDataUrl(this.files)
@@ -414,8 +447,9 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                 var closeButton = document.createElement('div');
                 closeButton.setAttribute('class', 'image-close');
                 closeButton.innerHTML = 'X';
-                var spinner=document.createElement('span');
-                spinner.setAttribute('class','mui-icon mui-spinner');
+                var loading = document.createElement('div');
+                loading.classList.add('mui-uploader-loading-container');
+                loading.innerHTML = '<div class="tui-uploader-rond"><div class="tui-uploader-loading"></div></div><div class="tui-uploader-load"><p>上传中</p></div>';
                 closeButton.addEventListener('click', function(event) {
                     event.stopPropagation();
                     event.cancelBubble = true;
@@ -425,7 +459,7 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                     return false;
                 }, false);
                 placeholder.appendChild(closeButton);
-                placeholder.appendChild(spinner)
+                placeholder.appendChild(loading)
                 ui.imageList.append(placeholder);
                 return placeholder;
             };
@@ -441,6 +475,7 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                 $('.tui-mask').addClass('active');
                 scope.car.Brand=$(this).attr('data-filter-value');
                 scope.BrandName=$(this).attr('data-text');
+                $('.tui-car-text').text($(this).attr('data-text'))
                 scope.getSeries();
                 $(element[0]).removeClass('active');
                 $('serieslist.tui-swipe-container').addClass('active  ').siblings('.tui-swipe-container').removeClass('active   fadeOutRightBig');
@@ -476,6 +511,8 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
             mui(elem).on('tap','li.tui-filter-item',function(){
                 scope.car.SeriesID=$(this).attr('data-filter-value');
                 scope.SeriesName=$(this).attr('data-text');
+                var text=$('.tui-car-text').text()+$(this).attr('data-text');
+                $('.tui-car-text').text(text);
                 scope.getSpecName();
                 $(element[0]).removeClass('active');
                 $('speclist.tui-swipe-container').addClass('active').siblings('.tui-swipe-container').removeClass('active');
@@ -504,6 +541,8 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
             mui(elem).on('tap','li.tui-filter-item',function(){
                 scope.car.CatalogID=$(this).attr('data-filter-value');
                 scope.car.SpecName=$(this).attr('data-text');
+                var text=$('.tui-car-text').text()+$(this).attr('data-text');
+                $('.tui-car-text').text(text);
                 $('.tui-mask').removeClass('active');
                 $('.tui-swipe-container').removeClass('active');
             })
@@ -669,10 +708,68 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
             })
         }
     }
-
-
-})
-
+}).directive('tuiNav',function(){
+    return {
+        restrict:'A',
+        replace:false,
+        link:function(scope,element,attr){
+            var elem=element[0];
+            elem.addEventListener('tap',function(e){
+                elem.querySelector('a').classList.add('tui-active')
+            })
+        }
+    }
+}).directive('discount',['$rootScope','$filter',function($rootScope,$filter){
+	return{
+		restrict:'E',
+		replace:false,
+		templateUrl:$rootScope.PATH+'/partials/discountusage.html',
+		link:function(scope,element,attr){
+			var elem=element[0]//.querySelector('.tui-discount-item');
+			var arr={
+				PolicyCodes:[],
+				Count:0
+			}
+			mui(elem).on('tap','.tui-discount-item',function(){
+				$(this). toggleClass('active');
+			});
+			mui(elem).on('tap','button.mui-pull-right',function(){
+				var  discount=$('.tui-discount-item.active');
+				angular.forEach(discount,function(obj,index){
+					var  value=$(obj).attr('data-value');
+					var code=$(obj).attr('data-code');
+					arr.PolicyCodes.push(code);
+					arr.Count=parseFloat(arr.Count)+parseFloat(value);
+				})
+				$('#Count').text('-'+$filter('currency')(arr.Count,'￥'));
+				if(parseFloat(scope.servicefees-arr.Count)>0)
+				{
+					var  fullpay=parseFloat(scope.order.PayTotal-(scope.servicefees-arr.Count));
+					var  servicepay=parseFloat(scope.servicefees-arr.Count);
+				}
+				else{
+					var  fullpay=parseFloat(scope.order.PayTotal-scope.servicefees);
+					var  servicepay=0;
+				}
+				$('#needpay').text($filter('currency')(fullpay,'￥'));
+				$('#needpayservice').text($filter('currency')(servicepay,'￥'));
+                scope.discount.PolicyCodes=arr.PolicyCodes;
+                scope.discount.Count=arr.Count;
+				arr={PolicyCodes:[],Count:0};
+				$('.tui-mask').removeClass('active');
+				$('.tui-swipe-container').removeClass('active');
+			});
+			mui(elem).on('tap','button.mui-pull-left',function(){
+				$('.tui-discount-item').removeClass('active');
+				$('.tui-mask').removeClass('active');
+				$('.tui-swipe-container').removeClass('active');
+				document.querySelector('input[name=usediscount]').checked=false
+				scope.discount.usage=false;
+			})
+		}
+		
+	}
+}])
 
 
 

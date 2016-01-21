@@ -32,18 +32,18 @@
 		else {
 			loading = document.createElement('div');
 			loading.classList.add('mui-loading-container');
-			loading.innerHTML = '<i class="mui-icon mui-spinner"></i>';
+			loading.innerHTML = '<div class="tui-rond"><div class="tui-loading"></div></div><div class="tui-load"><p>加载中</p></div>';
 			document.body.appendChild(loading);
 		}
-			//loading.classList.add('fadeOutDown')
 	}
 	mui.onload=function(){
 		var loading=$('.mui-loading-container');
 		setTimeout(function(){
 			loading.remove();
-		},500)
+		},350)
 
 	}
+	
 })(mui, document)
 
 //格式话时间日期

@@ -66,6 +66,8 @@
 .icon-che:before { content: "\e65c"; }
 .icon-jizhao:before { content: "\e648"; }
 .icon-shibai1:before { content: "\e614"; }
+.icon-commloading:before { content: "\e676"; }
+.icon-shou:before { content: "\e677"; }
 .icon-xingxing:before { content: "\e60b"; }
 .icon-zijinguanli:before { content: "\e60c"; }
 .icon-youhuiquan1:before { content: "\e65d"; }
@@ -77,6 +79,7 @@
 .icon-ershoucheqiugou:before { content: "\e642"; }
 .icon-wodexiaoxi:before { content: "\e65f"; }
 .icon-zhanghaoanquan0101:before { content: "\e638"; }
+.icon-xuanzexuanzhong:before { content: "\e678"; }
 .icon-star:before { content: "\e60d"; }
 .icon-renzhengchenggong:before { content: "\e62a"; }
 .icon-wodedingdan1:before { content: "\e632"; }
@@ -115,6 +118,7 @@
 .icon-shouyeshouye:before { content: "\e64f"; }
 .icon-icon2:before { content: "\e64b"; }
 .icon-qunfengzanwudingdan:before { content: "\e667"; }
+.icon-che2:before { content: "\e675"; }
 .icon-jiaoyijilu:before { content: "\e669"; }
 .icon-chongzhitixian:before { content: "\e66a"; }
 .icon-danwei:before { content: "\e66b"; }

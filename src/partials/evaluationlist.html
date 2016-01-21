@@ -1,3 +1,4 @@
+<!--委托评估师列表-->
 <style>
 	.dui-evalist-table .mui-table-view-cell:after {
 		left: 0px;
@@ -123,7 +124,7 @@
 		background: none;
 	}
 	
-	.mui-bar .mui-btn-link{
+	.mui-bar .mui-btn-link {
 		color: #333;
 	}
 	
@@ -132,15 +133,17 @@
 		color: #4d4d4d;
 	}
 	
-	.dui-bottom-nav {
-		position: fixed;
-		bottom: 0px;
+	.dui-appr-bottom {
+		position: relative;
+		/*float: left;*/
 		width: 100%;
-		border-top: 1px solid #dedede;
+		/*border-top: 1px solid #dedede;*/
 		background-color: #FFF;
+		padding: 20px;
+		text-align: center;
 	}
 	
-	.dui-bottom-nav .dui-b-nav-h {
+	.dui-appr-bottom .dui-b-nav-h {
 		line-height: 45px;
 		vertical-align: middle;
 		text-align: center;
@@ -148,10 +151,52 @@
 		float: left;
 	}
 	
-	.dui-bottom-nav .dui-b-nav-bg {
+	.dui-appr-bottom .dui-b-nav-bg {
 		background-color: #ff6a00;
 		color: #fff;
+		line-height:45px;
+		font-size: 16px;
 	}
+	
+	.dui-jp-title {
+		color: #4c4c4c;
+		font-size: 18px;
+		border-bottom: 1px solid #4d4d4d;
+		padding: 5px;
+		margin-bottom: 10px;
+	}
+	
+	.dui-jp-p-w {
+		padding: 10px;
+	}
+	
+	.dui-jp-p1 {
+		font-size: 18px;
+		line-height: 30px;
+		text-align: center;
+	}
+	
+	.dui-jp-p2 {
+		font-size: 14px;
+		line-height: 25px;
+		text-align: center;
+	}
+	
+	.dui-jp-p-w button {
+		width: 146px;
+		height: 37px;
+		background: #006bff;
+		color: #fff;
+		margin-top: 10px;
+		font-size: 16px;
+		border: 1px solid #006bff;
+		text-align: center;
+	}
+	
+	.tui-nolist {
+		display: none !important;
+	}
+	.dui-appr-price:before{content: '元'; position: absolute; right: 10px; top:10px; width:30px; height:30px;text-align: center;}
 </style>
 <div id="evalist">
 	<header class="mui-bar mui-bar-nav">
@@ -161,33 +206,30 @@
 	<div class="mui-content">
 
 		<div id="slider" class="mui-slider">
-			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+			<!--<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 				<a class="mui-control-item mui-active" href="#item_pgs">评估师</a>
 				<a class="mui-control-item" href="#item_jppgs">金牌评估师</a>
 			</div>
-			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>-->
 			<div class="mui-slider-group">
 				<div id="item_pgs" class="mui-slider-item mui-control-content mui-active">
 					<div class="dui-car-wrap">
 						<div class="mui-table-view dui-evalist-table">
 							<div class="mui-table-view-cell">
-								<a href="javascript:;" class="dui-nav-right">
-									<div class="mui-col-xs-11">
-										<div class="mui-col-xs-3 dui-car-w">
-											<div class="dui-car-img"><img ng-src="{{HOST + (carinfodata.HomePicID||'./images/detection-photo-default.gif')}}"></div>
-										</div>
-										<div class="mui-col-xs-9 dui-car-w">
-											<p><span ng-bind="carinfodata.SpecName"></span></p>
-											<p class="span14">{{carinfodata.Buyyear | CDateFormat}}上牌 {{carinfodata.Mileage}}万公里</p>
-											<p>
-												<span class="color-price span24">{{carinfodata.Price/10000 | number:2}} </span>
-												<span class="span14 color-price">万</span>
-												<span class="span14"><strike>{{carinfodata.NewCarPrice/10000 | number:2}}万</strike></span>
-												<p/>
-										</div>
+								<div class="mui-col-xs-12">
+									<div class="mui-col-xs-3 dui-car-w">
+										<div class="dui-car-img"><img ng-src="{{carinfodata.HomePicID||'./images/detection-photo-default.gif'}}"></div>
 									</div>
-									<div class="mui-col-xs-1"></div>
-								</a>
+									<div class="mui-col-xs-9 dui-car-w dui-appr-td">
+										<p><span ng-bind="carinfodata.SpecName"></span></p>
+										<p class="span14">{{carinfodata.Buyyear|DateTimeFormat:'yyyy年MM月dd日'}}上牌 {{carinfodata.Mileage}}万公里</p>
+										<p>
+											<span class="color-price span24">{{carinfodata.Price/10000 | number:2}} </span>
+											<span class="span14 color-price">万</span>
+											<span class="span14"><strike>{{carinfodata.NewCarPrice/10000 | number:2}}万</strike></span>
+											<p/>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -196,7 +238,7 @@
 						<div class="mui-table-view-cell" ng-repeat="obj in list">
 							<a ng-click="viewevaluation(obj)" class="dui-nav-right">
 								<div class="mui-col-xs-3 dui-appr-td">
-									<div class="dui-appr-photo"><img ng-src="{{HOST + obj.HeadImage}}" src="./images/detection-photo-default.gif"></div>
+									<div class="dui-appr-photo"><img ng-src="{{obj.HeadImage}}" src="./images/detection-photo-default.gif"></div>
 								</div>
 								<div class="mui-col-xs-8 dui-appr-td">
 									<p class="p1">【<span ng-bind='obj.CityName'></span>】 <span ng-bind='obj.UserName'></span> <span ng-bind='obj.Contact'></span></p>
@@ -210,19 +252,39 @@
 							</a>
 						</div>
 					</div>
+
+					<div class="mui-table-view dui-evalist-table" style="margin-top: 10px;">
+						<div class="mui-table-view-cell">
+							<div class="dui-jp-title">委托车同享金牌评估师</div>
+							<div class="mui-col-xs-12" style="background: #f2f2f2; border: 1px solid #dedede; position: relative;">
+								<div class="mui-col-xs-12"><img src="./images/ctx-pgs.jpg"></div>
+								<div class="mui-col-xs-12 dui-jp-p-w">
+									<p class="dui-jp-p1">金牌评估师 车同享权威认证</p>
+									<p class="dui-jp-p2">一键委托，评估更便捷，进度全跟踪</p>
+									<p style="text-align: center;">
+										<button ng-click="toctx()">提交请求</button>
+									</p>
+								</div>
+								<div style="position: absolute; right: -6px; top: -55px;"><img src="./images/jinpai.png"></div>
+							</div>
+						</div>
+					</div>
+					
+					<pager></pager>
+					
 				</div>
-				<div id="item_jppgs" class="mui-slider-item mui-control-content">
+				<!--<div id="item_jppgs" class="mui-slider-item mui-control-content">
 					<div class="dui-car-wrap">
 						<div class="mui-table-view dui-evalist-table">
 							<div class="mui-table-view-cell">
 								<a href="javascript:;" class="dui-nav-right">
 									<div class="mui-col-xs-11">
 										<div class="mui-col-xs-3 dui-car-w">
-											<div class="dui-car-img"><img ng-src="{{HOST + (carinfodata.HomePicID||'./images/detection-photo-default.gif')}}"></div>
+											<div class="dui-car-img"><img ng-src="{{carinfodata.HomePicID||'./images/detection-photo-default.gif'}}"></div>
 										</div>
 										<div class="mui-col-xs-9 dui-car-w">
 											<p><span ng-bind="carinfodata.SpecName"></span></p>
-											<p class="span14">{{carinfodata.Buyyear | CDateFormat}}上牌 {{carinfodata.Mileage}}万公里</p>
+											<p class="span14">{{carinfodata.Buyyear|DateTimeFormat:'yyyy年MM月dd日'}}上牌 {{carinfodata.Mileage}}万公里</p>
 											<p>
 												<span class="color-price span24">{{carinfodata.Price/10000 | number:2}} </span>
 												<span class="span14 color-price">万</span>
@@ -235,10 +297,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
-		<pager></pager>
 	</div>
 </div>
 
@@ -251,9 +312,9 @@
 	<div class="mui-content">
 
 		<div class="mui-table-view dui-evalist-table">
-			<div class="mui-table-view-cell">
+			<div class="mui-table-view-cell dui-no-active">
 				<div class="mui-col-xs-3 dui-appr-td">
-					<div class="dui-appr-photo"><img ng-src="{{HOST + evaluationdata.HeadImage}}" src="./images/detection-photo-default.gif"></div>
+					<div class="dui-appr-photo"><img ng-src="{{evaluationdata.HeadImage}}" src="./images/detection-photo-default.gif"></div>
 				</div>
 				<div class="mui-col-xs-9 dui-appr-td">
 					<p class="p1">【<span ng-bind='evaluationdata.CityName'></span>】 <span ng-bind='evaluationdata.UserName'></span> <span ng-bind='evaluationdata.Contact'></span></p>
@@ -267,24 +328,28 @@
 
 		<form name="eval_form" id="eval_form">
 			<div class="mui-table-view dui-evalist-table">
-				<div class="mui-table-view-cell dui-pay-title">
+				<div class="mui-table-view-cell dui-pay-title dui-no-active">
 					<h6>支付评估费用</h6>
 				</div>
 
 				<div class="mui-table-view-cell">
-					<div class="mui-input-group">
+					<!--<div class="mui-input-group">-->
 						<div class="mui-input-row">
 							<label>评估费用</label>
-							<input type="text" name="eva_price" id="eva_price" required="required" placeholder="请输入评估费用金额">
+							<input type="text" name="eva_price" id="eva_price" required="required" placeholder="请输入评估费用金额"><span class="dui-appr-price"></span>
 						</div>
-					</div>
+					<!--</div>-->
 				</div>
 			</div>
 
-			<div class="dui-bottom-nav">
-				<a href="javascript:;"><div class="mui-col-xs-5 dui-b-nav-h">拨打电话</div></a>
-				<a href="javascript:;"><div class="mui-col-xs-7 dui-b-nav-h dui-b-nav-bg" ng-click="gotobuy(evaluationdata)">确认提交</div></a>
+			<div class="dui-appr-bottom">
+				<button type="button" class="mui-btn mui-btn-danger mui-btn-block" ng-click="gotobuy(evaluationdata)">确认提交</button>
+				<!--<a href="javascript:;">
+					<div class="dui-b-nav-bg" ng-click="gotobuy(evaluationdata)">确认提交</div>
+				</a>-->
 			</div>
 		</form>
 	</div>
 </div>
+
+<div ng-include="'partials/nav.html'"></div>

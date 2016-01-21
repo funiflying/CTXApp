@@ -91,13 +91,13 @@
 	</div>
 
 	<div class="mui-table-view dui-evalist-table">
-		<div class="mui-table-view-cell mui-col-xs-12">
+		<!--<div class="mui-table-view-cell mui-col-xs-12">
 			<div class="dui-appr-photo"></div>
-		</div>
+		</div>-->
 		<div class="mui-table-view-cell mui-col-xs-12">
 			<div class="dui-evalist-table dui-eva-order">
 				<div class="mui-col-xs-4 dui-carinfo-img dui-appr-td">
-					<img ng-src="{{HOST + (carinfodata.HomePicID||'/images/default_img.png')}}">
+					<img ng-src="{{carinfodata.HomePicID||'/images/default_img.png'}}">
 				</div>
 				<div class="mui-col-xs-8 dui-appr-td">
 					<p><span class="span16" ng-bind="carinfodata.SpecName"></span></p>
@@ -127,10 +127,10 @@
 			<div class="mui-table-view-cell span16">支付方式 &nbsp;<span class="span14">(请选择下面的支付方式)</span></div>
 		</div>
 		<ul class="mui-table-view mui-table-view-radio">
-			<li class="mui-table-view-cell">
+			<li class="mui-table-view-cell mui-selected">
 				<a class="mui-navigate-right">微信支付</a>
 			</li>
-			<li class="mui-table-view-cell mui-selected">
+			<li class="mui-table-view-cell ">
 				<a class="mui-navigate-right">支付宝</a>
 			</li>
 			<li class="mui-table-view-cell">
@@ -141,7 +141,7 @@
 			<div class="mui-table-view-cell span16">评估截止时间</div>
 		</div>
 		<div class="dui-eva-button">
-			<button type="button" class="mui-btn mui-btn-danger mui-btn-block">提交订单</button>
+			<button type="button" ng-click="ordersubmit()" class="mui-btn mui-btn-danger mui-btn-block">提交订单</button>
 		</div>
 	</div>
 </div>
