@@ -1,19 +1,19 @@
 <div class="tui-content">
     <header class="mui-bar mui-bar-nav tui-bar-nav">
-        <h1 class="mui-title">活动详情</h1>
+        <h1 class="mui-title">优惠券详情</h1>
     </header>
     <section class="tui-promotion-banner" ng-init="getInfo()">
         <img ng-src="{{promotion.PolicyLogoURL||'images/promotion.png'}}" >
     </section>
     <section class="tui-promotion-title">
         <i class="iconfont icon-youhuiquan"></i>
-        抵用券详情
+        优惠券详情
     </section>
     <section class="tui-promotion-description">
-        <span>活动时间：</span><label><i ng-bind="promotion.PolicyStartDateFull|DateTimeFormat:'yyyy-MM-dd'"></i>到<i ng-bind="promotion.PolicyEndDateFull|DateTimeFormat:'yyyy-MM-dd'"></i></label>
+        <span>有效时间：</span><label><i ng-bind="promotion.PolicyStartDateFull|DateTimeFormat:'yyyy-MM-dd'"></i>到<i ng-bind="promotion.PolicyEndDateFull|DateTimeFormat:'yyyy-MM-dd'"></i></label>
     </section>
     <section class="tui-promotion-description">
-        <span>活动规则：</span><label ng-bind="promotion.PolicyBrief"></label>
+        <span>优惠券规则：</span><label ng-bind="promotion.PolicyBrief"></label>
     </section>
     <section class="tui-promotion-usagerule">
         <span>使用规则：</span>

@@ -72,7 +72,7 @@ angular.module('CTXAppServices', []).factory('ResourceService', ['$resource', '$
                     surl='/account/OutAndAllanceLogin';
                     break;
                 case 'loginout':
-                    surl='/account/LoginOff';
+                    surl='/account/wxunbinding';
                     break;
                 case 'GetCar':
                 	surl='/common/car/GetCar';   //获取车源基本信息
@@ -122,6 +122,9 @@ angular.module('CTXAppServices', []).factory('ResourceService', ['$resource', '$
                     break;
                     surl='/Order/userbuy';//提交买车订单
                     break;
+                case 'orderTopay':
+                	surl='/order/SendBankInfoToBuyer';  //汇款信息
+                	break;
                 case 'GetTestReportWithCode': //通过检测编号获取检测报告
                 	surl='/Alliance/TestReport/GetTestReportWithCode';
                 	break;
@@ -185,6 +188,18 @@ angular.module('CTXAppServices', []).factory('ResourceService', ['$resource', '$
                 case 'TestEntrust':
                 	surl='/Alliance/AppraiserOrder/TestEntrust';  //委托订单提交
                 	break;
+                case 'worrylist':
+                    surl='/Common/CarWorrySell/GetCarWorrySellListWithFlag';  //急售列表
+                    break;
+                case 'worry':
+                    surl='/Common/CarWorrySell/PublishWorryCar';  //急售发布
+                    break;
+                case 'guideprice':
+                    surl='/common/car/GetGuidePrice';  //急售指导价
+                    break;
+                case 'validcode':
+                    surl='/common/message/ValideMessageCode';  //短信验证
+                    break;
                 default:
                     break;
             }
@@ -276,7 +291,14 @@ angular.module('CTXAppServices', []).factory('ResourceService', ['$resource', '$
         },
         carsellcount:function(){
             return $http.get($rootScope.HOST+'/Common/car/GetSellingCount')
+        },
+        WriteTestReport:function(data){
+            return $http.post($rootScope.HOST+'/Alliance/TestReport/WriteTestReport',data)
+        },
+        OrderPostTestReport:function(data){
+            return $http.post($rootScope.HOST+'/Order/OrderPostTestReport',data)
         }
+        
     }
 
 }])

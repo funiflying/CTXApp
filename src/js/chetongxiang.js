@@ -2,7 +2,9 @@
  * 自动消失提示框
  */
 (function(mui, document) {
+    mui.init();
 	mui.toast = function(_message,callback) {
+        _message=(_message==undefined?'访问出错了':_message)
 		if (mui.os.plus) {
 			//默认显示在底部；
 			mui.plusReady(function() {
@@ -78,7 +80,8 @@ function extend(des, src, override) {
 	}
 	return des;
 }
-Array.prototype.remove = function(index) {
+/*
+Array.prototype.removeIndex = function(index) {
 	if (isNaN(index) || index > this.length) {
 		return false;
 	}
@@ -88,4 +91,17 @@ Array.prototype.remove = function(index) {
 		}
 	}
 	this.length -= 1
+}
+*/
+if (!Date.prototype.toISOString) {
+	Date.prototype.toISOString = function() {
+		function pad(n) { return n < 10 ? '0' + n : n }
+		return this.getUTCFullYear() + '-'
+			+ pad(this.getUTCMonth() + 1) + '-'
+			+ pad(this.getUTCDate()) + 'T'
+			+ pad(this.getUTCHours()) + ':'
+			+ pad(this.getUTCMinutes()) + ':'
+			+ pad(this.getUTCSeconds()) + '.'
+			+ pad(this.getUTCMilliseconds()) + 'Z';
+	}
 }

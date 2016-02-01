@@ -6,8 +6,29 @@
 angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$rootScope','$swipe','ResourceService','LocalStorageService',function($scope,$rootScope,$swipe,ResourceService,LocalStorageService){
     $rootScope.CityID=(LocalStorageService.getStorage('LOCALTION')&&LocalStorageService.getStorage('LOCALTION').CityID)||''
     $rootScope.CityName=(LocalStorageService.getStorage('LOCALTION')&&LocalStorageService.getStorage('LOCALTION').CityName)||'全国';
+    //默认封面
+    $rootScope.cover=$rootScope.PATH+'/images/carcover.gif';
     //同行价
     $rootScope.WholesalePrice=(LocalStorageService.getStorage('WholesalePrice')&&LocalStorageService.getStorage('WholesalePrice').WholesalePrice)||false;
+
+    //退出
+    $rootScope.LOGINOUT=function(){
+        ResourceService.getFunServer('loginout',{}).then(function(data){
+            if(data.status==1){
+                mui.toast('您已成功退出',function(){
+                    $rootScope.user=null;
+                    LocalStorageService.removeStorage('AUTH');
+                    LocalStorageService.removeStorage('WholesalePrice');
+                    $rootScope.state.reload()
+                })
+            }
+            else{
+                mui.toast(d.message)
+            }
+        })
+    }
+
+
 }]).controller('HomeController',['$scope','$rootScope','$swipe','ResourceService',function($scope,$rootScope,$swipe,ResourceService){
 
     var gallery = mui(".mui-slider");
@@ -88,7 +109,8 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
         Style: $rootScope.stateParams.Style||null,
         WomenCar: null,
         PageNum:$scope.pagerConfig.pageSize,
-        IncludeFlag:0
+        IncludeFlag:0,
+        IsMobile:1
     }
     var city=ResourceService.getFunServer('servicecity',{}).then(function(data){
         if(data.status==1){
@@ -101,9 +123,9 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
     LocalStorageService.setSearchCarHistory($rootScope.stateParams);
     $scope.getList=function(pageNo){
         $scope.filter.PageNo=pageNo||1;
-        $scope.filter.IncludeFlag>0?$scope.filter.CityID==-1:$scope.filter.CityID=$rootScope.CityID;
+        $scope.filter.CityID=$rootScope.CityID;
         ResourceService.getFunServer('CarListServcie',$scope.filter,'post').then(function(data){
-            if(data.data[0])
+            if(data.data&&data.data[0])
             {
                 $scope.carlist=data.data[0].value;
                 $scope.pagerConfig.total=data.count;
@@ -257,6 +279,20 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
                 }
 			})
     }
+    //汇款信息
+    $scope.orderTopay=function(){
+        var params={
+             OrderCode:orderCode,
+			 paymount:$scope.order.PayTotal
+            
+        }
+        ResourceService.getFunServer('orderTopay',params,'post').then(function(data){
+            
+              
+        })
+    }
+    
+    
     //提交全款
     $scope.fullpay=function(){
         if($scope.orderForm.$valid){
@@ -395,7 +431,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
 
 
 }]).controller('LoginController',['$rootScope','$scope','ResourceService','LocalStorageService',function($rootScope,$scope,ResourceService,LocalStorageService){
-     $rootScope.user&&$rootScope.user.HeadImage? $scope.HeadStyle={backgroundImage:'url('+$rootScope.user.HeadImage+')'}:$scope.HeadStyle={backgroundImage:'url(../images/detection-photo-default.gif)'};
+   
     $scope.login={
         Contact:'',
         Code:''
@@ -434,6 +470,8 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
                if(data.status==1){
                    LocalStorageService.setStorage('AUTH',data.data);
                    $rootScope.user=data.data;
+	               $('.tui-login').removeClass('active');
+	               $('.tui-mask').removeClass('active');
                }
                else{
                    mui.toast(data.message);
@@ -441,8 +479,14 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
            })
        }
     }
-}]).controller('CarController',['$rootScope','$http','$scope','$filter','ResourceService','UploaderService','CarService',function($rootScope,$http,$scope,$filter,ResourceService,UploaderService,CarService){
-    $scope.car={};
+}]).controller('CarController',['$rootScope','$http','$scope','$filter','ResourceService','UploaderService','CarService','LocalStorageService',
+function($rootScope,$http,$scope,$filter,ResourceService,UploaderService,CarService,LocalStorageService){
+    $scope.car={
+        WholesalePrice:0,
+        Mileage:0,
+        TransferNo:0,
+        RegisterPlace:$rootScope.user&&$rootScope.user.CityName
+    };
 
     //分页条数
     $scope.pagerConfig={
@@ -457,7 +501,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
     //车源列表
     $scope.getList=function(pageNo){
       //联盟商车源
-       if($rootScope.user.AppraiserCode){
+       if($rootScope.user&&$rootScope.user.AppraiserCode){
            var params = {
                CarFlag: -1,
                PageNo: pageNo,
@@ -498,6 +542,53 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
            })
        }
     }
+    //车源历史记录
+    $scope.getRecordList=function(pageNo){
+        //联盟商车源
+        if($rootScope.user&&($rootScope.user.AllianceCode||$rootScope.user.AppraiserCode)){
+            var params = {
+                CarFlag: -1,
+                PageNo: pageNo,
+                PageNum:$scope.pagerConfig.pageSize
+            }
+            ResourceService.getFunServer('alliancecargather',params,'post').then(function(data){
+                if(data.status==1){
+                    $scope.list=data.data.rows;
+                    $scope.pagerConfig.total=data.data.total;
+                }
+                else {
+                    $scope.list=[];
+                    $scope.pagerConfig.total=0;
+                }
+                $scope.pagerConfig.callback=$scope.getRecordList;
+                $scope.pager(pageNo);
+
+            })
+        }
+        else {
+            //个人车源
+            var d = {
+                CarFlag: -1,
+                PageNo: pageNo,
+                PageNum:$scope.pagerConfig.pageSize
+            }
+            ResourceService.getFunServer('cargather',d,'post').then(function(data){
+                if(data.status==1){
+                    $scope.list=data.data.rows;
+                    $scope.pagerConfig.total=data.data.total;
+                }
+                else {
+                    $scope.list=[];
+                    $scope.pagerConfig.total=0;
+                }
+                $scope.pagerConfig.callback=$scope.getRecordList;
+                $scope.pager(pageNo);
+            })
+        }
+    }
+
+
+
     //车辆基本信息
     $scope.getCar=function(){
         if(!$scope.CarNo){
@@ -512,25 +603,24 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
                     switch (name){
                         case 'Car':
                             var  o= val[i].value[0]
-                            o.CarNo=o.CarNo;
                             o.Mileage=parseInt(o.Mileage);
                             o.TransferNo=parseInt(o.TransferNo);
-                            o.Price=parseFloat(o.Price/10000);
-                            o.WholesalePrice=parseFloat(o.WholesalePrice/10000);
+                            o.Price=parseFloat(o.Price);
+                            o.WholesalePrice=parseFloat(o.WholesalePrice);
                             o.Buyyear =new Date($filter('DateTimeFormat')(o.Buyyear,'yyyy/MM/dd'));
                             o.InitialDate =new Date($filter('DateTimeFormat')(o.InitialDate,'yyyy/MM/dd'));
                             o.Annual_Inspect_Time =new Date($filter('DateTimeFormat')(o.Annual_Inspect_Time,'yyyy/MM/dd'));
                             o.Compulsory_insurance_Time =new Date($filter('DateTimeFormat')(o.Compulsory_insurance_Time,'yyyy/MM/dd'));
                             o.Commercial_Insurance_Time =new Date($filter('DateTimeFormat')(o.Commercial_Insurance_Time,'yyyy/MM/dd'));
-                            o.IsUrgent=o.IsUrgent=='True'||true?true:false;
-                            o.QuasiNewCar=o.QuasiNewCar=='True'||true?true:false;
-                            o.LearnerCa=o.LearnerCa=='True'||true?true:false;
-                            o.WomenCar=o.WomenCar=='True'||true?true:false;
-                            o.SevenSeat=o.SevenSeat=='True'||true?true:false;
-                            o.DrivingLicense=o.DrivingLicense=='True'||true?true:false;
-                            o.Registration=o.Registration=='True'||true?true:false;
-                            o.PurchaseInvoices=o.PurchaseInvoices=='True'||true?true:false;
-                            o.IncludeTransferFee=o.IncludeTransferFee=='True'||true?true:false;
+                            o.IsUrgent=o.IsUrgent.toString().toLowerCase()=='true'?true:false;
+                            o.QuasiNewCar=o.QuasiNewCar.toString().toLowerCase()=='true'?true:false;
+                            o.LearnerCa=o.LearnerCa.toString().toLowerCase()=='true'?true:false;
+                            o.WomenCar=o.WomenCar.toString().toLowerCase()=='true'?true:false;
+                            o.SevenSeat=o.SevenSeat.toString().toLowerCase()=='true'?true:false;
+                            o.DrivingLicense=o.DrivingLicense.toString().toLowerCase()=='true'?true:false;
+                            o.Registration=o.Registration.toString().toLowerCase()=='true'?true:false;
+                            o.PurchaseInvoices=o.PurchaseInvoices.toString().toLowerCase()=='true'?true:false;
+                            o.IncludeTransferFee=o.IncludeTransferFee.toString().toLowerCase()=='true'?true:false;
                             o.CarPic_Car_CarNo=[];
                             $scope.car=o;
                             $scope.EditPic([{PicAddr:$scope.car.HomePicID}],'car-homepic')
@@ -549,7 +639,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
     }
     $scope.EditPic=function(images,id){
         angular.forEach(images,function(obj,index){
-        	var img=obj.PicAddr//.replace('_Big','');
+        	var img=obj.PicAddr;
             var imageList=document.getElementById(id);
             var placeholder = document.createElement('div');
             placeholder.setAttribute('class', 'image-item');
@@ -625,12 +715,35 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
     }
     //发布
     $scope.release=function() {
+        if($scope.car.FrameNumber&&$scope.car.FrameNumber.length!=17){
+            return mui.toast('车架号必须为17位')
+        }
         if ($scope.carForm.$valid) {
-            $scope.GetPicPath()
-            $scope.car.Price = parseFloat($scope.car.Price) * 10000;
-            $scope.car.WholesalePrice = parseFloat($scope.car.WholesalePrice) * 10000;
-            $scope.car.IncludeTransferFee = $scope.IncludeTransferFee;
+
             if ($scope.CarNo) {
+                $scope.GetPicPath()
+                $scope.car.IncludeTransferFee = $scope.IncludeTransferFee;
+                $scope.car.Buyyear=new Date($scope.car.Buyyear).toUTCString()||null;
+                $scope.car.InitialDate=new Date($scope.car.InitialDate).toUTCString()||null;
+                $scope.car.Annual_Inspect_Time=new Date($scope.car.Annual_Inspect_Time).toUTCString()||null;
+                $scope.car.Compulsory_insurance_Time=new Date($scope.car.Compulsory_insurance_Time).toUTCString()||null;
+                $scope.car.Commercial_Insurance_Time=new Date($scope.car.Commercial_Insurance_Time).toUTCString()||null;
+                $scope.car.WayFeeTime=new Date($scope.car.WayFeeTime).toUTCString()||null;
+
+               /* ResourceService.getFunServer('editcar',$scope.car,'post').then(function(data){
+                    if (data.data.status ==1) {
+                        mui.toast('编辑成功', function () {
+                            $rootScope.state.go('cargather');
+                        })
+                    } else {
+                        mui.toast(data.data.message,function(){
+                            $scope.car.Price = parseFloat($scope.car.Price)/ 10000 ;
+                            $scope.car.WholesalePrice = parseFloat($scope.car.WholesalePrice)/ 10000;
+                        });
+                    }
+                }, function (err) {
+                    mui.toast(err)
+                })*/
                 CarService.edit($scope.car).then(function (data) {
                     if (data.data.status ==1) {
                         mui.toast('编辑成功', function () {
@@ -639,21 +752,63 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
                     } else {
                         mui.toast(data.data.message);
                     }
+                },function (err) {
+                    mui.toast(err)
                 })
             }
             else {
+                $scope.GetPicPath()
+                /* $scope.car.IncludeTransferFee = $scope.IncludeTransferFee;
+                 $scope.car.Buyyear=new Date($scope.car.Buyyear)||null;
+                 $scope.car.InitialDate=new Date($scope.car.InitialDate)||null;
+                 $scope.car.Annual_Inspect_Time=new Date($scope.car.Annual_Inspect_Time)||null;
+                 $scope.car.Compulsory_insurance_Time=new Date($scope.car.Compulsory_insurance_Time)||null;
+                 $scope.car.Commercial_Insurance_Time=new Date($scope.car.Commercial_Insurance_Time)||null;
+                 $scope.car.WayFeeTime=new Date($scope.car.WayFeeTime)||null;*/
                 CarService.release( $scope.car).then(function (data) {
                     if (data.data.status ==1) {
                         mui.toast('发布成功', function () {
-                            $rootScope.state.go('cargather');
+                            if($rootScope.user&&$rootScope.user.AppraiserCode&&($rootScope.user.IdentityTag==2||$rootScope.user.IdentityTag==3)){
+                            	$scope.car.CarNo = data.data.data;
+                            	//填写检测报告
+								var flowdata = {
+									"flowFlag": "",
+									"isPingGu": false,
+									"backurl": "cargather",
+									"cardata": $scope.car,
+									"TestReport":""
+								};
+								LocalStorageService.setStorage("flowdata",flowdata);
+								window.location.href="./report.html#/addreport";
+								//$rootScope.state.go('addreport');	
+                            }else{
+                            	$rootScope.state.go('cargather');
+                            }
                         })
                     } else {
-                        mui.toast(data.data.message);
+                        mui.toast(data.data.message,function(){
+                             $scope.car.Price = parseFloat($scope.car.Price) ;
+                             $scope.car.WholesalePrice = parseFloat($scope.car.WholesalePrice);
+                        });
                     }
                 })
             }
         }
-    }
+    }  
+    
+    //填写检测报告
+    $scope.addreport = function(obj) {
+		var flowdata = {
+			"flowFlag": "",
+			"isPingGu": false,
+			"backurl": "cargather",
+			"cardata": obj,
+			"TestReport":""
+		};
+		LocalStorageService.setStorage("flowdata",flowdata);
+		window.location.href="./report.html#/addreport";
+		//$rootScope.state.go('addreport');
+	}
 }]).controller('AccountController',['$rootScope','$scope','ResourceService','LocalStorageService',function($rootScope,$scope,ResourceService,LocalStorageService){
 
     $scope.USER=$rootScope.user;
@@ -672,6 +827,14 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
                 }
             }
         })
+    }
+    //编辑用户信息
+    $scope.updateUser=function(user){
+        if(user){
+            ResourceService.getFunServer('updateUser',user,'post').then(function(data){
+                $scope.getUser();
+            })
+        }
     }
     //联盟商信息
     $scope.getAlliance=function(){
@@ -813,6 +976,8 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
             })
         }
     }
+    
+    
 }]).controller('SellController',['$rootScope','$scope','ResourceService','CarService',function($rootScope,$scope,ResourceService,CarService){
     $scope.getCarCount=function(){
         CarService.carsellcount().success(function(data){
@@ -865,8 +1030,182 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
    	    })
   
    }
+}]).controller('worryController',['$rootScope','$scope','ResourceService',function($rootScope,$scope,ResourceService){
+
+    //分页条数
+    $scope.pagerConfig={
+        pageSize:5,
+        total:0,
+        callback:null
+    }
+    $scope.list=[];
+    $scope.car={}
+    $scope.getList=function(pageNo){
+        //联盟商车源
+
+            var params = {
+                CarFlag: 255,
+                CheckFlag:2,
+                PageNo: pageNo,
+                PageNum:$scope.pagerConfig.pageSize,
+            }
+            ResourceService.getFunServer('worrylist',params,'post').then(function(data){
+                if(data.rows){
+                    $scope.list=data.rows;
+                    $scope.pagerConfig.total=data.total;
+                }
+                else {
+                    $scope.list=[];
+                    $scope.pagerConfig.total=0;
+                }
+                $scope.pagerConfig.callback=$scope.getList;
+                $scope.pager(pageNo);
+
+            })
+
+
+    }
+    //车系
+    $scope.getSeries=function(){
+        var params={
+            BrandID:$scope.car.Brand
+        }
+        ResourceService.getFunServer('Series',params,'post').then(function(data){
+            if(data.status==1){
+                $scope.series=data.data
+            }
+            else {
+                $scope.series=[];
+            }
+        })
+    }
+    //车型
+    $scope.getSpecName=function(){
+        var params={
+            brandid:$scope.car.Brand,
+            seriesid:$scope.car.SeriesID
+        }
+        ResourceService.getFunServer('SpecName',params,'post').then(function(data){
+            if(data.status==1){
+                $scope.speclist=data.data
+            }
+            else {
+                $scope.speclist=[];
+            }
+        })
+    }
+    $scope.watch={
+        CatalogID:$scope.car.Brand,
+        Buyyear:$scope.car.Buyyear,
+        Mileage:$scope.car.Mileage
+    }
+    //指导价
+    $scope.guideprice=0;
+    $scope.factoryprice=0
+    $scope.guide=function(){
+        if(!$scope.car.Brand||!$scope.car.Buyyear||!$scope.car.Mileage){
+            return;
+        }
+        var params={
+            CatalogID:$scope.car.Brand,
+            Buyyear:$scope.car.Buyyear,
+            Mileage:$scope.car.Mileage
+        }
+        ResourceService.getFunServer('guideprice',params,'post').then(function(data){
+            if(data.status==1){
+                $scope.guideprice=data.data.GuidePirce/10000;
+                $scope.factoryprice=data.data.FactoryPrice/10000
+                console.log($scope.guideprice,$scope.factoryprice)
+            }
+            else{
+                $scope.guideprice='未知';
+                $scope.factoryprice='未知';
+            }
+        })
+    }
+    $scope.$watch('car.Brand',function(){
+        $scope.guide()
+    },true);
+    $scope.$watch('car.Buyyear',function(){
+        $scope.guide()
+    },true)
+    $scope.$watch('car.Mileage',function(){
+        $scope.guide()
+    },true)
+
+    var settime=function(){
+
+        var el=$('.tui-getcode');
+        if ($rootScope.countdown == 0) {
+            el.removeAttr("disabled");
+            el.text("获取验证码");
+            $rootScope.countdown = 60
+        } else {
+            el.attr("disabled",'disabled');
+            el.text($rootScope.countdown + "s");
+            $rootScope.countdown--;
+            setTimeout(settime, 1000)
+        }
+    }
+    //短信验证码
+    $scope.getMCode=function(){
+        if($scope.car.OwnerPhone){
+            var params={
+                phoneNum:$scope.car.OwnerPhonet
+            }
+            ResourceService.getFunServer('SendPhoneValCode',params).then(function(data){
+                if(data.status==1){
+                    settime()
+                }
+            })
+        }
+    }
+    $scope.GetPicPath=function(){
+        var home=$('#car-homepic').find('.image-item:not(.space)');
+        $scope.car.HomePicURL=home.attr('data-path');
+    }
+   //发布
+    $scope.release=function(){
+        if($scope.carForm.$valid){
+            var code = {
+                phonenum: $scope.car.OwnerPhone,
+                code: $scope.code
+            }
+            $scope.GetPicPath();
+            ResourceService.getFunServer('worry',$scope.car,'post').then(function(data){
+                if(data.status==1){
+                    mui.toast('发布成功',function(){
+                        $rootScope.state.go('worrycar')
+                    })
+                }else{
+                    mui.toast(data.message)
+                }
+            })
+           /* ResourceService.getFunServer('validcode',code,'post').then(function(data){
+                if(data.status==1){
+                    ResourceService.getFunServer('worry',$scope.car,'post').then(function(data){
+                        if(data.status==1){
+                            mui.toast('发布成功',function(){
+                                $rootScope.state.go('worrycar')
+                            })
+                        }else{
+                            mui.toast(data.message)
+                        }
+                    })
+
+                }else{
+                    mui.toast(data.message)
+                }
+
+
+            })*/
 
 
 
+
+
+        }
+
+    }
 
 }])

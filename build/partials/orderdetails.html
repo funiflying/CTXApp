@@ -9,8 +9,11 @@
                 <span class="mui-pull-right tui-font-green"><span ng-if="order.RevokeFlag==0" ng-bind="order.OrderFlag|OrderStatus"></span><span ng-if="order.RevokeFlag>0" ng-bind="order.RevokeFlag|RevokeStatus"></span></span>
             </section>
             <section class="tui-order-info">
-                <div class="tui-order-icon" data-car="{{order.CarNo}}">
-                    <img ng-src="{{order.HomePicID}}" alt="">
+                 <div class="tui-order-icon" data-car="{{order.CarNo}}" ng-switch="order.AppraiserFlag">
+                     <img ng-src="{{order.HomePicID}}" alt="">
+                     <span class="tui-ctxrenzhen-3" ng-switch-when="3"></span>
+                     <span class="tui-ctxrenzhen-2" ng-switch-when="2"></span>
+                     <span class="tui-ctxrenzhen-1" ng-switch-when="1"></span>
                 </div>
                 <section class="tui-order-descr">
                     <h5 class="tui-car-name mui-ellipsis-2"><i ng-bind="order.BrandName+order.SpecName"></i></h5>
@@ -167,7 +170,7 @@
             </li>
             <li ng-class="{'tui-order-details-item active':order.OrderFlag>3,'tui-order-details-item underway ':order.OrderFlag==3,'tui-order-details-item':order.OrderFlag<3}">
                 <h4 class="tui-order-details-caption">
-                    购车全款
+                    联系物流
                 </h4>
                 <table border="0" cellspacing="0" cellpadding="0" class="tui-orderdetails-table" ng-if="order.OrderFlag>3">
 

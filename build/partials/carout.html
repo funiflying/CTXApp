@@ -12,12 +12,15 @@
                 </span>
             </section>
             <section class="tui-order-info" ui-sref="carinfo({CarNo:car.CarNo})">
-                <div class="tui-order-icon" data-car="{{car.CarNo}}">
-                    <img ng-src="{{car.HomePicID}}" alt="">
+                <div class="tui-order-icon" data-car="{{car.CarNo}}" ng-switch="car.AppraiserFlag">
+                     <img ng-src="{{car.HomePicID}}" alt="">
+                     <span class="tui-ctxrenzhen-3" ng-switch-when="3"></span>
+                     <span class="tui-ctxrenzhen-2" ng-switch-when="2"></span>
+                     <span class="tui-ctxrenzhen-1" ng-switch-when="1"></span>
                 </div>
                 <section class="tui-order-descr">
                     <h5 class="tui-car-name mui-ellipsis-2"><i ng-bind="car.BrandName+car.SpecName"></i></h5>
-                    <p class="tui-car-deploy"><i ng-bind="car.InitialDate|DateTimeFormat:'yyyy年MM月'"></i>上牌 <i ng-bind="car.Mileage"></i>万公里</p>
+                    <p class="tui-car-deploy"><i ng-bind="car.Buyyear|DateTimeFormat:'yyyy年MM月'"></i>上牌 <i ng-bind="car.Mileage"></i>万公里</p>
                     <p class="tui-car-sellprice"><span class="mui-pull-left tui-font-orange"><strong class="tui-car-price" ng-bind="car.Price/10000|currency:'￥'"></strong>万 </span><span class="mui-pull-right tui-car-newprice" ng-if="car.WholesalePrice>0">同行价 <i ng-bind="car.WholesalePrice/10000|currency:'￥'"></i>万</span></p>
                 </section>
             </section>
@@ -40,11 +43,11 @@
             </div>
             <div class="mui-input-row">
                 <label class="tui-form-required">新车主姓名</label>
-                <input type="text" class="mui-input-clear" ng-model="soldout.OwnerName" required>
+                <input type="text" class="mui-input-clear" ng-model="soldout.OwnerName" required maxlength="10">
             </div>
             <div class="mui-input-row">
                 <label class="tui-form-required">新车主电话</label>
-                <input type="tel" class="mui-input-clear" ng-model="soldout.OwnerPhone" required maxlength="10">
+                <input type="tel" class="mui-input-clear" ng-model="soldout.OwnerPhone" required>
             </div>
             <div class="mui-input-row">
                 <label>新车主地址</label>

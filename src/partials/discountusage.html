@@ -6,16 +6,16 @@
 </header>
      <ul class="mui-table-view tui-discount" ng-init="getDiscountList()">
         <li class="mui-table-view-cell tui-discount-item"  ng-repeat="obj in discountlist" ui-sref="promotion({PolicyCode:obj.PolicyCode})" data-value = "{{obj.PolicyValue}}" data-code="{{obj.PolicyCode}}">
-        <section ng-class="{true:'tui-discount-main tui-discount-reduction',false:'tui-discount-main tui-discount-deduction'}[obj.PolicyFlag==1]">
-            <p class="tui-discount-value"><i ng-if="obj.PolicyFlag==0"  ng-bind="obj.PolicyValue|currency:'￥'"></i><i ng-if="obj.PolicyFlag==1" ng-bind="obj.PolicyValue+'折'"></i></p>
-            <p class="tui-discount-for">【<i ng-bind="obj.PolicyName"></i>】</p>
-            <p class="tui-discount-date"><i ng-bind="obj.PolicyStartDateFull|DateTimeFormat:'yyyy-MM-dd'"></i>- <i ng-bind="obj.PolicyEndDateFull|DateTimeFormat:'yyyy-MM-dd'"></i> </p>
-        </section>
-        <section class="tui-discount-aside">
-            <p>编号：<i ng-bind="obj.PolicyCode"></i></p>
-            <p>使用范围：<i ng-bind="obj.PolicyRange|PolicyRange"></i></p>
-            <p>可叠加使用：<i ng-bind="obj.PolicyUseMutile|PolicyMutile"></i></p>
-        </section>
-    </li>
+            <section ng-class="{true:'tui-discount-main tui-discount-reduction',false:'tui-discount-main tui-discount-deduction'}[obj.PolicyFlag==1]">
+                <p class="tui-discount-value"><i ng-if="obj.PolicyFlag==0"  ng-bind="obj.PolicyValue|currency:'￥'"></i><i ng-if="obj.PolicyFlag==1" ng-bind="obj.PolicyValue+'折'"></i></p>
+                <p class="tui-discount-for">【<i ng-bind="obj.PolicyName"></i>】</p>
+                <p class="tui-discount-date">编号：<i ng-bind="obj.PolicyCode"></i></p>
+            </section>
+            <section class="tui-discount-aside">
+                <p>使用范围：<i ng-bind="obj.PolicyRange|PolicyRange"></i></p>
+                <p>优惠券有效期：<i ng-bind="obj.PolicyStartDateFull|DateTimeFormat:'yyyy-MM-dd'"></i>- <i ng-bind="obj.PolicyEndDateFull|DateTimeFormat:'yyyy-MM-dd'"></i> </p>
+                <p>可叠加使用：<i ng-bind="obj.PolicyUseMutile|PolicyMutile"></i></p>
+            </section>
+       </li>
     </ul>
 </div>

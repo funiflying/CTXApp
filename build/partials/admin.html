@@ -8,7 +8,7 @@
     <section class="tui-admin-banner">
         <p><span class="tui-admin-header" ng-style="HeadStyle"></span></p>
         <button ng-if="!user" type="button" class="mui-btn tui-btn-orange" tui-login>点击登录</button>
-        <span ng-if="user" class="tui-user-name" ng-bind="user.Contact"></span>
+        <strong ng-if="user" class="tui-user-name" style="color: #fff" ng-bind="user.Contact"></strong>
     </section>
     <ul class="mui-table-view">
         <li class="mui-table-view-cell" ui-sref="buyorder">
@@ -31,14 +31,19 @@
                 <i class="tui-admin-icon tui-admin-pinggudingdan"></i> 委托评估
             </a>
         </li>
-        <li class="mui-table-view-cell" ui-sref="appr_eval_list" ng-if="user.AppraiserCode">
+        <!--<li class="mui-table-view-cell" ui-sref="appr_eval_list" ng-if="user.AppraiserCode">
             <a class="mui-navigate-right">
-                <i class="tui-admin-icon tui-admin-pinggudingdan"></i> 委托评估订单
+                <i class="tui-admin-icon tui-admin-pinggudingdan" ></i> 委托评估订单
             </a>
-        </li>
+        </li>-->
         <li class="mui-table-view-cell" ui-sref="discount">
             <a class="mui-navigate-right">
-                <i class="tui-admin-icon tui-admin-youhuiquan"></i> 优惠券
+                <i class="tui-admin-icon tui-admin-youhuiquan"></i> 我的优惠券
+            </a>
+        </li>
+        <li class="mui-table-view-cell" ui-sref="worrycar">
+            <a class="mui-navigate-right">
+                <i class="tui-admin-icon tui-admin-youhuiquan"></i> 急售通道
             </a>
         </li>
        <!-- <li class="mui-table-view-cell">

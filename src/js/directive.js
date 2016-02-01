@@ -34,7 +34,8 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                 $('.tui-filter-type[data-role='+role+']').toggleClass('active');
                 $('.tui-filter-type:not([data-role='+role+'])').removeClass('active');
                 $('.tui-nav-item:not([data-for='+role+'])').removeClass('active');
-                $('.tui-filter-result').removeClass('active')
+                console.log($('.tui-filter-result i').text())
+                $('.tui-filter-result').removeClass('active');
 
             })
             //排序
@@ -223,6 +224,7 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
         transclude:true,
         link:function(scope,element,attr){
             scope.pager=function(pageNo){
+                var elem=element[0];
                 var config= $.extend({},scope.pagerConfig);
                 if(config.total==0&&document.querySelector('.tui-nolist')==null){
                     $(element[0]).before('<div class="tui-nolist"></div>')
@@ -232,10 +234,22 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                 }
                 pageNo=pageNo||1
                 var pageLength = (config.total % config.pageSize == 0 ? config.total / config.pageSize : Math.ceil(config.total /config.pageSize));
-
                 if(pageLength>1){
-                    $('.tui-page').show()
-                    var op="";
+                    $('.tui-page').show();
+                    var  page=  '<div class="tui-page">'+
+                    '<a class="page-up">'+
+                    '<span>上一页</span></a>'+
+                    '<a  class="page-select-a">'+
+                    '<span class="change-page">'+
+                    '<span class="select-con">'+
+                    '<span class="page-num"></span>'+
+                    '<span class="triangle page-triangle"></span></span>'+
+                    '<select name="" id="pager" class="tui-3g-page-btn">'+
+                    '</select></select>'+
+                    '</span></a><a class="page-down">'+
+                    '<span>下一页</span></a></div>'
+                     $(elem).html(page);
+                     var op='';
                     for (var i= 0;i<pageLength;i++){
                         if((i+1)==pageNo){
                             op+='<option  selected value="'+parseInt(i+1)+'" >'+parseInt(i+1)+'</option>';
@@ -263,36 +277,32 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                         $('.page-up').removeClass('disable').find('span').data('page',parseInt(pageNo)-1);
                         $('.page-down').removeClass('disable').find('span').data('page',parseInt(pageNo)+1);
                     }
-                }
-                else {
-                    $('.tui-page').hide()
+                    mui('.tui-page').on('change','.tui-3g-page-btn',function(){
+                        scope.pagerConfig.callback($(this).val())
+                    });
+                    mui('.page-up').on('tap','span',function(){
+                        var p=$(this).data('page')||1;
+                        scope.pagerConfig.callback(p)
+                    });
+                    mui('.page-down').on('tap','span',function(){
+                        var p=$(this).data('page')||1;
+                        scope.pagerConfig.callback(p)
+                    });
                 }
            }
-           mui('.tui-page').on('change','.tui-3g-page-btn',function(){
+          /* mui('.tui-page').on('change','.tui-3g-page-btn',function(){
                scope.pagerConfig.callback($(this).val())
            });
            mui('.page-up').on('tap','span',function(){
                var p=$(this).data('page')||1;
-               $('#pager').select()
                scope.pagerConfig.callback(p)
            });
            mui('.page-down').on('tap','span',function(){
                var p=$(this).data('page')||1;
                scope.pagerConfig.callback(p)
-           });
+           });*/
         },
-        template:' <div class="tui-page">'+
-        '<a class="page-up">'+
-        '<span>上一页</span></a>'+
-        '<a  class="page-select-a">'+
-        '<span class="change-page">'+
-        '<span class="select-con">'+
-       '<span class="page-num"></span>'+
-        '<span class="triangle page-triangle"></span></span>'+
-       '<select name="" id="pager" class="tui-3g-page-btn">'+
-        '</select></select>'+
-        '</span></a><a class="page-down">'+
-        '<span>下一页</span></a></div>',
+        template:'',
         replace:false
     }
 }]).directive('login',['$rootScope',function($rootScope){
@@ -405,13 +415,15 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                             ctx.drawImage($img, 0, 0, width, height);
                             var base64 = $canvas.toDataURL('image/jpeg',0.5);
                             elem.style.backgroundImage='url(' + base64 + ')';
-                            var params={BaseCode:base64.substr(23)};     
+                            var params={BaseCode:base64.substr(23)};
+                            console.log('uploader');
                             UploaderService.uploader(params,flag).success(function(data){
                                     if(data.status==1) {
                                         $(elem).find('.mui-uploader-loading-container').remove()
                                         elem.setAttribute('data-path',data.data.replace('_Big',''))
                                     }
                             });
+                             console.log('uploader');
                             i++
                             getDataUrl(files)
 
@@ -451,11 +463,10 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                 loading.classList.add('mui-uploader-loading-container');
                 loading.innerHTML = '<div class="tui-uploader-rond"><div class="tui-uploader-loading"></div></div><div class="tui-uploader-load"><p>上传中</p></div>';
                 closeButton.addEventListener('click', function(event) {
-                    event.stopPropagation();
+
                     event.cancelBubble = true;
-                    setTimeout(function() {
-                        placeholder.remove();
-                    }, 0);
+                    placeholder.remove();
+                    event.stopPropagation();
                     return false;
                 }, false);
                 placeholder.appendChild(closeButton);
@@ -751,6 +762,7 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
 					var  fullpay=parseFloat(scope.order.PayTotal-scope.servicefees);
 					var  servicepay=0;
 				}
+                scope.order.PayTotal=fullpay;
 				$('#needpay').text($filter('currency')(fullpay,'￥'));
 				$('#needpayservice').text($filter('currency')(servicepay,'￥'));
                 scope.discount.PolicyCodes=arr.PolicyCodes;
@@ -769,6 +781,131 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
 		}
 		
 	}
+}]).directive("cityPicker",function(){
+    return{
+		restrict:'A',
+		replace:false,
+		link:function(scope,element,attr){
+			var elem=element[0]//.querySelector('.tui-discount-item');
+			var cityPicker = new mui.PopPicker({
+				layer: 3
+            });
+            cityPicker.setData(cityData3)
+			mui(elem).on('tap','.tui-select-city',function(){
+                cityPicker.show(function(items) {
+                    $('.tui-city-result').text((items[1] || {}).text);
+                    scope.USER.CityID=(items[2] || {}).value;
+                    scope.USER.CityName=(items[1] || {}).text;
+                    scope.updateUser(scope.USER)
+                });
+				
+			});
+			
+		}
+	}
+}).directive("worryPicker",function(){
+    return{
+        restrict:'A',
+        replace:false,
+        link:function(scope,element,attr){
+            var elem=element[0]//.querySelector('.tui-discount-item');
+            var cityPicker = new mui.PopPicker({
+                layer: 3
+            });
+            cityPicker.setData(cityData3)
+            mui(elem).on('tap','.tui-select-city',function(){
+                cityPicker.show(function(items) {
+                    $('.tui-city-result').text((items[1] || {}).text);
+                    scope.car.CityID=(items[2] || {}).value;
+                    scope.car.CityName=(items[1] || {}).text;
+                });
+
+            });
+
+        }
+    }
+}).directive('uploaerHead',['UploaderService',function(UploaderService){
+    return {
+        restrict: 'A',
+        replace: false,
+        link: function (scope, element, attr) {
+           var fileInput=element[0];
+            fileInput.addEventListener('change', function(event) {
+                    var file = this.files[0];
+                    if (file) {
+                        var url = webkitURL.createObjectURL(file);
+                        var $img = new Image();
+                        $img.onload = function() {
+                            //生成比例
+                            var width = $img.width,
+                                height = $img.height,
+                                scale = width / height;
+                            width = parseInt(2680);
+                            height = parseInt(width / scale);
+
+                            //生成canvas
+                            var $canvas = document.createElement('canvas');
+                            var ctx = $canvas.getContext('2d');
+                            $canvas.width=width;
+                            $canvas.height=height;
+                            ctx.drawImage($img, 0, 0, width, height);
+                            var base64 = $canvas.toDataURL('image/jpeg',0.5);
+                            document.querySelector('.tui-resume-header').style.backgroundImage='url(' + base64 + ')';
+                            var params={BaseCode:base64.substr(23)};
+                            UploaderService.uploader(params,2).success(function(data){
+                                if(data.status==1) {
+                                    scope.USER.HeadImage=data.data;
+                                    scope.updateUser(scope.USER)
+                                }
+                            });
+                        }
+                        $img.src = url;
+                    }
+
+            }, false);
+
+        }
+    }
+}]).directive('preView',['$filter',function($filter){
+    return {
+        restrict: 'A',
+        replace: false,
+        link: function (scope, element, attr) {
+            var elem=element[0];
+            elem.addEventListener('focus',function(){
+                var m=$filter('currency')(this.value/10000,'￥')+'万';
+                var div=$('<p class="tui-preview"></p>');
+                if(document.getElementsByClassName('tui-preview').length==0)
+                {
+                    $(this).parent().append(div);
+                    div.text(m);
+                }
+                else{
+                    console.log(document.getElementsByClassName('tui-preview'))
+                    $('.tui-preview').text(m)
+                }
+            });
+            elem.addEventListener('keyup',function(){
+                var m=$filter('currency')(this.value/10000,'￥')+'万';
+                var div=$('<p class="tui-preview"></p>');
+                if(document.getElementsByClassName('tui-preview').length==0)
+                {
+                    $(this).parent().append(div);
+                    div.text(m);
+                }
+                else{
+                    console.log(document.getElementsByClassName('tui-preview'))
+                    $('.tui-preview').text(m)
+                }
+            });
+            elem.addEventListener('blur',function(){
+                $(this).parent().find('.tui-preview').remove();
+            })
+        }
+    }
+
+
+
 }])
 
 

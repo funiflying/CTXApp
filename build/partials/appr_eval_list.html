@@ -168,6 +168,8 @@
 						<section class="tui-order-operate">
 							<button type="button" class="mui-btn" ng-click="delcomfirm(obj)" ng-if="obj.OrderFlag<3 && obj.RevokeFlag==0">申请撤单</button>
 							<a class="mui-btn tui-btn-orange" ui-sref="uviewreport({ReportCode:obj.TestReportCode})" ng-if="obj.OrderFlag>=3">查看检测</a>
+							<a class="mui-btn tui-btn-orange" ng-click="jiedansubmit(obj)" ng-if="obj.OrderFlag==1">接取订单</a>
+							<!--<a class="mui-btn tui-btn-orange" ng-click="addreport(obj)" ng-if="obj.OrderFlag==2">填写检测</a>-->
 							<a class="mui-btn tui-btn-orange" ng-click="Paysubmit(obj)" ng-if="obj.OrderFlag==0">支付费用</a>
 							<a class="mui-btn" ng-click="goto_evaluate(obj)" ng-if="obj.OrderFlag==4">交易评价</a>
 						</section>

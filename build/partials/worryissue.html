@@ -1,0 +1,87 @@
+<div class="tui-mask"></div>
+<div class="tui-content" ng-init="getCar()">
+    <header class="mui-bar mui-bar-nav tui-bar-nav">
+        <h1 class="mui-title">急售发布</h1>
+    </header>
+    <div class="tui-carissue">
+        <form class="mui-input-group" name="carForm" novalidate>
+            <div class="mui-input-row" select-series style="height: auto;min-height: 40px">
+                <label class="tui-form-required">品牌</label>
+                <p class="tui-car-text" ng-bind="car.SeriesName+car.SpecName"></p>
+                <span class="mui-navigate-right"></span>
+            </div>
+
+            <div class="mui-input-row" select-color>
+                <label class="tui-form-required">颜色</label>
+                <p class="tui-color-text" ng-bind="car.Color|ColorFilter"></p>
+                <span class="mui-navigate-right"></span>
+
+            </div>
+
+            <div class="mui-input-row" worry-picker>
+                <label class="tui-form-required">所在城市</label>
+                <a class="mui-navigate-right ">
+                     <p class="tui-select-city tui-select-city-2 tui-city-result"></p>
+                </a>
+            </div>
+            <div class="tui-blank"></div>
+            <div class="mui-input-row">
+                <label class="tui-form-required">行驶里程</label>
+                <input type="number" ng-model="car.Mileage" required>
+                <span class="tui-aide">万公里</span>
+            </div>
+            <div class="mui-input-row">
+                <label class="tui-form-required">购买年限</label>
+                <input type="date" ng-model="car.Buyyear" required>
+            </div>
+            <div class="mui-input-row">
+                <label class="tui-form-required">车架号</label>
+                <input type="text" ng-model="car.FrameNumber" placeholder="请输入17位车架号" class="tui-toUppercase" minlength="17" maxlength="17">
+            </div>
+            <div class="mui-input-row">
+                <label >发动机号</label>
+                <input type="text" ng-model="car.EngineNo"  placeholder="请输入发动机号" >
+            </div>
+            <div class="mui-input-row tui-image-container">
+                <label class="tui-form-required">封面图片</label>
+                <uploader class="image-list" data-name="HomePicID" data-flag="1" id="car-homepic"></uploader>
+            </div>
+            <div class="mui-input-row">
+                <label class="tui-form-required">售价</label>
+                <input type="number" ng-model="car.Price" required pre-view>
+            </div>
+            <div class="mui-input-row" style="line-height: 40px;padding: 0 10px">
+                指导价：<i ng-bind="guideprice|currency:'￥'"></i>万
+                新车价：<i ng-bind="factoryprice|currency:'￥'"></i>万
+            </div>
+            <div class="mui-input-row" style="line-height: 40px;padding: 0 10px">
+                备注：您的预售价必须小于<i class="tui-font-orange" ng-bind="guideprice*0.8|currency:'￥'"></i>万时才符合急售条件
+
+            </div>
+            <div class="tui-blank"></div>
+            <div class="mui-input-row">
+                <label class="tui-form-required">联系人</label>
+                <input type="text" ng-model="car.OwnerName" required maxlength="10" placeholder="请输入联系人">
+            </div>
+            <div class="mui-input-row">
+                <label class="tui-form-required">联系电话</label>
+                <input type="tel" ng-model="car.OwnerPhone" required placeholder="请输入联系电话">
+
+            </div>
+            <!--<div class="mui-input-row">
+                <label class="tui-form-required">验证码</label>
+                <input type="number" ng-model="code" style="width:35%;float: left" >
+                <button class="mui-btn mui-btn-link tui-getcode" type="button" ng-click="getMCode()" >获取验证码</button>
+            </div>-->
+
+        </form>
+        <brandindex tui-series class="tui-swipe-container"></brandindex>
+        <serieslist tui-spec class="tui-swipe-container"></serieslist>
+        <speclist class="tui-swipe-container"></speclist>
+        <colorlist class="tui-swipe-container"></colorlist>
+    </div>
+
+</div>
+<div class="tui-btngroup-fix">
+    <button type="button" class="tui-btn tui-btn-primary" ng-click="release()">发布车源</button>
+</div>

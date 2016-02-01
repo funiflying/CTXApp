@@ -57,6 +57,7 @@
 		overflow: hidden;
 		text-align: center;
 		border-radius: 50%;
+    
 	}
 	
 	.dui-appr-photo img {
@@ -96,6 +97,7 @@
 	
 	.dui-car-img {
 		padding: 5px;
+        position: relative
 	}
 	
 	.dui-car-wrap {
@@ -200,7 +202,7 @@
 </style>
 <div id="evalist">
 	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</a>
+		<!--<a class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</a>-->
 		<h1 class="mui-title">委托评估</h1>
 	</header>
 	<div class="mui-content">
@@ -218,7 +220,12 @@
 							<div class="mui-table-view-cell">
 								<div class="mui-col-xs-12">
 									<div class="mui-col-xs-3 dui-car-w">
-										<div class="dui-car-img"><img ng-src="{{carinfodata.HomePicID||'./images/detection-photo-default.gif'}}"></div>
+										<div class="dui-car-img" ng-switch="carinfodata.AppraiserFlag">
+										<img ng-src="{{carinfodata.HomePicID||'./images/detection-photo-default.gif'}}">
+										<span class="tui-ctxrenzhen-3" ng-switch-when="3"></span>
+                                         <span class="tui-ctxrenzhen-2" ng-switch-when="2"></span>
+                                         <span class="tui-ctxrenzhen-1" ng-switch-when="1"></span>
+										</div>
 									</div>
 									<div class="mui-col-xs-9 dui-car-w dui-appr-td">
 										<p><span ng-bind="carinfodata.SpecName"></span></p>
@@ -305,7 +312,7 @@
 
 <div id="evainfo" style="display: none;">
 	<header class="mui-bar mui-bar-nav">
-		<a class="mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left" ng-click="closeview()"><span class="mui-icon mui-icon-left-nav"></span>返回</a>
+<!--		<a class="mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left" ng-click="closeview()"><span class="mui-icon mui-icon-left-nav"></span>返回</a>-->
 		<h1 class="mui-title">委托评估</h1>
 	</header>
 
@@ -336,7 +343,7 @@
 					<!--<div class="mui-input-group">-->
 						<div class="mui-input-row">
 							<label>评估费用</label>
-							<input type="text" name="eva_price" id="eva_price" required="required" placeholder="请输入评估费用金额"><span class="dui-appr-price"></span>
+							<input  type="number" name="eva_price" id="eva_price" required="required" placeholder="请输入评估费用金额" /><span class="dui-appr-price"></span>
 						</div>
 					<!--</div>-->
 				</div>

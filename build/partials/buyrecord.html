@@ -17,9 +17,11 @@
                 <span class="mui-pull-right"><span class="tui-font-green" ng-if="obj.RevokeFlag==0" ng-bind="obj.OrderFlag|OrderStatus"></span><span class="tui-font-red" ng-if="obj.RevokeFlag>0" ng-bind="obj.RevokeFlag|RevokeStatus"></span></span>
             </section>
             <section class="tui-order-info" ui-sref="carinfo({CarNo:obj.CarNo})">
-                <div class="tui-order-icon" data-car="{{obj.CarNo}}">
+                <div class="tui-order-icon" data-car="{{obj.CarNo}}" ng-switch="obj.AppraiserFlag">
                     <img ng-src="{{obj.HomePicID}}" alt="">
-                    <!--<p class="tui-order-code">订单号 <i ng-bind="obj.OrderCode"></i></p>-->
+                     <span class="tui-ctxrenzhen-3" ng-switch-when="3"></span>
+                     <span class="tui-ctxrenzhen-2" ng-switch-when="2"></span>
+                     <span class="tui-ctxrenzhen-1" ng-switch-when="1"></span>
                 </div>
                 <section class="tui-order-descr">
                     <h5 class="tui-car-name mui-ellipsis-2"><i ng-bind="obj.BrandName+obj.SpecName"></i></h5>

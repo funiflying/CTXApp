@@ -28,7 +28,8 @@
 	font-size: 16px;
 	float: left;
 	border-radius:0px;
-	border: 0px;
+	border: 0;
+
 }
 
 .dui-bottom-nav .dui-b-nav-bg {
@@ -545,4 +546,23 @@
 .dui-car-imglist .dui-img-inherit:last-child{margin: 5px 0px 0px 0px;}
 .dui-car-imglist .dui-img-inherit img{
 	width: inherit;
+}
+.car-appariserflag{
+	height: 40px;
+	line-height: 40px;
+	background-repeat: no-repeat;
+	background-size:45px 40px ;
+	font-size: 12px;
+	background-position:center;
+}
+.car-info-caption::before{
+	content: "";
+	display: inline-block;
+	background: #FF6A00;
+	width: 3px;
+	height: 12px;
+	margin-right: 3px;
+}
+.border-top-none{
+	border-top:none !important ;
 }

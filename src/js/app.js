@@ -49,15 +49,9 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             access:0,
             action:'buy'
         }).state('viewreport',{
-            url:'/viewreport?CarNo',
+            url:'/viewreport?CarNo&Scroll',
             templateUrl:'partials/viewreport.html',
             controller:'CarInfoCtrl',
-            access:0,
-            action:'home'
-        }).state('uviewreport',{
-            url:'/uviewreport?ReportCode',
-            templateUrl:'partials/viewreport.html',
-            controller:'ViewReportCtrl',
             access:0,
             action:'home'
         }).state('evaluationlist',{
@@ -168,6 +162,12 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             controller:'CarController',
             access:1,
             action:'admin'
+        }).state('cargatherecord',{
+            url:'/cargatherecord',
+            templateUrl:'partials/cargatherecord.html',
+            controller:'CarController',
+            access:1,
+            action:'admin'
         }).state('carout',{
             url:'/carout?CarNo',
             templateUrl:'partials/carout.html',
@@ -201,6 +201,12 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
         }).state('retraders',{
             url:'/account/retraders',
             templateUrl:'partials/retraderspwd.html',
+            controller:'AccountController',
+            access:1,
+            action:'admin'
+        }).state('resume',{
+            url:'/resume',
+            templateUrl:'partials/resume.html',
             controller:'AccountController',
             access:1,
             action:'admin'
@@ -246,6 +252,18 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
             controller:'EvaluateCtrl',
             access:1,
             action:'admin'
+        }).state('worrycar',{
+            url:'/worrycar',
+            templateUrl:'partials/worrycar.html',
+            controller:'worryController',
+            access:0,
+            action:'home'
+        }).state('worryissue',{
+            url:'/worryissue',
+            templateUrl:'partials/worryissue.html',
+            controller:'worryController',
+            access:0,
+            action:'home'
         }).state('404',{
             url:'/404',
             templateUrl:'partials/404.html',
@@ -255,8 +273,8 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
         });
     $httpProvider.interceptors.push('myInterceptor');
  }]).run(['$rootScope','$state','$stateParams','ResourceService','LocalStorageService',function($rootScope,$state,$stateParams,ResourceService,LocalStorageService) {
-    $rootScope.HOST=window.location.protocol+'//'+window.location.host;
-    $rootScope.PATH=''
+    $rootScope.HOST='http://192.168.0.218'//window.location.protocol+'//'+window.location.host;
+    $rootScope.PATH='';
     $rootScope.state = $state;
     $rootScope.stateParams = $stateParams;
     $rootScope.ACTION='home'
@@ -264,10 +282,11 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
     $rootScope.countdown=60;
     //用户
     $rootScope.user=LocalStorageService.getStorage('AUTH')||null;
-    ResourceService.getFunServer('validwechat',{}).then(function(data){
+    ResourceService.getFunServer('validwechat',{openid:'openid20160126110458997F254643FA35C45D'}).then(function(data){
         if(data.status==1){
             $rootScope.user=data.data;
             LocalStorageService.setStorage('AUTH',data.data);
+            $rootScope.user&&$rootScope.user.HeadImage? $rootScope.HeadStyle={backgroundImage:'url('+$rootScope.user.HeadImage+')'}:$rootScope.HeadStyle={backgroundImage:'url(../images/detection-photo-default.gif)'};
         }
         else{
             $rootScope.user=null;
@@ -286,7 +305,8 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
         document.querySelector('.tui-mask').classList.remove('active');
     });
     $rootScope.$on('$stateChangeSuccess', function() {
-
+		//用户
+     $rootScope.user=LocalStorageService.getStorage('AUTH')||null;
         if($state.current.access==1&&!$rootScope.user){
            $rootScope.state.go('admin');
            $rootScope.LOGIN();
@@ -304,10 +324,10 @@ angular.module('CTXApp',['ui.router','ngTouch','ngResource','ngAnimate','CTXAppS
     //http 拦截
     var requestInterceptor = {
         request: function(config) {
-            if(config.url.match('/common/file/')==null){
+            if(config.url.match('/common/file/UpLoadImgByBase64ForCar')==null){
                 mui.loading()
             }
-            return config
+            return config;
         },
         requestError:function(config){
             return config

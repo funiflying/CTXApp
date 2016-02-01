@@ -1,576 +1,738 @@
 @charset "utf-8";
+
 /*
  * @author:吴添祥
  * @version:1.0.0
  * @date:2015-12-18
  */
-/*css reset*/
-body,nav,dl,dt,dd,h1,h2,h3,h4,ul,ol,li,input,button,textarea,footer{margin:0;padding:0}
-body{font: 14px/1.5 helvetica neue,tahoma,arial,hiragino sans gb,microsoft yahei,sans-serif;  color:#666;background:#e5e5e5 ;-webkit-text-size-adjust: none; min-width:320px;}
-h1,h2,h3,h4,h5,h6{font-size:100%}
-form{display:inline}
-ul,ol{list-style:none}
-i, cite, em, var, address, dfn {
-	font-style: inherit;
-}
-a{text-decoration:none;color:#666}
-a:hover, a:active, a:focus{color:#1c5aa2;text-decoration: none;}
-a:active{color:#aaa;}
-img{vertical-align:middle;border:0;-ms-interpolation-mode:bicubic;}
-button,input,select,textarea{font-size:100%; vertical-align:middle;outline:none;}
-textarea{resize:none}
-button,input[type="button"],input[type="reset"],input[type="submit"] {cursor:pointer;-webkit-appearance:button;-moz-appearance:button}
-input:focus:-moz-placeholder,input:focus::-webkit-input-placeholder {color:transparent}
-button::-moz-focus-inner,input::-moz-focus-inner { padding:0; border:0}
-table { border-collapse:collapse; border-spacing:0}
-.fl{float:left;}.fr{float:right;}.hide{display:none;}.show{display: block;}
-.ellipsis { white-space:nowrap; text-overflow:ellipsis; overflow:hidden}
-.break { word-break:break-all; word-wrap:break-word}
-header, footer, article, section, nav, menu {display: block;clear:all;}
 
-html::-webkit-scrollbar,
-body::-webkit-scrollbar{
-	width:0;
-	height:0;
+
+/*css reset*/
+
+body,
+nav,
+dl,
+dt,
+dd,
+h1,
+h2,
+h3,
+h4,
+ul,
+ol,
+li,
+input,
+button,
+textarea,
+footer {
+    margin: 0;
+    padding: 0
 }
+body {
+    font: 14px/1.5 helvetica neue, tahoma, arial, hiragino sans gb, microsoft yahei, sans-serif;
+    color: #666;
+    background: #e5e5e5;
+    -webkit-text-size-adjust: none;
+    min-width: 320px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%
+}
+form {
+    display: inline
+}
+ul,
+ol {
+    list-style: none
+}
+i,
+cite,
+em,
+var,
+address,
+dfn {
+    font-style: inherit;
+}
+a {
+    text-decoration: none;
+    color: #666
+}
+a:hover,
+a:active,
+a:focus {
+    color: #1c5aa2;
+    text-decoration: none;
+}
+a:active {
+    color: #aaa;
+}
+img {
+    vertical-align: middle;
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+}
+button,
+input,
+select,
+textarea {
+    font-size: 100%;
+    vertical-align: middle;
+    outline: none;
+}
+textarea {
+    resize: none
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    cursor: pointer;
+    -webkit-appearance: button;
+    -moz-appearance: button
+}
+input:focus:-moz-placeholder,
+input:focus::-webkit-input-placeholder {
+    color: transparent
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    padding: 0;
+    border: 0
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.hide {
+    display: none;
+}
+.show {
+    display: block;
+}
+.ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden
+}
+.break {
+    word-break: break-all;
+    word-wrap: break-word
+}
+header,
+footer,
+article,
+section,
+nav,
+menu {
+    display: block;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
 /********
 *公用
 ********/
-.mui-grid-view.mui-grid-9 .mui-table-view-cell.mui-active{
-	background: transparent;
+.tui-toUppercase{
+    text-transform:uppercase;
 }
-.tui-content{
-	margin-top: 45px;
-	overflow: hidden;
+.mui-grid-view.mui-grid-9 .mui-table-view-cell.mui-active {
+    background: transparent;
 }
-.tui-blank{
-	width: auto;
-	height: 10px;
-	background: transparent;
+.tui-content {
+    margin-top: 45px;
+    overflow: hidden;
+    min-height: 400px;
 }
-.tui-footer{
-	margin-bottom: 60px;
-	line-height:1.5;
-	padding: 10px 0;
+.tui-blank {
+    width: auto;
+    height: 10px;
+    background: transparent;
 }
-.tui-footer p{
-	margin: 0;
-	font-size: 10px;
+.tui-footer {
+    margin-bottom: 60px;
+    line-height: 1.5;
+    padding: 10px 0;
 }
-.tui-notfound{
-	background: url("../images/404.png") no-repeat center bottom ;
-	height: 350px;
+.tui-footer p {
+    margin: 0;
+    font-size: 10px;
 }
-.tui-nolist{
-	height: 300px;
-	background: url("../images/no-list.png") no-repeat center ;
-	position: relative;
+.tui-notfound {
+    background: url("../images/404.png") no-repeat center bottom;
+    height: 350px;
 }
-.tui-nolist::after{
-	content: "暂无数据";
-	display: block;
-	text-align: center;
-	position: absolute;
-	top: 180px;
-	width: 100%;
+.tui-nolist {
+    height: 300px;
+    background: url("../images/no-list.png") no-repeat center;
+    position: relative;
 }
-pager{
-	display: none;
+.tui-nolist::after {
+    content: "暂无数据";
+    display: block;
+    text-align: center;
+    position: absolute;
+    top: 180px;
+    width: 100%;
 }
 /********
 *提示框
 ********/
-.mui-toast-container
-{
-	position: fixed;
-	width: 100%;
-	height: 120%;
-	background: rgba(0,0,0,0.5);
-}
 
-.mui-toast-message
-{
-	position: absolute;
-	font-size: 16px;
-	width: 240px;
-	padding:20px 30px;
-	text-align: center;
-	color: #666;
-	border-radius: 7px;
-	background-color: #FFFFFF;
-	min-height: 100px;
-	vertical-align: middle;
-	top:45%;
-	left: 50%;
-	margin-left: -120px;
-	z-index: 3;
+.mui-toast-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+
 }
-.mui-toast-message h6{
-	color: #444;
-	font-size: 14px;
+.mui-toast-message {
+    position: absolute;
+    font-size: 16px;
+    width: 240px;
+    padding: 20px 30px;
+    text-align: center;
+    color: #666;
+    border-radius: 7px;
+    background-color: #FFFFFF;
+    min-height: 100px;
+    vertical-align: middle;
+    top: 40%;
+    left: 50%;
+    margin-left: -120px;
+    z-index: 3;
 }
-.mui-loading-container{
-	position: absolute;
-	font-size: 16px;
-	width: 120px;
-	line-height: 90px;
-	text-align: center;
-	color: #FFFFFF;
-	border-radius: 7px;
-	background: rgba(0,0,0,0.7);
-	height: 80px;
-	vertical-align: middle;
-	top:50%;
-	left: 50%;
-	margin-left: -60px;
-	margin-top: -40px;
-	z-index: 3;
+.mui-toast-message h6 {
+    color: #444;
+    font-size: 14px;
 }
-.mui-loading-container i::before{
-	color: #FFFFFF;
-	font-size: 30px;
-	-webkit-animation: spinner-spin 1s step-end infinite;
-	animation: spinner-spin 1s step-end infinite;
+.mui-loading-container {
+    position: absolute;
+    font-size: 16px;
+    width: 120px;
+    line-height: 90px;
+    text-align: center;
+    color: #FFFFFF;
+    border-radius: 7px;
+    background: rgba(0, 0, 0, 0.7);
+    height: 80px;
+    vertical-align: middle;
+    top: 50%;
+    left: 50%;
+    margin-left: -60px;
+    margin-top: -40px;
+    z-index: 101;
+}
+.mui-loading-container i::before {
+    color: #FFFFFF;
+    font-size: 30px;
+    -webkit-animation: spinner-spin 1s step-end infinite;
+    animation: spinner-spin 1s step-end infinite;
 }
 .tui-loading {
-	height : 10px;
-	width : 10px;
-	position : absolute;
-	background-color : #fff;
-	border-radius : 50%;
-	top : 0;
-	left : 8px;
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 0;
+    left: 8px;
 }
-
 .tui-rond {
-	height  : 60px;
-	width : 60px;
-	border : 1px solid #fff;
-	border-radius : 50%;
-	position :absolute;
-	top : 10px;
-	left : 30px;
-	animation : rond 1.5s infinite;
-	-webkit-animation : rond 1.5s infinite;
+    height: 60px;
+    width: 60px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    animation: rond 1.5s infinite;
+    -webkit-animation: rond 1.5s infinite;
 }
-.mui-uploader-loading-container{
-	position: absolute;
-	top:8px;
-	left: 8px;
+.mui-uploader-loading-container {
+    position: absolute;
+    top: 8px;
+    left: 8px;
 }
-.mui-uploader-loading-container i::before{
-	color: #FFFFFF;
-	font-size: 10px;
-	-webkit-animation: spinner-spin 1s step-end infinite;
-	animation: spinner-spin 1s step-end infinite;
+.mui-uploader-loading-container i::before {
+    color: #FFFFFF;
+    font-size: 10px;
+    -webkit-animation: spinner-spin 1s step-end infinite;
+    animation: spinner-spin 1s step-end infinite;
 }
 .tui-uploader-loading {
-	height : 5px;
-	width : 5px;
-	position : absolute;
-	background-color : #fff;
-	border-radius : 50%;
-	top : 0;
-	left : 3px;
+    height: 5px;
+    width: 5px;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 0;
+    left: 3px;
 }
-
 .tui-uploader-rond {
-	height  : 24px;
-	width :24px;
-	border : 1px solid #fff;
-	border-radius : 50%;
-	position :absolute;
-	top : 13px;
-	left :13px;
-	animation : rond 1.5s infinite;
-	-webkit-animation : rond 1.5s infinite;
+    height: 24px;
+    width: 24px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    animation: rond 1.5s infinite;
+    -webkit-animation: rond 1.5s infinite;
 }
-.tui-uploader-load{
-	text-align: center;
-	font-size: 10px;
-	width: 80px;
-	position: absolute;
-	top: 12px;
-	left: -15px;
+.tui-uploader-load {
+    text-align: center;
+    font-size: 10px;
+    width: 80px;
+    position: absolute;
+    top: 12px;
+    left: -15px;
 }
 @keyframes rond {
-	0% {transform : rotate(0deg);}
-	100% {transform : rotate(360deg);}
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
-
 @-webkit-keyframes rond {
-	0% {-webkit-transform : rotate(0deg);}
-	100% {-webkit-transform : rotate(360deg);}
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 /*********
  * 按钮
  * *******/
+
 .tui-btn {
-	display: inline-block;
-	position: relative;
-	text-align: center;
-	text-decoration: none;
-	outline: 1px solid rgba(0,0,0,.02);
-	padding: 0;
-	margin: 0;
-	cursor: pointer;
-	-webkit-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-appearance: none;
-	width: 100%;
-	background-color: #ff6a00;
-	border: 1px solid#ff6a00;
-	color: #fff;
-	height: 42px;
-	font-size: 16px;
-	line-height: 42px;
-	border-radius: 0;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    outline: 1px solid rgba(0, 0, 0, .02);
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    width: 100%;
+    background-color: #ff6a00;
+    border: 1px solid#ff6a00;
+    color: #fff;
+    height: 42px;
+    font-size: 16px;
+    line-height: 42px;
+    border-radius: 0;
 }
 .tui-btn-default {
-	height: 34px;
-	background-color: #e6f5de;
-	color: #5b2;
-	font-size: 14px;
-	line-height: 34px;
-	padding: 0 12px;
+    height: 34px;
+    background-color: #e6f5de;
+    color: #5b2;
+    font-size: 14px;
+    line-height: 34px;
+    padding: 0 12px;
 }
 .tui-btn-primary {
-	width: 100%;
-	background-color:#ff6a00;
-	color: #fff;
+    width: 100%;
+    background-color: #ff6a00;
+    color: #fff;
 }
-.tui-btn-orange{
-	color: #fff;
-	border: 1px solid #ff6a00;
-	background-color: #ff6a00;
+.tui-btn-orange {
+    color: #fff;
+    border: 1px solid #ff6a00;
+    background-color: #ff6a00;
 }
-progress{
-	width: 100%;
+progress {
+    width: 100%;
 }
+
 /*********
  * 字体颜色
  * *******/
+
 .tui-font-orange {
-	color: #fd5736;
+    color: #fd5736;
 }
-
 .tui-font-green {
-	color: #41a934;
+    color: #41a934;
+}
+.tui-font-red {
+    color: #cc2b53;
+}
+.tui-font-white {
+    color: #fff;
+}
+.tui-font-blue {
+    color: #0091ff;
 }
 
-.tui-font-red {
-	color: #cc2b53;
-}
-.tui-font-white{
-	color: #fff;
-}
-.tui-font-blue{
-	color: #0091ff;
-}
 /*********
  * 表单
  * *******/
+
 .mui-input-row select {
-	font-size: 100%;
-	height: 37px;
-	padding: 0;
+    font-size: 100%;
+    height: 37px;
+    padding: 0;
 }
-.tui-form-required{
-	position: relative;
+.tui-form-required {
+    position: relative;
 }
-.tui-form-required::before{
-	content:  '* ';
-	display: inline-block;
-	color:red;
-	line-height: 1.1;
-	font-size: 100%;
-	position: absolute;
-	left: 5px;
-	top:35%;
+.tui-form-required::before {
+    content: '* ';
+    display: inline-block;
+    color: red;
+    line-height: 1.1;
+    font-size: 100%;
+    position: absolute;
+    left: 5px;
+    top: 35%;
+}
+.tui-preview{
+    position: absolute;
+    height: 30px;
+    line-height:30px;
+    text-align: center;
+    top: -40px;
+    left: 25%;
+    padding:0 5px;
+    min-width:200px;
+    border-radius: 4px;
+    color: #055555;
+    background: rgba(150,218,191,0.8);
+}
+.tui-preview:after{
+    border: solid transparent;
+    content: ' ';
+    height: 0;
+    left: 50%;
+    margin-left: -9px;
+    bottom:-16px;
+    position: absolute;
+    width: 0;
 }
 
+.tui-preview:after {
+    border-width: 8px;
+    border-top-color:rgba(150,218,191,0.8);
+}
+
+
+.mui-input-row{
+    overflow: visible;
+}
 /*********
  * 头部导航
  * *******/
-.mui-bar.mui-bar-nav.tui-bar-nav{
-	background:#ffffff;
-	color: #4c4c4c;
-	-webkit-box-shadow:none;
-	-moz-box-shadow: none;
-	box-shadow: none;
+
+.mui-bar.mui-bar-nav.tui-bar-nav {
+    background: #ffffff;
+    color: #4c4c4c;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
-.mui-bar.mui-bar-nav.tui-bar-nav .tui-nav-location{
-	color: #4c4c4c;
+.mui-bar.mui-bar-nav.tui-bar-nav .tui-nav-location {
+    color: #4c4c4c;
 }
+
 /*************
 *底部导航
 */
+
 .tui-bar-tab {
-	bottom: 0;
-	display: table;
-	width: 100%;
-	height: 50px;
-	padding: 0;
-	table-layout: fixed;
-	border-top: 0;
-	border-bottom: 0;
-	-webkit-touch-callout: none;
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
 }
 .tui-bar {
-	position: fixed;
-	right: 0;
-	left: 0;
-	padding-right: 10px;
-	padding-left: 10px;
-	border-bottom: 0;
-	background-color: #f7f7f7;
-	-webkit-box-shadow: 0 0 1px rgba(0,0,0,.2);
-	box-shadow: 0 0 1px rgba(0,0,0,.2);
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-	z-index: 101;
+    position: fixed;
+    right: 0;
+    left: 0;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-bottom: 0;
+    background-color: #f7f7f7;
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 1px rgba(0, 0, 0, .2);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 101;
 }
-.tui-bar-tab .tui-tab-item
-{
-	display: table-cell;
-	overflow: hidden;
-	width: 1%;
-	text-align: center;
-	vertical-align: middle;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	color: #999999;
+.tui-bar-tab .tui-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #999999;
 }
-.tui-bar-tab .tui-tab-item.tui-active .iconfont
-{
-	color: #ff6a00;
+.tui-bar-tab .tui-tab-item.tui-active .iconfont {
+    color: #ff6a00;
 }
-.tui-bar-tab .tui-tab-item .iconfont
-{
-	top: 3px;
-	width: 24px;
-	height: 24px;
-	padding-top: 0;
-	font-size: 30px;
-	padding-bottom: 0;
-	color: #999999;
+.tui-bar-tab .tui-tab-item .iconfont {
+    top: 3px;
+    width: 24px;
+    height: 24px;
+    padding-top: 0;
+    font-size: 30px;
+    padding-bottom: 0;
+    color: #999999;
 }
-.tui-bar-tab .tui-tab-item  .tui-tab-label
-{
-	font-size: 11px;
-	display: block;
-	overflow: hidden;
-	margin: 0;
-	margin-top: -5px;
+.tui-bar-tab .tui-tab-item .tui-tab-label {
+    font-size: 11px;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    margin-top: -5px;
 }
-.tui-bar-tab .tui-tab-item .tui-icon:active
-{
-	background: none;
+.tui-bar-tab .tui-tab-item .tui-icon:active {
+    background: none;
 }
+
 /*********
  * 导航图标
  * *******/
-.tui-nav-icon{
-	display: block;
-	background: url(../images/icon_new_v1.png) no-repeat;
+
+.tui-nav-icon {
+    display: block;
+    background: url(../images/icon_new_v1.png) no-repeat;
     background-size: 200px auto;
     width: 40px;
     height: 50px;
     margin: 0 auto;
 }
-.tui-nav-icon-buy{
-	background-position: 0 -25px;
+.tui-nav-icon-buy {
+    background-position: 0 -25px;
 }
-.tui-nav-icon-sell{
-	background-position: -46px -25px;
+.tui-nav-icon-sell {
+    background-position: -46px -25px;
 }
 .tui-nav-icon-server {
     background-position: -92px -25px;
 }
-.mui-btn-nav.tui-nav-search-group{
-	background:#ebebeb;
-	opacity: 0.6;
-	height: 30px;
-	line-height:30px;
-	width: 60%;
-	margin-top: 8px !important;
-	color: #999999;
-	font-size: 14px;
-	position: relative;
+.mui-btn-nav.tui-nav-search-group {
+    background: #ebebeb;
+    opacity: 0.6;
+    height: 30px;
+    line-height: 30px;
+    width: 60%;
+    margin-top: 8px !important;
+    color: #999999;
+    font-size: 14px;
+    position: relative;
 }
 .mui-btn-nav.tui-nav-search-group,
-.mui-btn-nav.tui-nav-search-cancel{
-	color: #999999;
+.mui-btn-nav.tui-nav-search-cancel {
+    color: #999999;
 }
 a.mui-btn-nav.tui-nav-search-group:link,
 a.mui-btn-nav.tui-nav-search-group:visited,
 a.mui-btn-nav.tui-nav-search-group:hover,
 a.mui-btn-nav.tui-nav-search-group:active,
-.mui-btn-nav.tui-nav-search-cancel:active{
-	color: #FFFFFF
+.mui-btn-nav.tui-nav-search-cancel:active {
+    color: #FFFFFF
 }
-.mui-btn-nav.tui-nav-search-bar{
-	background:#ebebeb;
-	opacity: 0.6;
-	height: 30px;
-	line-height:30px;
-	margin-top: 7px !important;
-	color: #999999;
-	font-size: 14px;
-	position: relative;
-	width: 85%;
+.mui-btn-nav.tui-nav-search-bar {
+    background: #ebebeb;
+    opacity: 0.6;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 7px !important;
+    color: #999999;
+    font-size: 14px;
+    position: relative;
+    width: 85%;
 }
-.mui-btn-nav.tui-nav-search-bar  .mui-icon-search{
-	position: absolute;
-	right: 10px;
-	color: #FFFFFF;
-	top:4px;
+.mui-btn-nav.tui-nav-search-bar .mui-icon-search {
+    position: absolute;
+    right: 10px;
+    color: #FFFFFF;
+    top: 4px;
 }
-.mui-btn-nav.tui-nav-search-bar .tui-nav-search{
-	border:none;
-	background-color: transparent;
-	height: 30px;
+.mui-btn-nav.tui-nav-search-bar .tui-nav-search {
+    border: none;
+    background-color: transparent;
+    height: 30px;
     line-height: 30px;
 }
-.mui-btn-link.tui-nav-search-cancel{
-	width: 10%;
-	color: #999999;
+.mui-btn-link.tui-nav-search-cancel {
+    width: 10%;
+    color: #999999;
 }
+
 /*****
 *分页
 ******/
+
 .tui-page {
-	border-bottom: 1px solid #dadada;
-	display: -webkit-box;
-	display: box;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	-webkit-text-size-adjust: none;
-	-moz-text-size-adjust: none;
-	-ms-text-size-adjust: none;
-	-o-text-size-adjust: none;
-	text-size-adjust: none;
-	background-color: #fff;
+    border-bottom: 1px solid #dadada;
+    display:block;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -o-text-size-adjust: none;
+    text-size-adjust: none;
+    background-color: #fff;
+}
+.tui-page:after{
+    content:"";
+    display: block;
+    clear: both;
 }
 .tui-page a {
-	height: 50px;
-	line-height: 50px;
-	text-align: center;
-	display: block;
-	-webkit-box-flex: 3;
-	box-flex: 3;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    display: block;
+    float: left;
+    width: 33%;
 }
 .tui-page .page-select-a {
-	-webkit-box-flex: 1;
-	box-flex: 1;
-	position: relative;
+    display: block;
+    float: left;
+    width: 33%;
+    position: relative;
 }
 .tui-page span {
-	color: #ff6a00;
-	display: block;
-	height: 50px;
-	line-height: 50px;
+    color: #ff6a00;
+    display: block;
+    height: 50px;
+    line-height: 50px;
 }
 .page-up span {
-	border-right: 1px solid #eee;
+    border-right: 1px solid #eee;
 }
 .page-down span {
-	border-left: 1px solid #eee;
+    border-left: 1px solid #eee;
 }
 .tui-page span.page-num {
-	display: inline-block;
-	color: #878787;
+    display: inline-block;
+    color: #878787;
 }
 .tui-page span.triangle {
-	margin-left: 1px;
-	display: inline-block;
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 4px;
-	border-color: #a5a5a5 transparent transparent transparent;
+    margin-left: 1px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 4px;
+    border-color: #a5a5a5 transparent transparent transparent;
 }
 .tui-3g-page-btn {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 44px;
-	min-width: 70px;
-	border: 0;
-	opacity: .01;
-	-webkit-appearance: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 44px;
+    min-width: 70px;
+    border: 0;
+    opacity: .01;
+    -webkit-appearance: none;
 }
 option {
-	font-weight: normal;
-	display: block;
-	padding: 0px 2px 1px;
-	white-space: pre;
-	min-height: 1.2em;
+    font-weight: normal;
+    display: block;
+    padding: 0 2px 1px;
+    white-space: pre;
+    min-height: 1.2em;
 }
 .tui-page a.disable {
-	background: #fcfcfc;
-
+    background: #fcfcfc;
 }
 .tui-page a.disable span {
-	color: #b7b7b7;
+    color: #b7b7b7;
 }
+
 /*********
  * 轮播图
  * *******/
-.mui-slider img{
-	height: 100%;
+
+.mui-slider img {
+    height: 100%;
 }
-.tui-about-promise{
-	background: #FFFFFF;
-	font-size: 11px;
-	height: 30px;
-	line-height: 30px;
-	color: #666666;
-	text-align: center;
+.tui-about-promise {
+    background: #FFFFFF;
+    font-size: 11px;
+    height: 30px;
+    line-height: 30px;
+    color: #666666;
+    text-align: center;
 }
-.tui-about-promise .tui-promise-list{
-	height: 30px;
-	line-height: 30px;
-	display: inline-block;
-	font-size: 10px;
-	text-align: center;
-	margin: 0 5px;
+.tui-about-promise .tui-promise-list {
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    font-size: 10px;
+    text-align: center;
+    margin: 0 5px;
 }
-.tui-about-promise .tui-promise-list i{
-	color: #ff6a00;
-	font-size: 12px;
-	line-height: 25px;
+.tui-about-promise .tui-promise-list i {
+    color: #ff6a00;
+    font-size: 12px;
+    line-height: 25px;
 }
+
 /*********
  * 快速买车
  * *******/
-.mui-table-view-cell.tui-car-filter-caption{
-	padding: 5px 15px !important;
-	color: #999999;
-	font-size: 14px !important;
-	text-align: left !important;
+
+.mui-table-view-cell.tui-car-filter-caption {
+    padding: 5px 15px !important;
+    color: #999999;
+    font-size: 14px !important;
+    text-align: left !important;
 }
-.tui-car-filter-title{
-	background: #FFFFFF;
-	height: 34px;
-	line-height: 34px;
-	color: #333333;
-	padding-left: 15px;
-	margin-top: 8px;
+.tui-car-filter-title {
+    background: #FFFFFF;
+    height: 34px;
+    line-height: 34px;
+    color: #333333;
+    padding-left: 15px;
+    margin-top: 8px;
 }
-.mui-table-view.tui-car-filter .mui-table-view-cell.tui-filter-item{
-	font-size: 13px ;
-	background: #fcfcfc;
-	padding: 0;
+.mui-table-view.tui-car-filter .mui-table-view-cell.tui-filter-item {
+    font-size: 13px;
+    background: #fcfcfc;
+    padding: 0;
 }
-.tui-car-filter-icon{
-	display: block;
+.tui-car-filter-icon {
+    display: block;
     width: 100%;
     height: 26px;
     margin: 0 auto;
@@ -579,1424 +741,1615 @@ option {
     -ms-background-size: 725px auto;
     background-size: 725px auto;
 }
-.tui-car-filter-icon-dazhong{
-	width: 26px;
+.tui-car-filter-icon-dazhong {
+    width: 26px;
     background-position: -211px 0;
 }
-.tui-car-filter-icon-xiandai{
-	width: 39px;
+.tui-car-filter-icon-xiandai {
+    width: 39px;
     background-position: -512px 0;
 }
-.tui-car-filter-icon-fengtian{
-	width: 32px;
+.tui-car-filter-icon-fengtian {
+    width: 32px;
     background-position: -237px 0;
 }
-.tui-car-filter-icon-baoma{
-	width: 26px;
+.tui-car-filter-icon-baoma {
+    width: 26px;
     background-position: -133px 0;
 }
-.tui-car-filter-icon-bieke{
-	width: 24px;
-	background-position: -109px 0;
+.tui-car-filter-icon-bieke {
+    width: 24px;
+    background-position: -109px 0;
 }
-.tui-car-filter-icon-aodi{
-	width: 44px;
-	background-position: -678px 0;
+.tui-car-filter-icon-aodi {
+    width: 44px;
+    background-position: -678px 0;
 }
-.tui-car-filter-icon-benchi{
-	width: 26px;
-	background-position: -44px 0;
+.tui-car-filter-icon-benchi {
+    width: 26px;
+    background-position: -44px 0;
 }
-.tui-car-filter-icon-richan{
-	width: 32px;
-	background-position: -480px 0;
+.tui-car-filter-icon-richan {
+    width: 32px;
+    background-position: -480px 0;
 }
-.tui-car-filter-icon-fute{
-	width: 46px;
-	background-position: -269px 0;
+.tui-car-filter-icon-fute {
+    width: 46px;
+    background-position: -269px 0;
 }
-.tui-car-filter-icon-bentian{
-	width: 26px;
-	background-position: -159px 0;
+.tui-car-filter-icon-bentian {
+    width: 26px;
+    background-position: -159px 0;
 }
-.tui-car-filter-icon-xuefulan{
-	width: 44px;
-	background-position: -551px 0;
+.tui-car-filter-icon-xuefulan {
+    width: 44px;
+    background-position: -551px 0;
 }
-.tui-car-filter-icon-qiya{
-	width: 44px;
-	background-position: -436px 0;
+.tui-car-filter-icon-qiya {
+    width: 44px;
+    background-position: -436px 0;
 }
-.tui-car-filter-icon-more{
-	width: 18px;
-	background-position: -654px 0;
+.tui-car-filter-icon-more {
+    width: 18px;
+    background-position: -654px 0;
 }
 .tui-mod-more {
     display: block;
     color: #ff6a00!important;
     font-size: 13px;
     text-align: center;
-
 }
+
 /*********
  * 车辆列表
  * *******/
-.tui-product-title
-{
-	color: #333;
-	font-weight: 500;
-	line-height: 22px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	margin-bottom: 2px;
-	overflow: hidden;
-	font-size: 14px;
+
+.tui-product-title {
+    color: #333;
+    font-weight: 500;
+    line-height: 22px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 2px;
+    overflow: hidden;
+    font-size: 14px;
 }
-.tui-product-meta{
-	color: #999;
-	font-size: 12px;
-	line-height: 20px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-	text-align: left;
+.tui-product-meta {
+    color: #999;
+    font-size: 12px;
+    line-height: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: left;
 }
-.tui-product-price{
-	display: -webkit-flex;
-	justify-content: flex-start;
-	align-items: center;
+.tui-product-price {
+    display: -webkit-flex;
+    justify-content: flex-start;
+    align-items: center;
+    display: -webkit-box;
+    -webkit-box-align: center;
 }
-.tui-product-sale{
-	color: #ff9600;
-	font-size: 16px;
-	font-weight: normal;
-	line-height: 20px;
-	text-align: left;
-	-webkit-flex: 1 1 45%;
+.tui-product-sale {
+    color: #ff9600;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 20px;
+    text-align: left;
+    -webkit-flex: 1 1 45%;
+    -webkit-box-flex: 1;
 }
-.tui-product-detection{
-	-webkit-flex: 0 0 15px;
+.tui-product-detection {
+    -webkit-flex: 0 0 15px;
+    -webkit-box-flex: 1;
     background: #95d658;
-	height: 15px;
-	border-radius: 2px;
-	color: #FFFFFF;
-	font-size: 10px;
+    height: 15px;
+    border-radius: 2px;
+    color: #FFFFFF;
+    font-size: 10px;
 }
 .tui-tag-reduce {
-	/*background-color: #ff9600;*/
-	/*color: #fff;*/
-	font-size: 10px;
-	line-height: 14px;
-	padding: 1px;
-	margin: 0;
-	-webkit-flex: 1 0 auto;
-	text-align: right;
+    /*background-color: #ff9600;*/
+    /*color: #fff;*/
+    font-size: 10px;
+    line-height: 14px;
+    padding: 1px;
+    margin: 0;
+    -webkit-flex: 1 0 auto;
+    text-align: right;
+    -webkit-box-flex: 1;
 }
 .tui-tag-reduce b {
-	display: inline-block;
-	background-color: #fff;
-	color: #ff9600;
-	font-weight: 500;
-	line-height: 14px;
-	padding: 1px;
-	margin-left: 1px;
+    display: inline-block;
+    background-color: #fff;
+    color: #ff9600;
+    font-weight: 500;
+    line-height: 14px;
+    padding: 1px;
+    margin-left: 1px;
 }
-.mui-content-padded.mui-hotline-telephone{
-	color: #999999;
-	text-align: center;
+.mui-content-padded.mui-hotline-telephone {
+    color: #999999;
+    text-align: center;
 }
-.mui-grid-9.tui-search-keyword{
-	background: #FFFFFF;
+.mui-grid-9.tui-search-keyword {
+    background: #FFFFFF;
 }
-.tui-car-cover{
-	position: relative;
+.tui-car-cover {
+    position: relative;
 }
 .tui-car-cover::after {
-	content: attr(data-city);
-	display: inline-block;
-	width: auto;
-	background: #000000;
-	opacity: 0.8;
-	position: absolute;
-	left:2px;
-	bottom:2px;
-	font-size: 10px;
-	border-radius:4px;
-	color: #ffffff;
-	padding: 0 10px;
+    content: attr(data-city);
+    display: inline-block;
+    width: auto;
+    background: #000000;
+    opacity: 0.8;
+    position: absolute;
+    left: 2px;
+    bottom: 2px;
+    font-size: 10px;
+    border-radius: 4px;
+    color: #ffffff;
+    padding: 0 10px;
 }
-.tui-report-count{
-	position: absolute;
-	right: 0;
-	top:0;
-	font-size: 10px;
-	color: #FFFFFF;
-	background: #fa6464;
-	padding: 0 5px;
+.tui-report-count {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 10px;
+    color: #FFFFFF;
+    background: #fa6464;
+    padding: 0 5px;
 }
-.tui-ctxrenzhen{
-	background: url("../images/ctxrenzhen.png") no-repeat center;
-	background-size: cover;
-	position: absolute;
-	left:3px;
-	top:3px;
-	width:33px;
-	height:29px;
+.tui-ctxrenzhen-3 {
+    background: url("../images/renzheng_icon_3.png") no-repeat center;
+    background-size: cover;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 33px;
+    height: 29px;
+}
+.tui-ctxrenzhen-2 {
+    background: url("../images/renzheng_icon_2.png") no-repeat center;
+    background-size: cover;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 33px;
+    height: 29px;
+}
+.tui-ctxrenzhen-1 {
+    background: url("../images/renzheng_icon_1.png") no-repeat center;
+    background-size: cover;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 33px;
+    height: 29px;
+}
+
+.tui-ctxrenzhen-big-3 {
+    background: url("../images/renzheng_icon_3.png") no-repeat center;
+    background-size: cover;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 55px;
+    height: 50px;
+}
+.tui-ctxrenzhen-big-2 {
+    background: url("../images/renzheng_icon_2.png") no-repeat center;
+    background-size: cover;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 55px;
+    height: 50px;
+}
+.tui-ctxrenzhen-big-1 {
+    background: url("../images/renzheng_icon_1.png") no-repeat center;
+    background-size: cover;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 55px;
+    height: 50px;
 }
 
 /*
 车辆筛选
 */
+
 .tui-mask {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index:3;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0,0,0,.4);
-	margin-top: 45px;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .4);
+    margin-top: 45px;
 }
-.tui-mask.active{
-	display: block;
+.tui-mask.active {
+    display: block;
 }
 .tui-filter {
-	position: relative;
-	z-index: 100;
-	background-color: #fcfcfc;
+    position: relative;
+    z-index: 100;
+    background-color: #fcfcfc;
 }
 .tui-filter-nav {
-	display: -webkit-box;
-	display: -ms-box;
-	display:box;
-	background-color: #fff;
-	z-index: 100;
+    display: -webkit-box;
+    display: -ms-box;
+    display: box;
+    background-color: #fff;
+    z-index: 100;
 }
 .tui-filter-nav .tui-nav-item {
-	display: block;
-	-webkit-box-flex: 1;
-	-ms-box-flex: 1;
-	box-flex: 1;
-	-webkit-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
-	width: 100%;
-	height: 44px;
-	line-height: 44px;
-	text-align: center;
-	overflow: hidden;
-	color: #333333;
-	position: relative;
-	z-index: 100;
+    display: block;
+    -webkit-box-flex: 1;
+    -ms-box-flex: 1;
+    box-flex: 1;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    overflow: hidden;
+    color: #333333;
+    position: relative;
+    z-index: 100;
 }
-
 .tui-filter-nav .tui-nav-item.active,
 .tui-filter-nav .tui-nav-item.active.touch,
 .tui-filter-nav .tui-nav-item.select,
 .tui-filter-nav .tui-nav-item.select.touch {
-	background-color: transparent;
-	border-bottom: 2px solid #ff6a00;
-	color: #ff6a00;
+    background-color: transparent;
+    border-bottom: 2px solid #ff6a00;
+    color: #ff6a00;
 }
 .tui-filter-nav .tui-nav-item::after {
-	content: "";
-	position: absolute;
-	top: 50%;
-	right: 8px;
-	width: 0;
-	height: 0;
-	border: 4px solid transparent;
-	border-top-color: #999;
-	margin-top: -2px;
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    width: 0;
+    height: 0;
+    border: 4px solid transparent;
+    border-top-color: #999;
+    margin-top: -2px;
 }
 .tui-filter-nav .tui-nav-item.active::after {
-	border-top-color: transparent;
-	border-bottom-color: #ff6a00;
-	margin-top: -5px;
+    border-top-color: transparent;
+    border-bottom-color: #ff6a00;
+    margin-top: -5px;
 }
-.tui-filter .tui-filter-type{
-	display: none;
+.tui-filter .tui-filter-type {
+    display: none;
 }
-.tui-filter .tui-filter-type.active{
-	display: block;
+.tui-filter .tui-filter-type.active {
+    display: block;
 }
-.mui-grid-view.mui-grid-9.tui-filter-list{
-	background-color: #FFFFFF !important;
+.mui-grid-view.mui-grid-9.tui-filter-list {
+    background-color: #FFFFFF !important;
 }
- .tui-filter-btnone{
-	border-top:none !important;
+.tui-filter-btnone {
+    border-top: none !important;
 }
 .tui-filter-type .tui-filter-list a {
-	display: block;
-	position: relative;
-	color: #333;
-	font-size: 13px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-	padding: 0 !important;
+    display: block;
+    position: relative;
+    color: #333;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 !important;
 }
-
-.tui-filter-type .tui-filter-list a  .mui-icon{
-	font-size: 12px;
-	color: #333;
+.tui-filter-type .tui-filter-list a .mui-icon {
+    font-size: 12px;
+    color: #333;
 }
 .tui-filter-list .mui-table-view-cell.tui-filter-item,
-.tui-filter-list .mui-table-view-cell.tui-filter-item-multiple{
-	padding: 10px 0 ;
+.tui-filter-list .mui-table-view-cell.tui-filter-item-multiple {
+    padding: 10px 0;
 }
-.tui-filter-list .mui-table-view-cell.tui-filter-item-placeholder{
-	padding: 10px 0 ;
+.tui-filter-list .mui-table-view-cell.tui-filter-item-placeholder {
+    padding: 10px 0;
 }
-.tui-filter-type .mui-table-view-cell.tui-car-filter-caption{
-	padding-left: 15px;
+.tui-filter-type .mui-table-view-cell.tui-car-filter-caption {
+    padding-left: 15px;
 }
 .tui-filter-type .mui-table-view-cell.tui-filter-item.active,
-.tui-filter-type .mui-table-view-cell.tui-filter-item-multiple.active{
-	 background: #f4f4f4;
-	 position: relative;
- }
-.tui-filter-type .mui-table-view-cell.tui-filter-item.active .iconfont{
-	color: #ff6a00;
+.tui-filter-type .mui-table-view-cell.tui-filter-item-multiple.active {
+    background: #f4f4f4;
+    position: relative;
+}
+.tui-filter-type .mui-table-view-cell.tui-filter-item.active .iconfont {
+    color: #ff6a00;
 }
 .tui-filter-more.tui-filter-type .mui-table-view-cell.tui-filter-item.active::after,
-.tui-filter-more.tui-filter-type .mui-table-view-cell.tui-filter-item-multiple.active::after{
-	font-family: Muiicons;
-	font-size: 14px;
-	font-weight: normal;
-	font-style: normal;
-	line-height: 1;
-	display: block;
-	text-decoration: none;
-	-webkit-font-smoothing: antialiased;
-	content: "\e442";
-	position: absolute;
-	top: 1px;
-	right:1px;
-	left: initial;
-	background:#ff6a00;
-	border-radius:50% ;
-	color: #ff6a00;
-	-webkit-transform: none;
-	transform: none;
+.tui-filter-more.tui-filter-type .mui-table-view-cell.tui-filter-item-multiple.active::after {
+    font-family: Muiicons;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    display: block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    content: "\e442";
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    left: initial;
+    background: #ff6a00;
+    border-radius: 50%;
+    color: #ff6a00;
+    -webkit-transform: none;
+    transform: none;
 }
 .mui-table-view-cell:after {
-	/* position: absolute; */
-	/* right: 0; */
-	/* bottom: 0; */
-	/* left: 15px; */
-	/* height: 1px; */
-	/* content: ''; */
-	/* -webkit-transform: scaleY(.5); */
-	/* transform: scaleY(.5); */
-	/* background-color: #c8c7cc; */
+    /* position: absolute; */
+    /* right: 0; */
+    /* bottom: 0; */
+    /* left: 15px; */
+    /* height: 1px; */
+    /* content: ''; */
+    /* -webkit-transform: scaleY(.5); */
+    /* transform: scaleY(.5); */
+    /* background-color: #c8c7cc; */
 }
-.tui-filter-opt
-{
-	display:-moz-box; /* Firefox */
-	display:-webkit-box; /* Safari and Chrome */
-	display:box;
-	width:100%;
+.tui-filter-opt {
+    display: -moz-box;
+    /* Firefox */
+    display: -webkit-box;
+    /* Safari and Chrome */
+    display: box;
+    width: 100%;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
 }
 .tui-filter-opt .tui-btn-default {
-	color: #fff;
-	background-color: #b5b5b5;
-	border: 0;
-	-webkit-box-flex: 3.0;
-	box-flex: 3.0;
-	display:-moz-box; /* Firefox */
-	display:-webkit-box; /* Safari and Chrome */
-	display:box;
-	height:42px;
+    color: #fff;
+    background-color: #b5b5b5;
+    border: 0;
+    -webkit-box-flex: 3.0;
+    box-flex: 3.0;
+    display: -moz-box;
+    /* Firefox */
+    display: -webkit-box;
+    /* Safari and Chrome */
+    display: box;
+    height: 42px;
+    text-align: center;
 }
 .tui-filter-opt .tui-btn-primary {
-	color: #fff;
-	border: 0;
-	-webkit-box-flex:1.0;
-	box-flex: 1.0;
-	display:-moz-box; /* Firefox */
-	display:-webkit-box; /* Safari and Chrome */
-	display:box;
+    color: #fff;
+    border: 0;
+    -webkit-box-flex: 1.0;
+    box-flex: 1.0;
+    display: -moz-box;
+    /* Firefox */
+    display: -webkit-box;
+    /* Safari and Chrome */
+    display: box;
+    text-align: center;
 }
-.tui-filter-type .mui-indexed-list-bar{
-	width: 23px;
-	background-color: transparent;
-	position: absolute;
-	height: 100%;
-	z-index: 10;
-	right: 0px;
-	-webkit-transition: .2s;
-	color: #4c4c4c;
+.tui-filter-type .mui-indexed-list-bar {
+    width: 23px;
+    background-color: transparent;
+    position: absolute;
+    height: 100%;
+    z-index: 10;
+    right: 0px;
+    -webkit-transition: .2s;
+    color: #4c4c4c;
+}
+.tui-filter-result {
+    line-height: 32px;
+    padding-left: 15px;
+    border-bottom: 1px solid #eeeeee;
+    display: none;
+}
+.tui-filter-result.active {
+    display: -webkit-box;
+}
+.tui-filter-result label {
+    -webkit-box-flex: 1;
+}
+.tui-filter-result p {
+    -webkit-box-flex: 3;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+    white-space: nowrap;
+}
+.tui-filter-result-btn {
+    -webkit-box-flex: 1;
+    border-left: 1px solid #eeeeee;
+    text-align: center;
+    min-width: 60px;
+    width: 60px;
+    color: #ff6a00;
 }
 
-.tui-filter-result{
-	line-height: 32px;
-	padding-left: 15px;
-	border-bottom:1px solid #eeeeee;
-	display: none;
-}
-.tui-filter-result.active{
-	display: -webkit-box;
-}
-.tui-filter-result label{
-	 -webkit-box-flex: 1;
- }
-.tui-filter-result p{
-	-webkit-box-flex: 3;
-	margin: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	word-break: keep-all;
-	white-space: nowrap;
-}
-.tui-filter-result-btn{
-	-webkit-box-flex:1;
-	border-left:1px solid #eeeeee;
-	text-align: center;
-	min-width: 60px;
-	width: 60px;
-	color: #ff6a00;
-}
 /*
 个人中心
 */
-.tui-admin-banner{
-	background: url("../images/adminbanner.png") no-repeat;
-	background-size: cover;
+
+.tui-admin-banner {
+    background: url("../images/adminbanner.png") no-repeat;
+    background-size: cover;
     text-align: center;
-	padding: 15px;
+    padding: 15px;
 }
-.tui-admin-banner i{
-	color: #c4c4c4;
-	font-size: 32px;
-	border-radius: 50%;
-	background: #FFFFFF;
+.tui-admin-banner i {
+    color: #c4c4c4;
+    font-size: 32px;
+    border-radius: 50%;
+    background: #FFFFFF;
 }
-.tui-admin-banner p{
-	margin: 0;
+.tui-admin-banner p {
+    margin: 0;
 }
-.tui-admin-header{
-	display: inline-block;
-	background-size: cover;
-	border-radius: 50%;
+.tui-admin-header {
+    display: inline-block;
+    background-size: cover;
+    border-radius: 50%;
 }
-@media screen and (max-device-width:640px){
-	.tui-admin-header{
-		width: 61px;
-		height: 61px;
-		border:1px solid #DEDEDE;
-	}
-}
-@media screen and (min-device-width:640px){
-	.tui-admin-header{
-		width: 121px;
-		height: 121px;
-	}
-}
-.tui-admin-icon {background-image: url("../images/admin-icon.png"); display: inline-block; float: left;margin-right: 10px;}
-.tui-admin-pinggushi {background-position: -0px -90px; width: 25px; height: 25px; }
-.tui-admin-danweixinxi {background-position: -360px -45px; width: 25px; height: 25px; }
-.tui-admin-gerenziliao{background-position: -315px -45px; width: 25px; height: 25px; }
-.tui-admin-jiaoyijilu{background-position: -270px -45px; width: 25px; height: 25px; }
-.tui-admin-yinhangka{background-position: -225px -45px; width: 25px; height: 25px; }
-.tui-admin-chongzhi {background-position: -180px -45px; width: 25px; height: 25px; }
-.tui-admin-tixian{background-position: -120px -45px; width: 25px; height: 25px; }
-.tui-admin-tonghangzhaoche {background-position: -0px -45px; width: 25px; height: 25px; }
-.tui-admin-jiaoyimima {background-position: -60px -45px; width: 25px; height: 25px; }
-.tui-admin-mimashezhi{background-position: -360px -0px; width: 25px; height: 25px; }
-.tui-admin-zhanghaozhongxin {background-position: -315px -0px; width: 25px; height: 25px; }
-.tui-admin-wodexiaoxi {background-position: -270px -0px; width: 25px; height: 25px; }
-.tui-admin-youhuiquan{background-position: -225px -0px; width: 25px; height: 25px; }
-.tui-admin-wodecheyuan {background-position: -180px -0px; width: 25px; height: 25px; }
-.tui-admin-pinggudingdan{background-position: -120px -0px; width: 25px; height: 25px; }
-.tui-admin-sell{background-position: -60px -0px; width: 25px; height: 25px; }
-.tui-admin-buy{background-position: -0px -0px; width: 25px; height: 25px; }
-
-
-
-.tui-login{
-	 position: absolute;
-	 z-index: 100;
-	 display: none;
-	 width: 100%;
-	 top:50%;
-	 transform: translateY(-50%) ;
-	 -webkit-transform:translateY(-50%) ;
- }
-.tui-login.active{
-	position: absolute;
-	z-index: 100;
-	display: block;
-	width: 100%;
-	top:50%;
-	transform: translateY(-50%) ;
-	-webkit-transform:translateY(-50%) ;
-
-}
-.tui-login-container{
-	padding-top: 10px;
-	margin: 0 10px;
-	background: #FFFFFF;
-}
-.tui-login-container h4{
-	line-height: 38px;
-	border-bottom: 1px solid #dedede;
-	text-align: center;
-
-}
-.tui-login .mui-input-row .tui-btn-getcode{
-	width: 80px;
-	height: 30px;
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	left: inherit;
-	line-height: 30px;
-	font-size: 12px;
-}
-.tui-login .mui-input-row label{
-	width: 30%;
-}
-.tui-login .mui-input-row input{
-	width: 70%;
-}
-.tui-slider-indicator
-{
-	bottom: 8px;
-	width: 100%;
-	text-align: center;
-	border-bottom: 1px solid #dedede;
-	color: #4c4c4c;
-	background: #FFFFFF;
-
-}
-.tui-slider-indicator.tui-segmented-control
-{
-	position: relative;
-	bottom: auto;
-}
-.tui-slider-indicator .tui-indicator
-{
-	display: inline-block;
-
-	width: 6px;
-	height: 6px;
-	margin: 1px 6px;
-
-	cursor: pointer;
-
-	border-radius: 50%;
-	background: #fff;
-	-webkit-box-shadow: 0 0 1px 1px rgba(130, 130, 130, .7);
-	box-shadow: 0 0 1px 1px rgba(130, 130, 130, .7);
+.tui-resume-header {
+    display: inline-block;
+    background-size: cover;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    float: right;
+    border: 1px solid #DEDEDE;
+    margin-top: -5px;
+    margin-right: 20px;
 }
 
-.tui-segmented-control .tui-control-item
-{
-	line-height: 38px;
-
-	display: table-cell;
-	overflow: hidden;
-
-	width: 1%;
-	-webkit-transition: background-color .1s linear;
-	transition: background-color .1s linear;
-	text-align: center;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	color: #4c4c4c;
-	border-color: #dedede;
-	border-left: 1px solid #dedede;
+@media screen and (max-device-width:640px) {
+    .tui-admin-header {
+        width: 61px;
+        height: 61px;
+        border: 1px solid #DEDEDE;
+    }
 }
-.tui-segmented-control .tui-control-item:first-child
-{
-	border-left-width: 0;
+@media screen and (min-device-width:640px) {
+    .tui-admin-header {
+        width: 121px;
+        height: 121px;
+    }
 }
-.tui-segmented-control .tui-control-item.active
-{
-	color: #ff6a00;
-	background-color: #fff;
-	border-bottom: 2px solid #ff6a00;
+.tui-admin-header-uploader{
+    position: absolute;width: 100%;
+    height: 30px;
+    opacity: 0;
+    z-index: 3;
+    top: 0;
+    left: 0;
+}
+.tui-admin-icon {
+    background-image: url("../images/admin-icon.png");
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+}
+.tui-admin-pinggushi {
+    background-position: -0px -90px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-danweixinxi {
+    background-position: -360px -45px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-gerenziliao {
+    background-position: -315px -45px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-jiaoyijilu {
+    background-position: -270px -45px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-yinhangka {
+    background-position: -225px -45px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-chongzhi {
+    background-position: -180px -45px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-tixian {
+    background-position: -120px -45px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-tonghangzhaoche {
+    background-position: -0px -45px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-jiaoyimima {
+    background-position: -60px -45px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-mimashezhi {
+    background-position: -360px -0px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-zhanghaozhongxin {
+    background-position: -315px -0px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-wodexiaoxi {
+    background-position: -270px -0px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-youhuiquan {
+    background-position: -225px -0px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-wodecheyuan {
+    background-position: -180px -0px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-pinggudingdan {
+    background-position: -120px -0px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-sell {
+    background-position: -60px -0px;
+    width: 25px;
+    height: 25px;
+}
+.tui-admin-buy {
+    background-position: -0px -0px;
+    width: 25px;
+    height: 25px;
+}
+.tui-login {
+    position: absolute;
+    z-index: 100;
+    display: none;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+.tui-login.active {
+    position: absolute;
+    z-index: 100;
+    display: block;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+.tui-login-container {
+    padding-top: 10px;
+    margin: 0 10px;
+    background: #FFFFFF;
+}
+.tui-login-container h4 {
+    line-height: 38px;
+    border-bottom: 1px solid #dedede;
+    text-align: center;
+}
+.tui-login .mui-input-row .tui-btn-getcode {
+    width: 80px;
+    height: 30px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    left: inherit;
+    line-height: 30px;
+    font-size: 12px;
+}
+.tui-login .mui-input-row label {
+    width: 30%;
+}
+.tui-login .mui-input-row input {
+    width: 70%;
+}
+.tui-slider-indicator {
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #dedede;
+    color: #4c4c4c;
+    background: #FFFFFF;
+}
+.tui-slider-indicator.tui-segmented-control {
+    position: relative;
+    bottom: auto;
+}
+.tui-slider-indicator .tui-indicator {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 1px 6px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0 0 1px 1px rgba(130, 130, 130, .7);
+    box-shadow: 0 0 1px 1px rgba(130, 130, 130, .7);
+}
+.tui-segmented-control .tui-control-item {
+    line-height: 38px;
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    -webkit-transition: background-color .1s linear;
+    transition: background-color .1s linear;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #4c4c4c;
+    border-color: #dedede;
+    border-left: 1px solid #dedede;
+}
+.tui-segmented-control .tui-control-item:first-child {
+    border-left-width: 0;
+}
+.tui-segmented-control .tui-control-item.active {
+    color: #ff6a00;
+    background-color: #fff;
+    border-bottom: 2px solid #ff6a00;
+}
+.tui-admin-offbtn{
+    padding: 10px;
+}
+.tui-admin-offbtn .mui-btn-block{
+    padding: 10px 0;
 }
 /*
  *订单
  */
-.tui-order{
-	padding:0;
-	padding-bottom: 10px;
+
+.tui-order {
+    padding: 0;
+    padding-bottom: 10px;
     list-style: none;
-	margin:  0;
-	color: #4c4c4c;
+    margin: 0;
+    color: #4c4c4c;
 }
-.tui-order-item{
-	margin-top: 10px;
-	background: #FFFFFF;
+.tui-order-item {
+    margin-top: 10px;
+    background: #FFFFFF;
 }
 .tui-order-item::after,
-.tui-order-header::after{
-	content: "";
-	display: block;
-	clear: both;
-	height:0;
+.tui-order-header::after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
 }
-.tui-order-header{
-  line-height: 38px;
-  border-bottom: 1px solid #dedede;
-  padding: 0 10px;
+.tui-order-header {
+    line-height: 38px;
+    border-bottom: 1px solid #dedede;
+    padding: 0 10px;
 }
-.tui-order-info{
-	display: flex;
-	display: -webkit-flex;
-	flex-direction: row;
-	padding: 10px;
-	align-items: center;
-	border-bottom: 1px solid #dedede;
+.tui-order-info {
+     padding: 10px;
+     align-items: center;
+     border-bottom: 1px solid #dedede;
+     clear: both;
+ }
+.tui-order-info::after {
+  content: "";
+   display: block;
+   clear: both;
 }
-.tui-order-info .tui-order-icon{
-	-webkit-flex: 0 0 35%;
-	position: relative;
+.tui-order-info .tui-order-icon {
+    float: left;
+    width: 40%;
+    position: relative;
 }
-.tui-order-code{
-   margin: 0;
-   padding: 0 10px;
-	line-height:24px;
-	font-size: 12px;
-	border-bottom:1px solid #dedede;
+.tui-order-code {
+    margin: 0;
+    padding: 0 10px;
+    line-height: 24px;
+    font-size: 12px;
+    border-bottom: 1px solid #dedede;
 }
-.tui-order-info .tui-order-icon::before{
-	content: attr(data-car);
-	display: block;
-	position: absolute;
-	width: 100%;
-	color: #FFFFFF;
-	bottom: 0;
-	left: 0;
-	text-align: center;
-	font-size: 10px;
+.tui-order-info .tui-order-icon::before {
+    content: attr(data-car);
+    display: block;
+    position: absolute;
+    width: 100%;
+    color: #FFFFFF;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    font-size: 10px;
 }
-.tui-order-info .tui-order-descr{
-	-webkit-flex: 0 0 65%;
+.tui-order-info .tui-order-descr {
+    display: block;
+    float: left;
+    width: 60%;
 }
-.tui-order-info .tui-order-icon img{
-	width: 100%;
-	height:100%;
+.tui-order-info .tui-order-icon img {
+    width: 100%;
+    height: 100%;
 }
-.tui-order-descr{
-	padding: 0 10px;
+.tui-order-descr {
+    padding: 0 10px;
 }
-.tui-order-descr p{
-	margin:0;
+.tui-order-descr p {
+    margin: 0;
 }
-.tui-order-descr .tui-car-name{
-	font-size: 14px;
-	color: #333;
+.tui-order-descr .tui-car-name {
+    font-size: 14px;
+    color: #333;
 }
-.tui-order-descr  .tui-car-deploy{
-	font-size: 14px;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	padding: 0;
-	margin: 0;
+.tui-order-descr .tui-car-deploy {
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0;
+    margin: 0;
 }
-.tui-order-descr  .tui-car-sellprice{
-
+.tui-order-descr .tui-car-sellprice {}
+.tui-order-descr .tui-car-price {
+    font-size: 18px;
 }
-.tui-order-descr  .tui-car-price{
-	font-size: 18px;
+.tui-order-descr .tui-car-newprice {
+    font-size: 12px;
+    margin-top: 5px;
 }
-.tui-order-descr  .tui-car-newprice{
-	font-size: 12px;
-	margin-top: 5px;
-}
-.tui-order-operate{
-	padding: 10px;
+.tui-order-operate {
+    padding: 10px;
     text-align: right;
+    position: relative;
 }
-.tui-order-operate p{
-	margin: 0;
-	font-size: 12px;
-	display: -webkit-flex;
-	justify-content: flex-end;
-	align-items: center;
+.tui-statement {
+    position: absolute;
+    width: 50%;
+    left: 10px;
+    top: 10px;
+    text-align: left;
 }
-.tui-fullpay-check{
-	-webkit-flex: 0 0 50%;
-	 position:releative;
-}
-.tui-fullpay-check input[type=checkbox]{
-	position:absolute;
-	top: -7px;
-	left: 40px !important;
-}
- .tui-fullpay-title{
-
-	-webkit-flex: 0 0 30%;
-}
-.tui-fullpay-num{
-
-	-webkit-flex: 0 0 30%;
-}
-.tui-fullpay-allpay{
-	border-top:1px solid #dedede;
-	font-size: 14px;
-	line-height: 38px;
-	margin-top: 10px;
-}
-.tui-order-form{
-	background: #FFFFFF;
-	padding-bottom: 10px;
-}
-.tui-btngroup-fix{
-	display: flex;
-	display: -webkit-flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	z-index: 2;
+.tui-order-operate p {
+    margin: 0;
+    font-size: 12px;
+    display: -webkit-flex;
+    justify-content: flex-end;
+    align-items: center;
 
 }
-.tui-btngroup-fix .tui-btn-default{
-   -webkit-flex: 0 0 30%;
-	color: #fff;
-	background-color: #b5b5b5;
-	border: 0;
-	height:42px;
+.tui-fullpay-check {
+    -webkit-flex: 0 0 50%;
+    position:releative;
 }
-.tui-btngroup-fix .tui-btn-primary{
-	-webkit-flex: 1 1 70%;
-	color: #fff;
-	border: 0;
+.tui-fullpay-check input[type=checkbox] {
+    position: absolute;
+    top: -7px;
+    left: 40px !important;
 }
-.tui-order-trade::before{
-	content: url('../images/trade.png');
-	position: absolute;
-	left: inherit;
-	right: 0;
-	bottom:0;
-	line-height: 13px;
-	z-index: 2;
+.tui-fullpay-title {
+    -webkit-flex: 0 0 30%;
 }
+.tui-fullpay-num {
+    -webkit-flex: 0 0 30%;
+}
+.tui-fullpay-allpay {
+    border-top: 1px solid #dedede;
+    font-size: 14px;
+    line-height: 38px;
+    margin-top: 10px;
+}
+.tui-order-form {
+    background: #FFFFFF;
+    padding-bottom: 10px;
+}
+.tui-pay-statement {
+    padding: 10px;
+    background: #fff;
+    font-size: 12px;
+}
+.tui-pay-statement p {
+    font-size: 12px;
+}
+.tui-btngroup-fix {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack:center;
+}
+.tui-btngroup-fix .tui-btn-default {
+    -webkit-flex: 0 0 30%;
+    -webkit-box-flex:1;
+    flex: 0 0 30%;
+    color: #fff;
+    background-color: #b5b5b5;
+    border: 0;
+    height: 42px;
+}
+.tui-btngroup-fix .tui-btn-primary {
+    -webkit-flex: 1 1 60%;
+    -webkit-box-flex:3;
+    flex: 1 1 60%;
+    color: #fff;
+    border: 0;
+    display: block;
+
+}
+.tui-order-trade::before {
+    content: url('../images/trade.png');
+    position: absolute;
+    left: inherit;
+    right: 0;
+    bottom: 0;
+    line-height: 13px;
+    z-index: 2;
+}
+
 /*
 *评价
 */
-.pj-container{
-	line-height: 1.1;
-	padding: 5px 15px;
+
+.pj-container {
+    line-height: 1.1;
+    padding: 5px 15px;
 }
 .pj-star-icon.active {
-	background-position: 0 0;
-	background-size: 52px 17px;
+    background-position: 0 0;
+    background-size: 52px 17px;
 }
 .pj-star-icon {
-	display: inline-block;
-	width: 22px;
-	height: 17px;
-	background: url(../images/icon_star3.png) -33px 0 no-repeat;
-	background-size: 52px 17px;
-	text-indent: -9999px;
-	vertical-align: -2px;
+    display: inline-block;
+    width: 22px;
+    height: 17px;
+    background: url(../images/icon_star3.png) -33px 0 no-repeat;
+    background-size: 52px 17px;
+    text-indent: -9999px;
+    vertical-align: -2px;
 }
+
 /*
 *订单详情
 */
-.tui-order-details{
-	padding: 10px 0 10px 20px;
-	position: relative;
-}
-.tui-order-details-item{
-	border-left: 1px solid #dedede;
-	min-height:30px;
-	position: relative;
-}
-.tui-order-details-item::before{
-	font-family:"iconfont" !important;
-	font-size:16px;
-	font-style:normal;
-	-webkit-font-smoothing: antialiased;
-	-webkit-text-stroke-width: 0.2px;
-	content: "\e618";
-	position: absolute;
-	top: 2px;
-	left: -9px;
-}
-.tui-order-details-item.active::before{
-	font-family:"iconfont" !important;
-	font-size:16px;
-	font-style:normal;
-	-webkit-font-smoothing: antialiased;
-	-webkit-text-stroke-width: 0.2px;
-	content: "\e618";
-	position: absolute;
-	top: 2px;
-	left: -9px;
-	color: #ff6a00;
-}
-.tui-order-details-item.underway::before{
-	font-family:"iconfont" !important;
-	font-size:16px;
-	font-style:normal;
-	-webkit-font-smoothing: antialiased;
-	-webkit-text-stroke-width: 0.2px;
-	content: "\e63e";
-	position: absolute;
-	top: 2px;
-	left: -9px;
-	color: #12a000;
-	z-index: 2;
-	-webkit-animation:onway 5s linear 0s infinite alternate;
-}
-.tui-order-details-item:first-child::before{
 
+.tui-order-details {
+    padding: 10px 0 10px 20px;
+    position: relative;
 }
-.tui-order-details::after{
-	width: 12px;
-	height: 12px;
-	border:1px solid #dedede;
-	border-radius: 50%;
-	position: absolute;
-	bottom: -3px;
-	left: 14px;
-	content: "";
+.tui-order-details-item {
+    border-left: 1px solid #dedede;
+    min-height: 30px;
+    position: relative;
 }
-.tui-order-details::before{
-	width: 12px;
-	height: 12px;
-	border:1px solid #dedede;
-	border-radius: 50%;
-	position: absolute;
-	top: -3px;
-	left: 14px;
-	content: "";
+.tui-order-details-item::before {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    content: "\e618";
+    position: absolute;
+    top: 2px;
+    left: -9px;
 }
-.tui-orderdetails-table{
-	width: 90%;
-	margin: 0 auto;
-	font-size: 14px;
-	line-height: 24px;
-	color: #666666;
-	border-bottom: 1px solid #dedede;
+.tui-order-details-item.active::before {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    content: "\e618";
+    position: absolute;
+    top: 2px;
+    left: -9px;
+    color: #ff6a00;
 }
-.tui-order-details-caption{
-	font-size: 14px;
-	color: #333333;
-	text-align: left;
-	width: 90%;
-	margin: 0 auto;
+.tui-order-details-item.underway::before {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    content: "\e63e";
+    position: absolute;
+    top: 2px;
+    left: -9px;
+    color: #12a000;
+    z-index: 2;
+    -webkit-animation: onway 5s linear 0s infinite alternate;
+}
+.tui-order-details-item:first-child::before {}
+.tui-order-details::after {
+    width: 12px;
+    height: 12px;
+    border: 1px solid #dedede;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -3px;
+    left: 14px;
+    content: "";
+}
+.tui-order-details::before {
+    width: 12px;
+    height: 12px;
+    border: 1px solid #dedede;
+    border-radius: 50%;
+    position: absolute;
+    top: -3px;
+    left: 14px;
+    content: "";
+}
+.tui-orderdetails-table {
+    width: 90%;
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 24px;
+    color: #666666;
+    border-bottom: 1px solid #dedede;
+}
+.tui-order-details-caption {
+    font-size: 14px;
+    color: #333333;
+    text-align: left;
+    width: 90%;
+    margin: 0 auto;
     line-height: 30px;
-	font-weight: normal;
+    font-weight: normal;
 }
-.tui-orderdetails-table th{
-	font-weight: normal;
-	width: 80px;
+.tui-orderdetails-table th {
+    font-weight: normal;
+    width: 80px;
 }
-.tui-orderdetails-table td{
-	text-align: left;
+.tui-orderdetails-table td {
+    text-align: left;
 }
-@-webkit-keyframes onway /* Safari 和 Chrome */
+@-webkit-keyframes onway
+/* Safari 和 Chrome */
+
 {
-	0%   {top: 2px;}
-	25%  {top: 25%;}
-	50%  {top: 50%;}
-	100% {top: 70%;}
+    0% {
+        top: 2px;
+    }
+    25% {
+        top: 25%;
+    }
+    50% {
+        top: 50%;
+    }
+    100% {
+        top: 70%;
+    }
 }
+
 /*
 *我的车源
 */
-.tui-carissue{
-	overflow: hidden;
+
+.tui-carissue {
+    overflow: hidden;
 }
-.tui-carissue .mui-input-row{
-	background: #FFFFFF;
-	display: -webkit-flex;
-	justify-content: space-between;
-	align-items: center;
+/*.tui-carissue .mui-input-row {
+    background: #FFFFFF;
+    display: -webkit-flex;
+    display: flex;
+    display: -webkit-box;
+    justify-content: space-between;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-box-pack: start;
 }
-.tui-carissue .mui-input-row label{
-	-webkit-flex: 1 1 auto;
+.tui-carissue .mui-input-row label {
+    -webkit-flex: 1 1 auto;
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
 }
-.tui-carissue .mui-input-row input{
-	-webkit-flex: 1 1 65%;
-}
+.tui-carissue .mui-input-row input {
+    -webkit-flex: 1 1 65%;
+    flex: 1 1 65%;
+    -webkit-box-flex:3;
+}*/
 .tui-carissue .mui-input-row .tui-car-text,
-.tui-carissue .mui-input-row .tui-color-text{
-	-webkit-flex: 1 1 65%;
-	line-height: 21px;
-	min-height: 40px;
-	padding: 10px 25px 10px 0;
-	margin: 0;
-	-webkit-user-select: text;
-	outline: 0;
-	background-color: #fff;
-	-webkit-appearance: none;
+.tui-carissue .mui-input-row .tui-color-text {
+    -webkit-flex: 1 1 65%;
+    -webkit-box-flex:3;
+    flex: 1 1 65%;
+    line-height: 21px;
+    min-height: 40px;
+    padding: 10px 25px 10px 0;
+    margin: 0;
+    -webkit-user-select: text;
+    outline: 0;
+    background-color: #fff;
+    -webkit-appearance: none;
 }
-.mui-input-row .tui-bank-text{
-	-webkit-flex: 1 1 65%;
-	line-height: 21px;
-	min-height: 40px;
-	padding: 10px 25px 10px 0;
-	margin: 0;
-	-webkit-user-select: text;
-	outline: 0;
-	background-color: #fff;
-	-webkit-appearance: none;
+.mui-input-row .tui-bank-text {
+    -webkit-flex: 1 1 65%;
+    -webkit-box-flex:3;
+    flex: 1 1 65%;
+    line-height: 21px;
+    min-height: 40px;
+    padding: 10px 25px 10px 0;
+    margin: 0;
+    -webkit-user-select: text;
+    outline: 0;
+    background-color: #fff;
+    -webkit-appearance: none;
 }
-
-.tui-carissue .mui-input-row .tui-aide{
-	position: absolute;
-	right: 5px;
-	color: #999;
-	font-size: 12px;
-	transform: translateY(50%);
+.tui-carissue .mui-input-row .tui-aide {
+    position: absolute;
+    right: 20px;
+    color: #999;
+    font-size: 12px;
+    top: 10px;
 }
-
-.mui-input-row.tui-image-container{
-	background: #FFFFFF;
-	display: block !important;
-	min-height: 125px;
-	height: auto;
+.mui-input-row.tui-image-container {
+    background: #FFFFFF;
+    display: block !important;
+    min-height: 125px;
+    height: auto;
 }
-.tui-image-container label{
-	display: block !important;
-	width: 100%;
-	float: none;
+.tui-image-container label {
+    display: block !important;
+    width: 100%;
+    float: none;
 }
 .mui-input-row.tui-image-container .image-list {
-	min-height: 85px;
-	height: auto;
-	 background-size: cover;
-	 padding: 10px 10px;
-	overflow: hidden;
-	display: block;
+    min-height: 85px;
+    height: auto;
+    background-size: cover;
+    padding: 10px 10px;
+    overflow: hidden;
+    display: block;
 }
- .image-item.space {
-	border: none;
+.image-item.space {
+    border: none;
 }
- .image-item-bar {
-	width: 65px;
-	height: 65px;
-	background-image: url(../images/iconfont-tianjia.png);
-	background-size: 100% 100%;
-	position: relative;
-	border-radius: 5px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	 display: inline-block;
+.image-item-bar {
+    width: 65px;
+    height: 65px;
+    background-image: url(../images/iconfont-tianjia.png);
+    background-size: 100% 100%;
+    position: relative;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
 }
 .image-item {
-	width: 65px;
-	height: 65px;
-	position: relative;
-	border-radius: 5px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	border: solid 1px #e8e8e8;
-	display: inline-block;
-	background-size: 100% 100%;
+    width: 65px;
+    height: 65px;
+    position: relative;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: solid 1px #e8e8e8;
+    display: inline-block;
+    background-size: 100% 100%;
 }
-.image-item span.mui-icon{
-	position: absolute;
-	bottom:20px;
-	left: 20px;
+.image-item span.mui-icon {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
 }
- .image-item .image-close {
-	position: absolute;
-	display: inline-block;
-	right: -6px;
-	top: -6px;
-	width: 20px;
-	height: 20px;
-	text-align: center;
-	line-height: 20px;
-	border-radius: 12px;
-	background-color: #FF5053;
-	color: #f3f3f3;
-	border: solid 1px #FF5053;
-	font-size: 9px;
-	font-weight: 200;
-	z-index: 1;
+.image-item .image-close {
+    position: absolute;
+    display: inline-block;
+    right: -6px;
+    top: -6px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 12px;
+    background-color: #FF5053;
+    color: #f3f3f3;
+    border: solid 1px #FF5053;
+    font-size: 9px;
+    font-weight: 200;
+    z-index: 1;
 }
 .image-item.space .image-close {
-	display: none;
+    display: none;
 }
- .image-item-bar input[type="file"] {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-	opacity: 0;
-	cursor: pointer;
-	z-index: 0;
+.image-item-bar input[type="file"] {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 0;
 }
-.tui-swipe-container{
-	position: absolute;
-	width: 100%;
-	top: 0;
-	left: 100%;
-	height: auto;
-	z-index: 100;
-	display:none ;
+.tui-swipe-container {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 100%;
+    height: auto;
+    z-index: 100;
+    display: none;
 }
-.tui-swipe-container.active{
-	display: block;
-	left: 0;
-	/*-webkit-animation:ouvrir 1s  ;*/
+.tui-swipe-container.active {
+    display: block;
+    left: 0;
+    /*-webkit-animation:ouvrir 1s  ;*/
 }
+
 /*******
 *帐号中心
 */
-.tui-settings{
-	background: #FFFFFF;
-	padding-top: 45px;
+
+.tui-settings {
+    background: #FFFFFF;
+    padding-top: 45px;
 }
-.tui-settings-text{
-	padding:20px 10px;
-	line-height: 1.5;
-	background: #efeff4;
+.tui-settings-text {
+    padding: 20px 10px;
+    line-height: 1.5;
+    background: #efeff4;
 }
-.tui-settings-tip{
-	padding:20px 10px;
-	line-height: 1.5;
-	text-align: center;
-	color: #ff6b00;
+.tui-settings-tip {
+    padding: 20px 10px;
+    line-height: 1.5;
+    text-align: center;
+    color: #ff6b00;
 }
-.tui-carissue .mui-input-row{
-	background: #FFFFFF;
-	display: -webkit-flex;
-	justify-content: space-between;
-	align-items: center;
+.tui-carissue .mui-input-row {
+    background: #FFFFFF;
+
 }
-.tui-settings .mui-input-row label{
-	-webkit-flex: 1 1 auto;
-}
-.tui-settings .mui-input-row input{
-	-webkit-flex: 1 1 65%;
+.tui-settings .mui-input-row label {
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
 }
 
-.tui-settings .mui-input-row .tui-bank-text{
-	-webkit-flex: 1 1 65%;
-	line-height: 21px;
-	min-height: 40px;
-	padding: 10px 25px 10px 0;
-	margin: 0;
-	-webkit-user-select: text;
-	outline: 0;
-	background-color: #fff;
-	-webkit-appearance: none;
+.tui-settings .mui-input-row .tui-bank-text {
+    -webkit-flex: 1 1 65%;
+    flex: 1 1 65%;
+    line-height: 21px;
+    min-height: 40px;
+    padding: 10px 25px 10px 0;
+    margin: 0;
+    -webkit-user-select: text;
+    outline: 0;
+    background-color: #fff;
+    -webkit-appearance: none;
+}
+.tui-city-result {
+    margin-right: 15px;
 }
 
-.tui-carissue .mui-input-row .tui-aide{
-	position: absolute;
-	right: 5px;
-	color: #999;
-	font-size: 12px;
-	transform: translateY(50%);
-}
-.tui-bank-list li{
-	padding-top: 5px;
-	padding-bottom: 5px;
+.tui-bank-list li {
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 .tui-bank {
-	width: auto;
-	height: auto;
-	border: 1px solid #DEDEDE;
-	margin: 20px;
-	border-radius: 7px;
+    width: auto;
+    height: auto;
+    border: 1px solid #DEDEDE;
+    margin: 20px;
+    border-radius: 7px;
 }
-
 .tui-bank-title {
-	height: 30px;
-	line-height: 30px;
-	background: #f6f6f6;
-	color: #333333;
-	font-size: 14px;
-	border-top-left-radius: 7px;
-	border-top-right-radius: 7px;
-	display: -webkit-flex;
-	justify-content: flex-start;
-	align-items: center;
+    height: 30px;
+    line-height: 30px;
+    background: #f6f6f6;
+    color: #333333;
+    font-size: 14px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
-.tui-bank-name{
-	-webkit-flex: 1 1 60%;
+.tui-bank-name {
+    -webkit-flex: 1 1 60%;
+    flex: 1 1 60%;
 }
-.tui-bank-bar{
-	-webkit-flex: 1 1 40%;
-	text-align: right;
-	padding-right: 10px;
+.tui-bank-bar {
+    -webkit-flex: 1 1 40%;
+    flex: 1 1 40%;
+    text-align: right;
+    padding-right: 10px;
 }
 .tui-bank-title a {
-	color: #0074cc;
+    color: #0074cc;
 }
-
 .tui-bank-body {
-	height:100px;
-	padding-left: 20px;
-	background: #FFFFFF;
+    height: 100px;
+    padding-left: 20px;
+    background: #FFFFFF;
 }
-
 .tui-bank-body table {
-	width: 100%;
-	border: none;
-	height: 100px;
-	color: #333333;
+    width: 100%;
+    border: none;
+    height: 100px;
+    color: #333333;
 }
-.tui-bank-body table th{
-	width: 25%;
-	border: none;
-	color: #333333;
-	font-weight: normal;
-	text-align: right;
+.tui-bank-body table th {
+    width: 25%;
+    border: none;
+    color: #333333;
+    font-weight: normal;
+    text-align: right;
 }
 .tui-bank-footer {
-	height: 30px;
-	line-height: 30px;
-	background: #f6f6f6;
-	color: #32a838;
-	font-size: 14px;
-	padding-left: 20px;
-	border-bottom-left-radius: 7px;
-	border-bottom-right-radius: 7px;
+    height: 30px;
+    line-height: 30px;
+    background: #f6f6f6;
+    color: #32a838;
+    font-size: 14px;
+    padding-left: 20px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
 }
 
 /*银行图标
 */
+
 .bank-icbc {
-	background-position: 0 -140px;
+    background-position: 0 -140px;
 }
-
 .bank-logo {
-	background-image: url("../images/bank-logo.png");
-	background-repeat: no-repeat;
-	display: block;
-	height: 31px;
-	overflow: hidden;
-	text-indent: -9999px;
+    background-image: url("../images/bank-logo.png");
+    background-repeat: no-repeat;
+    display: block;
+    height: 31px;
+    overflow: hidden;
+    text-indent: -9999px;
 }
-
-
-
 .bank-bjrcb {
-	background-position: 15px 0;
+    background-position: 15px 0;
 }
 .bank-bob {
-	background-position: 15px -28px;
+    background-position: 15px -28px;
 }
 .bank-cbhb {
-	background-position: 15px -56px;
+    background-position: 15px -56px;
 }
 .bank-bocd {
-	background-position: 15px -84px;
+    background-position: 15px -84px;
 }
 .bank-fudian {
-	background-position: 15px -112px;
+    background-position: 15px -112px;
 }
 .bank-icbc {
-	background-position: 15px -140px;
+    background-position: 15px -140px;
 }
 .bank-ceb {
-	background-position: 15px -168px;
+    background-position: 15px -168px;
 }
-.bank-cgb, .bank-gdb {
-	background-position: 15px -196px;
+.bank-cgb,
+.bank-gdb {
+    background-position: 15px -196px;
 }
 .bank-hkb {
-	background-position: 15px -224px;
+    background-position: 15px -224px;
 }
 .bank-hzb {
-	background-position: 15px -252px;
+    background-position: 15px -252px;
 }
 .bank-hengfeng {
-	background-position: 15px -280px;
+    background-position: 15px -280px;
 }
 .bank-hxb {
-	background-position: 15px -308px;
+    background-position: 15px -308px;
 }
 .bank-ccb {
-	background-position: 15px -336px;
+    background-position: 15px -336px;
 }
 .bank-jsb {
-	background-position: 15px -364px;
+    background-position: 15px -364px;
 }
-.bank-bcm, .bank-bcom {
-	background-position: 15px -392px;
+.bank-bcm,
+.bank-bcom {
+    background-position: 15px -392px;
 }
 .bank-jinghua {
-	background-position: 15px -420px;
+    background-position: 15px -420px;
 }
 .bank-cmbc {
-	background-position: 15px -448px;
+    background-position: 15px -448px;
 }
 .bank-njcb {
-	background-position: 15px -476px;
+    background-position: 15px -476px;
 }
 .bank-nbcb {
-	background-position: 15px -504px;
+    background-position: 15px -504px;
 }
 .bank-abc {
-	background-position: 15px -532px;
+    background-position: 15px -532px;
 }
 .bank-pab {
-	background-position: 15px -560px;
+    background-position: 15px -560px;
 }
 .bank-spdb {
-	background-position: 15px -588px;
+    background-position: 15px -588px;
 }
 .bank-qdccb {
-	background-position: 15px -616px;
+    background-position: 15px -616px;
 }
 .bank-srcb {
-	background-position: 15px -644px;
+    background-position: 15px -644px;
 }
-.bank-bos, .bank-shb {
-	background-position: 15px -672px;
+.bank-bos,
+.bank-shb {
+    background-position: 15px -672px;
 }
 .bank-sdb {
-	background-position: 15px -700px;
+    background-position: 15px -700px;
 }
 .bank-wzcb {
-	background-position: 15px -728px;
+    background-position: 15px -728px;
 }
 .bank-cib {
-	background-position: 15px -756px;
+    background-position: 15px -756px;
 }
 .bank-cmb {
-	background-position: 15px -784px;
+    background-position: 15px -784px;
 }
 .bank-zjtl {
-	background-position: 15px -812px;
+    background-position: 15px -812px;
 }
 .bank-boc {
-	background-position: 15px -840px;
+    background-position: 15px -840px;
 }
-.bank-post, .bank-psbc {
-	background-position: 15px -868px;
+.bank-post,
+.bank-psbc {
+    background-position: 15px -868px;
 }
 .bank-citic {
-	background-position: 15px -896px;
+    background-position: 15px -896px;
 }
 .bank-cqrcb {
-	background-position: 15px -924px;
+    background-position: 15px -924px;
 }
 .bank-cqcb {
-	background-position: 15px -952px;
+    background-position: 15px -952px;
 }
 .bank-gzrcc {
-	background-position: 15px -980px;
+    background-position: 15px -980px;
 }
 .bank-gzcb {
-	background-position: 15px -1008px;
+    background-position: 15px -1008px;
 }
 .bank-hsb {
-	background-position: 15px -1036px;
+    background-position: 15px -1036px;
 }
 .bank-czb {
-	background-position: 15px -1064px;
+    background-position: 15px -1064px;
 }
 .bank-bonc {
-	background-position: 15px -1092px;
+    background-position: 15px -1092px;
 }
 .bank-gdnyb {
-	background-position: 15px -1120px;
+    background-position: 15px -1120px;
 }
 .bank-chab {
-	background-position: 0 -1148px;
+    background-position: 0 -1148px;
 }
 .bank-dylscz {
-	background-position: 15px -1177px;
+    background-position: 15px -1177px;
 }
 .bank-dzb {
-	background-position: 15px -1205px;
+    background-position: 15px -1205px;
 }
 .bank-lwb {
-	background-position: 15px -1904px;
+    background-position: 15px -1904px;
 }
 .bank-qsb {
-	background-position: 15px -1260px;
+    background-position: 15px -1260px;
 }
 .bank-rzb {
-	background-position: 15px -1289px;
+    background-position: 15px -1289px;
 }
 .bank-tab {
-	background-position: 15px -1317px;
+    background-position: 15px -1317px;
 }
 .bank-lsb {
-	background-position: 15px -1345px;
+    background-position: 15px -1345px;
 }
 .bank-wfccb {
-	background-position: 15px -1373px;
+    background-position: 15px -1373px;
 }
 .bank-ordos {
-	background-position: 15px -1401px;
+    background-position: 15px -1401px;
 }
 .bank-boxm {
-	background-position: 15px -1430px;
+    background-position: 15px -1430px;
 }
 .bank-bolj {
-	background-position: 15px -1456px;
+    background-position: 15px -1456px;
 }
 .bank-jzcb {
-	background-position: 15px -1484px;
+    background-position: 15px -1484px;
 }
 .bank-jjccb {
-	background-position: 15px -1512px;
+    background-position: 15px -1512px;
 }
 .bank-cjccb {
-	background-position: 15px -1568px;
+    background-position: 15px -1568px;
 }
 .bank-boly {
-	background-position: 15px -1596px;
+    background-position: 15px -1596px;
 }
 .bank-hubnx {
-	background-position: 15px -1623px;
+    background-position: 15px -1623px;
 }
 .bank-bhrcb {
-	background-position: 15px -1708px;
+    background-position: 15px -1708px;
 }
 .bank-hbnx {
-	background-position: 15px -1794px;
+    background-position: 15px -1794px;
 }
 .bank-gsnx {
-	background-position: 15px -1652px;
+    background-position: 15px -1652px;
 }
 .bank-bsb {
-	background-position: 15px -1820px;
+    background-position: 15px -1820px;
 }
 .bank-shxnx {
-	background-position: 15px -1764px;
+    background-position: 15px -1764px;
 }
 .bank-jsnx {
-	background-position: 15px -1681px;
+    background-position: 15px -1681px;
 }
 .bank-whrcb {
-	background-position: 15px -1736px;
+    background-position: 15px -1736px;
 }
 .bank-jzb {
-	background-position: 15px -1876px;
+    background-position: 15px -1876px;
 }
 .bank-drcb {
-	background-position: 15px -1848px;
+    background-position: 15px -1848px;
 }
 .bank-nmgnx {
-	background-position: 15px -1959px;
+    background-position: 15px -1959px;
 }
 .bank-pzhccb {
-	background-position: 15px -1989px;
+    background-position: 15px -1989px;
 }
 .bank-egb {
-	background-position: 15px -1932px;
+    background-position: 15px -1932px;
 }
 .bank-dyccb {
-	background-position: 15px -2045px;
+    background-position: 15px -2045px;
 }
 .bank-whccb {
-	background-position: 15px -2155px;
+    background-position: 15px -2155px;
 }
 .bank-jlnx {
-	background-position: 15px -2073px;
+    background-position: 15px -2073px;
 }
 .bank-sxnx {
-	background-position: 15px -2128px;
+    background-position: 15px -2128px;
 }
 .bank-bojn {
-	background-position: 15px -2100px;
+    background-position: 15px -2100px;
 }
 .bank-bozz {
-	background-position: 15px -2214px;
+    background-position: 15px -2214px;
 }
 .bank-ytcb {
-	background-position: 15px -2184px;
+    background-position: 15px -2184px;
 }
 .bank-bobd {
-	background-position: 15px -2016px;
+    background-position: 15px -2016px;
 }
 .bank-scnx {
-	background-position: 15px -2324px;
+    background-position: 15px -2324px;
 }
 .bank-hnnx {
-	background-position: 15px -2379px;
+    background-position: 15px -2379px;
 }
 .bank-bogy {
-	background-position: 15px -2240px;
+    background-position: 15px -2240px;
 }
 .bank-lzcb {
-	background-position: 15px -2295px;
+    background-position: 15px -2295px;
 }
 .bank-bogl {
-	background-position: 15px -2268px;
+    background-position: 15px -2268px;
 }
 .bank-zjtlcb {
-	background-position: 15px -2353px;
+    background-position: 15px -2353px;
 }
 .bank-boyk {
-	background-position: 15px -2548px;
+    background-position: 15px -2548px;
 }
 .bank-hunnx {
-	background-position: 15px -2576px;
+    background-position: 15px -2576px;
 }
 .bank-lnnx {
-	background-position: 15px -2408px;
+    background-position: 15px -2408px;
 }
 .bank-shbank {
-	background-position: 15px -2464px;
+    background-position: 15px -2464px;
 }
 .bank-lycb {
-	background-position: 15px -2436px;
+    background-position: 15px -2436px;
 }
 .bank-zjkccb {
-	background-position: 15px -2492px;
+    background-position: 15px -2492px;
 }
 .bank-boxia {
-	background-position: 15px -2521px;
+    background-position: 15px -2521px;
 }
 .bank-gznx {
-	background-position: 15px -2604px;
+    background-position: 15px -2604px;
 }
 .bank-czcb {
-	background-position: 0 -2688px;
+    background-position: 0 -2688px;
 }
 .bank-tjrcb {
-	background-position: 0 -2660px;
+    background-position: 0 -2660px;
 }
 .bank-hbcl {
-	background-position: 0 -2632px;
+    background-position: 0 -2632px;
 }
+
 /*
 *我要买车
 */
+
 .tui-sell-banner img,
-.tui-sell-pro img{
-	width: 100%;
-	height:auto;
+.tui-sell-pro img {
+    width: 100%;
+    height: auto;
 }
-.tui-sell-count{
-	line-height: 38px;
-	background: #FFFFFF;
-	margin-top: 0;
-	padding:0 15px;
+.tui-sell-count {
+    line-height: 38px;
+    background: #FFFFFF;
+    margin-top: 0;
+    padding: 0 15px;
 }
-.tui-sell-bar{
-	padding: 0 10px;
-	text-align: center;
+.tui-sell-bar {
+    padding: 0 10px;
+    text-align: center;
 }
-.mui-table-view.mui-grid-view.tui-sell-descr .mui-table-view-cell{
-	padding: 10px;
+.mui-table-view.mui-grid-view.tui-sell-descr .mui-table-view-cell {
+    padding: 10px;
 }
-.mui-table-view.mui-grid-view.tui-sell-descr .mui-table-view-cell .mui-media-body{
-	height: 35px;
-	margin: 10px 0;
-	line-height: 24px;
+.mui-table-view.mui-grid-view.tui-sell-descr .mui-table-view-cell .mui-media-body {
+    height: 35px;
+    margin: 10px 0;
+    line-height: 24px;
 }
+
 /*
 *优惠券
 */
-.tui-discount{
-padding: 10px;
-	background: transparent;
+
+.tui-discount {
+    padding: 10px;
+    background: transparent;
 }
 .tui-discount-item.mui-table-view-cell:after {
     position: absolute;
@@ -2009,114 +2362,129 @@ padding: 10px;
     transform: scaleY(.5);
     /* background-color: #c8c7cc; */
 }
-.tui-discount-item{
-	display: -webkit-flex;
-	-webkit-justify-content: center;
-	-webkit-align-items: center;
-	background: #FFFFFF url("../images/watermark.png") no-repeat 90% 80%;
-	background-size: 60% 60%;
-	padding: 0;
-	margin: 5px 0;
-	position: relative;
-	border: 1px solid #dedede;
+.tui-discount-item {
+    display: -webkit-flex;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+    background: #FFFFFF url("../images/watermark.png") no-repeat 90% 80%;
+    background-size: 60% 60%;
+    padding: 0;
+    margin: 5px 0;
+    position: relative;
+    border: 1px solid #dedede;
 }
-.tui-discount-item.active{
-	border: 1px solid #FF6A00;
-	-webkit-transition:all  0.5s;
+.tui-discount-item.active {
+    border: 1px solid #FF6A00;
+    -webkit-transition: all 0.5s;
 }
-.tui-discount-item.active::before{
-	content: '\e678';
-	display: block;
-	font-family:"iconfont" !important;
-  font-size:30px;
-  line-height: 1;
-  color: #FF6A00;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: 0.2px;
-  position: absolute;
-  right: -2px;
-  top: -4px;
+.tui-discount-item.active::before {
+    content: '\e678';
+    display: block;
+    font-family: "iconfont" !important;
+    font-size: 30px;
+    line-height: 1;
+    color: #FF6A00;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    position: absolute;
+    right: -2px;
+    top: -4px;
 }
-.tui-discount-main{
-	-webkit-flex: 1 1 40%;
-	padding: 0 2px;
-	text-align: center;
-	border-right: dashed 1px #FFFFFF;
+.tui-discount-main {
+    -webkit-flex: 0 0 40%;
+    flex: 0 0 40%;
+    padding: 0 2px;
+    text-align: center;
+    border-right: dashed 1px #FFFFFF;
 }
-.tui-discount-aside{
-	-webkit-flex: 1 1 auto;
-	padding: 0 10px;
-	color: #4c4c4c;
+.tui-discount-aside {
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 0 10px;
+    color: #4c4c4c;
 }
-.tui-discount-aside p{
-	color: #4c4c4c;
+.tui-discount-aside p {
+    color: #4c4c4c;
 }
-.tui-discount-reduction{
-	background: #8cc754;
+.tui-discount-reduction {
+    background: #8cc754;
 }
-.tui-discount-deduction{
-	background: #a60a03;
+.tui-discount-deduction {
+    background: #a60a03;
 }
-.tui-discount-bootless{
-	background: #b3b3b3;
+.tui-discount-bootless {
+    background: #b3b3b3;
 }
-.tui-discount-value{
-	font-size: 16px;
-	color: #FFFFFF;
-	font-family:arial;
-	font-weight: 700;
+.tui-discount-value {
+    font-size: 16px;
+    color: #FFFFFF;
+    font-family: arial;
+    font-weight: 700;
 }
-.tui-discount-for{
-	font-size: 14px;
-	color: #FFFFFF;
+.tui-discount-for {
+    font-size: 14px;
+    color: #FFFFFF;
 }
-.tui-discount-reduction .tui-discount-date{
-	font-size: 10px;
-	color: #209305;
+.tui-discount-reduction .tui-discount-date {
+    font-size: 10px;
+    color: #209305;
 }
-.tui-discount-deduction .tui-discount-date{
-	font-size: 10px;
-	color: #7c0302
+.tui-discount-deduction .tui-discount-date {
+    font-size: 10px;
+    color: #7c0302
 }
-.tui-discount-bootless .tui-discount-date{
-	font-size: 10px;
+.tui-discount-bootless .tui-discount-date {
+    font-size: 10px;
 }
-.tui-promotion-banner img{
-	width: 100%;
-	height:auto;
+.tui-promotion-banner img {
+    width: 100%;
+    height: auto;
 }
-.tui-promotion-title{
-	padding: 10px;
-	font-size: 16px;
-	background: #FFFFFF;
-	border-bottom: 1px solid #DEDEDE;
-	color: #4c4c4c;
+.tui-promotion-title {
+    padding: 10px;
+    font-size: 16px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #DEDEDE;
+    color: #4c4c4c;
 }
-.tui-promotion-title i{
-	font-size: 16px;
-	color: #ab5015;
+.tui-promotion-title i {
+    font-size: 16px;
+    color: #ab5015;
 }
-.tui-promotion-description{
- 	padding: 10px;
-	display: -webkit-flex;
-	-webkit-justify-content: flex-start;
-	align-items: flex-start;
+.tui-promotion-description {
+    padding: 10px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    align-items: flex-start;
 }
-.tui-promotion-description span{
-	-webkit-flex:  0 0 25%;
+.tui-promotion-description span {
+    -webkit-flex: 0 0 25%;
+    flex: 0 0 25%;
 }
-.tui-promotion-description label{
-	-webkit-flex:  0 0 75%;
+.tui-promotion-description label {
+    -webkit-flex: 0 0 75%;
+    flex: 0 0 75%;
 }
-.tui-promotion-usagerule{
-	padding: 10px;
+.tui-promotion-usagerule {
+    padding: 10px;
 }
-.tui-promotion-usagerule p{
-	text-indent: 2em;
+.tui-promotion-usagerule p {
+    text-indent: 2em;
 }
-.tui-promotion-statement{
-	text-align: center;
-	color: #005ae1;
-}
+.tui-promotion-statement {
+    text-align: center;
+    color: #005ae1;
+}.tui-select-city-2{
+    height: 40px;
+    line-height: 40px;
+ }
+ .tui-getcode{
+     float: left !important;
+     height: 30px;
+     display: inline-block;
+     font-size: 14px;
+     margin: 5px 10px 5px 0;
 
+ }

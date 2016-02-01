@@ -11,7 +11,13 @@
     </header>
     <!--slider-->
         <div id="slider" class="mui-slider">
-            <div class="mui-slider-group" ui-sref="searchcar">
+            <div class="mui-slider-group mui-slider-loop" ui-sref="searchcar">
+                <div class="mui-slider-item mui-slider-item-duplicate">
+                    <a href="">
+                        <img src="images/banner2.png">
+                    </a>
+                </div>
+                
                 <div class="mui-slider-item">
                     <a href="">
                         <img src="images/banner.jpg">
@@ -19,7 +25,12 @@
                 </div>
                 <div class="mui-slider-item">
                     <a href="">
-                        <img src="images/index-1.png">
+                        <img src="images/banner2.png">
+                    </a>
+                </div>
+                <div class="mui-slider-item mui-slider-item-duplicate">
+                    <a href="">
+                        <img src="images/banner.jpg">
                     </a>
                 </div>
             </div>
@@ -31,17 +42,19 @@
         <!-- end slider -->
         <div class="tui-about-promise">
             <span class="tui-promise-list">
-                   <i class="mui-icon mui-icon-checkbox-filled"></i>100%好车
+                   <i class="mui-icon mui-icon-checkbox-filled"></i>百万车源 在线同享
             </span>
               <span class="tui-promise-list">
-                   <i class="mui-icon mui-icon-checkbox-filled"></i>259项全车检测
+                   <i class="mui-icon mui-icon-checkbox-filled"></i>四重评估检测
             </span>
               <span class="tui-promise-list">
-                   <i class="mui-icon mui-icon-checkbox-filled"></i>14天可退一年质保
+                   <i class="mui-icon mui-icon-checkbox-filled"></i>自建车商诚信体系
             </span>
         </div>
 
-        <div class="tui-car-filter-title">快速买车</div>
+        <div class="tui-car-filter-title">快速买车
+          <span style="float: right;margin-right: 10px; color: #fd5736" ui-sref="worrycar">急售通道</span>
+        </div>
         <ul class="mui-table-view mui-grid-view mui-grid-9 tui-car-filter">
             <li class="mui-table-view-cell mui-col-xs-12 tui-car-filter-caption">
                 价格
@@ -151,14 +164,14 @@
             <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="1" data-filter-name="Style">
                 <a href="" ui-sref="carlist.query({Style:1,Value:'小轿车'})">小轿车</a>
             </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="5" data-filter-name="Style">
-                <a href="" ui-sref="carlist.query({Style:5,Value:'SUV'})">SUV</a>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="2" data-filter-name="Style">
+                <a href="" ui-sref="carlist.query({Style:2,Value:'SUV'})">SUV</a>
             </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="6" data-filter-name="Style">
-                <a href="" ui-sref="carlist.query({Style:6,Value:'MPV'})">MPV</a>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="3" data-filter-name="Style">
+                <a href="" ui-sref="carlist.query({Style:3,Value:'MPV'})">MPV</a>
             </li>
-            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="7" data-filter-name="Style">
-                <a href="" ui-sref="carlist.query({Style:7,Value:'跑车'})">跑车</a>
+            <li class="mui-table-view-cell mui-col-xs-3 tui-filter-item" data-filter-value="4" data-filter-name="Style">
+                <a href="" ui-sref="carlist.query({Style:4,Value:'跑车'})">跑车</a>
             </li>
             <li class="mui-table-view-cell mui-col-xs-12 tui-filter-item">
                 <a ui-sref="carlist" class="tui-mod-more">查看全部车辆 &gt;&gt; </a>
@@ -170,21 +183,22 @@
         <ul class="mui-table-view mui-grid-view" ng-init="getList()">
             <li class="mui-table-view-cell mui-media mui-col-xs-6" ng-repeat="obj in carlist">
                 <a ui-sref="carinfo({CarNo:obj.CarNo})">
-                    <div ng-class="{true:'tui-car-cover tui-order-trade',false:'tui-car-cover'}[obj.CarFlag==1]" data-city="{{obj.CityName}}">
+                    <div ng-class="{true:'tui-car-cover tui-order-trade',false:'tui-car-cover'}[obj.CarFlag==1]" data-city="{{obj.CityName}}" ng-switch="obj.AppraiserFlag">
                         <img class="mui-media-object" ng-src="{{obj.HomePicID}}">
                         <span class="tui-report-count" ng-if="obj.BuyIntentionCount>0"><i ng-bind="obj.BuyIntentionCount"></i>人评估</span>
-                        <span class="tui-ctxrenzhen" ng-if="obj.CheckFlag == 4"></span>
+                        <span class="tui-ctxrenzhen-3" ng-switch-when="3"></span>
+                        <span class="tui-ctxrenzhen-2" ng-switch-when="2"></span>
+                        <span class="tui-ctxrenzhen-1" ng-switch-when="1"></span>
                     </div>
                     <div class="tui-product-title" ng-bind="obj.SpecName"></div>
                     <div class="tui-product-meta">
-                        <i ng-bind="obj.InitialDate|DateTimeFormat:'yyyy年MM月'"></i>上牌| 行驶<i ng-bind="obj.Mileage"></i>万公里
+                        <i ng-bind="obj.Buyyear|DateTimeFormat:'yyyy年MM月'"></i>上牌| 行驶<i ng-bind="obj.Mileage"></i>万公里
                     </div>
                     <div class="tui-product-price">
                         <div class="tui-product-sale">
                             <i ng-bind="obj.Price/10000|currency:''"></i>万
                         </div>
-                        <div class="tui-product-detection" ng-if="obj.ReportCount >0">检</div>
-                        <div class="tui-tag-reduce" ng-if="WholesalePrice"><b ng-bind="obj.WholesalePrice/10000|currency:'￥'"></b>万<br>同行价</div>
+                        <div class="tui-tag-reduce" ng-if="WholesalePrice&&obj.CarFlag!=1"><b ng-bind="obj.WholesalePrice/10000|currency:'￥'"></b><span class="tui-font-orange">万</span><br>同行价</div>
                     </div>
                    
                 </a>

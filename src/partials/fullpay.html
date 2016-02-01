@@ -9,8 +9,11 @@
                 <span class="mui-pull-right tui-font-green"><span ng-if="order.RevokeFlag==0"  ng-bind="order.OrderFlag|OrderStatus"></span><span ng-if="order.RevokeFlag>0"  ng-bind="order.RevokeFlag|RevokeStatus"></span></span>
             </section>
             <section class="tui-order-info">
-                <div class="tui-order-icon" data-car="{{order.CarNo}}">
-                    <img ng-src="{{order.HomePicID}}" alt="">
+                <div class="tui-order-icon" data-car="{{order.CarNo}}" ng-switch="order.AppraiserFlag">
+                     <img ng-src="{{order.HomePicID||cover}}" alt="">
+                     <span class="tui-ctxrenzhen-3" ng-switch-when="3"></span>
+                     <span class="tui-ctxrenzhen-2" ng-switch-when="2"></span>
+                     <span class="tui-ctxrenzhen-1" ng-switch-when="1"></span>
                 </div>
                 <section class="tui-order-descr">
                     <h5 class="tui-car-name mui-ellipsis-2" ><i ng-bind="order.BrandName+order.SpecName"></i></h5>
@@ -19,13 +22,14 @@
                 </section>
             </section>
             <section class="tui-order-operate">
+                <strong class="tui-font-red tui-statement">平台服务费不含过户、挂牌、提档、保险等各种其它费用</strong>
                 <p><span class="tui-fullpay-title">成交价：</span><span class="tui-fullpay-num tui-font-orange"><i ng-bind="order.DealPrice|currency:'￥'"></i></span></p>
                 <p><span class="tui-fullpay-title">预付款：</span><span class="tui-fullpay-num tui-font-blue">-<i ng-bind="order.PrePayMoney|currency:'￥'"></i></span></p>
                 <p><span class="tui-fullpay-title">服务费：</span><span class="tui-fullpay-num tui-font-orange"><i ng-bind="servicefees|currency:'￥'"></i></span></p>
                 <p><span class="tui-fullpay-title">物流费：</span><span class="tui-fullpay-num tui-font-orange"><i ng-bind="order.ShippingFee|currency:'￥'"></i></span></p>
                 <p><span class="tui-fullpay-title">保修费：</span><span class="tui-fullpay-num tui-font-orange"><i ng-bind="order.WarrantyCost|currency:'￥'"></i></span></p>
-                <p class="tui-fullpay-allpay"><span class="tui-fullpay-title">总金额：</span><span class="tui-fullpay-num"><i class="tui-font-orange" ng-bind="order.PayTotal|currency:'￥'"></i></span></p>
-            	<p ng-if="discountlist[0]"><span class="mui-checkbox mui-left tui-fullpay-check"><label for="">使用抵用券</label><input type="checkbox" name="usediscount" ng-model="discount.usage"/></span><span class="tui-fullpay-title">抵用券：</span><span class="tui-fullpay-num tui-font-green"><i  id="Count" ></i></span></p>
+                <p class="tui-fullpay-allpay"><span class="tui-fullpay-title">还需支付金额：</span><span class="tui-fullpay-num"><i class="tui-font-orange" ng-bind="order.PayTotal|currency:'￥'"></i></span></p>
+            	<p ng-if="discountlist[0]&&servicefees>0"><span class="mui-checkbox mui-left tui-fullpay-check"><label for="">使用抵用券</label><input type="checkbox" name="usediscount" ng-model="discount.usage"/></span><span class="tui-fullpay-title">抵用券：</span><span class="tui-fullpay-num tui-font-green"><i  id="Count" ></i></span></p>
             	<p class="tui-fullpay-allpay" style="margin-top: 10px;"><span class="tui-fullpay-title">应付金额：</span><span class="tui-fullpay-num"><i class="tui-font-orange" ng-bind="order.PayTotal|currency:'￥'" id="needpay"></i></span></p>
             </section>
         </li>
@@ -48,8 +52,20 @@
     <discount ng-class="{true:'tui-swipe-container active',false:'tui-swipe-container'}[discount.usage==true]"></discount>
     <div ng-class="{true:'tui-mask active',false:'tui-mask'}[discount.usage==true]"></div>
 </div> 
+<div class="tui-pay-statement">
+    <p>
+        尊敬的<i ng-bind="user.UserName" class="font-orange"></i>先生/女士，您当前在车同享汽车交易平台提交购车订单（订单号：<i ng-bind="order.OrderCode"></i>），请在<i ng-bind="payTime"></i>(下单日期48小时内)之前通过银行汇款至：</p>
+    <p>	开户行：民生银行厦门观音山支行</p>
+    <p>	户名：车同享科技有限公司</p>
+    <p>	账号： 695685945</p>
+    <p>	待付金额：<strong class="font-orange"><i ng-bind="order.PayTotal|currency:'￥'"></i></strong>元
+    </p>
+    <p>备注：请在汇款单的备注里填写订单号<strong class="tui-font-orange"><i ng-bind="order.OrderCode"></i></strong>，以便财务人员审核，谢谢合作！</p>
+    <p style="color:red;"><strong>车通享声明：平台服务费不含过户、挂牌、提档、保险等各种其它费用。</strong></p>
+
+</div>
 <div class="tui-btngroup-fix">
-    <button type="button" class="tui-btn tui-btn-default" ui-sref="orderdetails({OrderCode:order.OrderCode})">查看详情</button>
+    <button type="button" class="tui-btn tui-btn-default" ng-click="orderTopay()">获取汇款信息</button>
     <button type="button" class="tui-btn tui-btn-primary" ng-click="fullpay()">确定</button>
 </div>
 

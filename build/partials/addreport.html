@@ -1,0 +1,904 @@
+<script>
+	$(function() {
+		$("#eq > span").each(function() {
+			// 从标记读取初始值并删除
+			var value = parseInt($(this).text(), 10);
+			$(this).empty().slider({
+				value: value,
+				range: "min",
+				animate: true,
+				orientation: "vertical",
+				slide: function(event, ui) {
+					$(this).attr("data-value", ui.value);
+				}
+			});
+		});
+		
+		$("#eqq > span").each(function() {
+			// 从标记读取初始值并删除
+			var value = parseInt($(this).text(), 10);
+			$(this).empty().slider({
+				value: value,
+				range: "min",
+				animate: true,
+				orientation: "vertical",
+				slide: function(event, ui) {
+					$(this).attr("data-value", ui.value);
+				}
+			});
+		});
+	});
+</script>
+<style>
+	.dui-slider .mui-slider-item {}
+	
+	.dui-slider-item {
+		font-size: 14px;
+		position: relative;
+		width: 100%;
+		height: 100%;
+		vertical-align: top;
+		white-space: normal;
+	}
+	.mui-segmented-control-negative.mui-segmented-control-inverted .mui-control-item.mui-active{
+		border-bottom:2px solid #ff6a00;
+	}
+	
+	
+	#eq span {
+		height: 200px;
+		width: 40px;
+		float: left;
+		margin-right: 16px;
+	}
+	
+	#eqq span {
+		height: 200px;
+		width: 35px;
+		float: left;
+		margin-right: 10px;
+	}
+	
+	.ui-corner-all{ border-radius:0px !important;}
+	
+	.ui-slider .ui-slider-range {
+		background-color: #ff6a00 !important;
+		filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#ff6a00',endColorStr='#ff6a00',gradientType='0'); 
+		background-image: linear-gradient(to bottom, #ff6a00, #ff6a00);
+		background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ff6a00), to(#ff6a00));
+		background: -o-linear-gradient(top,#ff6a00, #ff6a00);
+		z-index: inherit;
+	}
+	
+	.ui-slider .ui-slider-handle {
+		width: 40px !important;
+		height: 10px !important;
+		margin: 0px 0px -10px 0px !important;
+		padding: 0px !important;
+		left: -1px;
+	}
+	
+	.e-ui.ui-slider .ui-slider-handle {
+		width: 35px !important;
+		height: 10px !important;
+		margin: 0px 0px -10px 0px !important;
+		padding: 0px !important;
+		left: -1px;
+	}
+	
+	.ui-state-default {
+		border-radius: 0px;
+	}
+	
+	.tui-footer{margin-bottom: 0px !important;}
+</style>
+<header class="mui-bar mui-bar-nav">
+	<a class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"><span class="mui-icon mui-icon-left-nav"></span>返回</a>
+	<h1 class="mui-title">填写检测报告</h1>
+</header>
+<div class="mui-content dui-content">
+	<!--事故排查Begin-->
+	<div class="dui-title-w">
+		<a class="dui-title-right" href="javascript:;">
+			<div class="dui-title-text">事故排查</div>
+		</a>
+	</div>
+	<div class="dui-title-desc">
+		<textarea class="report-input" type="text" value="" rows="3" id="TextAccidentCheckMemo">车体骨架结构无变形、无扭曲、无更换、无烧焊、无褶皱；无火烧痕迹，无水泡痕迹。</textarea>
+	</div>
+	<div class="w">
+		<div class="mui-row">
+			<div class="dui-img-w mui-col-xs-12" style="text-align: center; padding-top: 20px; padding-bottom: 20px">
+				<div class="carbody-bg">
+					<div style="position: absolute; top: 0px; left: 0px"><img src="./images/carbody-bg.jpg" width="300"></div>
+					<div id="accident-16" class="gcc_16"></div>
+					<div id="accident-5" class="gcc_5"></div>
+					<div id="accident-9" class="gcc_9"></div>
+					<div id="accident-13" class="gcc_13"></div>
+					<div id="accident-14" class="gcc_14"></div>
+					<div id="accident-3" class="gcc_3"></div>
+					<div id="accident-1" class="gcc_1"></div>
+					<div id="accident-11" class="gcc_11"></div>
+					<div id="accident-7" class="gcc_7"></div>
+
+					<div id="accident-6" class="gcc_6"></div>
+					<div id="accident-10" class="gcc_10"></div>
+					<div id="accident-4" class="gcc_4"></div>
+					<div id="accident-15" class="gcc_15"></div>
+					<div id="accident-2" class="gcc_2"></div>
+					<div id="accident-12" class="gcc_12"></div>
+					<div id="accident-8" class="gcc_8"></div>
+					<div id="accident-17" class="gcc_17"></div>
+					<div id="accident-18" class="gcc_18"></div>
+				</div>
+			</div>
+		</div>
+		<div class="dui-report-title">
+			<h5>1.排除重大碰撞</h5>
+		</div>
+		<div class="dui-report-box">
+			<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+				<li class="mui-table-view-cell mui-col-xs-3">编号</li>
+				<li class="mui-table-view-cell mui-col-xs-6">检查项</li>
+				<li class="mui-table-view-cell mui-col-xs-3">结果</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">1</li>
+				<li class="mui-table-view-cell mui-col-xs-6">左A柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-1" ng-click="ARSelect('1')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">2</li>
+				<li class="mui-table-view-cell mui-col-xs-6">右A柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-2" ng-click="ARSelect('2')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">3</li>
+				<li class="mui-table-view-cell mui-col-xs-6">左B柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-3" ng-click="ARSelect('3')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">4</li>
+				<li class="mui-table-view-cell mui-col-xs-6">右B柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-4" ng-click="ARSelect('4')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">5</li>
+				<li class="mui-table-view-cell mui-col-xs-6">左C柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-5" ng-click="ARSelect('5')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">6</li>
+				<li class="mui-table-view-cell mui-col-xs-6">右C柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-6" ng-click="ARSelect('6')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">7</li>
+				<li class="mui-table-view-cell mui-col-xs-6">左前纵梁</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-7" ng-click="ARSelect('7')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">8</li>
+				<li class="mui-table-view-cell mui-col-xs-6">右前纵梁</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-8" ng-click="ARSelect('8')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">9</li>
+				<li class="mui-table-view-cell mui-col-xs-6">左后纵梁</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-9" ng-click="ARSelect('9')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">10</li>
+				<li class="mui-table-view-cell mui-col-xs-6">右后纵梁</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-10" ng-click="ARSelect('10')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">11</li>
+				<li class="mui-table-view-cell mui-col-xs-6 dui-cell">左前减震器
+					<br>悬挂部位</li>
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">
+					<i id="report-11" ng-click="ARSelect('11')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">12</li>
+				<li class="mui-table-view-cell mui-col-xs-6 dui-cell">右前减震器
+					<br>悬挂部位</li>
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">
+					<i id="report-12" ng-click="ARSelect('12')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">13</li>
+				<li class="mui-table-view-cell mui-col-xs-6 dui-cell">左后减震器
+					<br>悬挂部位</li>
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">
+					<i id="report-13" ng-click="ARSelect('13')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">14</li>
+				<li class="mui-table-view-cell mui-col-xs-6 dui-cell">右后减震器
+					<br>悬挂部位</li>
+				<li class="mui-table-view-cell mui-col-xs-3 dui-cell">
+					<i id="report-14" ng-click="ARSelect('14')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">15</li>
+				<li class="mui-table-view-cell mui-col-xs-6">车身底板</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-15" ng-click="ARSelect('15')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">16</li>
+				<li class="mui-table-view-cell mui-col-xs-6">后备箱底板</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-16" ng-click="ARSelect('16')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">17</li>
+				<li class="mui-table-view-cell mui-col-xs-6">防火墙</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-17" ng-click="ARSelect('17')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-3">18</li>
+				<li class="mui-table-view-cell mui-col-xs-6">水箱支柱</li>
+				<li class="mui-table-view-cell mui-col-xs-3">
+					<i id="report-18" ng-click="ARSelect('18')" data-value="1" class="report-check-yes"></i>
+				</li>
+			</ul>
+		</div>
+
+		<div class="dui-report-title">
+			<h5>2.排除火烧</h5>
+		</div>
+		<div class="dui-report-box">
+			<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+				<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+				<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">发动机线束及
+					<br>车身线束</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-29" ng-click="ARSelect('29')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">发动机舱、车厢
+					<br>内或尾箱内</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-30" ng-click="ARSelect('30')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">车身各夹层内</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-31" ng-click="ARSelect('31')" data-value="1" class="report-check-yes"></i>
+				</li>
+			</ul>
+		</div>
+
+		<div class="dui-report-title">
+			<h5>3.排除泡水</h5>
+		</div>
+		<div class="dui-report-box">
+			<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+				<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+				<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">发动机线束
+					<br>及橡胶制品</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-19" ng-click="ARSelect('19')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">后备箱边角
+					<br>及备胎槽</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-20" ng-click="ARSelect('20')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7">座椅滑轨内</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-21" ng-click="ARSelect('21')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7">后排座椅坐垫底部</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-22" ng-click="ARSelect('22')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7">安全带底部</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-23" ng-click="ARSelect('23')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7">全车地胶地毯</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-24" ng-click="ARSelect('24')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7">音响喇叭底部</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-25" ng-click="ARSelect('25')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7">烟灰缸底座</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-26" ng-click="ARSelect('26')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">悬挂组件的固定
+					<br>螺丝及刹车挡板</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-27" ng-click="ARSelect('27')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-cell">车底板有一层隔
+					<br>热和隔音的棉毡</li>
+				<li class="mui-table-view-cell mui-col-xs-5 dui-cell">
+					<i id="report-28" ng-click="ARSelect('28')" data-value="1" class="report-check-yes"></i>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<!--事故排查End-->
+	<!--车辆安全Begin-->
+	<div class="dui-title-w">
+		<a class="dui-title-right" href="javascript:;">
+			<div class="dui-title-text">车辆安全</div>
+		</a>
+	</div>
+	<div class="w" id="safe_content">
+		<div class="dui-title-desc">
+			<textarea class="report-input ld-form-border" rows="3" type="text" id="TextSecurityCheckMemo" value="">经检测，胎纹深度、刹车片厚度、液位均正常。</textarea>
+		</div>
+		<div class="w dui-safety">
+			<div class="vehicle-safety-wrap">
+				<div class="safety-title">
+					<div class="dui-safe-tit-w">
+						<div class="dui-safe-tit-text">1</div>
+						<div class="fl">
+							<p class="p1">胎纹深度</p>
+							<p class="p2">正常</p>
+						</div>
+					</div>
+				</div>
+				<div class="treelist-wrap">
+					<div class="safety-base-line1">
+						<span style="position: absolute; top:-3px">5.0mm</span>
+						<span style="position: absolute; top:100px">1.6mm<br>(警戒值)</span>
+						<span style="position: absolute; bottom: 0px">1.0mm</span>
+					</div>
+					<div id="eq">
+							<span id="tree-32" data-name="32" data-value="90">90</span>
+							<span id="tree-33" data-name="33" data-value="95">95</span>
+							<span id="tree-34" data-name="34" data-value="88">88</span>
+							<span id="tree-35" data-name="35" data-value="92">92</span>
+						</div>
+				</div>
+				<div class="vehicle-safety-tyre">
+					<span style="position: absolute; left: 12px">左前轮</span>
+					<span style="position: absolute; left: 67px">左后轮</span>
+					<span style="position: absolute; left: 124px">右前轮</span>
+					<span style="position: absolute; left: 180px">右后轮</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="w dui-safety">
+			<div class="vehicle-safety-wrap">
+				<div class="safety-title">
+					<div class="dui-safe-tit-w">
+						<div class="dui-safe-tit-text">2</div>
+						<div class="fl">
+							<p class="p1">刹车片厚度</p>
+							<p class="p2">正常</p>
+						</div>
+					</div>
+				</div>
+				<div class="treelist-wrap">
+					<div class="safety-base-line1">
+						<span style="position: absolute; top:108px">警戒值</span>
+					</div>
+					<div id="eq">
+							<span id="tree-36" data-name="36" data-value="86">86</span>
+							<span id="tree-37" data-name="37" data-value="97">97</span>
+							<span id="tree-38" data-name="38" data-value="88">88</span>
+							<span id="tree-39" data-name="39" data-value="93">93</span>
+						</div>
+				</div>
+				<div class="vehicle-safety-tyre">
+					<span style="position: absolute; left: 12px">左前轮</span>
+					<span style="position: absolute; left: 67px">左后轮</span>
+					<span style="position: absolute; left: 124px">右前轮</span>
+					<span style="position: absolute; left: 180px">右后轮</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="w dui-safety">
+			<div class="vehicle-safety-wrap">
+				<div class="safety-title">
+					<div class="dui-safe-tit-w">
+						<div class="dui-safe-tit-text">3</div>
+						<div class="fl">
+							<p class="p1">液位</p>
+							<p class="p2">正常</p>
+						</div>
+					</div>
+				</div>
+				<div class="treelist-wrap">
+					<div class="safety-base-line1">
+						<span style="position: absolute; top:108px">警戒值</span>
+					</div>
+					<div id="eqq">
+							<span class="e-ui" id="tree-40" data-name="40" data-value="88">88</span>
+							<span class="e-ui" id="tree-41" data-name="41" data-value="97">97</span>
+							<span class="e-ui" id="tree-42" data-name="42" data-value="85">85</span>
+							<span class="e-ui" id="tree-43" data-name="43" data-value="93">93</span>
+							<span class="e-ui" id="tree-44" data-name="44" data-value="90">80</span>
+						</div>
+				</div>
+				<div class="vehicle-safety-tyre">
+					<span style="position: absolute; left: 12px">制动油</span>
+					<span style="position: absolute; left: 63px">机油</span>
+					<span style="position: absolute; left: 102px">助力油</span>
+					<span style="position: absolute; left: 147px">变速箱</span>
+					<span style="position: absolute; left: 192px">防冻液</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--车辆安全End-->
+
+	<!--外观内饰Begin-->
+	<div class="dui-title-w">
+		<a class="dui-title-right" href="javascript:;">
+			<div class="dui-title-text">外观内饰</div>
+		</a>
+	</div>
+	<div class="dui-title-desc">
+		<textarea type="text" id="TextAICheckMemo" rows="3" value="">经检测无钣金修复，无固件更换，外观正常。</textarea>
+	</div>
+
+	<div style="display: inline-block; background: #fff; width: 100%; height: auto">
+		<div style="position: relative; width: 100%; padding-left: 10px; height: 50px; overflow: hidden">
+			<p>
+				<span class="car-interior-flag"><i style="background: #dddddd"></i>原厂漆或轻微划痕修复</span>
+				<span class="car-interior-flag"><i style="background: #b2cce5"></i>钣金修复</span>
+				<span class="car-interior-flag"><i style="background: #ffb2b2"></i>覆盖件更换</span>
+				<span class="car-interior-flag"><i style="background: url(./images/guacha_line.png) no-repeat center; widht:12px; height:15px; overflow: hidden"></i>刮擦</span>
+				<span class="car-interior-flag"><i style="background: url(./images/pengzhuang_line.png) no-repeat center; widht:12px; height:15px; overflow: hidden"></i>碰撞</span>
+			</p>
+		</div>
+		<div class="car-interior-wrap">
+			<div id="AIcheck_64" ng-click="changeAI(64)" data-value="1" class="carAIbg carAI_W_64"></div>
+			<div id="AIcheck_65" ng-click="changeAI(65)" data-value="1" class="carAIbg carAI_W_65"></div>
+			<div id="AIcheck_66" ng-click="changeAI(66)" data-value="1" class="carAIbg carAI_W_66"></div>
+			<div id="AIcheck_67" ng-click="changeAI(67)" data-value="1" class="carAIbg carAI_W_67"></div>
+			<div id="AIcheck_68" ng-click="changeAI(68)" data-value="1" class="carAIbg carAI_W_68"></div>
+			<div id="AIcheck_69" ng-click="changeAI(69)" data-value="1" class="carAIbg carAI_W_69"></div>
+			<div id="AIcheck_70" ng-click="changeAI(70)" data-value="1" class="carAIbg carAI_W_70"></div>
+			<div id="AIcheck_71" ng-click="changeAI(71)" data-value="1" class="carAIbg carAI_W_71"></div>
+			<div id="AIcheck_72" ng-click="changeAI(72)" data-value="1" class="carAIbg carAI_W_72"></div>
+			<div id="AIcheck_73" ng-click="changeAI(73)" data-value="1" class="carAIbg carAI_W_73"></div>
+			<div id="AIcheck_74" ng-click="changeAI(74)" data-value="1" class="carAIbg carAI_W_74"></div>
+			<div id="AIcheck_75" ng-click="changeAI(75)" data-value="1" class="carAIbg carAI_W_75"></div>
+			<div id="AIcheck_76" ng-click="changeAI(76)" data-value="1" class="carAIbg carAI_W_76"></div>
+
+			<div class="e_main" id="guacha"></div>
+		</div>
+	</div>
+
+	<div style="display: inline-block; background: #fff; width: 100%; height: auto">
+		<div style="position: relative; width: 100%; padding-left: 10px; padding-top: 10px; height: 30px; overflow: hidden">
+			<p>
+				<span class="car-interior-flag" style="float:left"><i style="background: #b2cce5"></i>脏污</span>
+				<span class="car-interior-flag" style="float:left"><i style="background: #ffb2b2"></i>破损</span>
+			</p>
+		</div>
+		<div class="car-neishi-wrap">
+			<div id="AIcheck_79" ng-click="changeAI(79)" data-value="1" class="carNSbg carNS_W_79"></div>
+			<div id="AIcheck_80" ng-click="changeAI(80)" data-value="1" class="carNSbg carNS_W_80"></div>
+			<div id="AIcheck_81" ng-click="changeAI(81)" data-value="1" class="carNSbg carNS_W_81"></div>
+			<div id="AIcheck_82" ng-click="changeAI(82)" data-value="1" class="carNSbg carNS_W_82"></div>
+			<div id="AIcheck_83" ng-click="changeAI(83)" data-value="1" class="carNSbg carNS_W_83"></div>
+			<div id="AIcheck_84" ng-click="changeAI(84)" data-value="1" class="carNSbg carNS_W_84"></div>
+			<div id="AIcheck_85" ng-click="changeAI(85)" data-value="1" class="carNSbg carNS_W_85"></div>
+			<div id="AIcheck_86" ng-click="changeAI(86)" data-value="1" class="carNSbg carNS_W_86"></div>
+			<div id="AIcheck_87" ng-click="changeAI(87)" data-value="1" class="carNSbg carNS_W_87"></div>
+		</div>
+	</div>
+	<!--外观内饰End-->
+
+	<!--驾驶检测Begin-->
+	<div class="dui-title-w">
+		<a class="dui-title-right" href="javascript:;">
+			<div class="dui-title-text">驾驶检测</div>
+		</a>
+	</div>
+	<div class="dui-title-desc">
+		<textarea class="report-input" type="text" id="TextControlCheckMemo" rows="3" value="">经试驾员专业测试，发动机、变速箱正常，无怠速抖动，变速时无闯档顿挫，转向无乏力感。</textarea>
+	</div>
+	<div class="w mui-content">
+		<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-negative">
+			<a class="mui-control-item mui-active" href="#item_qidong">启动</a>
+			<a class="mui-control-item" href="#item_qibu">起步</a>
+			<a class="mui-control-item" href="#item_jiasu">加速</a>
+			<a class="mui-control-item" href="#item_yunsu">匀速</a>
+			<a class="mui-control-item" href="#item_jiansu">减速</a>
+		</div>
+		<div class="dui-slider">
+			<div id="item_qidong" class="dui-slider-item mui-control-content mui-active">
+				<div class="dui-report-box">
+					<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+						<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+						<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-47" ng-click="ARSelect('47')" data-value="1" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">制动系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-48" ng-click="ARSelect('48')" data-value="1" class="report-check-yes"></i>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="item_qibu" class="dui-slider-item mui-control-content">
+				<div class="dui-report-box">
+					<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+						<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+						<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-49" ng-click="ARSelect('49')" data-value="1" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">变速箱</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-50" ng-click="ARSelect('50')" data-value="1" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">悬挂系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-51" ng-click="ARSelect('51')" data-value="1" class="report-check-yes"></i>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="item_jiasu" class="dui-slider-item mui-control-content">
+				<div class="dui-report-box">
+					<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+						<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+						<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-52" ng-click="ARSelect('52')" data-value="1" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">变速箱</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-53" ng-click="ARSelect('53')" data-value="1" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">传动系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-54" ng-click="ARSelect('54')" data-value="1" class="report-check-yes"></i>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="item_yunsu" class="dui-slider-item mui-control-content">
+				<div class="dui-report-box">
+					<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+						<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+						<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-55" ng-click="ARSelect('55')" data-value="1" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">变速箱</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-56" ng-click="ARSelect('56')" data-value="1" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">悬挂系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-57" ng-click="ARSelect('57')" data-value="1" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">转向系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-58" ng-click="ARSelect('58')" data-value="1" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">制动系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-59" ng-click="ARSelect('59')" data-value="1" class="report-check-yes"></i>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="item_jiansu" class="dui-slider-item mui-control-content">
+				<div class="dui-report-box">
+					<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+						<li class="mui-table-view-cell mui-col-xs-7">检查项</li>
+						<li class="mui-table-view-cell mui-col-xs-5">结果</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">发动机</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-60" ng-click="ARSelect('60')" data-value="1" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">变速箱</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-61" ng-click="ARSelect('61')" data-value="1" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">传动系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-62" ng-click="ARSelect('62')" data-value="1" class="report-check-yes"></i>
+						</li>
+
+						<li class="mui-table-view-cell mui-col-xs-7">悬挂系统</li>
+						<li class="mui-table-view-cell mui-col-xs-5">
+							<i id="report-63" ng-click="ARSelect('63')" data-value="1" class="report-check-yes"></i>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!--驾驶检测End-->
+
+	<!--设备检测Begin-->
+	<div class="dui-title-w">
+		<a class="dui-title-right" href="#/viewreport">
+			<div class="dui-title-text">设备检测</div>
+		</a>
+	</div>
+	<div class="dui-title-desc">
+		<textarea class="report-input" type="text" id="TextDeviceCheckMemo" rows="3" value="">经检测员专业测试，安全系统的车身稳定系统无更换、电子设备检测全部合格、发动机舱全部合格。</textarea>
+	</div>
+	<div class="w">
+		<div class="dui-report-box">
+			<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+				<li class="dui-device-li mui-col-xs-5">
+					<h6>7</h6><em>项</em></li>
+				<li class="dui-device-li mui-col-xs-7">
+					<p class="p1">安全系统检测</p>
+					<p class="p2">若有问题请在右边选择</p>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">安全带系统</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-91" ng-click="ARSelect('91')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">安全气囊系统</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-92" ng-click="ARSelect('92')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">防抱死系统（ABS）</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-93" ng-click="ARSelect('93')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">车身稳定系统（ESP）</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-94" ng-click="ARSelect('94')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">轮胎胎压</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-95" ng-click="ARSelect('95')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">儿童座椅接口</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-96" ng-click="ARSelect('96')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">手刹</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-97" ng-click="ARSelect('97')" data-value="1" class="report-check-yes"></i>
+				</li>
+			</ul>
+		</div>
+
+		<div class="dui-report-box">
+			<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+				<li class="dui-device-li mui-col-xs-5">
+					<h6>17</h6><em>项</em></li>
+				<li class="dui-device-li mui-col-xs-7">
+					<p class="p1">电子设备检测</p>
+					<p class="p2">若有问题请在右边选择</p>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">车灯系统</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-98" ng-click="ARSelect('98')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">仪表指示灯</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-99" ng-click="ARSelect('99')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">雨刷器</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-100" ng-click="ARSelect('100')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">空调系统</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-101" ng-click="ARSelect('101')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">多媒体系统</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-102" ng-click="ARSelect('102')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">电动车窗</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-103" ng-click="ARSelect('103')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">中控锁</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-104" ng-click="ARSelect('104')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">座椅电动功能</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-105" ng-click="ARSelect('105')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">蓄电池</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-106" ng-click="ARSelect('106')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">蓄电池电压、发电电压</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-107" ng-click="ARSelect('107')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">天窗</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-108" ng-click="ARSelect('108')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">中控显示屏</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-109" ng-click="ARSelect('109')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">GPS导航</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-110" ng-click="ARSelect('110')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">倒车雷达</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-111" ng-click="ARSelect('111')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">倒车影像</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-112" ng-click="ARSelect('112')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">电动座椅</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-113" ng-click="ARSelect('113')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">点烟器和电源插座</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-114" ng-click="ARSelect('114')" data-value="1" class="report-check-yes"></i>
+				</li>
+			</ul>
+		</div>
+
+		<div class="dui-report-box">
+			<ul class="mui-table-view mui-grid-view mui-grid-9 dui-report-table">
+				<li class="dui-device-li mui-col-xs-5">
+					<h6>8</h6><em>项</em></li>
+				<li class="dui-device-li mui-col-xs-7">
+					<p class="p1">发动机舱</p>
+					<p class="p2">若有问题请在右边选择</p>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">缸盖外有无机油渗入</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-115" ng-click="ARSelect('115')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">散热器栅格有无破损</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-116" ng-click="ARSelect('116')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">蓄电池电极柱有无腐蚀</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-117" ng-click="ARSelect('117')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">蓄电池电解液有无渗漏</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-118" ng-click="ARSelect('118')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">发动机皮带有无老化</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-119" ng-click="ARSelect('119')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">油管有无老化裂痕</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-120" ng-click="ARSelect('120')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">水管有无老化裂痕</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-121" ng-click="ARSelect('121')" data-value="1" class="report-check-yes"></i>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-7 dui-tl">线束有无老化裂痕</li>
+				<li class="mui-table-view-cell mui-col-xs-5">
+					<i id="report-122" ng-click="ARSelect('122')" data-value="1" class="report-check-yes"></i>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--设备检测End-->
+	
+	<div class="w dui-report-box">
+		<div style="width:100%; padding:10px; background-color: #edeeef; position: relative; display: inline-block">
+				<label style="float: left; line-height: 30px">分数：</label>
+				<select required="required" style="border: 1px solid #dedede" ng-model="CarRate">
+					<option>请选择分数</option>
+					<option value="95">95分：综合车况很好</option>
+					<option value="80">80分：综合车况较好</option>
+					<option value="65">65分：综合车况一般</option>
+					<option value="50">50分：综合车况较差</option>
+					<option value="35">35分：综合车况很差</option>
+				</select>
+				<select ng-model="CarRateA" style="border: 1px solid #dedede" required="required">
+					<option>请选择分数级</option>
+					<option value="A">A：全车除保险杠外无修复痕迹</option>
+					<option value="B">B：全车结构件无损伤，加强件无严重损伤，允许覆盖件有修复</option>
+					<option value="C">C：全车结构件无重大损伤，允许加强件和覆盖件有修复</option>
+					<option value="D">D：全车结构件发生一处或多处变形类损伤</option>
+				</select>
+				<label style="float: left; line-height: 30px">综合描述：</label>
+				<textarea id="TestDescription" rows="6">经过检测排除重大事故。排除水淹车和过火车，钣金喷漆部位比较多，内饰整洁干净，无异味。安全系统，刹车系统以及电子设备系统一切正常，发动机启动运行一切 正常，动力充沛，换挡平顺，一切正常。</textarea>
+			
+			</div>
+	</div>
+	
+	<div class="w dui-report-box" style="z-index: 10">
+		<button type="button" class="mui-col-xs-12 mui-btn-block mui-btn-red" ng-click="ARSubmit(carinfodata)">确认提交</button>
+	</div>
+</div>
+<!--<div class="dui-bottom-nav" style="z-index: 10;">
+	<button type="button" class="mui-col-xs-12 dui-b-nav-h dui-b-nav-bg" ng-click="ARSubmit(carinfodata)">确认提交</button>
+</div>-->

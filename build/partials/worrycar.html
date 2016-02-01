@@ -1,0 +1,28 @@
+<div class="tui-content">
+    <header class="mui-bar mui-bar-nav tui-bar-nav" ng-init="getList(1)">
+        <h1 class="mui-title">急售车源</h1>
+        <a class="mui-pull-right mui-btn mui-btn-blue mui-btn-link" ui-sref="worryissue">急售发布</a>
+    </header>
+    <ul class="tui-order">
+        <li class="tui-order-item" ng-repeat="obj in list">
+            <section class="tui-order-header">
+                <span class="mui-pull-left">发布时间:<i ng-bind="obj.PublishTime|DateTimeFormat:'yyyy年MM月dd日'"></i></span>
+                <span class="mui-pull-right">
+                    <span class="tui-font-green" ng-bind="obj.CarFlag|WorryCarStatus"></span>
+                </span>
+            </section>
+            <section class="tui-order-info">
+                <div class="tui-order-icon" data-car="{{obj.WorryCode}}">
+                    <img ng-src="{{obj.HomePicURL}}">
+                </div>
+                <section class="tui-order-descr">
+                    <h5 class="tui-car-name mui-ellipsis-2"><i ng-bind="obj.BrandName+obj.SpecName"></i></h5>
+                    <p class="tui-car-deploy mui-ellipsis-"><i ng-bind="obj.Buyyear|DateTimeFormat:'yyyy年MM月'"></i>购买 <i ng-bind="obj.Mileage"></i>万公里</p>
+                    <p class="mui-ellipsis"><span ng-bind="obj.OwnerName+' '+obj.OwnerPhone"></span> <span ng-bind="obj.CityName"></span></p>
+                    <p class="tui-car-sellprice"><span class="tui-font-orange"><strong class="tui-car-price" ng-bind="obj.Price/10000|currency:'￥'"></strong>万 </span></p>
+                </section>
+            </section>
+        </li>
+    </ul>
+    <pager></pager>
+</div>
