@@ -34,7 +34,6 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                 $('.tui-filter-type[data-role='+role+']').toggleClass('active');
                 $('.tui-filter-type:not([data-role='+role+'])').removeClass('active');
                 $('.tui-nav-item:not([data-for='+role+'])').removeClass('active');
-                console.log($('.tui-filter-result i').text())
                 $('.tui-filter-result').removeClass('active');
 
             })
@@ -93,12 +92,11 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                 $('.tui-filter-result').addClass('active').find('i.tui-filter-brandTxt').text(text)
                 scope.getList()
             })
-            //价格
+            //区域
             mui('.tui-filter-type[data-role=areaFilter]').on('tap','li.tui-filter-item',function(){
                 var val=$(this).attr('data-filter-value');
                 var text=$(this).attr('data-text');
                 scope.filter.IncludeFlag=val;
-                scope.filter.CityID=-1;
                 $(this).addClass('active').siblings('li.tui-filter-item').removeClass('active')
                 $('.tui-mask').removeClass('active')
                 $('.tui-filter-type[data-role=areaFilter]').toggleClass('active');
@@ -225,6 +223,7 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
         link:function(scope,element,attr){
             scope.pager=function(pageNo){
                 var elem=element[0];
+                $(elem).html('');
                 var config= $.extend({},scope.pagerConfig);
                 if(config.total==0&&document.querySelector('.tui-nolist')==null){
                     $(element[0]).before('<div class="tui-nolist"></div>')
@@ -235,7 +234,6 @@ angular.module("CTXAppDirective",[]).directive('filtercar',['$rootScope',functio
                 pageNo=pageNo||1
                 var pageLength = (config.total % config.pageSize == 0 ? config.total / config.pageSize : Math.ceil(config.total /config.pageSize));
                 if(pageLength>1){
-                    $('.tui-page').show();
                     var  page=  '<div class="tui-page">'+
                     '<a class="page-up">'+
                     '<span>上一页</span></a>'+

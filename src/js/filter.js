@@ -26,12 +26,9 @@ angular.module("CTXAppFilters", []).filter("DateTimeFormat", function () {
         if (str == undefined || str == null) {
             return '';
         } else {
-            //strdata = str.split(".");
             var pos = str.lastIndexOf(".");
             var iurl = str.substring(0, pos);
             var lastname = str.substring(pos, str.length);
-            //console.log(iurl +  "----"+lastname);
-            //ret = strdata[0]+"_Big."+strdata[1];
             ret = iurl + "_Big" + lastname;
             return ret;
         }
@@ -468,7 +465,7 @@ angular.module("CTXAppFilters", []).filter("DateTimeFormat", function () {
                 descr = "已下架";
                 break;
             default:
-                descr = "在售"
+                descr = "在售";
                 break;
 
         }

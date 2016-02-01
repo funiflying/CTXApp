@@ -109,7 +109,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
         Style: $rootScope.stateParams.Style||null,
         WomenCar: null,
         PageNum:$scope.pagerConfig.pageSize,
-        IncludeFlag:0,
+        IncludeFlag:'',
         IsMobile:1
     }
     var city=ResourceService.getFunServer('servicecity',{}).then(function(data){
@@ -123,7 +123,7 @@ angular.module("CTXAppControllers",[]).controller('RootController',['$scope','$r
     LocalStorageService.setSearchCarHistory($rootScope.stateParams);
     $scope.getList=function(pageNo){
         $scope.filter.PageNo=pageNo||1;
-        $scope.filter.CityID=$rootScope.CityID;
+        $scope.filter.IncludeFlag==''?$scope.filter.CityID='':$scope.filter.CityID=$rootScope.CityID;
         ResourceService.getFunServer('CarListServcie',$scope.filter,'post').then(function(data){
             if(data.data&&data.data[0])
             {

@@ -24,7 +24,7 @@ angular.module('CTXAppServices', []).factory('ResourceService', ['$resource', '$
                     surl = "/Alliance/TestReport/GetTestReportWithCode";
                     break;
                 case "CarListServcie"://车辆筛选
-                    surl='/common/car/SearchCar';
+                    surl='/common/car/SearchCarForMobile';
                     break;
                 case 'brandlist-search':
                     surl='/data/Brand.json';
